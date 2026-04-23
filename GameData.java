@@ -1,8 +1,9 @@
-import java.awt.*; import java.awt.event.*; import javax.swing.*; import javax.swing.event.*;
+import java.awt.*; import java.awt.event.*; import javax.swing.*; import javax.swing.event.*; import java.util.*; import java.io.*;
+
 
 public class GameData
 {
-	private String first, last;
+	private String first;
 	private String question;
 	private String [] answerSet;
 	private int correctAnswer;
@@ -13,7 +14,6 @@ public class GameData
 	public GameData ( )
 	{
 		first = "";
-		last = "";
 		correctCount = 0;
 		resetAll();
 	}
@@ -76,7 +76,6 @@ public class GameData
 	public void setName(String f, String l)
 	{
 		first = f;
-		last = l;
 	}
 	
 	public String getQuestion ( )
@@ -113,10 +112,10 @@ public class GameData
 	{
 		if(lastGameCorrectCount > 2)
 		{
-			return "Congratulations, " + first + " " + last + ", you answered " + lastGameCorrectCount +
+			return "Congratulations, " + first + ", you answered " + lastGameCorrectCount +
 				" out of 4 of the questions correctly.  Your name will be added to the list of high scores, shown to the right.  Good work!";
 		}
-		return "Good try " + first + " " + last + ", you answered " + lastGameCorrectCount +
+		return "Good try " + first + ", you answered " + lastGameCorrectCount +
 			" out of 4 of the questions correctly.  Keep working at it, and maybe next time your name will be added to the list of high scores!";
 	}
 	
@@ -126,7 +125,7 @@ public class GameData
 		String fileName = "highScores.txt";
 		Scanner inFile = null;
 		File inputFile = new File(fileName);
-		try 
+		try
 		{
 			inFile = new Scanner(inputFile);
 		} 
@@ -168,14 +167,14 @@ public class GameData
 				String line = inFile.nextLine();
 				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
 				{
-					result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+					result += first + " " + lastGameCorrectCount + "/4\n";
 					hasBeenAdded = true;
 				}
 				result += line + "\n";
 			}
 			if(!hasBeenAdded)
 			{
-				result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+				result += first + " " + lastGameCorrectCount + "/4\n";
 			}
 			inFile.close();
 
@@ -194,3 +193,4 @@ public class GameData
 			outFile.close();
 		}
 	}
+}

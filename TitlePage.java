@@ -1,11 +1,15 @@
-import java.awt.*; import java.awt.event.*; import javax.swing.*; import javax.swing.event.*;
+import java.awt.*; import java.awt.event.*; import javax.swing.*; import javax.swing.event.*; import java.util.*; import javax.imageio.ImageIO; import java.io.*;
 
-public class TitlePage extends JPanel 
+public class TitlePage extends JPanel implements ActionListener
 {
-    Image picture;
+    private Image picture;
+    private GameData data;
+    private PageManager pageMngr;
     
-    public TitlePage()
+    public TitlePage(PageManager pm)
     {
+        data = pm.getGameData();
+        pageMngr = pm;
         setLayout(null);
         picture = null;
         StartButtons();
@@ -48,7 +52,13 @@ public class TitlePage extends JPanel
 
         add(login);
         add(signUp);
+
+        login.addActionListener(this);
+        signUp.addActionListener(this);
     }
-    
-    
+
+    public void actionPerformed(ActionEvent e)
+    {
+        pageMngr.changeCard(e.getActionCommand());
+    }
 }
