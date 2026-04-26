@@ -10,7 +10,6 @@ public class ElementalSiege
 
     public static void main(String[] args)
     {
-
         JFrame frame = new JFrame("Elemental Siege");
 
 		frame.setSize(1500, 800);
