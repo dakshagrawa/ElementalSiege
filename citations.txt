@@ -1,1 +1,5 @@
-“Elemental Siege Game Home Screen.” *Gemini*, Google, 25 Apr. 2026.
+Images:
+“Elemental Siege Game Home Screen.” Gemini, Google, 25 Apr. 2026. 
+
+Code references:
+"Arrays (Java SE 26 & JDK 26)." Oracle Help Center, 2026, https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/Arrays.html. Accessed 26 Apr. 2026.

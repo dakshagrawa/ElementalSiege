@@ -4,17 +4,18 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
-public class SignIn extends JPanel
+public class SignUp extends JPanel
 {
 	private JTextField username;
 	private JPasswordField password;
-	private JButton login;
+	private JPasswordField passwordCheck;
+	private JButton signUp;
 	private JButton cancel;
 	private GameData data;
 	private PageManager pm;
 	private SouthPanel sp;
 
-	public SignIn(PageManager pageMngr)
+	public SignUp(PageManager pageMngr)
 	{
 		data = pageMngr.getGameData();
 		pm = pageMngr;
@@ -35,12 +36,12 @@ public class SignIn extends JPanel
 		{
 			setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 			setPreferredSize(new Dimension(800,200));
-			add(signIn());
+			add(signUp());
 		}
 		
-		public JLabel signIn()
+		public JLabel signUp()
 		{
-			JLabel title = new JLabel("Sign In");
+			JLabel title = new JLabel("Sign Up");
 			title.setFont(pm.titleFont);
 			return title;
 		}
@@ -50,14 +51,16 @@ public class SignIn extends JPanel
 	{
 		public CenterPanel()
 		{
-			setLayout(new GridLayout(2,1,0,10));
-			setPreferredSize(new Dimension(200,80));
+			setLayout(new GridLayout(3,1,0,10));
+			setPreferredSize(new Dimension(200,120));
 
 			username = new JTextField();
 			password = new JPasswordField();
+			passwordCheck = new JPasswordField();
 			
 			username.setEditable(true);
 			password.setEditable(true);
+			passwordCheck.setEditable(true);
 
 			username.addActionListener(new nameListener());
 			password.addActionListener(new pwdListener());
@@ -75,7 +78,13 @@ public class SignIn extends JPanel
 			passwordPanel.add(passwordLabel);
 			passwordPanel.add(password);
 			add(passwordPanel);
-			
+
+			JPanel passwordCheckPanel = new JPanel(new GridLayout(1,2));
+			JLabel passwordCheckLabel = new JLabel("Confirm Password: ");
+			passwordCheckLabel.setFont(pm.normalFont);
+			passwordCheckPanel.add(passwordCheckLabel);
+			passwordCheckPanel.add(passwordCheck);
+			add(passwordCheckPanel);
 		}
 
 		public class nameListener implements ActionListener
@@ -90,7 +99,7 @@ public class SignIn extends JPanel
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				login.doClick();
+				passwordCheck.requestFocusInWindow();
 			}
 		}
 	}
@@ -167,23 +176,24 @@ public class SignIn extends JPanel
 
 	public class SouthPanel extends JPanel implements ActionListener
 	{
+		private boolean loginExists;
 		private JLabel warningLabel;
 
 		public SouthPanel()
 		{
 			setLayout(new GridLayout(2,2,100,100));
 
-			login = new JButton("Login");
+			signUp = new JButton("Sign Up");
 			cancel = new JButton("Cancel");
 
-			login.setFont(pm.normalFont);
+			signUp.setFont(pm.normalFont);
 			cancel.setFont(pm.normalFont);
 			
-			login.addActionListener(this);
+			signUp.addActionListener(this);
 			cancel.addActionListener(this);
 
 			add(cancel);
-			add(login);
+			add(signUp);
 			add(new JPanel());
 			warningLabel = new JLabel("");
 			warningLabel.setForeground(Color.RED);
@@ -194,7 +204,7 @@ public class SignIn extends JPanel
 		{
 			String command = e.getActionCommand();
 
-			if(command.equals("Login"))
+			if(command.equals("Sign Up"))
 			{
 				char[] pwd = password.getPassword();
 				boolean loginExists = data.isAccountInFile(username.getText(),pwd);
@@ -210,6 +220,7 @@ public class SignIn extends JPanel
 			{
 				username.setText("");
 				password.setText("");
+				passwordCheck.setText("");
 				pm.changeCard("Title");
 			}
 		}

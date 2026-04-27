@@ -1,5 +1,5 @@
-import java.awt.*; import java.awt.event.*; import javax.swing.*; import javax.swing.event.*; import java.util.*; import java.io.*;
-
+import java.io.*;
+import java.util.*;
 
 public class GameData
 {
@@ -192,5 +192,57 @@ public class GameData
 			outFile.print(result);
 			outFile.close();
 		}
+	}
+
+	public static boolean isAccountInFile(String inName, char[] inPwd)
+	{
+		String fileName = "storedData/AccountInfo.txt";
+        Scanner inFile = null;
+        File inputFile = null;
+        try 
+        {
+			inputFile = new File(fileName);
+            inFile = new Scanner(inputFile);
+        } 
+        catch(FileNotFoundException e) 
+        {
+            System.err.printf("ERROR: Cannot open %s\n", fileName);
+            System.err.println("Cannot login with new account");
+            System.out.println(e);
+            System.exit(1);
+        }
+
+		String currentName = "";
+		char[] currentPwd = new char[0];
+		while(inFile.hasNextLine()) 
+		{
+			String line = inFile.nextLine();
+			
+			if(line.startsWith("Username: ")) 
+			{
+				currentName = line.substring(10);
+			} 
+			else if (line.startsWith("Password: ")) 
+			{
+				currentPwd = line.substring(10).toCharArray();
+				
+				if(currentName.equalsIgnoreCase(inName) && Arrays.equals(currentPwd, inPwd)) 
+				{
+					System.out.println("\nLogin Successful!\n");
+					Arrays.fill(currentPwd, '*'); // Clean up local
+					inFile.close();
+					return true;
+				}
+				
+				Arrays.fill(currentPwd, '*'); 
+			}
+			else
+			{
+				currentName = null;
+				Arrays.fill(currentPwd, '*');
+			}
+		}
+		inFile.close();
+		return false;
 	}
 }
