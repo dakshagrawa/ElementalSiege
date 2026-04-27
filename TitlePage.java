@@ -13,29 +13,28 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		data = pageMngr.getGameData();
 		pm = pageMngr;
+		getBackgroundImage(); //need to input image  
 		setLayout(null);
-		picture = null;
 		StartButtons();
 	}
 
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		getMyImage(); //need to input image  
 		g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
 	}
-
-	public void getMyImage()
+	public void getBackgroundImage()
 	{
-		String picName = "storedData/images/HomeScreenBackground.png";
+		picture = null;
+		String pictName = "storedData/images/HomeScreenBackground.png";
+
 		try
 		{
-			picture = ImageIO.read(new File(picName));
+			picture = ImageIO.read(new File(pictName));
 		}
-
 		catch(IOException e)
 		{
-			System.err.println("\n\n" + picName + " can't be found. \n\n");
+			System.err.println("\n\n" + pictName + " can't be found. \n\n");
 			e.printStackTrace();        
 		}
 	}
@@ -45,31 +44,17 @@ public class TitlePage extends JPanel implements ActionListener
 		JButton signIn;
 		JButton signUp;
 
-		signIn = new JButton("Continue");
-		signUp = new JButton("New Game");
+		signIn = pm.new Button1("Continue", new Color(21,49,94));
+		signUp = pm.new Button1("New Game", new Color(23,55,23));
 
-		signIn.setBackground(Color.WHITE);
-		signUp.setBackground(Color.WHITE);
-		signIn.setFont(pm.titleFont);
-		signUp.setFont(pm.titleFont);
-		signIn.setForeground(new Color(21,49,94));
-		signUp.setForeground(new Color(23,55,23));
-		signUp.setFocusPainted(false);
-		signIn.setFocusPainted(false);
-		signIn.setOpaque(false);
-		signUp.setOpaque(false);
-		signUp.setBorderPainted(false);
-		signIn.setBorderPainted(false);
-		signIn.setBounds(525, 685, 200, 50);
-		signUp.setBounds(770, 685, 200, 50);
-		signUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		signIn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		signIn.setBounds(525, 682, 200, 50);
+		signUp.setBounds(770, 682, 200, 50);
 
 		add(signUp);
 		add(signIn);
 
-		signIn.addMouseListener(pm.buttonHoverEffect(signIn, new Color(34, 139, 34), signIn.getForeground()));
-		signUp.addMouseListener(pm.buttonHoverEffect(signUp, new Color(34, 139, 34), signUp.getForeground()));
+		signIn.addMouseListener(pm.buttonHoverEffect(signIn, Color.LIGHT_GRAY, signIn.getForeground()));
+		signUp.addMouseListener(pm.buttonHoverEffect(signUp, Color.GRAY, signUp.getForeground()));
 
 		signIn.addActionListener(this);
 		signUp.addActionListener(this);

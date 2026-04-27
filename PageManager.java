@@ -48,6 +48,7 @@ public class PageManager extends JPanel
 		private Color normalBackgroundColor;
 		private Color hoverForegroundColor;
 		private Color normalForegroundColor;
+		private boolean normalOpacity;
 		private JButton button;
 
 		public FormatOnHover(JButton btn, Color bgColor, Color fgColor)
@@ -55,6 +56,7 @@ public class PageManager extends JPanel
 			button = btn;
 			normalBackgroundColor = button.getBackground();
 			normalForegroundColor = button.getForeground();
+			normalOpacity = button.isOpaque();
 			hoverBackgroundColor = bgColor;
 			hoverForegroundColor = fgColor;
 		}
@@ -76,7 +78,55 @@ public class PageManager extends JPanel
 		{
 			button.setBackground(normalBackgroundColor);
 			button.setForeground(normalForegroundColor);
-			button.setOpaque(false);
+			button.setOpaque(normalOpacity);
 		}
+	}
+
+	public class Button1 extends JButton
+	{
+		private Color fgColor;
+		private boolean isOpaque;
+		private boolean isBorderPainted;
+
+		public Button1(String btnName, Color foregroundColor, boolean isTransparentBg)
+		{
+			super(btnName);
+			fgColor = foregroundColor;
+			isOpaque = !isTransparentBg;
+			if(isTransparentBg) 
+				isBorderPainted=false;
+			else
+				isBorderPainted=true;
+			makeButton();
+		}
+
+		public Button1(String btnName, Color foregroundColor)
+		{
+			super(btnName);
+			fgColor = foregroundColor;
+			isOpaque = false;
+			isBorderPainted = false;
+			makeButton();
+		}
+
+		public Button1(String btnName)
+		{
+			super(btnName);
+			fgColor = Color.BLACK;
+			isOpaque = false;
+			isBorderPainted = false;
+			makeButton();
+		}
+
+		public void makeButton()
+		{
+			setBackground(Color.WHITE);
+			setFont(titleFont);
+			setForeground(fgColor);
+			setFocusPainted(false);
+			setOpaque(isOpaque);
+			setBorderPainted(isBorderPainted);
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
+		} 
 	}
 }

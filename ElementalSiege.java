@@ -4,20 +4,24 @@
 import java.awt.Color;
 import javax.swing.JFrame;
 
-public class ElementalSiege 
+public class ElementalSiege extends JFrame 
 {
-	private PageManager pageCards;
+	private PageManager pm;
 
-	public static void main(String[] args)
+    public ElementalSiege() 
 	{
-		JFrame frame = new JFrame("Elemental Siege");
+        super("Elemental Siege");
+        setSize(1500, 800);
+        setLocation(10, 0);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+		pm = new PageManager();
+        setContentPane(pm);
+        setVisible(true);
+    }
 
-		frame.setSize(1500, 800);
-		frame.setLocation(10, 0);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.setBackground(Color.GRAY);
-		frame.setContentPane(new PageManager());
-		frame.setVisible(true);
-	}
+    public static void main(String[] args) 
+	{
+        ElementalSiege es = new ElementalSiege();
+    }
 }
