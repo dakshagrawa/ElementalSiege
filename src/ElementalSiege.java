@@ -1,14 +1,13 @@
 // Daksh Agrawal & Dhikshitha Aiely
 // Period 7
 
-import java.awt.Color;
 import javax.swing.JFrame;
 
 public class ElementalSiege extends JFrame 
 {
 	private PageManager pm;
 
-    public ElementalSiege() 
+    public ElementalSiege()
 	{
         super("Elemental Siege");
         setSize(1500, 800);

@@ -10,9 +10,13 @@ public class GameData
 	private boolean [] chosenQuestions;
 	private int questionCount;
 	private int correctCount, lastGameCorrectCount;
+    private File accountInfoFile;
+	private String fileName;
 	
 	public GameData ( )
 	{
+		fileName = "../storedData/AccountInfo.txt";
+		accountInfoFile = null;
 		first = "";
 		correctCount = 0;
 		resetAll();
@@ -194,15 +198,11 @@ public class GameData
 		}
 	}
 
-	public static boolean isAccountInFile(String inName, char[] inPwd)
+	public void makeFile()
 	{
-		String fileName = "../storedData/AccountInfo.txt";
-        Scanner inFile = null;
-        File inputFile = null;
         try 
         {
-			inputFile = new File(fileName);
-            inFile = new Scanner(inputFile);
+			accountInfoFile = new File(fileName);
         } 
         catch(FileNotFoundException e) 
         {
@@ -211,26 +211,33 @@ public class GameData
             System.out.println(e);
             System.exit(1);
         }
+	}
 
+	// checks if the AccountInfo file has the account
+	public boolean isAccountInFile(String inName, char[] inPwd)
+	{
+		makeFile();
+		Scanner input;
+        input = new Scanner(accountInfoFile);
 		String currentName = "";
 		char[] currentPwd = new char[0];
-		while(inFile.hasNextLine()) 
+		while(input.hasNextLine()) 
 		{
-			String line = inFile.nextLine();
+			String line = input.nextLine();
 			
-			if(line.startsWith("Username: ")) 
+			if(line.startsWith("U: ")) 
 			{
-				currentName = line.substring(10);
+				currentName = line.substring(3);
 			} 
-			else if (line.startsWith("Password: ")) 
+			else if (line.startsWith("P: ")) 
 			{
-				currentPwd = line.substring(10).toCharArray();
+				currentPwd = line.substring(3).toCharArray();
 				
 				if(currentName.equalsIgnoreCase(inName) && Arrays.equals(currentPwd, inPwd)) 
 				{
 					System.out.println("\nLogin Successful!\n");
 					Arrays.fill(currentPwd, '*'); // Clean up local
-					inFile.close();
+					input.close();
 					return true;
 				}
 				
@@ -242,7 +249,30 @@ public class GameData
 				Arrays.fill(currentPwd, '*');
 			}
 		}
-		inFile.close();
+		input.close();
 		return false;
 	}
+
+	public static boolean putAccountInFile(String nName, char[] inPwd);
+	{
+		makeFile();
+		PrintWriter pw = null;
+        try 
+        {
+			pw = new PrintWriter(new FileWriter(accountInfoFile, true));
+        } 
+        catch(IOException e) 
+        {
+            System.err.printf("ERROR: Cannot open %s\n", fileName);
+            System.err.println("Cannot create new account.");
+            System.out.println(e);
+            System.exit(1);
+        }
+
+		pw.println("U: " + inName);
+		pw.println("P: " + inPwd + "\n");
+
+		input.close();
+		return false;
+	} 
 }

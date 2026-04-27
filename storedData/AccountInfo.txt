@@ -1,5 +1,5 @@
-Username: test
-Password: test
+U: test
+P: test
 
-Username: test2
-Password: test2
+U: test2
+P: test2
