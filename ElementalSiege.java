@@ -14,7 +14,7 @@ public class ElementalSiege
 
 		frame.setSize(1500, 800);
 		frame.setLocation(10, 0);
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setBackground(Color.GRAY);
 		frame.setContentPane(new PageManager());
