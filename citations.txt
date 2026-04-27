@@ -1,6 +1,6 @@
 Images:
 “Elemental Siege Game Home Screen.” Gemini, Google, 25 Apr. 2026. 
-bsd. Settings Icon. Flaticon, 2026, https://www.flaticon.com/free-icon/settings_8637718.
+Pixel perfect. "Cogwheel free icon." Flaticon, Freepik Company, www.flaticon.com/free-icon/cogwheel_3524577. Accessed 26 Apr. 2026.
 
 Code references:
 "Arrays (Java SE 26 & JDK 26)." Oracle Help Center, 2026, https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/Arrays.html. Accessed 26 Apr. 2026.
