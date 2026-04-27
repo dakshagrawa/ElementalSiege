@@ -196,7 +196,7 @@ public class GameData
 
 	public static boolean isAccountInFile(String inName, char[] inPwd)
 	{
-		String fileName = "storedData/AccountInfo.txt";
+		String fileName = "../storedData/AccountInfo.txt";
         Scanner inFile = null;
         File inputFile = null;
         try 

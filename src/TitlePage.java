@@ -26,7 +26,7 @@ public class TitlePage extends JPanel implements ActionListener
 	public void getBackgroundImage()
 	{
 		picture = null;
-		String pictName = "storedData/images/HomeScreenBackground.png";
+		String pictName = "../storedData/images/HomeScreenBackground.png";
 
 		try
 		{
