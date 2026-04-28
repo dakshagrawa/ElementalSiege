@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
-
 import javax.swing.*;
 
 public class SignUp extends JPanel
@@ -176,7 +175,6 @@ public class SignUp extends JPanel
 
 	public class SouthPanel extends JPanel implements ActionListener
 	{
-		private boolean loginExists;
 		private JLabel warningLabel;
 
 		public SouthPanel()
@@ -207,13 +205,15 @@ public class SignUp extends JPanel
 			if(command.equals("Sign Up"))
 			{
 				char[] pwd = password.getPassword();
-				boolean loginExists = data.isAccountInFile(username.getText(),pwd);
+				boolean signUpSuccessful = data.putAccountInFile(username.getText(),pwd);
 				Arrays.fill(pwd, '*');
-				if(loginExists)
-				{}
+				if(signUpSuccessful)
+				{
+					pm.changeCard("Character Selection");
+				}
 				else
 				{
-					warningLabel.setText("Username or password is incorrect. Please try again.");
+					warningLabel.setText("Username already exists. Please try again.");
 				}
 			}
 			else if (command.equals("Cancel"))

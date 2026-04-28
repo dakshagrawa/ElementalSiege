@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
-
 import javax.swing.*;
 
 public class SignIn extends JPanel
@@ -26,7 +25,10 @@ public class SignIn extends JPanel
 		positioner.add(new signInLabel(),BorderLayout.NORTH);
 		positioner.add(new CenterPanel(),BorderLayout.CENTER);
 		positioner.add(sp,BorderLayout.SOUTH);
+		positioner.setOpaque(false);
 		add(positioner); 
+
+		setBackground(new Color(211, 211, 211, 220));
 	}
 
 	public class signInLabel extends JPanel
@@ -36,6 +38,7 @@ public class SignIn extends JPanel
 			setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 			setPreferredSize(new Dimension(800,200));
 			add(signIn());
+			setOpaque(false);
 		}
 		
 		public JLabel signIn()
@@ -52,6 +55,7 @@ public class SignIn extends JPanel
 		{
 			setLayout(new GridLayout(2,1,0,10));
 			setPreferredSize(new Dimension(200,80));
+			setOpaque(false);
 
 			username = new JTextField();
 			password = new JPasswordField();
@@ -64,16 +68,18 @@ public class SignIn extends JPanel
 
 			JPanel usernamePanel = new JPanel(new GridLayout(1,2));
 			JLabel usernameLabel = new JLabel("Username:");
-			usernameLabel.setFont(pm.normalFont);
+			usernameLabel.setFont(pm.normalBoldFont);
 			usernamePanel.add(usernameLabel);
 			usernamePanel.add(username);
+			usernamePanel.setOpaque(false);
 			add(usernamePanel);
 
 			JPanel passwordPanel = new JPanel(new GridLayout(1,2));
 			JLabel passwordLabel = new JLabel("Password:");
-			passwordLabel.setFont(pm.normalFont);
+			passwordLabel.setFont(pm.normalBoldFont);
 			passwordPanel.add(passwordLabel);
 			passwordPanel.add(password);
+			passwordPanel.setOpaque(false);
 			add(passwordPanel);
 			
 		}
@@ -95,76 +101,6 @@ public class SignIn extends JPanel
 		}
 	}
 
-	// public String getHighScores()
-	// {
-	// 	String result = "";
-	// 	String fileName = "highScores.txt";
-	// 	Scanner inFile = null;
-	// 	File inputFile = new File(fileName);
-	// 	try
-	// 	{
-	// 		inFile = new Scanner(inputFile);
-	// 	} 
-	// 	catch(FileNotFoundException e) 
-	// 	{
-	// 		System.err.printf("ERROR: Cannot open %s\n", fileName);
-	// 		System.out.println(e);
-	// 		System.exit(1);
-	// 	}
-	// 	while(inFile.hasNext()) 
-	// 	{
-	// 		String line = inFile.nextLine();
-	// 		result += line + "\n";
-	// 	}
-	// 	return result;
-	// }
-	
-	// public void saveAccount()
-	// {
-	//     String fileName = "highScores.txt";
-	//     Scanner inFile = null;
-	//     File inputFile = new File(fileName);
-	//     try 
-	//     {
-	//         inFile = new Scanner(inputFile);
-	//     } 
-	//     catch(FileNotFoundException e) 
-	//     {
-	//         System.err.printf("ERROR: Cannot open %s\n", fileName);
-	//         System.out.println(e);
-	//         System.exit(1);
-	//     }
-	//     while(inFile.hasNext()) 
-	//     {
-	//         String line = inFile.nextLine();
-	//         if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
-	//         {
-	//             result += first + " " + lastGameCorrectCount + "/4\n";
-	//             hasBeenAdded = true;
-	//         }
-	//         result += line + "\n";
-	//     }
-	//     if(!hasBeenAdded)
-	//     {
-	//         result += first + " " + lastGameCorrectCount + "/4\n";
-	//     }
-	//     inFile.close();
-
-	//     File ioFile = new File("highScores.txt");
-	//     PrintWriter outFile = null;
-	//     try
-	//     {
-	//         outFile = new PrintWriter(ioFile);
-	//     }
-	//     catch(IOException e)
-	//     {
-	//         e.printStackTrace();
-	//         System.exit(1);
-	//     }
-	//     outFile.print(result);
-	//     outFile.close();
-	// }
-
 	public class SouthPanel extends JPanel implements ActionListener
 	{
 		private JLabel warningLabel;
@@ -173,21 +109,27 @@ public class SignIn extends JPanel
 		{
 			setLayout(new GridLayout(2,2,100,100));
 
-			login = new JButton("Login");
-			cancel = new JButton("Cancel");
+			login = pm.new Button1("Login", getBackground(),new Color(70, 130, 180));
+			cancel = pm.new Button1("Cancel", getBackground(),new Color(70, 130, 180));
 
-			login.setFont(pm.normalFont);
-			cancel.setFont(pm.normalFont);
+			login.setFont(pm.normalBoldFont);
+			cancel.setFont(pm.normalBoldFont);
+
+			pm.addHoverEffect(login, new Color(20, 35, 20), getBackground());
+			pm.addHoverEffect(cancel, new Color(20, 35, 20), getBackground());
 			
 			login.addActionListener(this);
 			cancel.addActionListener(this);
 
 			add(cancel);
 			add(login);
-			add(new JPanel());
+			JPanel placeholder = new JPanel();
+			placeholder.setOpaque(false);
+			add(placeholder);
 			warningLabel = new JLabel("");
 			warningLabel.setForeground(Color.RED);
 			add(warningLabel);
+			setOpaque(false);
 		}
 
 		public void actionPerformed(ActionEvent e)
@@ -197,7 +139,7 @@ public class SignIn extends JPanel
 			if(command.equals("Login"))
 			{
 				char[] pwd = password.getPassword();
-				boolean loginExists = data.isAccountInFile(username.getText(),pwd);
+				boolean loginExists = data.isAccountInFile(username.getText(),pwd,true);
 				Arrays.fill(pwd, '*');
 				if(loginExists)
 				{}

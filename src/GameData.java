@@ -16,7 +16,7 @@ public class GameData
 	public GameData ( )
 	{
 		fileName = "../storedData/AccountInfo.txt";
-		accountInfoFile = null;
+		accountInfoFile = new File(fileName);
 		first = "";
 		correctCount = 0;
 		resetAll();
@@ -198,28 +198,23 @@ public class GameData
 		}
 	}
 
-	public void makeFile()
+	// checks if the AccountInfo.txt file has the account in it
+	public boolean isAccountInFile(String inName, char[] inPwd, boolean checkPassword)
 	{
+		Scanner input = null;
         try 
-        {
-			accountInfoFile = new File(fileName);
-        } 
-        catch(FileNotFoundException e) 
-        {
-            System.err.printf("ERROR: Cannot open %s\n", fileName);
-            System.err.println("Cannot login with new account");
-            System.out.println(e);
-            System.exit(1);
-        }
-	}
+		{
+			input = new Scanner(accountInfoFile);
+		} 
+		catch (FileNotFoundException e) {
+			System.err.printf("ERROR: Cannot read %s\n", fileName);
+			System.err.println("Cannot open account.");
+			System.out.println(e);
+			e.printStackTrace();
+			return false;
+		}
 
-	// checks if the AccountInfo file has the account
-	public boolean isAccountInFile(String inName, char[] inPwd)
-	{
-		makeFile();
-		Scanner input;
-        input = new Scanner(accountInfoFile);
-		String currentName = "";
+		String currentName = null;
 		char[] currentPwd = new char[0];
 		while(input.hasNextLine()) 
 		{
@@ -233,10 +228,10 @@ public class GameData
 			{
 				currentPwd = line.substring(3).toCharArray();
 				
-				if(currentName.equalsIgnoreCase(inName) && Arrays.equals(currentPwd, inPwd)) 
+				if(currentName!=null && currentName.equalsIgnoreCase(inName) && (!checkPassword || Arrays.equals(currentPwd, inPwd))) 
 				{
 					System.out.println("\nLogin Successful!\n");
-					Arrays.fill(currentPwd, '*'); // Clean up local
+					Arrays.fill(currentPwd, '*'); // Clean up local password
 					input.close();
 					return true;
 				}
@@ -253,26 +248,32 @@ public class GameData
 		return false;
 	}
 
-	public static boolean putAccountInFile(String nName, char[] inPwd);
+	public boolean putAccountInFile(String inName, char[] inPwd)
 	{
-		makeFile();
 		PrintWriter pw = null;
-        try 
-        {
+		try 
+		{
 			pw = new PrintWriter(new FileWriter(accountInfoFile, true));
-        } 
-        catch(IOException e) 
-        {
-            System.err.printf("ERROR: Cannot open %s\n", fileName);
-            System.err.println("Cannot create new account.");
-            System.out.println(e);
-            System.exit(1);
-        }
+		} 
+		catch(IOException e) 
+		{
+			System.err.printf("ERROR: Cannot open %s\n", fileName);
+			System.err.println("Cannot create new account.");
+			System.out.println(e);
+			return false;
+		}
 
-		pw.println("U: " + inName);
-		pw.println("P: " + inPwd + "\n");
+		if(!isAccountInFile(inName,inPwd,false))
+		{
+			pw.println("U: " + inName);
+			pw.println("P: " + new String(inPwd) + "\n");
+			//Passwords are currently stored in plain text for project simplicity.
+			
+			pw.close();
+			return true;
+		}
 
-		input.close();
+		pw.close();
 		return false;
-	} 
+	}
 }
