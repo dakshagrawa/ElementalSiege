@@ -54,7 +54,7 @@ public class TitlePage extends JPanel implements ActionListener
 		add(signIn);
 
 		pm.addHoverEffect(signIn, Color.LIGHT_GRAY, signIn.getForeground());
-		pm.addHoverEffect(signUp, Color.GRAY, signUp.getForeground());
+		pm.addHoverEffect(signUp, Color.LIGHT_GRAY, signUp.getForeground());
 
 		signIn.addActionListener(this);
 		signUp.addActionListener(this);

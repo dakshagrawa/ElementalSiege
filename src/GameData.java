@@ -265,9 +265,9 @@ public class GameData
 
 		if(!isAccountInFile(inName,inPwd,false))
 		{
-			pw.println("U: " + inName);
+			pw.println("\nU: " + inName);
 			pw.println("P: " + new String(inPwd) + "\n");
-			//Passwords are currently stored in plain text for project simplicity.
+			//Passwords are not encrypted in file for the sake of simplicity.
 			
 			pw.close();
 			return true;

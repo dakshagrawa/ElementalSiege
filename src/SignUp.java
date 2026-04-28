@@ -26,7 +26,10 @@ public class SignUp extends JPanel
 		positioner.add(new signInLabel(),BorderLayout.NORTH);
 		positioner.add(new CenterPanel(),BorderLayout.CENTER);
 		positioner.add(sp,BorderLayout.SOUTH);
+		positioner.setOpaque(false);
 		add(positioner); 
+
+		setBackground(new Color(211, 211, 211, 220));
 	}
 
 	public class signInLabel extends JPanel
@@ -36,6 +39,7 @@ public class SignUp extends JPanel
 			setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 			setPreferredSize(new Dimension(800,200));
 			add(signUp());
+			setOpaque(false);
 		}
 		
 		public JLabel signUp()
@@ -52,6 +56,7 @@ public class SignUp extends JPanel
 		{
 			setLayout(new GridLayout(3,1,0,10));
 			setPreferredSize(new Dimension(200,120));
+			setOpaque(false);
 
 			username = new JTextField();
 			password = new JPasswordField();
@@ -69,6 +74,7 @@ public class SignUp extends JPanel
 			usernameLabel.setFont(pm.normalFont);
 			usernamePanel.add(usernameLabel);
 			usernamePanel.add(username);
+			usernamePanel.setOpaque(false);
 			add(usernamePanel);
 
 			JPanel passwordPanel = new JPanel(new GridLayout(1,2));
@@ -76,6 +82,7 @@ public class SignUp extends JPanel
 			passwordLabel.setFont(pm.normalFont);
 			passwordPanel.add(passwordLabel);
 			passwordPanel.add(password);
+			passwordPanel.setOpaque(false);
 			add(passwordPanel);
 
 			JPanel passwordCheckPanel = new JPanel(new GridLayout(1,2));
@@ -83,6 +90,7 @@ public class SignUp extends JPanel
 			passwordCheckLabel.setFont(pm.normalFont);
 			passwordCheckPanel.add(passwordCheckLabel);
 			passwordCheckPanel.add(passwordCheck);
+			passwordCheckPanel.setOpaque(false);
 			add(passwordCheckPanel);
 		}
 
@@ -103,76 +111,6 @@ public class SignUp extends JPanel
 		}
 	}
 
-	// public String getHighScores()
-	// {
-	// 	String result = "";
-	// 	String fileName = "highScores.txt";
-	// 	Scanner inFile = null;
-	// 	File inputFile = new File(fileName);
-	// 	try
-	// 	{
-	// 		inFile = new Scanner(inputFile);
-	// 	} 
-	// 	catch(FileNotFoundException e) 
-	// 	{
-	// 		System.err.printf("ERROR: Cannot open %s\n", fileName);
-	// 		System.out.println(e);
-	// 		System.exit(1);
-	// 	}
-	// 	while(inFile.hasNext()) 
-	// 	{
-	// 		String line = inFile.nextLine();
-	// 		result += line + "\n";
-	// 	}
-	// 	return result;
-	// }
-	
-	// public void saveAccount()
-	// {
-	//     String fileName = "highScores.txt";
-	//     Scanner inFile = null;
-	//     File inputFile = new File(fileName);
-	//     try 
-	//     {
-	//         inFile = new Scanner(inputFile);
-	//     } 
-	//     catch(FileNotFoundException e) 
-	//     {
-	//         System.err.printf("ERROR: Cannot open %s\n", fileName);
-	//         System.out.println(e);
-	//         System.exit(1);
-	//     }
-	//     while(inFile.hasNext()) 
-	//     {
-	//         String line = inFile.nextLine();
-	//         if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
-	//         {
-	//             result += first + " " + lastGameCorrectCount + "/4\n";
-	//             hasBeenAdded = true;
-	//         }
-	//         result += line + "\n";
-	//     }
-	//     if(!hasBeenAdded)
-	//     {
-	//         result += first + " " + lastGameCorrectCount + "/4\n";
-	//     }
-	//     inFile.close();
-
-	//     File ioFile = new File("highScores.txt");
-	//     PrintWriter outFile = null;
-	//     try
-	//     {
-	//         outFile = new PrintWriter(ioFile);
-	//     }
-	//     catch(IOException e)
-	//     {
-	//         e.printStackTrace();
-	//         System.exit(1);
-	//     }
-	//     outFile.print(result);
-	//     outFile.close();
-	// }
-
 	public class SouthPanel extends JPanel implements ActionListener
 	{
 		private JLabel warningLabel;
@@ -181,21 +119,27 @@ public class SignUp extends JPanel
 		{
 			setLayout(new GridLayout(2,2,100,100));
 
-			signUp = new JButton("Sign Up");
-			cancel = new JButton("Cancel");
+			signUp = pm.new Button1("Sign Up", getBackground(),new Color(70, 130, 180));
+			cancel = pm.new Button1("Cancel", getBackground(),new Color(70, 130, 180));
 
-			signUp.setFont(pm.normalFont);
-			cancel.setFont(pm.normalFont);
+			signUp.setFont(pm.normalBoldFont);
+			cancel.setFont(pm.normalBoldFont);
+
+			pm.addHoverEffect(signUp, new Color(20, 35, 20), getBackground());
+			pm.addHoverEffect(cancel, new Color(20, 35, 20), getBackground());
 			
 			signUp.addActionListener(this);
 			cancel.addActionListener(this);
 
 			add(cancel);
 			add(signUp);
-			add(new JPanel());
+			JPanel placeholder = new JPanel();
+			placeholder.setOpaque(false);
+			add(placeholder);
 			warningLabel = new JLabel("");
 			warningLabel.setForeground(Color.RED);
 			add(warningLabel);
+			setOpaque(false);
 		}
 
 		public void actionPerformed(ActionEvent e)
