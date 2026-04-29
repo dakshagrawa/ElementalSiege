@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class PageManager extends JPanel
@@ -12,11 +16,11 @@ public class PageManager extends JPanel
 
 	public PageManager()
 	{
-		titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 24);
-		normalFont = new Font(Font.DIALOG, Font.PLAIN, 14);
-		normalBoldFont = new Font(Font.DIALOG, Font.PLAIN, 14);
+		titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 26);
+		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
+		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		
-		data = new GameData();
+		data = new GameData(this);
 
 		card = new CardLayout();
 		setLayout(card);
@@ -25,6 +29,7 @@ public class PageManager extends JPanel
 		add(new SignIn(this),"Continue");
 		add(new SignUp(this),"New Game");
 		add(new Settings(this),"Settings");
+		add(new PickAvatar(this), "Pick Avatar");
 		//add(new characterSelect(this),"Character Selection");
 
 		card.show(this,"Title");
@@ -33,6 +38,7 @@ public class PageManager extends JPanel
 	public void changeCard(String cardName)
 	{
 		card.show(this,cardName);
+		repaint();
 	}
 
 	public GameData getGameData()
@@ -147,5 +153,26 @@ public class PageManager extends JPanel
 			setBorderPainted(isBorderPainted);
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		} 
+	}
+
+	public static class Functions
+	{
+		public static Image getImage(String imgName)
+		{
+			Image picture = null;
+			String pictName = "../storedData/images/"+imgName;
+
+			try
+			{
+				picture = ImageIO.read(new File(pictName));
+			}
+			catch(IOException e)
+			{
+				System.err.println("\n" + pictName + " can't be found. \n");
+				e.printStackTrace();        
+			}
+
+			return picture;
+		}
 	}
 }

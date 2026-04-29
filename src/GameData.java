@@ -12,12 +12,17 @@ public class GameData
 	private int correctCount, lastGameCorrectCount;
     private File accountInfoFile;
 	private String fileName;
+	private PageManager pm;
+
+	private String userAvatar;
 	
-	public GameData ( )
+	public GameData(PageManager pageMngr)
 	{
+		pm = pageMngr;
 		fileName = "../storedData/AccountInfo.txt";
 		accountInfoFile = new File(fileName);
 		first = "";
+		userAvatar = "";
 		correctCount = 0;
 		resetAll();
 	}
@@ -228,10 +233,17 @@ public class GameData
 			{
 				currentPwd = line.substring(3).toCharArray();
 				
-				if(currentName!=null && currentName.equalsIgnoreCase(inName) && (!checkPassword || Arrays.equals(currentPwd, inPwd))) 
+				if(currentName!=null && currentName.equalsIgnoreCase(inName) && checkPassword && Arrays.equals(currentPwd, inPwd)) 
 				{
-					System.out.println("\nLogin Successful!\n");
+					System.out.println("\nLogin Successful! :)");
 					Arrays.fill(currentPwd, '*'); // Clean up local password
+					input.close();
+					return true;
+				}
+				else if(currentName!=null && currentName.equalsIgnoreCase(inName) && !checkPassword) 
+				{
+					System.out.println("\nSign up login does not already exist in file! :)");
+					Arrays.fill(currentPwd, '*');
 					input.close();
 					return true;
 				}
@@ -248,32 +260,47 @@ public class GameData
 		return false;
 	}
 
-	public boolean putAccountInFile(String inName, char[] inPwd)
+	public boolean putAccountInFile(String inName, char[] inPwd, boolean passwordCorrectlyRepeated)
 	{
-		PrintWriter pw = null;
-		try 
+		if(passwordCorrectlyRepeated)
 		{
-			pw = new PrintWriter(new FileWriter(accountInfoFile, true));
-		} 
-		catch(IOException e) 
-		{
-			System.err.printf("ERROR: Cannot open %s\n", fileName);
-			System.err.println("Cannot create new account.");
-			System.out.println(e);
-			return false;
-		}
+			PrintWriter pw = null;
+			try 
+			{
+				pw = new PrintWriter(new FileWriter(accountInfoFile, true));
+			} 
+			catch(IOException e) 
+			{
+				System.err.printf("ERROR: Cannot open %s\n", fileName);
+				System.err.println("Cannot create new account.");
+				System.out.println(e);
+				return false;
+			}
 
-		if(!isAccountInFile(inName,inPwd,false))
-		{
-			pw.println("\nU: " + inName);
-			pw.println("P: " + new String(inPwd) + "\n");
-			//Passwords are not encrypted in file for the sake of simplicity.
-			
+			if(!isAccountInFile(inName,inPwd,false))
+			{
+				pw.println("");
+				pw.println("---");
+				pw.println("U: " + inName);
+				pw.println("P: " + new String(inPwd));
+				//Passwords are not encrypted in file for the sake of simplicity.
+				
+				pw.close();
+				return true;
+			}
+
 			pw.close();
-			return true;
 		}
-
-		pw.close();
 		return false;
+	}
+
+	public void setAvatar(int avatar)
+	{
+		if (avatar==1)
+			userAvatar = "FEMALE";
+		else if(avatar==2)
+			userAvatar = "MALE";
+		else
+			userAvatar = "NO AVATAR";
 	}
 }

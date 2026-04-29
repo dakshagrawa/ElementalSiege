@@ -142,16 +142,22 @@ public class SignIn extends JPanel
 				boolean loginExists = data.isAccountInFile(username.getText(),pwd,true);
 				Arrays.fill(pwd, '*');
 				if(loginExists)
-				{}
+				{
+					warningLabel.setForeground(Color.GREEN);
+					warningLabel.setText("Success!");
+					pm.changeCard("");
+				}
 				else
 				{
 					warningLabel.setText("Username or password is incorrect. Please try again.");
+					pm.repaint();
 				}
 			}
 			else if (command.equals("Cancel"))
 			{
 				username.setText("");
 				password.setText("");
+				warningLabel.setText("");
 				pm.changeCard("Title");
 			}
 		}

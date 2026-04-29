@@ -68,6 +68,7 @@ public class SignUp extends JPanel
 
 			username.addActionListener(new nameListener());
 			password.addActionListener(new pwdListener());
+			passwordCheck.addActionListener(new pwdCheckListener());
 
 			JPanel usernamePanel = new JPanel(new GridLayout(1,2));
 			JLabel usernameLabel = new JLabel("Username:");
@@ -107,6 +108,14 @@ public class SignUp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				passwordCheck.requestFocusInWindow();
+			}
+		}
+
+		public class pwdCheckListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				signUp.doClick();
 			}
 		}
 	}
@@ -149,15 +158,29 @@ public class SignUp extends JPanel
 			if(command.equals("Sign Up"))
 			{
 				char[] pwd = password.getPassword();
-				boolean signUpSuccessful = data.putAccountInFile(username.getText(),pwd);
+				char[] pwdCheck = passwordCheck.getPassword();
+				boolean pwdCorrect=false;
+				if(Arrays.equals(pwdCheck,pwd))
+					pwdCorrect=true;
+				boolean signUpSuccessful = data.putAccountInFile(username.getText(),pwd, pwdCorrect);
 				Arrays.fill(pwd, '*');
+				Arrays.fill(pwdCheck, '*');
 				if(signUpSuccessful)
 				{
-					pm.changeCard("Character Selection");
+					warningLabel.setForeground(Color.GREEN);
+					warningLabel.setText("Success!");
+					pm.changeCard("Pick Avatar");
+					pm.repaint();
+				}
+				else if(!pwdCorrect)
+				{
+					warningLabel.setText("Password does not match. Please try again.");
+					pm.repaint();
 				}
 				else
 				{
 					warningLabel.setText("Username already exists. Please try again.");
+					pm.repaint();
 				}
 			}
 			else if (command.equals("Cancel"))
@@ -165,6 +188,7 @@ public class SignUp extends JPanel
 				username.setText("");
 				password.setText("");
 				passwordCheck.setText("");
+				warningLabel.setText("");
 				pm.changeCard("Title");
 			}
 		}
