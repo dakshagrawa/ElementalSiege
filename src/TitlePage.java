@@ -3,7 +3,6 @@ import java.awt.*;
  import javax.swing.*;
 public class TitlePage extends JPanel implements ActionListener
 {
-	private Image picture;
 	private GameData data;
 	private PageManager pm;
 	
@@ -11,7 +10,6 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		data = pageMngr.getGameData();
 		pm = pageMngr;
-		picture = PageManager.Functions.getImage("HomeScreenBackground.png");
 		setLayout(null);
 		StartButtons();
 	}
@@ -19,7 +17,16 @@ public class TitlePage extends JPanel implements ActionListener
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
+		Image picture = PageManager.Functions.getImage("HomeScreenBackground.png");
+		super.paintComponent(g);
+		if (picture != null) 
+		{
+			g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
+		}
+		else
+		{
+			setBackground(Color.LIGHT_GRAY);
+		}
 	}
 
 	public void StartButtons() ///Login and sign-in button on title page

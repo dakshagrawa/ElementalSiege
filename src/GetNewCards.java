@@ -4,64 +4,62 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class PickAvatar extends JPanel
+public class GetNewCards extends JPanel
 {
 	private PageManager pm;
 	private GameData data;
 
-	public PickAvatar(PageManager pageMngr)
+	public GetNewCards(PageManager PageMngr)
 	{
-		pm = pageMngr;
+		pm = PageMngr;
 		data = pm.getGameData();
 
 		setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 		setBackground(new Color(169,169,169));
 
 		add(pickLabel());
-		add(new AvatarsGrid());
+		add(new CharacterCardsGrid());
 	}
 
 	public JLabel pickLabel()
 	{
-		JLabel label = new JLabel("Pick an Avatar:");
+		JLabel label = new JLabel("Pick 1 Card:");
 		label.setFont(pm.titleFont);
 		return label;
 	}
 
-	class AvatarsGrid extends JPanel
+	class CharacterCardsGrid extends JPanel
 	{
-		public AvatarsGrid()
+		public CharacterCardsGrid()
 		{
 			setLayout(new GridLayout(1,3,20,0));
 			setOpaque(false);
 			setPreferredSize(new Dimension(1200, 400));
 
-			AvatarPanel avatar1 = new AvatarPanel(1);
-			AvatarPanel avatar2 = new AvatarPanel(2);
+			CharacterPanel character1 = new CharacterPanel();
+			CharacterPanel character2 = new CharacterPanel();
+			CharacterPanel character3 = new CharacterPanel();
 
-			add(avatar1);
+			add(character1);
 			JPanel placeholder = new JPanel();
 			placeholder.setOpaque(false);
 			add(placeholder);
-			add(avatar2);
+			add(character2);
+			add(placeholder);
+			add(character3);
 		}
 
-		class AvatarPanel extends JPanel implements MouseListener
+		class CharacterPanel extends JPanel implements MouseListener
 		{
-			private int avatar;
-			private Image avatarImg;
+			private int character;
+			private Image characterImg;
 			private String imgName;
 
-			public AvatarPanel(int avatarInt)
+			public CharacterPanel()
 			{
-				avatar = avatarInt;
-				
-				if(avatar==1)
-					imgName = "femaleAvatar.png";
-				else if(avatar==2)
-					imgName = "maleAvatar.png";
+				character = (int)(Math.random()*10);
 
-				avatarImg = PageManager.Functions.getImage(imgName);
+				characterImg = PageManager.Functions.getImage(imgName);
 
 				// 1. Create your existing thick etch
 				Border etch = BorderFactory.createEtchedBorder(new Color(52, 53, 55), new Color(156, 157, 156));
@@ -82,15 +80,15 @@ public class PickAvatar extends JPanel
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
-				double scale = (double) getWidth() / avatarImg.getWidth(null);
-                int finalHeight = (int) (avatarImg.getHeight(null) * scale);
-                g.drawImage(avatarImg, 15, 15+((getHeight()/2)-(finalHeight/2)), getWidth()-30, finalHeight-30, this);
+				double scale = (double) getWidth() / characterImg.getWidth(null);
+                int finalHeight = (int) (characterImg.getHeight(null) * scale);
+                g.drawImage(characterImg, 15, 15+((getHeight()/2)-(finalHeight/2)), getWidth()-30, finalHeight-30, this);
 			}
 
 			public void mouseClicked(MouseEvent e) 
 			{
-				data.setAvatar(avatar);
-				pm.changeCard("Get New Cards1");
+				data.setAvatar(character);
+				pm.changeCard("Get New Cards"); // TODO: complete this cardname
 			}
 
 			public void mousePressed(MouseEvent e) {}

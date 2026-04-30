@@ -12,9 +12,11 @@ public class PageManager extends JPanel
 	public Font titleFont;
 	public Font normalFont; 
 	public Font normalBoldFont;
+	public ElementalSiege es;
 
-	public PageManager()
+	public PageManager(ElementalSiege ElemntlSiege)
 	{
+		es = ElemntlSiege;
 		titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
@@ -29,7 +31,10 @@ public class PageManager extends JPanel
 		add(new SignUp(this),"New Game");
 		add(new Settings(this),"Settings");
 		add(new PickAvatar(this), "Pick Avatar");
-		//add(new characterSelect(this),"Character Selection");
+		add(new GetNewCards(this),"Get New Cards1");
+		add(new GetNewCards(this),"Get New Cards2");
+		add(new GetNewCards(this),"Get New Cards3");
+		add(new GetNewCards(this),"Get New Cards4");
 
 		card.show(this,"Title");
 	}
@@ -167,6 +172,7 @@ public class PageManager extends JPanel
 			{
 				picture = ImageIO.read(new File(pictName));
 			}
+
 			catch(IOException e)
 			{
 				System.err.println("\n" + pictName + " can't be found. \n");

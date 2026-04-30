@@ -93,6 +93,8 @@ public class SignUp extends JPanel
 			passwordCheckPanel.add(passwordCheck);
 			passwordCheckPanel.setOpaque(false);
 			add(passwordCheckPanel);
+
+			username.requestFocusInWindow();
 		}
 
 		public class nameListener implements ActionListener

@@ -14,7 +14,7 @@ public class ElementalSiege extends JFrame
         setLocation(10, 0);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-		pm = new PageManager();
+		pm = new PageManager(this);
         setContentPane(pm);
         setVisible(true);
     }

@@ -152,7 +152,7 @@ public class GameData
 		return result;
 	}
 	
-	public void saveToHighScores ( )
+	public void saveData ( )
 	{
 		if(lastGameCorrectCount >= 3)
 		{
@@ -303,4 +303,6 @@ public class GameData
 		else
 			userAvatar = "NO AVATAR";
 	}
+
+	
 }

@@ -82,6 +82,7 @@ public class SignIn extends JPanel
 			passwordPanel.setOpaque(false);
 			add(passwordPanel);
 			
+			username.requestFocusInWindow();
 		}
 
 		public class nameListener implements ActionListener

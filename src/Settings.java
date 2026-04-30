@@ -5,9 +5,11 @@ import javax.swing.event.*;
 public class Settings extends JPanel implements ActionListener, ChangeListener
 {
 	private GameData data;
+	private PageManager pm;
 
-	public Settings(PageManager pm)
+	public Settings(PageManager pageMngr)
 	{
+		pm = pageMngr;
 		data = pm.getGameData();
 		setLayout(new GridLayout(3, 1, 10, 20));
 		
@@ -25,21 +27,16 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		add(quit);
 	}
 
-	public void actionPerformed(ActionEvent e)
+	public void actionPerformed(ActionEvent evt)
 	{
-		String command = e.getActionCommand();
-		if (command.equals("Save & Exit"))
-		{
-
-		}
-		else if (command.equals("Quit"))
-		{
-
-		}
-		
+		String command = evt.getActionCommand();
+		if(command.equals("Save & Exit"))
+			data.saveData();
+		else
+			pm.es.dispose();
 	}
 
-	public void stateChanged(ChangeEvent e)
+	public void stateChanged(ChangeEvent evt)
 	{
 
 	}
