@@ -1,7 +1,5 @@
 import java.awt.*;
  import java.awt.event.*;
- import java.io.*;
- import javax.imageio.ImageIO;
  import javax.swing.*;
 public class TitlePage extends JPanel implements ActionListener
 {
@@ -13,7 +11,7 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		data = pageMngr.getGameData();
 		pm = pageMngr;
-		getBackgroundImage(); //need to input image  
+		picture = PageManager.Functions.getImage("HomeScreenBackground.png");
 		setLayout(null);
 		StartButtons();
 	}
@@ -22,21 +20,6 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		super.paintComponent(g);
 		g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
-	}
-	public void getBackgroundImage()
-	{
-		picture = null;
-		String pictName = "../storedData/images/HomeScreenBackground.png";
-
-		try
-		{
-			picture = ImageIO.read(new File(pictName));
-		}
-		catch(IOException e)
-		{
-			System.err.println("\n\n" + pictName + " can't be found. \n\n");
-			e.printStackTrace();        
-		}
 	}
 
 	public void StartButtons() ///Login and sign-in button on title page

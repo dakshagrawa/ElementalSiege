@@ -1,9 +1,6 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class PickAvatar extends JPanel
@@ -16,7 +13,7 @@ public class PickAvatar extends JPanel
 		pm = pageMngr;
 		data = pm.getGameData();
 
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout(100,100));
 		setBackground(new Color(169,169,169));
 
 		add(new AvatarsGrid());
@@ -26,7 +23,7 @@ public class PickAvatar extends JPanel
 	{
 		public AvatarsGrid()
 		{
-			setLayout(new GridLayout(1,2,100,0));
+			setLayout(new GridLayout(1,2,0,0));
 
 			AvatarPanel avatar1 = new AvatarPanel(1);
 			AvatarPanel avatar2 = new AvatarPanel(2);
@@ -56,7 +53,7 @@ public class PickAvatar extends JPanel
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
-				g.drawImage(avatarImg, 0,0, 200,avatarImg.getHeight(null),this);
+				g.drawImage(avatarImg, 0,0, this.getWidth(),avatarImg.getHeight(null)*(this.getWidth()/avatarImg.getWidth(null)),this);
 			}
 
 			public void mouseClicked(MouseEvent e) 

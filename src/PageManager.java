@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -155,6 +154,8 @@ public class PageManager extends JPanel
 		} 
 	}
 
+	/* This class has different functions (tools) that helps 
+		use some chunks of code that is used repeatedly. */
 	public static class Functions
 	{
 		public static Image getImage(String imgName)
