@@ -58,7 +58,7 @@ public class GameData
 		}
 		catch(FileNotFoundException e)
 		{
-			System.err.printf("ERROR: Cannot open %s\n", fileName);
+			System.err.printf("ERROR MESSAGE: Cannot open %s\n", fileName);
 			System.err.println(e);
 			System.exit(1);
 		}
