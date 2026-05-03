@@ -9,14 +9,16 @@ public class PageManager extends JPanel
 {
 	private CardLayout card;
 	private GameData data;
+	public String lastCardName;
+	public String currentCardName;
 	public Font titleFont;
 	public Font normalFont; 
 	public Font normalBoldFont;
-	public ElementalSiege es;
+	public ElementalSiege frame;
 
-	public PageManager(ElementalSiege ElemntlSiege)
+	public PageManager(ElementalSiege elemntlSiege_JFrame)
 	{
-		es = ElemntlSiege;
+		frame = elemntlSiege_JFrame;
 		titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
@@ -26,22 +28,34 @@ public class PageManager extends JPanel
 		card = new CardLayout();
 		setLayout(card);
 
+		add(new CloseWindow(this),"Close");
 		add(new TitlePage(this), "Title");
 		add(new SignIn(this),"Continue");
 		add(new SignUp(this),"New Game");
 		add(new Settings(this),"Settings");
 		add(new PickAvatar(this), "Pick Avatar");
-		add(new GetNewCards(this),"Get New Cards1");
-		add(new GetNewCards(this),"Get New Cards2");
-		add(new GetNewCards(this),"Get New Cards3");
-		add(new GetNewCards(this),"Get New Cards4");
+		add(new GetNewCharacterCards(this, 1),"Get New Cards 1");
+		add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
+		add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
+		add(new GetNewCharacterCards(this, "Start Game"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
+		add(new StartGamePanel(this),"Start Game");
 
-		card.show(this,"Title");
+
+		lastCardName = "Title";
+		currentCardName = "Title";
+		changePanelCard(currentCardName);
 	}
 
-	public void changeCard(String cardName)
+	public void changePanelCard(String cardName)
 	{
+		if(!cardName.equals("Close"))
+		{
+			//card.show(this,lastCardName);
+			lastCardName = cardName;
+		}
+		currentCardName = cardName;
 		card.show(this,cardName);
+		revalidate(); //TODO: add citation
 		repaint();
 	}
 
@@ -175,8 +189,8 @@ public class PageManager extends JPanel
 
 			catch(IOException e)
 			{
-				System.err.println("\n" + pictName + " can't be found. \n");
-				e.printStackTrace();        
+				System.out.println(e);      
+				System.err.println("\n" + pictName + " can't be found. \n"); 
 			}
 
 			return picture;

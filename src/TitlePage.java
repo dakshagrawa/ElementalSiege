@@ -52,6 +52,6 @@ public class TitlePage extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		pm.changeCard(e.getActionCommand());
+		pm.changePanelCard(e.getActionCommand());
 	}
 }

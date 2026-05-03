@@ -146,7 +146,7 @@ public class SignIn extends JPanel
 				{
 					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");
-					pm.changeCard("");
+					pm.changePanelCard("");
 				}
 				else
 				{
@@ -159,7 +159,7 @@ public class SignIn extends JPanel
 				username.setText("");
 				password.setText("");
 				warningLabel.setText("");
-				pm.changeCard("Title");
+				pm.changePanelCard("Title");
 			}
 		}
 	}

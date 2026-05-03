@@ -31,9 +31,15 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 	{
 		String command = evt.getActionCommand();
 		if(command.equals("Save & Exit"))
+		{
 			data.saveData();
+			pm.changePanelCard(" Save & Exit");
+		}
 		else
-			pm.es.dispose();
+		{
+			pm.frame.dispose();
+			System.exit(0);
+		}
 	}
 
 	public void stateChanged(ChangeEvent evt)

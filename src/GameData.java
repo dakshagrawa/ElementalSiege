@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +15,9 @@ public class GameData
 	private String fileName;
 	private PageManager pm;
 
+	public CharacterImage[] characters;
+	public int[] userCharacters;
+
 	private String userAvatar;
 	
 	public GameData(PageManager pageMngr)
@@ -23,6 +27,8 @@ public class GameData
 		accountInfoFile = new File(fileName);
 		first = "";
 		userAvatar = "";
+		getCharactersFromFiles();
+		//getQuestions(); //TODO
 		correctCount = 0;
 		resetAll();
 	}
@@ -211,11 +217,11 @@ public class GameData
 		{
 			input = new Scanner(accountInfoFile);
 		} 
-		catch (FileNotFoundException e) {
-			System.err.printf("ERROR: Cannot read %s\n", fileName);
-			System.err.println("Cannot open account.");
+		catch (FileNotFoundException e) 
+		{
 			System.out.println(e);
-			e.printStackTrace();
+			System.err.printf("\nERROR MESSAGE: Cannot read %s\n", fileName);
+			System.err.println("Cannot open account.");
 			return false;
 		}
 
@@ -271,9 +277,9 @@ public class GameData
 			} 
 			catch(IOException e) 
 			{
-				System.err.printf("ERROR: Cannot open %s\n", fileName);
-				System.err.println("Cannot create new account.");
 				System.out.println(e);
+				System.err.printf("ERROR MESSAGE: Cannot open %s\n", fileName);
+				System.err.println("Cannot create new account.");
 				return false;
 			}
 
@@ -304,5 +310,112 @@ public class GameData
 			userAvatar = "NO AVATAR";
 	}
 
-	
+	public void getCharactersFromFiles()
+	{
+		String infoFileName = "../storedData/CharacterInfo.txt";
+		Scanner inputCharacterInfo = null;
+        try 
+		{
+			inputCharacterInfo = new Scanner(new File(infoFileName));
+		} 
+		catch (FileNotFoundException e) 
+		{
+			System.out.println(e);
+			System.err.printf("\nERROR MESSAGE: Cannot read %s\n", infoFileName);
+			System.err.println("Characters cannot be retrieved from file. Game will not work. :(");
+			System.exit(1);
+		}
+		inputCharacterInfo.nextLine(); // To ignore the instructions that are given on the top of the file
+
+		characters = new CharacterImage[12];
+		userCharacters = new int[characters.length];
+		for (int i = 0; i < characters.length; i++) 
+		{
+			characters[i] = null;
+			userCharacters[i] = -1;
+		}
+		int counter = 0;
+
+		Image pic1 = PageManager.Functions.getImage("characters/characters1.png");
+		for (int pic1_i = 0; pic1_i < 6; pic1_i++) 
+		{
+			for (int pic1_j = 0; pic1_j < 2; pic1_j++) 
+			{
+				characters[counter] = new CharacterImage(pic1,30+(224*pic1_i),25+(364*pic1_j),211,354, inputCharacterInfo);
+				counter++;
+			}
+		}
+	}
+	public static class CharacterImage 
+	{
+		public Image image;
+		public String name;
+		public int x1, y1, x2, y2, width, height;
+		public int problemSolving, wisdom, curiosity;
+		public char rarity;
+		public boolean hasError;
+
+		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
+		{
+			hasError = false;
+			image = img;
+			x1 = xVal;
+			y1 = yVal;
+			x2 = xVal+widthVal;
+			y2 = yVal+heightVal;
+			width = widthVal;
+			height = heightVal;
+			if(image==null||x1<0||y1<0||width<0||height<0||!gotImageInfo(inputCharInfo))
+				hasError = true;
+		}
+
+		// Second Constructor (Calculating width/height from coordinates)
+		public CharacterImage(Image img, int xMin, int yMin, int xMax, int yMax, Scanner inputCharInfo, boolean justXandY) 
+		{
+			//used: https://pixspy.com/ to get coordinates
+			hasError = false;
+			image = img;
+			x1 = xMin;
+			y1 = yMin;
+			x2 = xMax;
+			y2 = yMax;
+			width = xMax - xMin;
+			height = yMax - yMin;
+			if(image==null||x1<0||y1<0||width<0||height<0||!gotImageInfo(inputCharInfo))
+				hasError = true;
+		}
+
+		public boolean gotImageInfo(Scanner input)
+		{
+			if(input.hasNextLine())
+			{
+				String next = input.nextLine().trim();
+				if(next.contains(":"))
+				{
+					name = next.substring(0,next.indexOf(':'));
+					next = next.substring(next.indexOf(':')+1).trim();
+					problemSolving = Integer.parseInt(next.substring(0,next.indexOf(",")));
+					next = next.substring(next.indexOf(',')+1).trim();
+					wisdom = Integer.parseInt(next.substring(0,next.indexOf(",")));
+					next = next.substring(next.indexOf(',')+1).trim();
+					curiosity = Integer.parseInt(next.substring(0,next.indexOf(",")));
+					next = next.substring(next.indexOf(',')+1).trim();
+					rarity = next.toUpperCase().charAt(0);
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	public void setUserCharacters(int characterIdx)
+	{
+		for (int i = 0; i < userCharacters.length; i++) 
+		{
+			if(userCharacters[i]==-1)
+			{
+				userCharacters[i] = characterIdx;
+				break;
+			}
+		}
+	}
 }

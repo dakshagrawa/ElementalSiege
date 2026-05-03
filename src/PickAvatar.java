@@ -71,7 +71,7 @@ public class PickAvatar extends JPanel
 				Border padding = BorderFactory.createEmptyBorder(15, 15, 15, 15);
 
 				// 3. Combine them: thickEtch is outer, padding is inner
-				this.setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
+				setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
 
 
 				setBackground(new Color(215, 200, 169));
@@ -90,7 +90,7 @@ public class PickAvatar extends JPanel
 			public void mouseClicked(MouseEvent e) 
 			{
 				data.setAvatar(avatar);
-				pm.changeCard("Get New Cards1");
+				pm.changePanelCard("Get New Cards 1");
 			}
 
 			public void mousePressed(MouseEvent e) {}

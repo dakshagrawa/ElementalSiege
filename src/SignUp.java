@@ -171,7 +171,7 @@ public class SignUp extends JPanel
 				{
 					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");
-					pm.changeCard("Pick Avatar");
+					pm.changePanelCard("Pick Avatar");
 					pm.repaint();
 				}
 				else if(!pwdCorrect)
@@ -191,7 +191,7 @@ public class SignUp extends JPanel
 				password.setText("");
 				passwordCheck.setText("");
 				warningLabel.setText("");
-				pm.changeCard("Title");
+				pm.changePanelCard("Title");
 			}
 		}
 	}
