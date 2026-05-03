@@ -164,10 +164,13 @@ public class SignUp extends JPanel
 				boolean pwdCorrect=false;
 				if(Arrays.equals(pwdCheck,pwd))
 					pwdCorrect=true;
+				boolean isBlank = true;
+				if(pwd.length > 0)
+					isBlank = false;
 				boolean signUpSuccessful = data.putAccountInFile(username.getText(),pwd, pwdCorrect);
 				Arrays.fill(pwd, '*');
 				Arrays.fill(pwdCheck, '*');
-				if(signUpSuccessful)
+				if(signUpSuccessful && !isBlank)
 				{
 					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");

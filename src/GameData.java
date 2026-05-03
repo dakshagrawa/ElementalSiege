@@ -59,7 +59,7 @@ public class GameData
 		catch(FileNotFoundException e)
 		{
 			System.err.printf("ERROR: Cannot open %s\n", fileName);
-			System.out.println(e);
+			System.err.println(e);
 			System.exit(1);
 		}
 		int questionNumber = (int)(Math.random() * 30);
@@ -147,7 +147,7 @@ public class GameData
 		catch(FileNotFoundException e) 
 		{
 			System.err.printf("ERROR: Cannot open %s\n", fileName);
-			System.out.println(e);
+			System.err.println(e);
 			System.exit(1);
 		}
 		while(inFile.hasNext()) 
@@ -174,7 +174,7 @@ public class GameData
 			catch(FileNotFoundException e) 
 			{
 				System.err.printf("ERROR: Cannot open %s\n", fileName);
-				System.out.println(e);
+				System.err.println(e);
 				System.exit(1);
 			}
 			while(inFile.hasNext()) 
@@ -219,7 +219,7 @@ public class GameData
 		} 
 		catch (FileNotFoundException e) 
 		{
-			System.out.println(e);
+			System.err.println(e);
 			System.err.printf("\nERROR MESSAGE: Cannot read %s\n", fileName);
 			System.err.println("Cannot open account.");
 			return false;
@@ -239,19 +239,26 @@ public class GameData
 			{
 				currentPwd = line.substring(3).toCharArray();
 				
-				if(currentName!=null && currentName.equalsIgnoreCase(inName) && checkPassword && Arrays.equals(currentPwd, inPwd)) 
+				if(currentName!=null && currentName.equalsIgnoreCase(inName))
 				{
-					System.out.println("\nLogin Successful! :)");
-					Arrays.fill(currentPwd, '*'); // Clean up local password
-					input.close();
-					return true;
-				}
-				else if(currentName!=null && currentName.equalsIgnoreCase(inName) && !checkPassword) 
-				{
-					System.out.println("\nSign up login does not already exist in file! :)");
-					Arrays.fill(currentPwd, '*');
-					input.close();
-					return true;
+					if(checkPassword) 
+					{
+						if(Arrays.equals(currentPwd, inPwd))
+						{
+							System.out.println("\nLogin Successful! :)");
+							Arrays.fill(currentPwd, '*'); // Clean up local password
+							input.close();
+							return true;
+
+						}
+					}
+					else
+					{
+						System.out.println("\nSign up login does not already exist in file! :)");
+						Arrays.fill(currentPwd, '*');
+						input.close();
+						return true;
+					}
 				}
 				
 				Arrays.fill(currentPwd, '*'); 
@@ -277,7 +284,7 @@ public class GameData
 			} 
 			catch(IOException e) 
 			{
-				System.out.println(e);
+				System.err.println(e);
 				System.err.printf("ERROR MESSAGE: Cannot open %s\n", fileName);
 				System.err.println("Cannot create new account.");
 				return false;
@@ -320,7 +327,7 @@ public class GameData
 		} 
 		catch (FileNotFoundException e) 
 		{
-			System.out.println(e);
+			System.err.println(e);
 			System.err.printf("\nERROR MESSAGE: Cannot read %s\n", infoFileName);
 			System.err.println("Characters cannot be retrieved from file. Game will not work. :(");
 			System.exit(1);
@@ -389,19 +396,26 @@ public class GameData
 		{
 			if(input.hasNextLine())
 			{
-				String next = input.nextLine().trim();
-				if(next.contains(":"))
+				try
 				{
-					name = next.substring(0,next.indexOf(':'));
-					next = next.substring(next.indexOf(':')+1).trim();
-					problemSolving = Integer.parseInt(next.substring(0,next.indexOf(",")));
-					next = next.substring(next.indexOf(',')+1).trim();
-					wisdom = Integer.parseInt(next.substring(0,next.indexOf(",")));
-					next = next.substring(next.indexOf(',')+1).trim();
-					curiosity = Integer.parseInt(next.substring(0,next.indexOf(",")));
-					next = next.substring(next.indexOf(',')+1).trim();
-					rarity = next.toUpperCase().charAt(0);
-					return true;
+					String next = input.nextLine().trim();
+					if(next.contains(":"))
+					{
+						name = next.substring(0,next.indexOf(':'));
+						next = next.substring(next.indexOf(':')+1).trim();
+						problemSolving = Integer.parseInt(next.substring(0,next.indexOf(",")));
+						next = next.substring(next.indexOf(',')+1).trim();
+						wisdom = Integer.parseInt(next.substring(0,next.indexOf(",")));
+						next = next.substring(next.indexOf(',')+1).trim();
+						curiosity = Integer.parseInt(next.substring(0,next.indexOf(",")));
+						next = next.substring(next.indexOf(',')+1).trim();
+						rarity = next.toUpperCase().charAt(0);
+						return true;
+					}
+				}
+				catch(NumberFormatException | IndexOutOfBoundsException e) //TODO: citation for NumberFormatException
+				{
+					System.err.println("Error parsing Character info: "+e);
 				}
 			}
 			return false;
