@@ -78,7 +78,7 @@ public class GetNewCharacterCards extends JPanel
 			add(character1);
 			add(character2);
 			add(character3);
-		}
+		} 
 
 		class CharacterPanel extends JPanel implements MouseListener
 		{
