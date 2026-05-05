@@ -22,6 +22,9 @@ public class ElementalSiege extends JFrame implements WindowListener
         setContentPane(pm);
         setVisible(true);
 		addWindowListener(this);
+
+		Sound audio = new Sound();
+		audio.playBackground("../storedData/Audio/bg");
     }
 
     public static void main(String[] args) 

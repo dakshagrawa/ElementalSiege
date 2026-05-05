@@ -20,6 +20,7 @@ public class GetNewCharacterCards extends JPanel
 		setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 		setBackground(new Color(169,169,169));
 
+		JPanel adjusterPanel = new JPanel(new BorderLayout());
 		add(pickLabel());
 		add(new CharacterCardsGrid());
 	}
@@ -49,7 +50,6 @@ public class GetNewCharacterCards extends JPanel
 		{
 			setLayout(new GridLayout(1,3,20,0));
 			setOpaque(false);
-			// setPreferredSize(new Dimension(1200, 400));
 
 			int[] usedCharacterIdx = new int[3];
 			for(int i = 0; i < usedCharacterIdx.length; i++)
@@ -78,6 +78,8 @@ public class GetNewCharacterCards extends JPanel
 			add(character1);
 			add(character2);
 			add(character3);
+
+			setPreferredSize(new Dimension((data.characters[0].width+15)*3, data.characters[0].height));
 		} 
 	}
 	public class CharacterPanel extends JPanel implements MouseListener
@@ -98,7 +100,9 @@ public class GetNewCharacterCards extends JPanel
 			Border padding = BorderFactory.createEmptyBorder(30, 30, 30, 30);
 
 			// 3. Final nested border: thickEtch is outer, padding is inner
-			setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
+			
+			//setBorder(etch);
+			//setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
 
 
 			setBackground(new Color(215, 200, 169));

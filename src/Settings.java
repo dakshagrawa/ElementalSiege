@@ -33,7 +33,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		if(command.equals("Save & Exit"))
 		{
 			data.saveData();
-			pm.changePanelCard(" Save & Exit");
+			pm.changePanelCard("Save & Exit");
 		}
 		else
 		{
@@ -44,6 +44,6 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 	public void stateChanged(ChangeEvent evt)
 	{
-
+		
 	}
 }
