@@ -44,6 +44,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 	public void stateChanged(ChangeEvent evt)
 	{
-		
+		sound.currentVolume = slider.getValue();
+		sound.fc.setVaue(sound.currentVolume);;
 	}
 }

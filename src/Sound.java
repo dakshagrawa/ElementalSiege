@@ -1,10 +1,12 @@
 import java.net.URL;
 import javax.sound.sampled.*;
 
-public class Sound {
+public class Sound 
+{
     private Clip clip;
 
-    public void playBackground(String fileName) {
+    public void playBackground(String fileName, float volume) 
+	{
         // Stop and close existing clip to free Linux audio resources
         disposeSound();
 
@@ -19,17 +21,32 @@ public class Sound {
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(inputStream);
+
+			// --- VOLUME CONTROL START ---
+            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                
+                // volume is a float between 0.0 (silent) and 1.0 (full)
+                // We convert that to decibels
+                float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
+                gainControl.setValue(dB);
+            }
+            // --- VOLUME CONTROL END ---
             
             // Loop continuously
             clip.loop(Clip.LOOP_CONTINUOUSLY); 
             clip.start();
-        } catch (Exception e) {
+        } 
+		catch (Exception e) 
+		{
             e.printStackTrace();
         }
     }
 
-    public void disposeSound() {
-        if (clip != null) {
+    public void disposeSound() 
+	{
+        if (clip != null) 
+		{
             clip.stop();
             clip.close();
         }
