@@ -6,6 +6,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 {
 	private GameData data;
 	private PageManager pm;
+	private JSlider volumeSlider;
 
 	public Settings(PageManager pageMngr)
 	{
@@ -13,10 +14,10 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		data = pm.getGameData();
 		setLayout(new GridLayout(3, 1, 10, 20));
 		
-		JSlider volume = new JSlider(0, 100, 100);
-		volume.setOrientation(JSlider.HORIZONTAL);
-		volume.addChangeListener(this);
-		add(volume);
+		volumeSlider = new JSlider(0, 100, 100);
+		volumeSlider.setOrientation(JSlider.HORIZONTAL);
+		volumeSlider.addChangeListener(this);
+		add(volumeSlider);
 
 		JButton exit = new JButton("Save & Exit");
 		exit.addActionListener(this);
@@ -25,6 +26,8 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		JButton quit = new JButton("Quit");
 		quit.addActionListener(this);
 		add(quit);
+
+		//JButton timeLimit = new JButton("Set a time limit");
 	}
 
 	public void actionPerformed(ActionEvent evt)
@@ -44,7 +47,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 	public void stateChanged(ChangeEvent evt)
 	{
-		sound.currentVolume = slider.getValue();
-		sound.fc.setVaue(sound.currentVolume);;
+		pm.sound.currentVolume = volumeSlider.getValue();
+		pm.sound.fc.setVaue(pm.sound.currentVolume);
 	}
 }
