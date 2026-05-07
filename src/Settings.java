@@ -47,7 +47,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 	public void stateChanged(ChangeEvent evt)
 	{
-		pm.sound.currentVolume = volumeSlider.getValue();
-		pm.sound.fc.setVaue(pm.sound.currentVolume);
+		// pm.sound.currentVolume = volumeSlider.getValue();
+		// pm.sound.fc.setVaue(pm.sound.currentVolume);
 	}
 }
