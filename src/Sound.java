@@ -29,16 +29,16 @@ public class Sound
             clip = AudioSystem.getClip();
             clip.open(inputStream);
 
-			// --- VOLUME CONTROL START ---
-            if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) { //TODO: THIS DOESNT WORK (if test: add to param: ", float volume")
-                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			// // --- VOLUME CONTROL START ---
+            // if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) { //TODO: THIS DOESNT WORK (if test: add to param: ", float volume")
+            //     FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 
-                // volume is a float between 0.0 (silent) and 1.0 (full)
-                // We convert that to decibels
-                float dB = (float) (Math.log(currentVolume) / Math.log(10.0) * 20.0);
-                gainControl.setValue(dB);
-            }
-            // --- VOLUME CONTROL END ---
+            //     // volume is a float between 0.0 (silent) and 1.0 (full)
+            //     // We convert that to decibels
+            //     float dB = (float) (Math.log(currentVolume) / Math.log(10.0) * 20.0);
+            //     gainControl.setValue(dB);
+            // }
+            // // --- VOLUME CONTROL END ---
             
             // Loop continuously
             clip.loop(Clip.LOOP_CONTINUOUSLY); 
