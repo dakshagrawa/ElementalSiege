@@ -57,7 +57,7 @@ public class TitlePage extends JPanel implements ActionListener
 	}
 
 	public void addSettingsButton()
-{
+	{
     Image icon = PageManager.Functions.getImage("settings.png");
     ImageIcon scaledIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 
@@ -72,5 +72,5 @@ public class TitlePage extends JPanel implements ActionListener
 
     pm.addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
     add(settingsBtn);
-}
+	}
 }
