@@ -12,6 +12,7 @@ public class TitlePage extends JPanel implements ActionListener
 		pm = pageMngr;
 		setLayout(null);
 		StartButtons();
+		addSettingsButton();
 	}
 
 	public void paintComponent(Graphics g)
@@ -54,4 +55,22 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		pm.changePanelCard(e.getActionCommand());
 	}
+
+	public void addSettingsButton()
+{
+    Image icon = PageManager.Functions.getImage("settings.png");
+    ImageIcon scaledIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+
+    JButton settingsBtn = new JButton(scaledIcon);
+    settingsBtn.setBounds(10, 10, 50, 50); // top-left corner; adjust as needed
+    settingsBtn.setContentAreaFilled(false);
+    settingsBtn.setBorderPainted(false);
+    settingsBtn.setFocusPainted(false);
+    settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+    settingsBtn.addActionListener(e -> pm.changePanelCard("Settings"));
+
+    pm.addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
+    add(settingsBtn);
+}
 }
