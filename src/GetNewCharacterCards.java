@@ -1,6 +1,6 @@
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -16,6 +16,7 @@ public class GetNewCharacterCards extends JPanel
 		pm = PageMngr;
 		data = pm.getGameData();
 		thisPageNumber = thisPanelNumber;
+		nextPage = "Get New Cards "+(thisPageNumber+1);
 
 		setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 		setBackground(new Color(169,169,169));
@@ -51,7 +52,8 @@ public class GetNewCharacterCards extends JPanel
 			setLayout(new GridLayout(1,3,20,0));
 			setOpaque(false);
 
-			int[] usedCharacterIdx = new int[3];
+			int numToPick = Math.min(3, data.characters.length);
+    		int[] usedCharacterIdx = new int[numToPick];
 			for(int i = 0; i < usedCharacterIdx.length; i++)
 			{
 				int randomIdx;
@@ -82,7 +84,7 @@ public class GetNewCharacterCards extends JPanel
 			setPreferredSize(new Dimension((data.characters[0].width+15)*3, data.characters[0].height));
 		} 
 	}
-	public class CharacterPanel extends JPanel implements MouseListener
+	public class CharacterPanel extends JButton implements ActionListener
 	{
 		private int character;
 		private GameData.CharacterImage characterImg;
@@ -92,23 +94,22 @@ public class GetNewCharacterCards extends JPanel
 			character = characterIdx;
 			characterImg = data.characters[character];
 
-			// 1. Your existing thick etched frame
-			Border etch = BorderFactory.createEtchedBorder(new Color(52, 53, 55), new Color(156, 157, 156));
-			Border thickEtch = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(52, 53, 55), 10), etch);
-
-			// 2. Padding (increased to 30px for a cleaner look)
-			Border padding = BorderFactory.createEmptyBorder(30, 30, 30, 30);
-
-			// 3. Final nested border: thickEtch is outer, padding is inner
-			
-			//setBorder(etch);
-			//setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
-
-
 			setBackground(new Color(215, 200, 169));
 
-			addMouseListener(this);
-			setPreferredSize(new Dimension(characterImg.height, characterImg.width));
+			try
+			{
+				ImageIcon scaledCharacterIcon = new ImageIcon(characterImg.image.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+				setIcon(scaledCharacterIcon);
+			}
+			catch(GameData.CharacterImage.CharacterInitializationException e)
+			{
+				System.err.println("Could not load " + characterImg.name);
+				setText(characterImg.name);
+			}
+
+			addActionListener(this);
+			setPreferredSize(new Dimension(characterImg.width, characterImg.height));
+			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 
 		public void paintComponent(Graphics g)
@@ -123,24 +124,10 @@ public class GetNewCharacterCards extends JPanel
 			g.drawImage(characterImg.image, 15, y, margin + (getWidth() - (margin * 2)), finalHeight+y, characterImg.x1, characterImg.y1, characterImg.x2, characterImg.y2, this);
 		}
 
-		public void mouseClicked(MouseEvent e) 
+		public void actionPerformed(ActionEvent e) 
 		{
 			data.setUserCharacters(character);
-			if(thisPageNumber != 0)
-				pm.changePanelCard("Get New Cards "+(thisPageNumber++));
-			else
-				pm.changePanelCard(nextPage);
+			pm.changePanelCard(nextPage);
 		}
-
-		public void mousePressed(MouseEvent e) {}
-
-		public void mouseReleased(MouseEvent e) {}
-
-		public void mouseEntered(MouseEvent e) 
-		{
-			setCursor(new Cursor(Cursor.HAND_CURSOR));
-		}
-
-		public void mouseExited(MouseEvent e) {}
 	}
 }

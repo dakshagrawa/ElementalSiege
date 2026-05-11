@@ -58,19 +58,21 @@ public class TitlePage extends JPanel implements ActionListener
 
 	public void addSettingsButton()
 	{
-    Image icon = PageManager.Functions.getImage("settings.png");
-    ImageIcon scaledIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+		Image icon = PageManager.Functions.getImage("settings.png");
+		ImageIcon scaledSettingsIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 
-    JButton settingsBtn = new JButton(scaledIcon);
-    settingsBtn.setBounds(10, 10, 50, 50); // top-left corner; adjust as needed
-    settingsBtn.setContentAreaFilled(false);
-    settingsBtn.setBorderPainted(false);
-    settingsBtn.setFocusPainted(false);
-    settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		JButton settingsBtn = new JButton(scaledSettingsIcon);
+		settingsBtn.setBounds(10, 10, 50, 50); // top-left corner; adjust as needed
+		settingsBtn.setContentAreaFilled(false);
+		settingsBtn.setBorderPainted(false);
+		settingsBtn.setFocusPainted(false);
+		settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-    settingsBtn.addActionListener(e -> pm.changePanelCard("Settings"));
+		settingsBtn.setActionCommand("Settings");
+		settingsBtn.addActionListener(this);
 
-    pm.addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
-    add(settingsBtn);
+		pm.addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
+		add(settingsBtn);
 	}
+
 }

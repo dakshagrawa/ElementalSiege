@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -197,5 +198,47 @@ public class PageManager extends JPanel
 
 			return picture;
 		}
+
+		public static BufferedImage getBufferedImage(String imgName)
+		{
+			BufferedImage picture = null;
+			String pictName = "../storedData/images/"+imgName;
+
+			try
+			{
+				picture = ImageIO.read(new File(pictName));
+			}
+
+			catch(IOException e)
+			{
+				System.out.println(e);      
+				System.err.println("\n" + pictName + " can't be found. \n"); 
+			}
+
+			return picture;
+		}
+
+		// Source - https://stackoverflow.com/a/13605411
+		// Posted by Sri Harsha Chilakapati, modified by community. See post 'Timeline' for change history
+		// Retrieved 2026-05-10, License - CC BY-SA 3.0
+		public static BufferedImage characterToBufferedImage(GameData.CharacterImage imageClass) //TODO: cite
+		{
+			if (imageClass.image instanceof BufferedImage)
+			{
+				return (BufferedImage) imageClass.image;
+			}
+
+			// Create a buffered image with transparency
+			BufferedImage buffered = new BufferedImage(imageClass.width, imageClass.height, BufferedImage.TYPE_INT_ARGB);
+
+			// Draw the image on to the buffered image
+			Graphics2D bGr = buffered.createGraphics();
+			bGr.drawImage(imageClass.image, 0, 0, imageClass.width, imageClass.height, imageClass.x1, imageClass.y1, imageClass.x2, imageClass.y2, null);
+			bGr.dispose();
+
+			// Return the buffered image
+			return buffered;
+		}
+
 	}
 }

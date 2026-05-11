@@ -1,4 +1,6 @@
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RasterFormatException;
 import java.io.*;
 import java.util.*;
 
@@ -343,7 +345,7 @@ public class GameData
 		}
 		int counter = 0;
 
-		Image pic1 = PageManager.Functions.getImage("characters/characters1.png");
+		BufferedImage pic1 = PageManager.Functions.getBufferedImage("characters/characters1.png");
 		for (int pic1_i = 0; pic1_i < 6; pic1_i++) 
 		{
 			for (int pic1_j = 0; pic1_j < 2; pic1_j++) 
@@ -353,74 +355,123 @@ public class GameData
 			}
 		}
 	}
+
 	public static class CharacterImage 
 	{
-		public Image image;
+		private Image fullImage;
+		public BufferedImage image;
 		public String name;
-		public int x1, y1, x2, y2, width, height;
+		public int x1, y1, width, height;  //used: https://pixspy.com/ to get coordinates // TODO: cite this
 		public int problemSolving, wisdom, curiosity;
 		public char rarity;
 		public boolean hasError;
 
+		// In CharacterImage constructor:
 		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
 		{
-			hasError = false;
-			image = img;
+			fullImage = img;
 			x1 = xVal;
 			y1 = yVal;
-			x2 = xVal+widthVal;
-			y2 = yVal+heightVal;
 			width = widthVal;
 			height = heightVal;
-			if(image==null||x1<0||y1<0||width<0||height<0||!gotImageInfo(inputCharInfo))
-				hasError = true;
+
+			// If parsing info fails or image is null, mark as error
+			hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); 
+			
+			if (!hasError) {
+				getCroppedImage();
+			} else {
+				// Assign a 1x1 empty image or a default image to prevent NPE in other classes
+				image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+				System.err.println("Could not load character info for " + name);
+			}
+		}
+		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
+		{
+			try
+			{
+				fullImage = img;
+				x1 = xVal;
+				y1 = yVal;
+				width = widthVal;
+				height = heightVal;
+
+				hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
+				getCroppedImage();
+
+				if(hasError)
+					throw new CharacterInitializationException();
+			}
+			catch(CharacterInitializationException e)
+			{
+				System.err.println("Could not load " + name);
+			}
 		}
 
-		// Second Constructor (Calculating width/height from coordinates)
 		public CharacterImage(Image img, int xMin, int yMin, int xMax, int yMax, Scanner inputCharInfo, boolean justXandY) 
 		{
-			//used: https://pixspy.com/ to get coordinates
-			hasError = false;
-			image = img;
-			x1 = xMin;
-			y1 = yMin;
-			x2 = xMax;
-			y2 = yMax;
-			width = xMax - xMin;
-			height = yMax - yMin;
-			if(image==null||x1<0||y1<0||width<0||height<0||!gotImageInfo(inputCharInfo))
-				hasError = true;
+			this(img, xMin, yMin, xMax - xMin, yMax - yMin, inputCharInfo);
 		}
 
-		public boolean gotImageInfo(Scanner input)
+		public boolean parsedCharacterInfo(Scanner input)
 		{
-			if(input.hasNextLine())
+			if(input.hasNextLine() && input!=null)
 			{
 				try
 				{
-					String next = input.nextLine().trim();
-					if(next.contains(":"))
+					String line = input.nextLine().trim();
+					if(line.contains(":"))
 					{
-						name = next.substring(0,next.indexOf(':'));
-						next = next.substring(next.indexOf(':')+1).trim();
-						problemSolving = Integer.parseInt(next.substring(0,next.indexOf(",")));
-						next = next.substring(next.indexOf(',')+1).trim();
-						wisdom = Integer.parseInt(next.substring(0,next.indexOf(",")));
-						next = next.substring(next.indexOf(',')+1).trim();
-						curiosity = Integer.parseInt(next.substring(0,next.indexOf(",")));
-						next = next.substring(next.indexOf(',')+1).trim();
-						rarity = next.toUpperCase().charAt(0);
+						name = line.substring(0,line.indexOf(':')).trim();
+						line = line.substring(line.indexOf(':')+1).trim();
+
+						problemSolving = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
+						line = line.substring(line.indexOf(',')+1).trim();
+
+						wisdom = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
+						line = line.substring(line.indexOf(',')+1).trim();
+
+						curiosity = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
+						line = line.substring(line.indexOf(',')+1).trim();
+
+						rarity = line.toUpperCase().charAt(0);
+
 						return true;
 					}
 				}
 				catch(NumberFormatException | IndexOutOfBoundsException e) //TODO: citation for NumberFormatException
 				{
-					System.err.println("Error parsing Character info: "+e);
+					System.err.println("Error parsing Character info: " + e);
 				}
 			}
 			return false;
 		}
+
+		public void getCroppedImage()
+		{
+			try
+			{
+				image = ((BufferedImage)fullImage).getSubimage(x1, y1, width, height);
+				image = PageManager.Functions.characterToBufferedImage(this);
+				hasError = false;
+			}
+			catch(RasterFormatException | ArrayIndexOutOfBoundsException e)
+			{
+				System.err.println("\n\n"+name+" has error");
+				e.printStackTrace();
+				hasError = true;
+			}
+		}
+
+		public class CharacterInitializationException extends RuntimeException //TODO: cite -> https://www.geeksforgeeks.org/java/user-defined-custom-exception-in-java/
+		{
+			public CharacterInitializationException()
+			{
+				super(name + " information is wrong");
+			}
+		}
 	}
+
 	public void setUserCharacters(int characterIdx)
 	{
 		for (int i = 0; i < userCharacters.length; i++) 
