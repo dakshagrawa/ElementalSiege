@@ -31,7 +31,7 @@ public class SignIn extends JPanel
 		setBackground(new Color(211, 211, 211, 220));
 	}
 
-	public class signInLabel extends JPanel
+	class signInLabel extends JPanel
 	{
 		public signInLabel()
 		{
@@ -49,7 +49,7 @@ public class SignIn extends JPanel
 		}
 	}
 	
-	public class CenterPanel extends JPanel
+	class CenterPanel extends JPanel
 	{
 		public CenterPanel()
 		{
@@ -85,7 +85,7 @@ public class SignIn extends JPanel
 			username.requestFocusInWindow();
 		}
 
-		public class nameListener implements ActionListener
+		class nameListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -93,7 +93,7 @@ public class SignIn extends JPanel
 			}
 		}
 
-		public class pwdListener implements ActionListener
+		class pwdListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -102,7 +102,7 @@ public class SignIn extends JPanel
 		}
 	}
 
-	public class SouthPanel extends JPanel implements ActionListener
+	class SouthPanel extends JPanel implements ActionListener
 	{
 		private JLabel warningLabel;
 

@@ -361,31 +361,11 @@ public class GameData
 		private Image fullImage;
 		public BufferedImage image;
 		public String name;
-		public int x1, y1, width, height;  //used: https://pixspy.com/ to get coordinates // TODO: cite this
+		public int x1, y1, x2, y2, width, height;  //used: https://pixspy.com/ to get coordinates // TODO: cite this
 		public int problemSolving, wisdom, curiosity;
 		public char rarity;
 		public boolean hasError;
 
-		// In CharacterImage constructor:
-		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
-		{
-			fullImage = img;
-			x1 = xVal;
-			y1 = yVal;
-			width = widthVal;
-			height = heightVal;
-
-			// If parsing info fails or image is null, mark as error
-			hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); 
-			
-			if (!hasError) {
-				getCroppedImage();
-			} else {
-				// Assign a 1x1 empty image or a default image to prevent NPE in other classes
-				image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-				System.err.println("Could not load character info for " + name);
-			}
-		}
 		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
 		{
 			try
@@ -395,6 +375,8 @@ public class GameData
 				y1 = yVal;
 				width = widthVal;
 				height = heightVal;
+				x2 = x1+width;
+				y2 = y1+height;
 
 				hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
 				getCroppedImage();
