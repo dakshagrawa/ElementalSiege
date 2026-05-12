@@ -263,10 +263,10 @@ class QuestionsPanel extends JPanel implements ActionListener
 		group.clearSelection();
 		data.grabQuestionFromFile();
 		questionArea.setText(data.getQuestion());
-		answer[0].setText("A. " + data.getAnswer(1));
-		answer[1].setText("B. " + data.getAnswer(2));
-		answer[2].setText("C. " + data.getAnswer(3));
-		answer[3].setText("D. " + data.getAnswer(4));
+		answer[0].setText("A. " + data.getAnswer(0));
+		answer[1].setText("B. " + data.getAnswer(1));
+		answer[2].setText("C. " + data.getAnswer(2));
+		answer[3].setText("D. " + data.getAnswer(3));
 		for(int i = 0; i < answer.length; i++)
 		{
 			answer[i].setEnabled(true);
