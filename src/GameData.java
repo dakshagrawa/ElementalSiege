@@ -53,7 +53,7 @@ public class GameData
 	public void grabQuestionFromFile ( )
 	{
 		Scanner inFile = null;
-		String fileName = "computerQuestions.txt"; //TODO: Change FileName
+		String fileName = "../storedData/Questions.txt"; //TODO: Change FileName
 		File inputFile = new File(fileName);
 		try
 		{
