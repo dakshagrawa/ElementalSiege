@@ -210,6 +210,57 @@ public class GameData
 			outFile.close();
 		}
 	}
+	
+	public void saveToHighScores ( )
+	{
+		if(lastGameCorrectCount >= 3)
+		{
+			String result = "";
+			boolean hasBeenAdded = false;
+			String fileName = "highScores.txt";
+			Scanner inFile = null;
+			File inputFile = new File(fileName);
+			try 
+			{
+				inFile = new Scanner(inputFile);
+			} 
+			catch(FileNotFoundException e) 
+			{
+				System.err.printf("ERROR: Cannot open %s\n", fileName);
+				System.out.println(e);
+				System.exit(1);
+			}
+			while(inFile.hasNext()) 
+			{
+				String line = inFile.nextLine();
+				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
+				{
+					result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+					hasBeenAdded = true;
+				}
+				result += line + "\n";
+			}
+			if(!hasBeenAdded)
+			{
+				result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+			}
+			inFile.close();
+
+			File ioFile = new File("highScores.txt");
+			PrintWriter outFile = null;
+			try
+			{
+				outFile = new PrintWriter(ioFile);
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+				System.exit(1);
+			}
+			outFile.print(result);
+			outFile.close();
+		}
+	}
 
 	// checks if the AccountInfo.txt file has the account in it
 	public boolean isAccountInFile(String inName, char[] inPwd, boolean checkPassword)
