@@ -315,7 +315,7 @@ class HighScoresPanel extends JPanel implements ActionListener
 		rightSidePanel.setLayout(new BorderLayout());
 		centerPanel.add(rightSidePanel, BorderLayout.CENTER);
 		
-		highScoresArea = new JTextArea("" + data.getHighScores(), 10, 20);
+		/*highScoresArea = new JTextArea("" + data.getHighScores(), 10, 20);
 		highScoresArea.setFont(myFont);
 		highScoresArea.setLineWrap(true);
 		highScoresArea.setWrapStyleWord(true);
@@ -323,7 +323,7 @@ class HighScoresPanel extends JPanel implements ActionListener
 		highScoresArea.setEditable(false);
 		highScoresArea.setMargin(new Insets(10,10,10,10));
 		JScrollPane scroller = new JScrollPane(highScoresArea);
-		rightSidePanel.add(scroller);
+		rightSidePanel.add(scroller);*/
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
