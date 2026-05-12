@@ -260,7 +260,7 @@ class QuestionsPanel extends JPanel implements ActionListener
 	
 	public void resetQuestion ( )
 	{
-//		group.clearSelection();
+		group.clearSelection();
 		data.grabQuestionFromFile();
 		questionArea.setText(data.getQuestion());
 		answer[0].setText("A. " + data.getAnswer(1));
