@@ -30,11 +30,13 @@ import javax.swing.JTextField;
 class QuestionPanel extends JPanel
 {
 	private CardLayout listOfCards;
+	private PageManager pm;
 	private GameData data;
 	
-	public QuestionPanel ( )
+	public QuestionPanel (PageManager pageMngr)
 	{
-		data = new GameData();
+		pm = pageMngr;
+		data = pm.getGameData();
 		data.grabQuestionFromFile();
 		
 		setBackground(Color.BLACK);
