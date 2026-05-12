@@ -27,27 +27,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class QuestionPanel
-{
-	public static void main(String[] args) 
-	{
-		JFrame frame = new JFrame("SHOWS HOW FILES COULD BE USED IN A GUI");
-		frame.setLayout(new BorderLayout());
-		CardForGameModuleFiles panel = new CardForGameModuleFiles();
-		frame.add(panel, BorderLayout.CENTER);
-		frame.setSize(960, 600);
-		frame.setLocation(200, 140);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-}
-
-class CardForGameModuleFiles extends JPanel
+class QuestionPanel extends JPanel
 {
 	private CardLayout listOfCards;
 	private GameData data;
 	
-	public CardForGameModuleFiles ( )
+	public QuestionPanel ( )
 	{
 		data = new GameData();
 		data.grabQuestionFromFile();
@@ -73,10 +58,10 @@ class StartPanel extends JPanel implements ActionListener
 {
 	private GameData data;
 	private CardLayout listOfCards;
-	private CardForGameModuleFiles primaryPanel;
+	private QuestionPanel primaryPanel;
 	private JTextField firstNameField, lastNameField;
 	
-	public StartPanel(GameData d, CardLayout c, CardForGameModuleFiles p)
+	public StartPanel(GameData d, CardLayout c, QuestionPanel p)
 	{
 		data = d;
 		listOfCards = c;
@@ -141,13 +126,13 @@ class QuestionsPanel extends JPanel implements ActionListener
 {
 	private GameData data;
 	private CardLayout listOfCards;
-	private CardForGameModuleFiles primaryPanel;
+	private QuestionPanel primaryPanel;
 	private ButtonGroup group;
 	private JTextArea questionArea;
 	private JRadioButton [] answer;
 	private JButton submit, nextQuestion, nextPanel;
 	
-	public QuestionsPanel(GameData d, CardLayout c, CardForGameModuleFiles p)
+	public QuestionsPanel(GameData d, CardLayout c, QuestionPanel p)
 	{
 		data = d;
 		listOfCards = c;
@@ -292,10 +277,10 @@ class HighScoresPanel extends JPanel implements ActionListener
 {
 	private GameData data;
 	private CardLayout listOfCards;
-	private CardForGameModuleFiles primaryPanel;
+	private QuestionPanel primaryPanel;
 	private JTextArea scoreInfo, highScoresArea;
 	
-	public HighScoresPanel(GameData d, CardLayout c, CardForGameModuleFiles p)
+	public HighScoresPanel(GameData d, CardLayout c, QuestionPanel p)
 	{
 		data = d;
 		listOfCards = c;
@@ -378,204 +363,4 @@ class HighScoresPanel extends JPanel implements ActionListener
 			System.exit(0);
 		}
 	}
-}
-
-class GameData
-{
-	private String first, last;
-	private String question;
-	private String [] answerSet;
-	private int correctAnswer;
-	private boolean [] chosenQuestions;
-	private int questionCount;
-	private int correctCount, lastGameCorrectCount;
-	
-	public GameData ( )
-	{
-		first = "";
-		last = "";
-		correctCount = 0;
-		resetAll();
-	}
-	
-	public GameData(PageManager pageManager) {
-		//TODO Auto-generated constructor stub
-	}
-
-	public void resetAll ( )
-	{
-		lastGameCorrectCount = correctCount;
-		answerSet = new String[4];
-		question = "";
-		for(int i = 0; i < answerSet.length; i++)
-		{
-			answerSet[i] = "";
-		}
-		correctAnswer = -1;
-		chosenQuestions = new boolean[30];
-		questionCount = correctCount = 0;
-	}
-
-	public void grabQuestionFromFile ( )
-	{
-		Scanner inFile = null;
-		String fileName = "computerQuestions.txt";
-		File inputFile = new File(fileName);
-		try
-		{
-			inFile = new Scanner(inputFile);
-		}
-		catch(FileNotFoundException e)
-		{
-			System.err.printf("ERROR: Cannot open %s\n", fileName);
-			System.out.println(e);
-			System.exit(1);
-		}
-		int questionNumber = (int)(Math.random() * 30);
-		while(chosenQuestions[questionNumber] == true)
-		{
-			questionNumber = (int)(Math.random() * 30);
-		}
-		chosenQuestions[questionNumber] = true;
-		questionCount++;
-		int counter = 0;
-
-		while(inFile.hasNext() && counter < 6 * questionNumber)
-		{
-			String line = inFile.nextLine();
-			counter++;
-		}
-		question = inFile.nextLine();
-
-		counter = 0;
-		while(inFile.hasNext() && counter < 4)
-		{
-			answerSet[counter] = inFile.nextLine();
-			counter++;
-		}
-		correctAnswer = inFile.nextInt();
-		inFile.close();
-	}
-	
-	public void setName(String f, String l)
-	{
-		first = f;
-		last = l;
-	}
-	
-	public String getQuestion ( )
-	{
-		return "" + questionCount + ". " + question;
-	}
-	
-	public String getAnswer(int index)
-	{
-		return answerSet[index];
-	}
-	
-	public int getCorrectAnswer ( )
-	{
-		return correctAnswer;
-	}
-	
-	public int getQuestionCount ( )
-	{
-		return questionCount;
-	}
-	
-	public int getCorrectCount ( )
-	{
-		return lastGameCorrectCount;
-	}
-	
-	public void addOneToCorrectCount ( )
-	{
-		correctCount++;
-	}
-	
-	// public String toString ( )
-	// {
-	// 	if(lastGameCorrectCount > 2)
-	// 	{
-	// 		return "Congratulations, " + first + " " + last + ", you answered " + lastGameCorrectCount +
-	// 			" out of 4 of the questions correctly.  Your name will be added to the list of high scores, shown to the right.  Good work!";
-	// 	}
-	// 	return "Good try " + first + " " + last + ", you answered " + lastGameCorrectCount +
-	// 		" out of 4 of the questions correctly.  Keep working at it, and maybe next time your name will be added to the list of high scores!";
-	// }
-	
-	// public String getHighScores ( )
-	// {
-	// 	String result = "";
-	// 	String fileName = "highScores.txt";
-	// 	Scanner inFile = null;
-	// 	File inputFile = new File(fileName);
-	// 	try 
-	// 	{
-	// 		inFile = new Scanner(inputFile);
-	// 	} 
-	// 	catch(FileNotFoundException e) 
-	// 	{
-	// 		System.err.printf("ERROR: Cannot open %s\n", fileName);
-	// 		System.out.println(e);
-	// 		System.exit(1);
-	// 	}
-	// 	while(inFile.hasNext()) 
-	// 	{
-	// 		String line = inFile.nextLine();
-	// 		result += line + "\n";
-	// 	}
-	// 	return result;
-	// }
-	
-	// public void saveToHighScores ( )
-	// {
-	// 	if(lastGameCorrectCount >= 3)
-	// 	{
-	// 		String result = "";
-	// 		boolean hasBeenAdded = false;
-	// 		String fileName = "highScores.txt";
-	// 		Scanner inFile = null;
-	// 		File inputFile = new File(fileName);
-	// 		try 
-	// 		{
-	// 			inFile = new Scanner(inputFile);
-	// 		} 
-	// 		catch(FileNotFoundException e) 
-	// 		{
-	// 			System.err.printf("ERROR: Cannot open %s\n", fileName);
-	// 			System.out.println(e);
-	// 			System.exit(1);
-	// 		}
-	// 		while(inFile.hasNext()) 
-	// 		{
-	// 			String line = inFile.nextLine();
-	// 			if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
-	// 			{
-	// 				result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
-	// 				hasBeenAdded = true;
-	// 			}
-	// 			result += line + "\n";
-	// 		}
-	// 		if(!hasBeenAdded)
-	// 		{
-	// 			result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
-	// 		}
-	// 		inFile.close();
-
-	// 		File ioFile = new File("highScores.txt");
-	// 		PrintWriter outFile = null;
-	// 		try
-	// 		{
-	// 			outFile = new PrintWriter(ioFile);
-	// 		}
-	// 		catch(IOException e)
-	// 		{
-	// 			e.printStackTrace();
-	// 			System.exit(1);
-	// 		}
-	// 		outFile.print(result);
-	// 		outFile.close();
-	// 	}
-	// }
 }
