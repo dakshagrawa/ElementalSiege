@@ -34,8 +34,11 @@ public class GetNewCharacterCards extends JPanel
 		setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
 		setBackground(new Color(169,169,169));
 
-		add(pickLabel());
-		add(new CharacterCardsGrid());
+		JPanel wrapperGrid = new JPanel(new GridLayout(2,1));
+		wrapperGrid.add(pickLabel());
+		wrapperGrid.add(new CharacterCardsGrid());
+		wrapperGrid.setOpaque(false);
+		add(wrapperGrid);
 	}
 
 	public JLabel pickLabel()
@@ -84,7 +87,7 @@ public class GetNewCharacterCards extends JPanel
 			setPreferredSize(new Dimension((data.characters[0].width+15)*3, data.characters[0].height));
 		} 
 	}
-	public static class CharacterPanel extends JButton implements ActionListener
+	public class CharacterPanel extends JButton implements ActionListener
 	{
 		private int character;
 		private GameData.CharacterImage characterImg;
@@ -98,7 +101,7 @@ public class GetNewCharacterCards extends JPanel
 
 			try
 			{
-				ImageIcon scaledCharacterIcon = new ImageIcon(characterImg.image.getScaledInstance(200, 300, Image.SCALE_SMOOTH));
+				ImageIcon scaledCharacterIcon = new ImageIcon(characterImg.image);
 				setIcon(scaledCharacterIcon);
 			}
 			catch(GameData.CharacterImage.CharacterInitializationException e)
