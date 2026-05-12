@@ -84,7 +84,7 @@ public class GetNewCharacterCards extends JPanel
 			setPreferredSize(new Dimension((data.characters[0].width+15)*3, data.characters[0].height));
 		} 
 	}
-	public class CharacterPanel extends JButton implements ActionListener
+	public static class CharacterPanel extends JButton implements ActionListener
 	{
 		private int character;
 		private GameData.CharacterImage characterImg;
@@ -98,12 +98,13 @@ public class GetNewCharacterCards extends JPanel
 
 			try
 			{
-				ImageIcon scaledCharacterIcon = new ImageIcon(characterImg.image.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+				ImageIcon scaledCharacterIcon = new ImageIcon(characterImg.image.getScaledInstance(200, 300, Image.SCALE_SMOOTH));
 				setIcon(scaledCharacterIcon);
 			}
 			catch(GameData.CharacterImage.CharacterInitializationException e)
 			{
 				System.err.println("Could not load " + characterImg.name);
+				e.printStackTrace();
 				setText(characterImg.name);
 			}
 
