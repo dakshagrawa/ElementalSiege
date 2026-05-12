@@ -125,7 +125,7 @@ public class GameData
 		correctCount++;
 	}
 	
-	/*public String toString ( )
+	public String toString ( )
 	{
 		if(lastGameCorrectCount > 2)
 		{
@@ -209,7 +209,7 @@ public class GameData
 			outFile.print(result);
 			outFile.close();
 		}
-	}*/
+	}
 
 	// checks if the AccountInfo.txt file has the account in it
 	public boolean isAccountInFile(String inName, char[] inPwd, boolean checkPassword)
