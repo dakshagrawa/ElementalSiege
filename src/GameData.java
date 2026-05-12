@@ -6,7 +6,7 @@ import java.util.*;
 
 public class GameData
 {
-	private String first;
+	private String first, last;
 	private String question;
 	private String [] answerSet;
 	private int correctAnswer;
@@ -28,6 +28,7 @@ public class GameData
 		fileName = "../storedData/AccountInfo.txt";
 		accountInfoFile = new File(fileName);
 		first = "";
+		last = "";
 		userAvatar = "";
 		getCharactersFromFiles();
 		//getQuestions(); //TODO
