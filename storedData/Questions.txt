@@ -1,456 +1,391 @@
-﻿1.
-What is the atomic number of an element equal to?
-A. Number of neutrons
-B. Number of protons
-C. Number of electrons and neutrons combined
-D. Atomic mass
-Answer: B
-2.
+﻿What is the atomic number of an element equal to?
+Number of neutrons
+Number of protons
+Number of electrons and neutrons combined
+Atomic mass
+2
 Which subatomic particle has a negative charge?
-A. Proton
-B. Neutron
-C. Electron
-D. Nucleus
-Answer: C
-3.
+Proton
+Neutron
+Electron
+Nucleus
+3
 Which scientist proposed the planetary model of the atom?
-A. Dalton
-B. Thomson
-C. Rutherford
-D. Bohr
-Answer: D
-4.
+Dalton
+Thomson
+Rutherford
+Bohr
+4
 What is the mass number of an atom with 11 protons and 12 neutrons?
-A. 11
-B. 12
-C. 23
-D. 24
-Answer: C
-5.
+11
+12
+23
+24
+3
 Which element is located in Group 17 of the periodic table?
-A. Neon
-B. Sodium
-C. Chlorine
-D. Magnesium
-Answer: C
-6.
+Neon
+Sodium
+Chlorine
+Magnesium
+3
 What type of bond involves the sharing of electrons?
-A. Ionic
-B. Metallic
-C. Covalent
-D. Hydrogen
-Answer: C
-7.
+Ionic
+Metallic
+Covalent
+Hydrogen
+3
 Which compound is ionic?
-A. CO2
-B. H2O
-C. NaCl
-D. CH4
-Answer: C
-8.
+CO2
+H2O
+NaCl
+CH4
+3
 What is the electron configuration of sodium (Na)?
-A. 2-8-1
-B. 2-8-2
-C. 2-7-1
-D. 2-8-8-1
-Answer: A
-9.
+2-8-1
+2-8-2
+2-7-1
+2-8-8-1
+1
 Which particle determines the identity of an element?
-A. Neutron
-B. Electron
-C. Proton
-D. Isotope
-Answer: C
-10.
+Neutron
+Electron
+Proton
+Isotope
+3
 What is the pH of a neutral solution at 25°C?
-A. 0
-B. 7
-C. 10
-D. 14
-Answer: B
-11.
+0
+7
+10
+14
+2
 Which state of matter has a definite volume but no definite shape?
-A. Solid
-B. Liquid
-C. Gas
-D. Plasma
-Answer: B
-12.
+Solid
+Liquid
+Gas
+Plasma
+2
 Which law states that matter cannot be created or destroyed?
-A. Boyle’s Law
-B. Charles’s Law
-C. Law of Conservation of Mass
-D. Law of Multiple Proportions
-Answer: C
-13.
+Boyle’s Law
+Charles’s Law
+Law of Conservation of Mass
+Law of Multiple Proportions
+3
 What is the molar mass of H2O?
-A. 16 g/mol
-B. 18 g/mol
-C. 20 g/mol
-D. 22 g/mol
-Answer: B
-14.
+16 g/mol
+18 g/mol
+20 g/mol
+22 g/mol
+2
 Which gas is most abundant in Earth’s atmosphere?
-A. Oxygen
-B. Carbon dioxide
-C. Nitrogen
-D. Hydrogen
-Answer: C
-15.
+Oxygen
+Carbon dioxide
+Nitrogen
+Hydrogen
+3
 What happens to gas pressure if volume decreases while temperature stays constant?
-A. Pressure decreases
-B. Pressure increases
-C. Pressure stays the same
-D. Pressure becomes zero
-Answer: B
-16.
+Pressure decreases
+Pressure increases
+Pressure stays the same
+Pressure becomes zero
+2
 Which type of reaction is represented by AB + CD → AD + CB?
-A. Synthesis
-B. Decomposition
-C. Single replacement
-D. Double replacement
-Answer: D
-17.
+Synthesis
+Decomposition
+Single replacement
+Double replacement
+4
 What is the oxidation number of oxygen in most compounds?
-A. +2
-B. +1
-C. -1
-D. -2
-Answer: D
-18.
++2
++1
+-1
+-2
+4
 Which element has the highest electronegativity?
-A. Oxygen
-B. Fluorine
-C. Chlorine
-D. Nitrogen
-Answer: B
-19.
+Oxygen
+Fluorine
+Chlorine
+Nitrogen
+2
 What is Avogadro’s number?
-A. 6.02 × 10^20
-B. 6.02 × 10^21
-C. 6.02 × 10^22
-D. 6.02 × 10^23
-Answer: D
-20.
+6.02 × 10^20
+6.02 × 10^21
+6.02 × 10^22
+6.02 × 10^23
+4
 What is the formula for sulfuric acid?
-A. HCl
-B. HNO3
-C. H2SO4
-D. HC2H3O2
-Answer: C
-21.
+HCl
+HNO3
+H2SO4
+HC2H3O2
+3
 Which phase change occurs when a solid turns directly into a gas?
-A. Condensation
-B. Sublimation
-C. Freezing
-D. Melting
-Answer: B
-22.
+Condensation
+Sublimation
+Freezing
+Melting
+2
 What is the charge of a calcium ion?
-A. +1
-B. +2
-C. -1
-D. -2
-Answer: B
-23.
++1
++2
+-1
+-2
+2
 Which orbital holds a maximum of 2 electrons?
-A. s orbital
-B. p orbital
-C. d orbital
-D. f orbital
-Answer: A
-24.
+s orbital
+p orbital
+d orbital
+f orbital
+1
 What is the empirical formula of C6H12O6?
-A. CH2O
-B. C2H4O2
-C. C3H6O3
-D. C6H12O6
-Answer: A
-25.
+CH2O
+C2H4O2
+C3H6O3
+C6H12O6
+1
 Which element is a noble gas?
-A. Bromine
-B. Helium
-C. Lithium
-D. Calcium
-Answer: B
-26.
+Bromine
+Helium
+Lithium
+Calcium
+2
 What is the main intermolecular force in water?
-A. Ionic bonding
-B. Metallic bonding
-C. Hydrogen bonding
-D. Covalent bonding
-Answer: C
-27.
+Ionic bonding
+Metallic bonding
+Hydrogen bonding
+Covalent bonding
+3
 Which reaction absorbs energy?
-A. Exothermic
-B. Endothermic
-C. Combustion
-D. Neutralization
-Answer: B
-28.
+Exothermic
+Endothermic
+Combustion
+Neutralization
+2
 What is the SI unit for amount of substance?
-A. Gram
-B. Liter
-C. Mole
-D. Atom
-Answer: C
-29.
+Gram
+Liter
+Mole
+Atom
+3
 Which element has 6 valence electrons?
-A. Carbon
-B. Oxygen
-C. Nitrogen
-D. Boron
-Answer: B
-30.
+Carbon
+Oxygen
+Nitrogen
+Boron
+2
 What is the shape of a methane molecule (CH4)?
-A. Linear
-B. Bent
-C. Trigonal planar
-D. Tetrahedral
-Answer: D
-31.
+Linear
+Bent
+Trigonal planar
+Tetrahedral
+4
 Which scientist discovered the electron?
-A. Rutherford
-B. Thomson
-C. Bohr
-D. Chadwick
-Answer: B
-32.
+Rutherford
+Thomson
+Bohr
+Chadwick
+2
 Which type of radiation has no charge?
-A. Alpha
-B. Beta
-C. Gamma
-D. Proton
-Answer: C
-33.
+Alpha
+Beta
+Gamma
+Proton
+3
 What is the molarity of a solution containing 2 moles of solute in 1 liter of solution?
-A. 0.5 M
-B. 1 M
-C. 2 M
-D. 4 M
-Answer: C
-34.
+0.5 M
+1 M
+2 M
+4 M
+3
 Which element is most reactive among the alkali metals?
-A. Lithium
-B. Sodium
-C. Potassium
-D. Cesium
-Answer: D
-35.
+Lithium
+Sodium
+Potassium
+Cesium
+4
 What type of solid is NaCl?
-A. Metallic solid
-B. Molecular solid
-C. Ionic solid
-D. Covalent network solid
-Answer: C
-36.
+Metallic solid
+Molecular solid
+Ionic solid
+Covalent network solid
+3
 What is the balanced coefficient of O2 in the equation:
 2H2 + O2 → 2H2O
-A. 1
-B. 2
-C. 3
-D. 4
-Answer: A
-37.
+1
+2
+3
+4
+1
 Which law explains why gases are compressible?
-A. Particles are stationary
-B. Gas particles are very far apart
-C. Gas particles attract strongly
-D. Gases have no mass
-Answer: B
-38.
+Particles are stationary
+Gas particles are very far apart
+Gas particles attract strongly
+Gases have no mass
+2
 What is the oxidation number of sodium in NaCl?
-A. -1
-B. 0
-C. +1
-D. +2
-Answer: C
-39.
+-1
+0
++1
++2
+3
 Which element is a metalloid?
-A. Silicon
-B. Oxygen
-C. Sodium
-D. Neon
-Answer: A
-40.
+Silicon
+Oxygen
+Sodium
+Neon
+1
 Which particle was discovered by James Chadwick?
-A. Electron
-B. Proton
-C. Neutron
-D. Positron
-Answer: C
-41.
+Electron
+Proton
+Neutron
+Positron
+3
 What is the formula for calculating density?
-A. mass × volume
-B. mass ÷ volume
-C. volume ÷ mass
-D. mass + volume
-Answer: B
-42.
+mass × volume
+mass ÷ volume
+volume ÷ mass
+mass + volume
+2
 Which process releases energy when a gas becomes a liquid?
-A. Melting
-B. Sublimation
-C. Condensation
-D. Vaporization
-Answer: C
-43.
+Melting
+Sublimation
+Condensation
+Vaporization
+3
 What is the name of the compound NH3?
-A. Nitric acid
-B. Ammonia
-C. Methane
-D. Hydrogen peroxide
-Answer: B
-44.
+Nitric acid
+Ammonia
+Methane
+Hydrogen peroxide
+2
 Which periodic trend generally increases from left to right?
-A. Atomic radius
-B. Metallic character
-C. Electronegativity
-D. Shielding effect
-Answer: C
-45.
+Atomic radius
+Metallic character
+Electronegativity
+Shielding effect
+3
 What is the total number of valence electrons in CO2?
-A. 8
-B. 12
-C. 16
-D. 18
-Answer: C
-46.
+8
+12
+16
+18
+3
 Which acid is considered a strong acid?
-A. Acetic acid
-B. Carbonic acid
-C. Hydrochloric acid
-D. Citric acid
-Answer: C
-47.
+Acetic acid
+Carbonic acid
+Hydrochloric acid
+Citric acid
+3
 What is the product of a neutralization reaction?
-A. Acid and metal
-B. Salt and water
-C. Gas and oxygen
-D. Water and hydrogen
-Answer: B
-48.
+Acid and metal
+Salt and water
+Gas and oxygen
+Water and hydrogen
+2
 What is the electron configuration ending for halogens?
-A. ns2 np1
-B. ns2 np3
-C. ns2 np5
-D. ns2 np6
-Answer: C
-49.
+ns2 np1
+ns2 np3
+ns2 np5
+ns2 np6
+3
 Which molecule is polar?
-A. CO2
-B. O2
-C. CH4
-D. H2O
-Answer: D
-50.
+CO2
+O2
+CH4
+H2O
+4
 What type of reaction is combustion?
-A. Reaction with oxygen producing energy
-B. Reaction forming a precipitate
-C. Reaction exchanging ions
-D. Reaction absorbing heat only
-Answer: A
-51.
+Reaction with oxygen producing energy
+Reaction forming a precipitate
+Reaction exchanging ions
+Reaction absorbing heat only
+1
 What is the frequency of a wave inversely related to?
-A. Energy
-B. Wavelength
-C. Amplitude
-D. Speed of light
-Answer: B
-52.
+Energy
+Wavelength
+Amplitude
+Speed of light
+2
 Which element has the electron configuration 2-8-7?
-A. Fluorine
-B. Chlorine
-C. Bromine
-D. Argon
-Answer: B
-53.
+Fluorine
+Chlorine
+Bromine
+Argon
+2
 Which statement about catalysts is true?
-A. They increase activation energy
-B. They are consumed in reactions
-C. They lower activation energy
-D. They stop reactions completely
-Answer: C
-54.
+They increase activation energy
+They are consumed in reactions
+They lower activation energy
+They stop reactions completely
+3
 What is the name of CaCO3?
-A. Calcium chloride
-B. Calcium carbonate
-C. Calcium oxide
-D. Calcium sulfate
-Answer: B
-55.
+Calcium chloride
+Calcium carbonate
+Calcium oxide
+Calcium sulfate
+2
 Which type of reaction breaks one compound into simpler substances?
-A. Synthesis
-B. Combustion
-C. Decomposition
-D. Replacement
-Answer: C
-56.
+Synthesis
+Combustion
+Decomposition
+Replacement
+3
 What is the molar mass of CO2?
-A. 28 g/mol
-B. 32 g/mol
-C. 44 g/mol
-D. 46 g/mol
-Answer: C
-57.
+28 g/mol
+32 g/mol
+44 g/mol
+46 g/mol
+3
 Which quantum number describes the shape of an orbital?
-A. Principal quantum number
-B. Angular momentum quantum number
-C. Magnetic quantum number
-D. Spin quantum number
-Answer: B
-58.
+Principal quantum number
+Angular momentum quantum number
+Magnetic quantum number
+Spin quantum number
+2
 What is the percent composition of oxygen in water closest to?
-A. 11%
-B. 33%
-C. 67%
-D. 89%
-Answer: D
-59.
+11%
+33%
+67%
+89%
+4
 Which element would have chemical properties most similar to magnesium?
-A. Calcium
-B. Sodium
-C. Aluminum
-D. Chlorine
-Answer: A
-60.
+Calcium
+Sodium
+Aluminum
+Chlorine
+1
 What is the hybridization of carbon in ethene (C2H4)?
-A. sp
-B. sp2
-C. sp3
-D. sp3d
-Answer: B
-61.
+sp
+sp2
+sp3
+sp3d
+2
 Which statement about equilibrium is true?
-A. Reactions stop completely
-B. Forward and reverse reaction rates are equal
-C. Products disappear
-D. Only forward reactions occur
-Answer: B
-62.
+Reactions stop completely
+Forward and reverse reaction rates are equal
+Products disappear
+Only forward reactions occur
+2
 What is the oxidation number of elemental oxygen (O2)?
-A. -2
-B. -1
-C. 0
-D. +2
-Answer: C
-63.
+-2
+-1
+0
++2
+3
 Which substance is the limiting reactant?
-A. The reactant left over after the reaction
-B. The reactant that determines the amount of product formed
-C. The product with the smallest mass
-D. The catalyst in the reaction
-Answer: B
-64.
+The reactant left over after the reaction
+The reactant that determines the amount of product formed
+The product with the smallest mass
+The catalyst in the reaction
+2
 Which law states that pressure and temperature are directly proportional when volume is constant?
-A. Boyle’s Law
-B. Charles’s Law
-C. Gay-Lussac’s Law
-D. Avogadro’s Law
-Answer: C
-65.
+Boyle’s Law
+Charles’s Law
+Gay-Lussac’s Law
+Avogadro’s Law
+3
 What is the geometry of a molecule with two bonding pairs and two lone pairs?
-A. Linear
-B. Bent
-C. Trigonal planar
-D. Tetrahedral
-Answer: B
+Linear
+Bent
+Trigonal planar
+Tetrahedral
+2
