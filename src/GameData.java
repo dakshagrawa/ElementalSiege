@@ -81,13 +81,13 @@ public class GameData
 		}
 		question = inFile.nextLine();
 
-		counter = 1;
-		while(inFile.hasNext() && counter <= 4)
+		counter = 0;
+		while(inFile.hasNext() && counter < 4)
 		{
 			answerSet[counter] = inFile.nextLine();
 			counter++;
 		}
-		correctAnswer = inFile.nextInt();
+		correctAnswer = inFile.nextInt() -1;
 		inFile.close();
 	}
 	
