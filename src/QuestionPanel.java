@@ -39,7 +39,7 @@ class QuestionPanel extends JPanel
 		
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		
+		 
 		listOfCards = new CardLayout();
 		setLayout(listOfCards);
 		
