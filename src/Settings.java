@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;    
+import javax.swing.event.*;
+import javax.swing.plaf.SliderUI;    
 public class Settings extends JPanel implements ActionListener, ChangeListener
 {
 	private GameData data;
@@ -14,8 +15,11 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		data = pm.getGameData();
 		setLayout(new GridLayout(3, 1, 10, 20));
 		
-		volumeSlider = new JSlider(0, 100, 100);
+		volumeSlider = new JSlider(0, 100, 75);
 		volumeSlider.setOrientation(JSlider.HORIZONTAL);
+		volumeSlider.setMajorTickSpacing(25);
+		volumeSlider.setPaintTicks(true);
+		volumeSlider.setPaintLabels(true);
 		volumeSlider.addChangeListener(this);
 		add(volumeSlider);
 
@@ -47,7 +51,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 	public void stateChanged(ChangeEvent evt)
 	{
-		// pm.sound.currentVolume = volumeSlider.getValue();
-		// pm.sound.fc.setVaue(pm.sound.currentVolume);
+		float targetVolume = (float)volumeSlider.getValue() / 100.0f;
+		pm.sound.setVolume(targetVolume); // TODO: maybe make this (float)
 	}
 }

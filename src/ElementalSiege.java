@@ -24,12 +24,12 @@ public class ElementalSiege extends JFrame implements WindowListener
         setVisible(true);
 		addWindowListener(this);
 
-		audio.playBackground("../storedData/Audio/bg");
+		audio.playNewBackground("../storedData/Audio/bg.wav");
     }
 
     public static void main(String[] args) 
 	{
-        ElementalSiege es = new ElementalSiege();
+        ElementalSiege game = new ElementalSiege();
     }
 
 	public void windowClosing(WindowEvent e) 
@@ -39,7 +39,6 @@ public class ElementalSiege extends JFrame implements WindowListener
 			pm.changePanelCard("Close");
 		}
 	}
-	
     public void windowOpened(WindowEvent e) {}
     public void windowClosed(WindowEvent e) {}
     public void windowIconified(WindowEvent e) {}

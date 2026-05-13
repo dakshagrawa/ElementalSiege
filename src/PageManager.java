@@ -189,10 +189,9 @@ public class PageManager extends JPanel
 			{
 				picture = ImageIO.read(new File(pictName));
 			}
-
-			catch(IOException e)
+			catch(NullPointerException | IOException e)
 			{
-				System.out.println(e);      
+				System.out.println(e.getMessage());
 				System.err.println("\n" + pictName + " can't be found. \n"); 
 			}
 
@@ -209,7 +208,7 @@ public class PageManager extends JPanel
 				picture = ImageIO.read(new File(pictName));
 			}
 
-			catch(IOException e)
+			catch(NullPointerException | IOException e)
 			{
 				System.out.println(e);      
 				System.err.println("\n" + pictName + " can't be found. \n"); 

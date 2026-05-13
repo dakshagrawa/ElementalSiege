@@ -16,7 +16,7 @@ public class BattlePanel extends JPanel implements ActionListener
 		pm = pageMngr;
 		data = pm.getGameData();
 
-        setLayout(new GridLayout(1, 4, 10, 10))
+        setLayout(new GridLayout(1, 4, 10, 10));
 
         
         Image userCard = PageManager.Functions.getImage("");
@@ -24,4 +24,9 @@ public class BattlePanel extends JPanel implements ActionListener
 
 
     }
+
+	public void actionPerformed(ActionEvent e) 
+	{
+
+	}
 }
