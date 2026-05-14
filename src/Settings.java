@@ -21,6 +21,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		volumeSlider.setPaintTicks(true);
 		volumeSlider.setPaintLabels(true);
 		volumeSlider.addChangeListener(this);
+		volumeSlider.setValue((int)(pm.sound.currentVolume*100));
 		add(volumeSlider);
 
 		JButton exit = new JButton("Save & Exit");

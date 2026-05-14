@@ -116,17 +116,17 @@ public class GetNewCharacterCards extends JPanel
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 		}
 
-		public void paintComponent(Graphics g)
-		{
-			super.paintComponent(g);
+		// public void paintComponent(Graphics g)
+		// {
+		// 	super.paintComponent(g);
 			
-			//the total margin: 10 (line) + 2 (etch) + 30 (padding) = 42
-			int margin = 42;
-			double scale = (double)(getWidth()-30) / characterImg.width;
-			int finalHeight = (int) (characterImg.height * scale);
-			int y = margin + (getHeight()/2)-(finalHeight/2);
-			g.drawImage(characterImg.image, 15, y, margin + (getWidth() - (margin * 2)), finalHeight+y, characterImg.x1, characterImg.y1, characterImg.x2, characterImg.y2, this);
-		}
+		// 	//the total margin: 10 (line) + 2 (etch) + 30 (padding) = 42
+		// 	int margin = 42;
+		// 	double scale = (double)(getWidth()-30) / characterImg.width;
+		// 	int finalHeight = (int) (characterImg.height * scale);
+		// 	int y = margin + (getHeight()/2)-(finalHeight/2);
+		// 	g.drawImage(characterImg.image, 15, y, margin + (getWidth() - (margin * 2)), finalHeight+y, characterImg.x1, characterImg.y1, characterImg.x2, characterImg.y2, this);
+		// }
 
 		public void actionPerformed(ActionEvent e) 
 		{

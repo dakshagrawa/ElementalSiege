@@ -18,12 +18,77 @@ public class BattlePanel extends JPanel implements ActionListener
 
         setLayout(new GridLayout(1, 4, 10, 10));
 
-        
-        Image userCard = PageManager.Functions.getImage("");
-
-
+        //Image userCard = data.characters[data.userCharacters[(int)(Math.random()*data.userCharacters.length)]].image;
+		
+		RelatedToBattlePanel rtbp = new RelatedToBattlePanel();
+		add(rtbp);
 
     }
+	
+	class UserInformationAndHealthBar extends JPanel
+	{
+		public UserInformation()
+		{
+			setLayout(new BorderLayout());
+			add(userHealthBar());
+		}
+
+		public JPanel userHealthBar()
+		{
+			JPanel userHealthPanel = new JPanel();
+			userHealthPanel.add();
+			return userHealthPanel;
+
+			
+			
+		}
+	}
+
+	class UserCardInterface
+	{
+		public UserCardInterface()
+		{
+			setLayout(new BorderLayout());
+		}
+	}
+
+
+	class RelatedToBattlePanel extends JPanel
+	{
+		private int userHealth;
+		private String userHealthDisplay;
+		private int enemyHealth;
+		private String enemyHealthDisplay;
+		private int level;
+
+		public RelatedToBattlePanel()
+		{	
+			level = 1;
+
+			userHealth = 0;
+			userHealthDisplay = userHealth + "/100";
+
+			
+			JTextArea healthBar = new JTextArea(userHealthDisplay, 1, 10);
+
+			enemyHealth = (int)(level*1.7) + 17;
+			enemyHealthDisplay = enemyHealth + "/" + enemyHealth;
+
+			JTextArea enemyHealthBar = new JTextArea(enemyHealthDisplay, 1, 10);
+			add(healthBar);
+			add(enemyHealthBar);
+		}
+
+		public void switchToQuestions()
+		{
+			while(enemyHealth > 0 || userHealth > 0)
+			{
+				pm.changePanelCard("Questions");
+			}
+		}
+
+	}
+		
 
 	public void actionPerformed(ActionEvent e) 
 	{

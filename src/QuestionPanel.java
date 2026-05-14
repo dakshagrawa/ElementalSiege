@@ -45,10 +45,10 @@ class QuestionPanel extends JPanel
 		listOfCards = new CardLayout();
 		setLayout(listOfCards);
 		
-		StartPanel first = new StartPanel(data, listOfCards, this);
+		StartPanel first = new StartPanel(pm, listOfCards, this);
 		add(first, "1");
 		
-		QuestionsPanel second = new QuestionsPanel(data, listOfCards, this);
+		QuestionsPanel second = new QuestionsPanel(pm, listOfCards, this);
 		add(second, "2");
 		
 		HighScoresPanel third = new HighScoresPanel(data, listOfCards, this);
@@ -59,13 +59,15 @@ class QuestionPanel extends JPanel
 class StartPanel extends JPanel implements ActionListener
 {
 	private GameData data;
+	private PageManager pm;
 	private CardLayout listOfCards;
 	private QuestionPanel primaryPanel;
 	private JTextField firstNameField, lastNameField;
 	
-	public StartPanel(GameData d, CardLayout c, QuestionPanel p)
+	public StartPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
 	{
-		data = d;
+		pm = pageMngr;
+		data = pm.getGameData();
 		listOfCards = c;
 		primaryPanel = p;
 		
@@ -133,10 +135,12 @@ class QuestionsPanel extends JPanel implements ActionListener
 	private JTextArea questionArea;
 	private JRadioButton [] answer;
 	private JButton submit, nextQuestion, nextPanel;
+	public PageManager pm;
 	
-	public QuestionsPanel(GameData d, CardLayout c, QuestionPanel p)
+	public QuestionsPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
 	{
-		data = d;
+		pm = pageMngr;
+		data = pm.getGameData();
 		listOfCards = c;
 		primaryPanel = p;
 		
@@ -248,6 +252,7 @@ class QuestionsPanel extends JPanel implements ActionListener
 		{
 			resetQuestion();
 			nextQuestion.setEnabled(false);
+			pm.changePanelCard("Battle");
 		}
 		else if(command.equals("NEXT PANEL"))
 		{

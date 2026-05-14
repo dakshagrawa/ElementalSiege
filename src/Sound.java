@@ -4,11 +4,11 @@ import javax.sound.sampled.*; //TODO: add citation
 public class Sound 
 {
     private Clip clip;
-    private float currentVolume; // Value between 0.0f (silent) and 1.0f (full volume)
+	public float currentVolume; // Value between 0.0f (silent) and 1.0f (full volume)
 
     public Sound() 
 	{
-        currentVolume = 1.0f; // Default to maximum volume
+        currentVolume = 0.75f; // Default to maximum volume
     }
 
 	public void playNewBackground(String fileName)
