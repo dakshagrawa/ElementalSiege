@@ -27,9 +27,10 @@ public class BattlePanel extends JPanel implements ActionListener
 	
 	class UserInformationAndHealthBar extends JPanel
 	{
-		public UserInformation()
+		public UserInformationAndHealthBar()
 		{
 			setLayout(new BorderLayout());
+			setOpaque(false);
 			add(userHealthBar());
 		}
 
@@ -49,6 +50,13 @@ public class BattlePanel extends JPanel implements ActionListener
 		public UserCardInterface()
 		{
 			setLayout(new BorderLayout());
+
+			add(new getUsersCard(), BorderLayout.CENTER);
+		}
+
+		class getUsersCard extends JPanel
+		{
+			data.userCharacters[(int)(Math.random()*data.userCharacters.length)];
 		}
 	}
 
