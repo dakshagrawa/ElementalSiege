@@ -421,8 +421,6 @@ public class GameData
 
 		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
 		{
-			try
-			{
 				fullImage = img;
 				x1 = xVal;
 				y1 = yVal;
@@ -446,11 +444,6 @@ public class GameData
 
 				if(hasError)
 					throw new CharacterInitializationException();
-			}
-			catch(CharacterInitializationException e)
-			{
-				System.err.println("Could not load " + name);
-			}
 		}
 
 		public CharacterImage(Image img, int xMin, int yMin, int xMax, int yMax, Scanner inputCharInfo, boolean justXandY) 
