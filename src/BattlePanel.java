@@ -123,13 +123,13 @@ public class BattlePanel extends JPanel implements ActionListener
         JPanel card = makeCardShell(userCard.name, userCard.rarity, userCard.image);
 
         problemSolvingBtn = makeAttributeButton("Problem Solving", userCard.problemSolving, new Color(180, 60, 60), "problemsolving");
-        curiosityBtn = makeAttributeButton("Curiosity", userCard.charisma, new Color(60, 90, 180), "curiosity");
+        curiosityBtn = makeAttributeButton("Curiosity", userCard.curiosity, new Color(60, 90, 180), "curiosity");
         wisdomBtn   = makeAttributeButton("Wisdom",   userCard.wisdom,   new Color(120, 60, 160), "wisdom");
 
         JPanel attrs = new JPanel(new GridLayout(3, 1, 0, 4));
         attrs.setOpaque(false);
-        attrs.add(strengthBtn);
-        attrs.add(charismaBtn);
+        attrs.add(problemSolvingBtn);
+        attrs.add(curiosityBtn);
         attrs.add(wisdomBtn);
         attrs.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
@@ -160,12 +160,12 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         JPanel card = makeCardShell(enemyCard.name, enemyCard.rarity, enemyCard.image);
 
-        JButton sBtn = makeAttributeButton("Strength", enemyCard.strength, new Color(180, 60, 60), "");
-        JButton cBtn = makeAttributeButton("Charisma",  enemyCard.charisma,  new Color(60, 90, 180), "");
+        JButton sBtn = makeAttributeButton("Problem Solving", enemyCard.problemSolving, new Color(180, 60, 60), "");
+        JButton cBtn = makeAttributeButton("Curiosity",  enemyCard.curiosity,  new Color(60, 90, 180), "");
         JButton wBtn = makeAttributeButton("Wisdom",    enemyCard.wisdom,    new Color(120, 60, 160), "");
 
-        highlightButton(sBtn, chosenAttribute.equals("strength"));
-        highlightButton(cBtn, chosenAttribute.equals("charisma"));
+        highlightButton(sBtn, chosenAttribute.equals("problemSolving"));
+        highlightButton(cBtn, chosenAttribute.equals("curiosity"));
         highlightButton(wBtn, chosenAttribute.equals("wisdom"));
 
         sBtn.setEnabled(false);
