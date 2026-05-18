@@ -255,10 +255,10 @@ public class BattlePanel extends JPanel implements ActionListener
 		{
 			return new Color(160, 80, 220);
 		}
-		else if (rarity.toLowerCase().equals("rare"))
-		{
-			return new Color(60, 130, 220);
-		}
+        else if (rarity.toLowerCase().equals("rare"))
+        {
+            return new Color(60, 130, 220);
+        }
 		else if (rarity.toLowerCase().equals("uncommon"))
 		{
 			return new Color(80, 190, 80);
