@@ -82,7 +82,7 @@ public class BattlePanel extends JPanel implements ActionListener
         streakLabel = new JLabel("Streak: " + streak, SwingConstants.CENTER);
         streakLabel.setForeground(new Color(255, 220, 50));
         streakLabel.setFont(pm.normalBoldFont);
-        centerResultPanel.add(streakLabel, gbc);
+        centerResultPanel.add(streakLabel);
 
         enemyCardPanel = new JPanel(new BorderLayout());
         enemyCardPanel.setOpaque(false);
