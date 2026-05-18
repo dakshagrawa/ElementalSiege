@@ -438,7 +438,7 @@ public class GameData
 					rarity="Common";
 				else if(rarityChar=='L')
 					rarity="Legendary";
-				else in(rarityChar=='R')
+				else if(rarityChar=='R')
 					rarity="Rare";
 				else
 					hasError=true;
