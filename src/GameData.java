@@ -415,7 +415,8 @@ public class GameData
 		public String name;
 		public int x1, y1, x2, y2, width, height;  //used: https://pixspy.com/ to get coordinates // TODO: cite this
 		public int problemSolving, wisdom, curiosity;
-		public char rarity;
+		public char rarityChar;
+		public String rarity;
 		public boolean hasError;
 
 		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
@@ -432,6 +433,16 @@ public class GameData
 
 				hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
 				getCroppedImage();
+
+				if(rarityChar=='C')
+					rarity="Common";
+				else if(rarityChar=='L')
+					rarity="Legendary";
+				else in(rarityChar=='R')
+					rarity="Rare";
+				else
+					hasError=true;
+					
 
 				if(hasError)
 					throw new CharacterInitializationException();
@@ -468,7 +479,7 @@ public class GameData
 						curiosity = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
 						line = line.substring(line.indexOf(',')+1).trim();
 
-						rarity = line.toUpperCase().charAt(0);
+						rarityChar = line.toUpperCase().charAt(0);
 
 						return true;
 					}
@@ -501,7 +512,7 @@ public class GameData
 		{
 			public CharacterInitializationException()
 			{
-				super(name + " information is wrong");
+				super(name + " information has error.");
 			}
 		}
 	}

@@ -7,8 +7,8 @@ public class BattlePanel extends JPanel implements ActionListener
     private GameData data;
     private PageManager pm;
 
-    private CharacterImage userCard;
-    private CharacterImage enemyCard;
+    private GameData.CharacterImage userCard;
+    private GameData.CharacterImage enemyCard;
     private int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
@@ -314,7 +314,7 @@ public class BattlePanel extends JPanel implements ActionListener
         repaint();
     }
 
-    private int getAttributeValue(CharacterCard card, String attribute)
+    private int getAttributeValue(GameData.CharacterImage card, String attribute)
     {
         if (attribute.equals("problemsolving"))
     	{
