@@ -421,29 +421,30 @@ public class GameData
 
 		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
 		{
-				fullImage = img;
-				x1 = xVal;
-				y1 = yVal;
-				width = widthVal;
-				height = heightVal;
-				x2 = x1+width;
-				y2 = y1+height;
+			fullImage = img;
+			x1 = xVal;
+			y1 = yVal;
+			width = widthVal;
+			height = heightVal;
+			x2 = x1+width;
+			y2 = y1+height;
 
-				hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
-				getCroppedImage();
+			hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
+			getCroppedImage();
 
-				if(rarityChar=='C')
-					rarity="Common";
-				else if(rarityChar=='L')
-					rarity="Legendary";
-				else if(rarityChar=='R')
-					rarity="Rare";
-				else
-					hasError=true;
-					
+			if(rarityChar=='C')
+				rarity="Common";
+			else if(rarityChar=='L')
+				rarity="Legendary";
+			else if(rarityChar=='R')
+				rarity="Rare";
+			else
+				hasError=true;
+				
 
-				if(hasError)
-					throw new CharacterInitializationException();
+			if(hasError)
+			System.out.println("Error with "+name);
+				//throw new CharacterInitializationException();
 		}
 
 		public CharacterImage(Image img, int xMin, int yMin, int xMax, int yMax, Scanner inputCharInfo, boolean justXandY) 
