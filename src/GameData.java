@@ -443,7 +443,7 @@ public class GameData
 				
 
 			if(hasError)
-			System.out.println("Error with "+name);
+				System.out.println("Error with "+name);
 				//throw new CharacterInitializationException();
 		}
 
