@@ -214,7 +214,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         card.add(imgLabel, BorderLayout.CENTER);
 
-        return card; //StackOverflow citation 
+        return card; // TODO: stackOverflow citation 
     }
 
     private JButton makeAttributeButton(String label, int value, Color bg, String command)
@@ -312,10 +312,6 @@ public class BattlePanel extends JPanel implements ActionListener
 
         revalidate();
         repaint();
-
-        Timer endCheckTimer = new Timer(1800, e -> checkBattleEnd());
-        endCheckTimer.setRepeats(false);
-        endCheckTimer.start();
     }
 
     private int getAttributeValue(CharacterCard card, String attribute)
@@ -350,7 +346,6 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         else
         {
-            // Go back to questions; BattlePanel.drawNewCards() will be called when the Questions panel sends us back here after a correct answer.
             pm.changePanelCard("Questions");
         }
     }
@@ -358,7 +353,7 @@ public class BattlePanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         String cmd = e.getActionCommand();
-        if (cmd.equals("strength") || cmd.equals("charisma") || cmd.equals("wisdom"))
+        if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
         {
             resolveAttribute(cmd);
         }
