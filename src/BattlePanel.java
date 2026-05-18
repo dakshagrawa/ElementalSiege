@@ -7,8 +7,8 @@ public class BattlePanel extends JPanel implements ActionListener
     private GameData data;
     private PageManager pm;
 
-    private CharacterCard userCard;
-    private CharacterCard enemyCard;
+    private CharacterImage userCard;
+    private CharacterImage enemyCard;
     private int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
