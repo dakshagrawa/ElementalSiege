@@ -12,7 +12,7 @@ public class GetNewCharacterCards extends JPanel
 
 	public GetNewCharacterCards(PageManager pageMngr, int thisPanelNumber)
 	{
-		GetNewCharacterCards(pageMngr,"Get New Cards "+(thisPageNumber+1));
+		GetNewCharacterCards(pageMngr,"Get New Cards "+(thisPanelNumber+1));
 
 		JPanel adjusterPanel = new JPanel(new BorderLayout());
 		add(pickLabel());
