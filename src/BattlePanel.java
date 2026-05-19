@@ -312,6 +312,8 @@ public class BattlePanel extends JPanel implements ActionListener
 
         revalidate();
         repaint();
+
+        checkBattleEnd();
     }
 
     private int getAttributeValue(GameData.CharacterImage card, String attribute)
