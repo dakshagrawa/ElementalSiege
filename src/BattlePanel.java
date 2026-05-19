@@ -228,7 +228,7 @@ public class BattlePanel extends JPanel
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFont(pm.normalFont);
         btn.setActionCommand(command);
-        btn.addActionListener(BattlePanel.makeAttributeButtonListener());
+        btn.addActionListener(BattlePanel.MakeAttributeButtonListener.MakeAttributeButtonListener());
         return btn;
     }
 
@@ -352,7 +352,7 @@ public class BattlePanel extends JPanel
         }
     }
 
-    public static class makeAttributeButtonListener implements ActionListener
+    public static class MakeAttributeButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
