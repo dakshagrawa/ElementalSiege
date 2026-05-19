@@ -5,7 +5,7 @@ import javax.swing.*;
 public class BattlePanel extends JPanel implements ActionListener
 {
     private static GameData data;
-    private PageManager pm;
+    private static PageManager pm;
 
     private static GameData.CharacterImage userCard;
     private static GameData.CharacterImage enemyCard;
@@ -24,9 +24,9 @@ public class BattlePanel extends JPanel implements ActionListener
     private JLabel streakLabel;
     private int streak = 0;
 
-    private JButton problemSolvingBtn;
-    private JButton curiosityBtn;
-    private JButton wisdomBtn;
+    private static JButton problemSolvingBtn;
+    private static JButton curiosityBtn;
+    private static JButton wisdomBtn;
     private static boolean attributeButtonsEnabled = false;
 
     public BattlePanel(PageManager pageMngr)
@@ -137,7 +137,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
-    private JPanel buildEnemyCardDisplay()
+    private static JPanel buildEnemyCardDisplay()
     {
         JPanel back = new JPanel(new BorderLayout());
         back.setBackground(new Color(60, 60, 80));
