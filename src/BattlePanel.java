@@ -352,7 +352,7 @@ public class BattlePanel extends JPanel
         }
     }
 
-    public static makeAttributeButtonListener implements ActionListener
+    public static class makeAttributeButtonListener implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
