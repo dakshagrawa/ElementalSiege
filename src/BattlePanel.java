@@ -9,7 +9,7 @@ public class BattlePanel extends JPanel implements ActionListener
 
     private static GameData.CharacterImage userCard;
     private static GameData.CharacterImage enemyCard;
-    private int userHealth;
+    private static int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
     private int maxEnemyHealth;
@@ -21,7 +21,7 @@ public class BattlePanel extends JPanel implements ActionListener
     private static JPanel enemyCardPanel;
     private JPanel centerResultPanel;
     private static JLabel resultLabel;
-    private JLabel streakLabel;
+    private static JLabel streakLabel;
     private int streak = 0;
 
     private static JButton problemSolvingBtn;
@@ -269,7 +269,7 @@ public class BattlePanel extends JPanel implements ActionListener
 		}
     }
 
-    private void resolveAttribute(String attribute)
+    private static void resolveAttribute(String attribute)
     {
         if (!attributeButtonsEnabled) return;
         attributeButtonsEnabled = false;
@@ -310,8 +310,8 @@ public class BattlePanel extends JPanel implements ActionListener
         resultLabel.setText(resultText);
         streakLabel.setText("Streak: " + streak);
 
-        revalidate();
-        repaint();
+        // revalidate();
+        // repaint();
 
         checkBattleEnd();
     }
@@ -336,7 +336,7 @@ public class BattlePanel extends JPanel implements ActionListener
     	}
     }
 
-    private void checkBattleEnd()
+    private static void checkBattleEnd()
     {
         if (userHealth <= 0)
         {
