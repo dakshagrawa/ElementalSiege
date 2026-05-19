@@ -252,6 +252,7 @@ class QuestionsPanel extends JPanel implements ActionListener
 		{
 			resetQuestion();
 			nextQuestion.setEnabled(false);
+			BattlePanel.drawNewCards();
 			pm.changePanelCard("Battle");
 		}
 		else if(command.equals("NEXT PANEL"))
