@@ -183,7 +183,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
-    private JPanel makeCardShell(String name, String rarity, Image img)
+    private static JPanel makeCardShell(String name, String rarity, Image img)
     {
         JPanel card = new JPanel(new BorderLayout(0, 4));
         card.setBackground(new Color(55, 55, 70));
