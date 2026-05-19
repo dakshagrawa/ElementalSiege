@@ -114,8 +114,8 @@ public class BattlePanel extends JPanel implements ActionListener
         resultLabel.setText("Pick an attribute!");
         attributeButtonsEnabled = true;
 
-        // revalidate();
-        // repaint();
+        revalidate();
+        repaint();
     }
 
     private JPanel buildUserCardDisplay()
