@@ -2,13 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public static class BattlePanel extends JPanel implements ActionListener
+public class BattlePanel extends JPanel implements ActionListener
 {
     private GameData data;
     private PageManager pm;
 
-    private GameData.CharacterImage userCard;
-    private GameData.CharacterImage enemyCard;
+    private static GameData.CharacterImage userCard;
+    private static GameData.CharacterImage enemyCard;
     private int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
@@ -17,17 +17,17 @@ public static class BattlePanel extends JPanel implements ActionListener
 	
     private HealthBarPanel userHealthPanel;
     private HealthBarPanel enemyHealthPanel;
-    private JPanel userCardPanel;
-    private JPanel enemyCardPanel;
+    private static JPanel userCardPanel;
+    private static JPanel enemyCardPanel;
     private JPanel centerResultPanel;
-    private JLabel resultLabel;
+    private static JLabel resultLabel;
     private JLabel streakLabel;
     private int streak = 0;
 
     private JButton problemSolvingBtn;
     private JButton curiosityBtn;
     private JButton wisdomBtn;
-    private boolean attributeButtonsEnabled = false;
+    private static boolean attributeButtonsEnabled = false;
 
     public BattlePanel(PageManager pageMngr)
     {
@@ -97,7 +97,7 @@ public static class BattlePanel extends JPanel implements ActionListener
         add(bottomBar, BorderLayout.SOUTH);
     }
 
-    public void drawNewCards()
+    public static void drawNewCards()
     {
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
