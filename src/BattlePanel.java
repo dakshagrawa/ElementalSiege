@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BattlePanel extends JPanel implements ActionListener
+public class BattlePanel extends JPanel
 {
     private static GameData data;
     private static PageManager pm;
@@ -228,7 +228,7 @@ public class BattlePanel extends JPanel implements ActionListener
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFont(pm.normalFont);
         btn.setActionCommand(command);
-        btn.addActionListener(this);
+        btn.addActionListener(makeAttributeButtonListener);
         return btn;
     }
 
@@ -352,12 +352,15 @@ public class BattlePanel extends JPanel implements ActionListener
         }
     }
 
-    public void actionPerformed(ActionEvent e)
+    public static makeAttributeButtonListener implements ActionListener
     {
-        String cmd = e.getActionCommand();
-        if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
+        public void actionPerformed(ActionEvent e)
         {
-            resolveAttribute(cmd);
+            String cmd = e.getActionCommand();
+            if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
+            {
+                resolveAttribute(cmd);
+            }
         }
     }
 
