@@ -114,8 +114,8 @@ public class BattlePanel extends JPanel implements ActionListener
         resultLabel.setText("Pick an attribute!");
         attributeButtonsEnabled = true;
 
-        revalidate();
-        repaint();
+        // revalidate();
+        // repaint();
     }
 
     private static JPanel buildUserCardDisplay()
@@ -217,7 +217,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card; // TODO: stackOverflow citation 
     }
 
-    private JButton makeAttributeButton(String label, int value, Color bg, String command)
+    private static JButton makeAttributeButton(String label, int value, Color bg, String command)
     {
         JButton btn = new JButton(label + "  " + value);
         btn.setBackground(bg);
