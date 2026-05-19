@@ -4,12 +4,12 @@ import javax.swing.*;
 
 public class BattlePanel extends JPanel implements ActionListener
 {
-    private static GameData data;
-    private static PageManager pm;
+    private GameData data;
+    private PageManager pm;
 
-    private static GameData.CharacterImage userCard;
-    private static GameData.CharacterImage enemyCard;
-    private static int userHealth;
+    private GameData.CharacterImage userCard;
+    private GameData.CharacterImage enemyCard;
+    private int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
     private int maxEnemyHealth;
@@ -17,17 +17,17 @@ public class BattlePanel extends JPanel implements ActionListener
 	
     private HealthBarPanel userHealthPanel;
     private HealthBarPanel enemyHealthPanel;
-    private static JPanel userCardPanel;
-    private static JPanel enemyCardPanel;
+    private JPanel userCardPanel;
+    private JPanel enemyCardPanel;
     private JPanel centerResultPanel;
-    private static JLabel resultLabel;
-    private static JLabel streakLabel;
+    private JLabel resultLabel;
+    private JLabel streakLabel;
     private int streak = 0;
 
-    private static JButton problemSolvingBtn;
-    private static JButton curiosityBtn;
-    private static JButton wisdomBtn;
-    private static boolean attributeButtonsEnabled = false;
+    private JButton problemSolvingBtn;
+    private JButton curiosityBtn;
+    private JButton wisdomBtn;
+    private boolean attributeButtonsEnabled = false;
 
     public BattlePanel(PageManager pageMngr)
     {
@@ -97,7 +97,7 @@ public class BattlePanel extends JPanel implements ActionListener
         add(bottomBar, BorderLayout.SOUTH);
     }
 
-    public static void drawNewCards()
+    public void drawNewCards()
     {
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
@@ -118,7 +118,7 @@ public class BattlePanel extends JPanel implements ActionListener
         // repaint();
     }
 
-    private static JPanel buildUserCardDisplay()
+    private JPanel buildUserCardDisplay()
     {
         JPanel card = makeCardShell(userCard.name, userCard.rarity, userCard.image);
 
@@ -137,7 +137,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
-    private static JPanel buildEnemyCardDisplay()
+    private JPanel buildEnemyCardDisplay()
     {
         JPanel back = new JPanel(new BorderLayout());
         back.setBackground(new Color(60, 60, 80));
@@ -183,7 +183,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
-    private static JPanel makeCardShell(String name, String rarity, Image img)
+    private JPanel makeCardShell(String name, String rarity, Image img)
     {
         JPanel card = new JPanel(new BorderLayout(0, 4));
         card.setBackground(new Color(55, 55, 70));
@@ -217,7 +217,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card; // TODO: stackOverflow citation 
     }
 
-    private static JButton makeAttributeButton(String label, int value, Color bg, String command)
+    private JButton makeAttributeButton(String label, int value, Color bg, String command)
     {
         JButton btn = new JButton(label + "  " + value);
         btn.setBackground(bg);
@@ -241,7 +241,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
     }
 
-    private static Color rarityColor(String rarity)
+    private Color rarityColor(String rarity)
     {
     	if (rarity == null)
 		{
@@ -269,7 +269,7 @@ public class BattlePanel extends JPanel implements ActionListener
 		}
     }
 
-    private static void resolveAttribute(String attribute)
+    private void resolveAttribute(String attribute)
     {
         if (!attributeButtonsEnabled) return;
         attributeButtonsEnabled = false;
@@ -336,7 +336,7 @@ public class BattlePanel extends JPanel implements ActionListener
     	}
     }
 
-    private static void checkBattleEnd()
+    private void checkBattleEnd()
     {
         if (userHealth <= 0)
         {
@@ -353,7 +353,7 @@ public class BattlePanel extends JPanel implements ActionListener
     }
 
     
-    public static void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e)
     {
         String cmd = e.getActionCommand();
         if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
@@ -409,7 +409,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
     }
 
-    public static class CharacterCard
+    public class CharacterCard
     {
         public String name = "Unknown";
         public String rarity = "Common";
