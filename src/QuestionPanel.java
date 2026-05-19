@@ -32,12 +32,14 @@ class QuestionPanel extends JPanel
 	private CardLayout listOfCards;
 	private PageManager pm;
 	private GameData data;
+	private BattlePanel battle;
 	
-	public QuestionPanel (PageManager pageMngr)
+	public QuestionPanel (PageManager pageMngr, BattlePanel bp)
 	{
 		pm = pageMngr;
 		data = pm.getGameData();
 		data.grabQuestionFromFile();
+		battle = bp;
 		
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -54,321 +56,321 @@ class QuestionPanel extends JPanel
 		HighScoresPanel third = new HighScoresPanel(data, listOfCards, this);
 		add(third, "3");
 	}
-}
 
-class StartPanel extends JPanel implements ActionListener
-{
-	private GameData data;
-	private PageManager pm;
-	private CardLayout listOfCards;
-	private QuestionPanel primaryPanel;
-	private JTextField firstNameField, lastNameField;
-	
-	public StartPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
+	class StartPanel extends JPanel implements ActionListener
 	{
-		pm = pageMngr;
-		data = pm.getGameData();
-		listOfCards = c;
-		primaryPanel = p;
+		private GameData data;
+		private PageManager pm;
+		private CardLayout listOfCards;
+		private QuestionPanel primaryPanel;
+		private JTextField firstNameField, lastNameField;
 		
-		setBackground(Color.BLACK);
-		setLayout(new GridLayout(3, 1, 10, 10));
-		Font myFont = new Font("Tahoma", Font.BOLD, 22);
-		
-		JPanel firstNamePanel = new JPanel();
-		firstNamePanel.setBackground(Color.LIGHT_GRAY);
-		firstNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-		add(firstNamePanel);
-		
-		JLabel firstNamePrompt = new JLabel("First Name: ");
-		firstNamePrompt.setFont(myFont);
-		firstNamePanel.add(firstNamePrompt);
-		
-		firstNameField = new JTextField(16);
-		firstNameField.setMargin(new Insets(10,10,10,10));
-		firstNameField.setFont(myFont);
-		firstNamePanel.add(firstNameField);
-		
-		JPanel lastNamePanel = new JPanel();
-		lastNamePanel.setBackground(Color.LIGHT_GRAY);
-		lastNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-		add(lastNamePanel);
-		
-		JLabel lastNamePrompt = new JLabel("Last Name: ");
-		lastNamePrompt.setFont(myFont);
-		lastNamePanel.add(lastNamePrompt);
-		
-		lastNameField = new JTextField(16);
-		lastNameField.setMargin(new Insets(10,10,10,10));
-		lastNameField.setFont(myFont);
-		lastNamePanel.add(lastNameField);
-
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setBackground(Color.LIGHT_GRAY);
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-		add(buttonPanel);
-		
-		JButton next = new JButton("NEXT PANEL");
-		next.setFont(myFont);
-		next.addActionListener(this);
-		buttonPanel.add(next);
-	}
-	
-	public void actionPerformed(ActionEvent evt) 
-	{
-		String command = evt.getActionCommand();
-		
-		if(command.equals("NEXT PANEL") && !firstNameField.getText().equals("") && !lastNameField.getText().equals(""))
+		public StartPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
 		{
-			data.setName(firstNameField.getText(), lastNameField.getText());
-			listOfCards.next(primaryPanel);
-		}
-	}
-}
+			pm = pageMngr;
+			data = pm.getGameData();
+			listOfCards = c;
+			primaryPanel = p;
+			
+			setBackground(Color.BLACK);
+			setLayout(new GridLayout(3, 1, 10, 10));
+			Font myFont = new Font("Tahoma", Font.BOLD, 22);
+			
+			JPanel firstNamePanel = new JPanel();
+			firstNamePanel.setBackground(Color.LIGHT_GRAY);
+			firstNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
+			add(firstNamePanel);
+			
+			JLabel firstNamePrompt = new JLabel("First Name: ");
+			firstNamePrompt.setFont(myFont);
+			firstNamePanel.add(firstNamePrompt);
+			
+			firstNameField = new JTextField(16);
+			firstNameField.setMargin(new Insets(10,10,10,10));
+			firstNameField.setFont(myFont);
+			firstNamePanel.add(firstNameField);
+			
+			JPanel lastNamePanel = new JPanel();
+			lastNamePanel.setBackground(Color.LIGHT_GRAY);
+			lastNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
+			add(lastNamePanel);
+			
+			JLabel lastNamePrompt = new JLabel("Last Name: ");
+			lastNamePrompt.setFont(myFont);
+			lastNamePanel.add(lastNamePrompt);
+			
+			lastNameField = new JTextField(16);
+			lastNameField.setMargin(new Insets(10,10,10,10));
+			lastNameField.setFont(myFont);
+			lastNamePanel.add(lastNameField);
 
-class QuestionsPanel extends JPanel implements ActionListener
-{
-	private GameData data;
-	private CardLayout listOfCards;
-	private QuestionPanel primaryPanel;
-	private ButtonGroup group;
-	private JTextArea questionArea;
-	private JRadioButton [] answer;
-	private JButton submit, nextQuestion, nextPanel;
-	public PageManager pm;
-	
-	public QuestionsPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
-	{
-		pm = pageMngr;
-		data = pm.getGameData();
-		listOfCards = c;
-		primaryPanel = p;
-		
-		setBackground(Color.BLACK);
-		setLayout(new BorderLayout(10, 10));
-		Font myFont = new Font("Tahoma", Font.BOLD, 22);
-		
-		answer = new JRadioButton[4];
-		
-		JPanel question = new JPanel();
-		question.setBackground(Color.WHITE);
-		question.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		question.setLayout(new BorderLayout());
-		add(question, BorderLayout.NORTH);
-		
-		questionArea = new JTextArea(data.getQuestion(), 3, 30);
-		questionArea.setFont(myFont);
-		questionArea.setLineWrap(true);
-		questionArea.setWrapStyleWord(true);
-		questionArea.setOpaque(false);
-		questionArea.setEditable(false);
-
-		question.add(questionArea, BorderLayout.CENTER);
-		
-		JPanel answers = new JPanel();
-		answers.setBackground(Color.GRAY);
-		answers.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		answers.setLayout(new GridLayout(2, 2, 20, 20));
-		add(answers, BorderLayout.CENTER);
-		
-		group = new ButtonGroup();
-
-		for(int i = 0; i < answer.length; i++)
-		{
-			answer[i] = new JRadioButton("" + (char)(65 + i) + ". " + data.getAnswer(i));
-			group.add(answer[i]);
-			answer[i].setBackground(new Color(230,230,230));
-			answer[i].setFont(myFont);
-			answer[i].addActionListener(this);
-			answers.add(answer[i]);
-		}
-
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setBackground(Color.WHITE);
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
-		add(buttonPanel, BorderLayout.SOUTH);
-		
-		submit = new JButton("SUBMIT");
-		submit.setFont(myFont);
-		submit.addActionListener(this);
-		submit.setEnabled(false);
-		buttonPanel.add(submit);
-		
-		nextQuestion = new JButton("NEXT QUESTION");
-		nextQuestion.setFont(myFont);
-		nextQuestion.addActionListener(this);
-		nextQuestion.setEnabled(false);
-		buttonPanel.add(nextQuestion);
-		
-		nextPanel = new JButton("NEXT PANEL");
-		nextPanel.setFont(myFont);
-		nextPanel.addActionListener(this);
-		nextPanel.setEnabled(false);
-		buttonPanel.add(nextPanel);
-	}
-	
-	public void actionPerformed(ActionEvent evt) 
-	{
-		String command = evt.getActionCommand();
-		
-		if(group.getSelection() != null)
-		{
-			submit.setEnabled(true);
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setBackground(Color.LIGHT_GRAY);
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
+			add(buttonPanel);
+			
+			JButton next = new JButton("NEXT PANEL");
+			next.setFont(myFont);
+			next.addActionListener(this);
+			buttonPanel.add(next);
 		}
 		
-		if(command.equals("SUBMIT"))
-		{	
-			answer[data.getCorrectAnswer()].setBackground(Color.GREEN);
+		public void actionPerformed(ActionEvent evt) 
+		{
+			String command = evt.getActionCommand();
+			
+			if(command.equals("NEXT PANEL") && !firstNameField.getText().equals("") && !lastNameField.getText().equals(""))
+			{
+				data.setName(firstNameField.getText(), lastNameField.getText());
+				listOfCards.next(primaryPanel);
+			}
+		}
+	}
+
+	class QuestionsPanel extends JPanel implements ActionListener
+	{
+		private GameData data;
+		private CardLayout listOfCards;
+		private QuestionPanel primaryPanel;
+		private ButtonGroup group;
+		private JTextArea questionArea;
+		private JRadioButton [] answer;
+		private JButton submit, nextQuestion, nextPanel;
+		public PageManager pm;
+		
+		public QuestionsPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
+		{
+			pm = pageMngr;
+			data = pm.getGameData();
+			listOfCards = c;
+			primaryPanel = p;
+			
+			setBackground(Color.BLACK);
+			setLayout(new BorderLayout(10, 10));
+			Font myFont = new Font("Tahoma", Font.BOLD, 22);
+			
+			answer = new JRadioButton[4];
+			
+			JPanel question = new JPanel();
+			question.setBackground(Color.WHITE);
+			question.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+			question.setLayout(new BorderLayout());
+			add(question, BorderLayout.NORTH);
+			
+			questionArea = new JTextArea(data.getQuestion(), 3, 30);
+			questionArea.setFont(myFont);
+			questionArea.setLineWrap(true);
+			questionArea.setWrapStyleWord(true);
+			questionArea.setOpaque(false);
+			questionArea.setEditable(false);
+
+			question.add(questionArea, BorderLayout.CENTER);
+			
+			JPanel answers = new JPanel();
+			answers.setBackground(Color.GRAY);
+			answers.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+			answers.setLayout(new GridLayout(2, 2, 20, 20));
+			add(answers, BorderLayout.CENTER);
+			
+			group = new ButtonGroup();
+
 			for(int i = 0; i < answer.length; i++)
 			{
-				if(answer[i].isSelected())
+				answer[i] = new JRadioButton("" + (char)(65 + i) + ". " + data.getAnswer(i));
+				group.add(answer[i]);
+				answer[i].setBackground(new Color(230,230,230));
+				answer[i].setFont(myFont);
+				answer[i].addActionListener(this);
+				answers.add(answer[i]);
+			}
+
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setBackground(Color.WHITE);
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
+			add(buttonPanel, BorderLayout.SOUTH);
+			
+			submit = new JButton("SUBMIT");
+			submit.setFont(myFont);
+			submit.addActionListener(this);
+			submit.setEnabled(false);
+			buttonPanel.add(submit);
+			
+			nextQuestion = new JButton("NEXT QUESTION");
+			nextQuestion.setFont(myFont);
+			nextQuestion.addActionListener(this);
+			nextQuestion.setEnabled(false);
+			buttonPanel.add(nextQuestion);
+			
+			nextPanel = new JButton("NEXT PANEL");
+			nextPanel.setFont(myFont);
+			nextPanel.addActionListener(this);
+			nextPanel.setEnabled(false);
+			buttonPanel.add(nextPanel);
+		}
+		
+		public void actionPerformed(ActionEvent evt) 
+		{
+			String command = evt.getActionCommand();
+			
+			if(group.getSelection() != null)
+			{
+				submit.setEnabled(true);
+			}
+			
+			if(command.equals("SUBMIT"))
+			{	
+				answer[data.getCorrectAnswer()].setBackground(Color.GREEN);
+				for(int i = 0; i < answer.length; i++)
 				{
-					if(i != data.getCorrectAnswer())
+					if(answer[i].isSelected())
 					{
-						answer[i].setBackground(Color.RED);
-					}
-					else
-					{
-						data.addOneToCorrectCount();
+						if(i != data.getCorrectAnswer())
+						{
+							answer[i].setBackground(Color.RED);
+						}
+						else
+						{
+							data.addOneToCorrectCount();
+						}
 					}
 				}
+				group.clearSelection();
+				for(int i = 0; i < answer.length; i++)
+				{
+					answer[i].setEnabled(false);
+				}
+				submit.setEnabled(false);
+				if(data.getQuestionCount() == 4)
+				{
+					nextPanel.setEnabled(true);
+				}
+				else
+				{
+					nextQuestion.setEnabled(true);
+				}
 			}
+			else if(command.equals("NEXT QUESTION"))
+			{
+				resetQuestion();
+				nextQuestion.setEnabled(false);
+				battle.drawNewCards();
+				pm.changePanelCard("Battle");
+			}
+			else if(command.equals("NEXT PANEL"))
+			{
+				data.resetAll();
+				resetQuestion();
+				nextPanel.setEnabled(false);
+				listOfCards.next(primaryPanel);
+			}
+		}
+		
+		public void resetQuestion ( )
+		{
 			group.clearSelection();
+			data.grabQuestionFromFile();
+			questionArea.setText(data.getQuestion());
+			answer[0].setText("A. " + data.getAnswer(0));
+			answer[1].setText("B. " + data.getAnswer(1));
+			answer[2].setText("C. " + data.getAnswer(2));
+			answer[3].setText("D. " + data.getAnswer(3));
 			for(int i = 0; i < answer.length; i++)
 			{
-				answer[i].setEnabled(false);
+				answer[i].setEnabled(true);
+				answer[i].setBackground(new Color(230, 230, 230));
 			}
-			submit.setEnabled(false);
-			if(data.getQuestionCount() == 4)
-			{
-				nextPanel.setEnabled(true);
-			}
-			else
-			{
-				nextQuestion.setEnabled(true);
-			}
-		}
-		else if(command.equals("NEXT QUESTION"))
-		{
-			resetQuestion();
-			nextQuestion.setEnabled(false);
-			BattlePanel.drawNewCards();
-			pm.changePanelCard("Battle");
-		}
-		else if(command.equals("NEXT PANEL"))
-		{
-			data.resetAll();
-			resetQuestion();
-			nextPanel.setEnabled(false);
-			listOfCards.next(primaryPanel);
 		}
 	}
-	
-	public void resetQuestion ( )
-	{
-		group.clearSelection();
-		data.grabQuestionFromFile();
-		questionArea.setText(data.getQuestion());
-		answer[0].setText("A. " + data.getAnswer(0));
-		answer[1].setText("B. " + data.getAnswer(1));
-		answer[2].setText("C. " + data.getAnswer(2));
-		answer[3].setText("D. " + data.getAnswer(3));
-		for(int i = 0; i < answer.length; i++)
-		{
-			answer[i].setEnabled(true);
-			answer[i].setBackground(new Color(230, 230, 230));
-		}
-	}
-}
 
-class HighScoresPanel extends JPanel implements ActionListener
-{
-	private GameData data;
-	private CardLayout listOfCards;
-	private QuestionPanel primaryPanel;
-	private JTextArea scoreInfo, highScoresArea;
-	
-	public HighScoresPanel(GameData d, CardLayout c, QuestionPanel p)
+	class HighScoresPanel extends JPanel implements ActionListener
 	{
-		data = d;
-		listOfCards = c;
-		primaryPanel = p;
+		private GameData data;
+		private CardLayout listOfCards;
+		private QuestionPanel primaryPanel;
+		private JTextArea scoreInfo, highScoresArea;
 		
-		Font myFont = new Font("Tahoma", Font.BOLD, 22);
-		
-		setLayout(new BorderLayout(20, 20));
-		setBackground(Color.GRAY);
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		setFont(myFont);
-		
-		JPanel centerPanel = new JPanel();
-		centerPanel.setLayout(new GridLayout(1, 2, 10, 10));
-		add(centerPanel, BorderLayout.CENTER);
-		
-		JPanel leftSidePanel = new JPanel();
-		leftSidePanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		leftSidePanel.setLayout(new BorderLayout());
-		centerPanel.add(leftSidePanel, BorderLayout.CENTER);
-		
-		scoreInfo = new JTextArea("" + data.getCorrectCount(), 10, 20);
-		scoreInfo.setFont(myFont);
-		scoreInfo.setLineWrap(true);
-		scoreInfo.setWrapStyleWord(true);
-		scoreInfo.setOpaque(false);
-		scoreInfo.setEditable(false);
-		leftSidePanel.add(scoreInfo);
-		
-		JPanel rightSidePanel = new JPanel();
-		rightSidePanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		rightSidePanel.setLayout(new BorderLayout());
-		centerPanel.add(rightSidePanel, BorderLayout.CENTER);
-		
-		/*highScoresArea = new JTextArea("" + data.getHighScores(), 10, 20);
-		highScoresArea.setFont(myFont);
-		highScoresArea.setLineWrap(true);
-		highScoresArea.setWrapStyleWord(true);
-		highScoresArea.setOpaque(false);
-		highScoresArea.setEditable(false);
-		highScoresArea.setMargin(new Insets(10,10,10,10));
-		JScrollPane scroller = new JScrollPane(highScoresArea);
-		rightSidePanel.add(scroller);*/
-		
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-		add(buttonPanel, BorderLayout.SOUTH);
-		
-		JButton playAgain = new JButton("PLAY AGAIN");
-		playAgain.setFont(myFont);
-		playAgain.addActionListener(this);
-		buttonPanel.add(playAgain);
-		
-		JButton exit = new JButton("EXIT");
-		exit.setFont(myFont);
-		exit.addActionListener(this);
-		buttonPanel.add(exit);
-	}
-	
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		scoreInfo.setText("" + data.toString());
-		highScoresArea.setText("" + data.getHighScores());
-		highScoresArea.setCaretPosition(0);
-	}
-	
-	public void actionPerformed(ActionEvent evt) 
-	{
-		String command = evt.getActionCommand();
-		
-		if(command.equals("PLAY AGAIN"))
+		public HighScoresPanel(GameData d, CardLayout c, QuestionPanel p)
 		{
-			data.saveToHighScores();
-			listOfCards.previous(primaryPanel);
+			data = d;
+			listOfCards = c;
+			primaryPanel = p;
+			
+			Font myFont = new Font("Tahoma", Font.BOLD, 22);
+			
+			setLayout(new BorderLayout(20, 20));
+			setBackground(Color.GRAY);
+			setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+			setFont(myFont);
+			
+			JPanel centerPanel = new JPanel();
+			centerPanel.setLayout(new GridLayout(1, 2, 10, 10));
+			add(centerPanel, BorderLayout.CENTER);
+			
+			JPanel leftSidePanel = new JPanel();
+			leftSidePanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+			leftSidePanel.setLayout(new BorderLayout());
+			centerPanel.add(leftSidePanel, BorderLayout.CENTER);
+			
+			scoreInfo = new JTextArea("" + data.getCorrectCount(), 10, 20);
+			scoreInfo.setFont(myFont);
+			scoreInfo.setLineWrap(true);
+			scoreInfo.setWrapStyleWord(true);
+			scoreInfo.setOpaque(false);
+			scoreInfo.setEditable(false);
+			leftSidePanel.add(scoreInfo);
+			
+			JPanel rightSidePanel = new JPanel();
+			rightSidePanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+			rightSidePanel.setLayout(new BorderLayout());
+			centerPanel.add(rightSidePanel, BorderLayout.CENTER);
+			
+			/*highScoresArea = new JTextArea("" + data.getHighScores(), 10, 20);
+			highScoresArea.setFont(myFont);
+			highScoresArea.setLineWrap(true);
+			highScoresArea.setWrapStyleWord(true);
+			highScoresArea.setOpaque(false);
+			highScoresArea.setEditable(false);
+			highScoresArea.setMargin(new Insets(10,10,10,10));
+			JScrollPane scroller = new JScrollPane(highScoresArea);
+			rightSidePanel.add(scroller);*/
+			
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+			add(buttonPanel, BorderLayout.SOUTH);
+			
+			JButton playAgain = new JButton("PLAY AGAIN");
+			playAgain.setFont(myFont);
+			playAgain.addActionListener(this);
+			buttonPanel.add(playAgain);
+			
+			JButton exit = new JButton("EXIT");
+			exit.setFont(myFont);
+			exit.addActionListener(this);
+			buttonPanel.add(exit);
 		}
-		else if(command.equals("EXIT"))
+		
+		public void paintComponent(Graphics g)
 		{
-			data.saveToHighScores();
-			System.exit(0);
+			super.paintComponent(g);
+			scoreInfo.setText("" + data.toString());
+			highScoresArea.setText("" + data.getHighScores());
+			highScoresArea.setCaretPosition(0);
+		}
+		
+		public void actionPerformed(ActionEvent evt) 
+		{
+			String command = evt.getActionCommand();
+			
+			if(command.equals("PLAY AGAIN"))
+			{
+				data.saveToHighScores();
+				listOfCards.previous(primaryPanel);
+			}
+			else if(command.equals("EXIT"))
+			{
+				data.saveToHighScores();
+				System.exit(0);
+			}
 		}
 	}
 }
