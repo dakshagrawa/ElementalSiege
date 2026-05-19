@@ -291,13 +291,13 @@ public class BattlePanel extends JPanel implements ActionListener
 		{
 			enemyHealth = Math.max(0, enemyHealth - damage);
 			streak++;
-			resultText = "You Win! Deal " + damage + " Damage";
+			resultText = "You Win. Deal " + damage + " Damage";
 		}
 		else if (enemyValue > userValue)
 		{
 			userHealth = Math.max(0, userHealth - damage);
 			streak = 0;
-			resultText = "You Lose! Take " + damage + " Damage";
+			resultText = "You Lose. Take " + damage + " Damage";
 		}
 		else
 		{
