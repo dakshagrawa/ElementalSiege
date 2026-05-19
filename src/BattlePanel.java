@@ -241,7 +241,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
     }
 
-    private Color rarityColor(String rarity)
+    private static Color rarityColor(String rarity)
     {
     	if (rarity == null)
 		{
