@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class BattlePanel extends JPanel implements ActionListener
 {
-    private GameData data;
+    private static GameData data;
     private PageManager pm;
 
     private static GameData.CharacterImage userCard;
