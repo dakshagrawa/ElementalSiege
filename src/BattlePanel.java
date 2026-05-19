@@ -99,7 +99,7 @@ public class BattlePanel extends JPanel implements ActionListener
 
     public void drawNewCards()
     {
-        int userIdx = .(int)(Math.random() * data.userCharacters.length);
+        int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
 
         int enemyIdx = (int)(Math.random() * data.characters.length);
