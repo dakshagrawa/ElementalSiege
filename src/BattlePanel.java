@@ -228,7 +228,7 @@ public class BattlePanel extends JPanel implements ActionListener
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFont(pm.normalFont);
         btn.setActionCommand(command);
-        btn.addActionListener(BattlePanel());
+        btn.addActionListener(this);
         return btn;
     }
 
