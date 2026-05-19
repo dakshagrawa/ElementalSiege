@@ -204,7 +204,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            Image scaled = img.getScaledInstance(500, 700, Image.SCALE_SMOOTH);
+            Image scaled = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
             imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
         }
         else
@@ -281,7 +281,7 @@ public class BattlePanel extends JPanel implements ActionListener
         int userValue  = getAttributeValue(userCard,  attribute);
         int enemyValue = getAttributeValue(enemyCard, attribute);
         int diff = Math.abs(userValue - enemyValue);
-        int damage = diff * 2;
+        int damage = diff;
 
         enemyCardPanel.removeAll();
         enemyCardPanel.add(buildRevealedEnemyCard(attribute), BorderLayout.CENTER);
@@ -312,6 +312,8 @@ public class BattlePanel extends JPanel implements ActionListener
 
         revalidate();
         repaint();
+
+        checkBattleEnd();
     }
 
     private int getAttributeValue(GameData.CharacterImage card, String attribute)
