@@ -118,7 +118,7 @@ public class BattlePanel extends JPanel implements ActionListener
         repaint();
     }
 
-    private JPanel buildUserCardDisplay()
+    private static JPanel buildUserCardDisplay()
     {
         JPanel card = makeCardShell(userCard.name, userCard.rarity, userCard.image);
 
