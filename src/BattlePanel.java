@@ -204,7 +204,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            Image scaled = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            Image scaled = img.getScaledInstance(500, 700, Image.SCALE_SMOOTH);
             imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
         }
         else
