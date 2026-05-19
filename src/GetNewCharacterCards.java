@@ -20,7 +20,7 @@ public class GetNewCharacterCards extends JPanel
 	}
 	public GetNewCharacterCards(PageManager pageMngr, String nextPageName)
 	{
-		pm = PageMngr;
+		pm = pageMngr;
 		data = pm.getGameData();
 		nextPage = nextPageName;
 
