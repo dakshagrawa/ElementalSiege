@@ -310,8 +310,8 @@ public class BattlePanel extends JPanel implements ActionListener
         resultLabel.setText(resultText);
         streakLabel.setText("Streak: " + streak);
 
-        // revalidate();
-        // repaint();
+        revalidate();
+        repaint();
 
         checkBattleEnd();
     }
