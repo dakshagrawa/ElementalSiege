@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BattlePanel extends JPanel implements ActionListener
+public static class BattlePanel extends JPanel implements ActionListener
 {
     private GameData data;
     private PageManager pm;
