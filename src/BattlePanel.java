@@ -97,7 +97,7 @@ public class BattlePanel extends JPanel implements ActionListener
         add(bottomBar, BorderLayout.SOUTH);
     }
 
-    public static void drawNewCards()
+    public void drawNewCards()
     {
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
