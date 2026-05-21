@@ -47,84 +47,11 @@ class QuestionPanel extends JPanel
 		listOfCards = new CardLayout();
 		setLayout(listOfCards);
 
-		StartPanel first = new StartPanel(pm, listOfCards, this);
-		add(first, "1");
-
 		QuestionsPanel second = new QuestionsPanel(pm, listOfCards, this);
 		add(second, "2");
 
 		HighScoresPanel third = new HighScoresPanel(data, listOfCards, this);
 		add(third, "3");
-	}
-
-	class StartPanel extends JPanel implements ActionListener
-	{
-		private GameData data;
-		private PageManager pm;
-		private CardLayout listOfCards;
-		private QuestionPanel primaryPanel;
-		private JTextField firstNameField, lastNameField;
-
-		public StartPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
-		{
-			pm = pageMngr;
-			data = pm.getGameData();
-			listOfCards = c;
-			primaryPanel = p;
-
-			setBackground(Color.BLACK);
-			setLayout(new GridLayout(3, 1, 10, 10));
-			Font myFont = new Font("Tahoma", Font.BOLD, 22);
-
-			JPanel firstNamePanel = new JPanel();
-			firstNamePanel.setBackground(Color.LIGHT_GRAY);
-			firstNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-			add(firstNamePanel);
-
-			JLabel firstNamePrompt = new JLabel("First Name: ");
-			firstNamePrompt.setFont(myFont);
-			firstNamePanel.add(firstNamePrompt);
-
-			firstNameField = new JTextField(16);
-			firstNameField.setMargin(new Insets(10,10,10,10));
-			firstNameField.setFont(myFont);
-			firstNamePanel.add(firstNameField);
-
-			JPanel lastNamePanel = new JPanel();
-			lastNamePanel.setBackground(Color.LIGHT_GRAY);
-			lastNamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-			add(lastNamePanel);
-
-			JLabel lastNamePrompt = new JLabel("Last Name: ");
-			lastNamePrompt.setFont(myFont);
-			lastNamePanel.add(lastNamePrompt);
-
-			lastNameField = new JTextField(16);
-			lastNameField.setMargin(new Insets(10,10,10,10));
-			lastNameField.setFont(myFont);
-			lastNamePanel.add(lastNameField);
-
-			JPanel buttonPanel = new JPanel();
-			buttonPanel.setBackground(Color.LIGHT_GRAY);
-			buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 70));
-			add(buttonPanel);
-
-			JButton next = new JButton("NEXT PANEL");
-			next.setFont(myFont);
-			next.addActionListener(this);
-			buttonPanel.add(next);
-		}
-
-		public void actionPerformed(ActionEvent evt)
-		{
-			String command = evt.getActionCommand();
-
-			if(command.equals("NEXT PANEL") && !firstNameField.getText().equals("") && !lastNameField.getText().equals(""))
-			{
-				data.setName(firstNameField.getText(), lastNameField.getText());
-				listOfCards.next(primaryPanel);
-			}
-		}
 	}
 
 	class QuestionsPanel extends JPanel implements ActionListener
