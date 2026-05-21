@@ -321,8 +321,10 @@ public class BattlePanel extends JPanel implements ActionListener
         int cu = card.curiosity;
         int wi = card.wisdom;
         int min = Math.min(ps, Math.min(cu, wi));
-        if (min == ps) return "problemsolving";
-        if (min == cu) return "curiosity";
+        if (min == ps) 
+            return "problemsolving";
+        if (min == cu) 
+            return "curiosity";
         return "wisdom";
     }
 
