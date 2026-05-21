@@ -413,7 +413,6 @@ public class BattlePanel extends JPanel implements ActionListener
             pm.changePanelCard("Questions");
         }
     }
-
     
     public void actionPerformed(ActionEvent e)
     {
