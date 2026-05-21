@@ -16,18 +16,9 @@ public class GetNewCharacterCards extends JPanel
 		thisPageNumber = thisPanelNumber;
 		nextPage = "Get New Cards " + (thisPageNumber + 1);
 		buildLayout();
-		this(pageMngr,"Get New Cards "+(thisPanelNumber+1));
-
-		JPanel adjusterPanel = new JPanel(new BorderLayout());
-		add(pickLabel());
-		add(new CharacterCardsGrid());
 	}
-<<<<<<< HEAD
 
 	public GetNewCharacterCards(PageManager pageMngr, String nextPageName)
-=======
-	public GetNewCharacterCards(PageManager pageMngr, String nextPageName)
->>>>>>> 9ea4357ebcba40740508ef9914480c0a32242af1
 	{
 		pm = pageMngr;
 		data = pm.getGameData();
