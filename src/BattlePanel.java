@@ -119,14 +119,21 @@ public class BattlePanel extends JPanel implements ActionListener
         wisdomBtn.setEnabled(false);
 
         if (displayTimer != null) displayTimer.stop();
-        displayTimer = new Timer(5000, e -> {
-            pm.changePanelCard("Questions");
-        });
+        displayTimer = new Timer(5000);
+        displayTimer.addActionListener(new DisplayTimer);
         displayTimer.setRepeats(false);
         displayTimer.start();
 
         revalidate();
         repaint();
+    }
+
+    class DisplayTimer implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            pm.changePanelCard("Questions");
+        }
     }
 
     private JPanel buildUserCardDisplay()
