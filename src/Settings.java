@@ -2,7 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.plaf.SliderUI;    
+import javax.swing.plaf.SliderUI;
+
 public class Settings extends JPanel implements ActionListener, ChangeListener
 {
 	private GameData data;
@@ -13,8 +14,17 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 	{
 		pm = pageMngr;
 		data = pm.getGameData();
-		setLayout(new GridLayout(3, 1, 10, 20));
-		
+		setLayout(new BorderLayout());
+
+		JPanel backBtnWrapper = new JPanel();
+		JButton backBtn = pm.new Button1("<- Back", Color.LIGHT_GRAY);
+		backBtn.setPreferredSize(new Dimension(100, 40));
+		backBtn.addActionListener(this);
+		add(backBtn, BorderLayout.NORTH);
+
+		JPanel centerPanel = new JPanel(new GridLayout(3, 1, 10, 20));
+		centerPanel.setOpaque(false);
+
 		volumeSlider = new JSlider(0, 100, 75);
 		volumeSlider.setOrientation(JSlider.HORIZONTAL);
 		volumeSlider.setMajorTickSpacing(25);
@@ -22,26 +32,44 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		volumeSlider.setPaintLabels(true);
 		volumeSlider.addChangeListener(this);
 		volumeSlider.setValue((int)(pm.sound.currentVolume*100));
-		add(volumeSlider);
+		centerPanel.add(volumeSlider);
 
 		JButton exit = new JButton("Save & Exit");
 		exit.addActionListener(this);
-		add(exit);
+		centerPanel.add(exit);
 
 		JButton quit = new JButton("Quit");
 		quit.addActionListener(this);
-		add(quit);
+		centerPanel.add(quit);
 
-		//JButton timeLimit = new JButton("Set a time limit");
+		add(centerPanel, BorderLayout.CENTER);
 	}
 
 	public void actionPerformed(ActionEvent evt)
 	{
 		String command = evt.getActionCommand();
-		if(command.equals("Save & Exit"))
+		if(command.equals("<- Back"))
+		{
+			// Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName
+            // which might be incorrect when coming from ClosePanel
+            if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
+                pm.changePanelCardNoHistory(pm.lastCardName);
+            } else {
+                // Fallback to Title page if lastCardName is not valid
+                pm.changePanelCard("Title");
+            }
+		}
+		else if(command.equals("Save & Exit"))
 		{
 			data.saveData();
-			pm.changePanelCard("Save & Exit");
+			// Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName
+            // which might be incorrect when coming from ClosePanel
+            if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
+                pm.changePanelCardNoHistory(pm.lastCardName);
+            } else {
+                // Fallback to Title page if lastCardName is not valid
+                pm.changePanelCard("Title");
+            }
 		}
 		else
 		{
@@ -53,6 +81,6 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 	public void stateChanged(ChangeEvent evt)
 	{
 		float targetVolume = (float)volumeSlider.getValue() / 100.0f;
-		pm.sound.setVolume(targetVolume); // TODO: maybe make this (float)
+		pm.sound.setVolume(targetVolume);
 	}
 }

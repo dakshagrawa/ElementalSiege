@@ -94,6 +94,7 @@ public class GameData
 	public void setName(String f, String l)
 	{
 		first = f;
+		last = l;
 	}
 	
 	public String getQuestion ( )
@@ -183,7 +184,7 @@ public class GameData
 			while(inFile.hasNext()) 
 			{
 				String line = inFile.nextLine();
-				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
+				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount)
 				{
 					result += first + " " + lastGameCorrectCount + "/4\n";
 					hasBeenAdded = true;
@@ -234,7 +235,7 @@ public class GameData
 			while(inFile.hasNext()) 
 			{
 				String line = inFile.nextLine();
-				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount);
+				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount)
 				{
 					result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
 					hasBeenAdded = true;

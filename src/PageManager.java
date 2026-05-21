@@ -13,7 +13,7 @@ public class PageManager extends JPanel
 	public String lastCardName;
 	public String currentCardName;
 	public Font titleFont;
-	public Font normalFont; 
+	public Font normalFont;
 	public Font normalBoldFont;
 	public ElementalSiege frame;
 	public Sound sound;
@@ -25,7 +25,7 @@ public class PageManager extends JPanel
 		titleFont = new Font(Font.SANS_SERIF, Font.BOLD, 26);
 		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
-		
+
 		data = new GameData(this);
 
 		card = new CardLayout();
@@ -44,6 +44,7 @@ public class PageManager extends JPanel
 		BattlePanel bp = new BattlePanel(this);
 		add(bp,"Battle");
 		add(new QuestionPanel(this,bp),"Questions");
+		add(new HomePanel(this, bp), "homePanel");
 
 		lastCardName = "Title";
 		currentCardName = "Title";
@@ -52,14 +53,18 @@ public class PageManager extends JPanel
 
 	public void changePanelCard(String cardName)
 	{
-		if(!cardName.equals("Close"))
-		{
-			//card.show(this,lastCardName);
-			lastCardName = cardName;
-		}
+		lastCardName = currentCardName;
 		currentCardName = cardName;
 		card.show(this,cardName);
 		revalidate(); //TODO: add citation
+		repaint();
+	}
+
+	public void changePanelCardNoHistory(String cardName)
+	{
+		currentCardName = cardName;
+		card.show(this,cardName);
+		revalidate();
 		repaint();
 	}
 
@@ -98,14 +103,14 @@ public class PageManager extends JPanel
 
 		public void mouseReleased(MouseEvent e) {}
 
-		public void mouseEntered(MouseEvent e) 
+		public void mouseEntered(MouseEvent e)
 		{
 			button.setBackground(hoverBackgroundColor);
 			button.setForeground(hoverForegroundColor);
 			button.setOpaque(true);
 		}
 
-		public void mouseExited(MouseEvent e) 
+		public void mouseExited(MouseEvent e)
 		{
 			button.setBackground(normalBackgroundColor);
 			button.setForeground(normalForegroundColor);
@@ -127,7 +132,7 @@ public class PageManager extends JPanel
 			fgColor = foregroundColor;
 			isOpaque = isBgOpaque;
 			bgColor = Color.WHITE;
-			if(!isBgOpaque) 
+			if(!isBgOpaque)
 				isBorderPainted=false;
 			else
 				isBorderPainted=true;
@@ -174,10 +179,10 @@ public class PageManager extends JPanel
 			setOpaque(isOpaque);
 			setBorderPainted(isBorderPainted);
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
-		} 
+		}
 	}
 
-	/* This class has different functions (tools) that helps 
+	/* This class has different functions (tools) that helps
 		use some chunks of code that is used repeatedly. */
 	public static class Functions
 	{
@@ -193,7 +198,7 @@ public class PageManager extends JPanel
 			catch(NullPointerException | IOException e)
 			{
 				System.out.println(e.getMessage());
-				System.err.println("\n" + pictName + " can't be found. \n"); 
+				System.err.println("\n" + pictName + " can't be found. \n");
 			}
 
 			return picture;
@@ -211,8 +216,8 @@ public class PageManager extends JPanel
 
 			catch(NullPointerException | IOException e)
 			{
-				System.out.println(e);      
-				System.err.println("\n" + pictName + " can't be found. \n"); 
+				System.out.println(e);
+				System.err.println("\n" + pictName + " can't be found. \n");
 			}
 
 			return picture;
@@ -239,6 +244,5 @@ public class PageManager extends JPanel
 			// Return the buffered image
 			return buffered;
 		}
-
 	}
 }

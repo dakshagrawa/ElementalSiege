@@ -89,7 +89,7 @@ public class CloseWindow extends JPanel
 				}
 				else if(command.equals("No"))
 				{
-					pm.changePanelCard(pm.lastCardName);
+					pm.changePanelCardNoHistory(pm.lastCardName);
 				}
 				
 			}

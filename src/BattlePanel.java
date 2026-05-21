@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.Timer;
 
 public class BattlePanel extends JPanel implements ActionListener
 {
@@ -9,11 +10,11 @@ public class BattlePanel extends JPanel implements ActionListener
 
     private GameData.CharacterImage userCard;
     private GameData.CharacterImage enemyCard;
-    private int userHealth;
+    public int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
     private int maxEnemyHealth;
-    private int level;
+    public int level;
 	
     private HealthBarPanel userHealthPanel;
     private HealthBarPanel enemyHealthPanel;
@@ -28,6 +29,8 @@ public class BattlePanel extends JPanel implements ActionListener
     private JButton curiosityBtn;
     private JButton wisdomBtn;
     private boolean attributeButtonsEnabled = false;
+    private Timer displayTimer;
+    private boolean lastAnswerCorrect;
 
     public BattlePanel(PageManager pageMngr)
     {
@@ -65,6 +68,9 @@ public class BattlePanel extends JPanel implements ActionListener
         userCardPanel = new JPanel(new BorderLayout());
         userCardPanel.setOpaque(false);
 
+        enemyCardPanel = new JPanel(new BorderLayout());
+        enemyCardPanel.setOpaque(false);
+
 		centerResultPanel = new JPanel(new GridLayout(2, 1, 0, 10));
 		centerResultPanel.setOpaque(false);
 
@@ -79,14 +85,6 @@ public class BattlePanel extends JPanel implements ActionListener
 		centerResultPanel.add(resultLabel);
 		centerResultPanel.add(streakLabel);
 
-        streakLabel = new JLabel("Streak: " + streak, SwingConstants.CENTER);
-        streakLabel.setForeground(new Color(255, 220, 50));
-        streakLabel.setFont(pm.normalBoldFont);
-        centerResultPanel.add(streakLabel);
-
-        enemyCardPanel = new JPanel(new BorderLayout());
-        enemyCardPanel.setOpaque(false);
-
         centerArea.add(userCardPanel);
         centerArea.add(centerResultPanel);
         centerArea.add(enemyCardPanel);
@@ -99,6 +97,9 @@ public class BattlePanel extends JPanel implements ActionListener
 
     public void drawNewCards()
     {
+        maxEnemyHealth = (int)(level * 1.7) + 17;
+        enemyHealth = maxEnemyHealth;
+
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
 
@@ -111,8 +112,18 @@ public class BattlePanel extends JPanel implements ActionListener
         userCardPanel.add(buildUserCardDisplay(), BorderLayout.CENTER);
         enemyCardPanel.add(buildEnemyCardDisplay(), BorderLayout.CENTER);
 
-        resultLabel.setText("Pick an attribute!");
-        attributeButtonsEnabled = true;
+        resultLabel.setText("Study your card... (5s)");
+        attributeButtonsEnabled = false;
+        problemSolvingBtn.setEnabled(false);
+        curiosityBtn.setEnabled(false);
+        wisdomBtn.setEnabled(false);
+
+        if (displayTimer != null) displayTimer.stop();
+        displayTimer = new Timer(5000, e -> {
+            pm.changePanelCard("Questions");
+        });
+        displayTimer.setRepeats(false);
+        displayTimer.start();
 
         revalidate();
         repaint();
@@ -269,11 +280,41 @@ public class BattlePanel extends JPanel implements ActionListener
 		}
     }
 
-    private void resolveAttribute(String attribute)
+    public void resolveRound(boolean correct)
     {
-        if (!attributeButtonsEnabled) return;
-        attributeButtonsEnabled = false;
+        lastAnswerCorrect = correct;
+        if (correct)
+        {
+            resultLabel.setText("Correct! Choose your attribute!");
+            attributeButtonsEnabled = true;
+            problemSolvingBtn.setEnabled(true);
+            curiosityBtn.setEnabled(true);
+            wisdomBtn.setEnabled(true);
+        }
+        else
+        {
+            resultLabel.setText("Wrong! Auto-attacking with lowest stat...");
+            attributeButtonsEnabled = false;
+            String lowest = getLowestAttribute(userCard);
+            doResolution(lowest);
+        }
+        revalidate();
+        repaint();
+    }
 
+    private String getLowestAttribute(GameData.CharacterImage card)
+    {
+        int ps = card.problemSolving;
+        int cu = card.curiosity;
+        int wi = card.wisdom;
+        int min = Math.min(ps, Math.min(cu, wi));
+        if (min == ps) return "problemsolving";
+        if (min == cu) return "curiosity";
+        return "wisdom";
+    }
+
+    private void doResolution(String attribute)
+    {
         problemSolvingBtn.setEnabled(false);
         curiosityBtn.setEnabled(false);
         wisdomBtn.setEnabled(false);
@@ -288,21 +329,21 @@ public class BattlePanel extends JPanel implements ActionListener
 
         String resultText;
         if (userValue > enemyValue)
-		{
-			enemyHealth = Math.max(0, enemyHealth - damage);
-			streak++;
-			resultText = "You Win. Deal " + damage + " Damage";
-		}
-		else if (enemyValue > userValue)
-		{
-			userHealth = Math.max(0, userHealth - damage);
-			streak = 0;
-			resultText = "You Lose. Take " + damage + " Damage";
-		}
-		else
-		{
-			resultText = "Tie! No damage dealt";
-		}
+			{
+				enemyHealth = Math.max(0, enemyHealth - damage);
+				streak++;
+				resultText = "You Win. Deal " + damage + " Damage";
+			}
+			else if (enemyValue > userValue)
+			{
+				userHealth = Math.max(0, userHealth - damage);
+				streak = 0;
+				resultText = "You Lose. Take " + damage + " Damage";
+			}
+			else
+			{
+				resultText = "Tie! No damage dealt";
+			}
 
         userHealthPanel.setHealth(userHealth);
         enemyHealthPanel.setHealth(enemyHealth);
@@ -338,17 +379,19 @@ public class BattlePanel extends JPanel implements ActionListener
 
     private void checkBattleEnd()
     {
-        if (userHealth <= 0)
+        if (userHealth <= 0 || enemyHealth <= 0)
         {
-            pm.changePanelCard("Game Over"); //have to write game ending
-        }
-        else if (enemyHealth <= 0)
-        {
-            pm.changePanelCard("Level Complete"); //new level?
+            pm.changePanelCard("homePanel");
         }
         else
         {
-            pm.changePanelCard("Questions");
+            // Wait for a moment before transitioning back to the next question
+            Timer delay = new Timer(2000, e -> {
+                drawNewCards();
+                pm.changePanelCard("Questions");
+            });
+            delay.setRepeats(false);
+            delay.start();
         }
     }
 
@@ -358,7 +401,7 @@ public class BattlePanel extends JPanel implements ActionListener
         String cmd = e.getActionCommand();
         if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
         {
-            resolveAttribute(cmd);
+            doResolution(cmd);
         }
     }
 
