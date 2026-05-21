@@ -402,7 +402,7 @@ public class BattlePanel extends JPanel implements ActionListener
         else
         {
             //use timer to wait 5 seconds to show user who got damaged before moving on to question
-            Timer delay = new Timer(60000, new CardDelay());
+            Timer delay = new Timer(6000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
         }
