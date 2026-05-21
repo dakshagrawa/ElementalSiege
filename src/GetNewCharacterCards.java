@@ -31,7 +31,10 @@ public class GetNewCharacterCards extends JPanel
 		setBackground(new Color(169, 169, 169));
 		setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
-		JLabel heading = new JLabel("Pick 1 Card:", SwingConstants.CENTER);
+		JLabel heading = new JLabel("Pick 1 Card:"
+		
+		
+		, SwingConstants.CENTER);
 		heading.setFont(pm.titleFont);
 		add(heading, BorderLayout.NORTH);
 
