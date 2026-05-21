@@ -246,6 +246,7 @@ class QuestionPanel extends JPanel
 				nextQuestion.setEnabled(false);
 				battle.resolveRound(lastAnswerCorrect);
 				pm.changePanelCard("Battle");
+				battle.startTimer=true;
 			}
 		}
 

@@ -32,7 +32,7 @@ public class BattlePanel extends JPanel implements ActionListener
     private Timer displayTimer;
     private boolean lastAnswerCorrect;
 
-    private boolean startTimer;
+    public boolean startTimer;
 
     public BattlePanel(PageManager pageMngr, boolean doTimer)
     {
@@ -121,12 +121,15 @@ public class BattlePanel extends JPanel implements ActionListener
         curiosityBtn.setEnabled(false);
         wisdomBtn.setEnabled(false);
 
-        if (displayTimer != null) 
-            displayTimer.stop();
-        displayTimer = new Timer(5000);
-        displayTimer.addActionListener(new DisplayTimer());
-        displayTimer.setRepeats(false);
-        displayTimer.start();
+        if(startTimer)
+        {
+            if (displayTimer != null) 
+                displayTimer.stop();
+            displayTimer = new Timer(5000);
+            displayTimer.addActionListener(new DisplayTimer());
+            displayTimer.setRepeats(false);
+            displayTimer.start();
+        }   
 
         revalidate();
         repaint();
