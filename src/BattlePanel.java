@@ -417,6 +417,15 @@ public class BattlePanel extends JPanel implements ActionListener
             pm.changePanelCard("Questions");
         }
     }
+
+    class CardDelay implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            drawNewCards();
+            pm.changePanelCard("Questions");
+        }
+    }
     
     public void actionPerformed(ActionEvent e)
     {
