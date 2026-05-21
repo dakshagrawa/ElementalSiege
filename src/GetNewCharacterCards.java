@@ -13,8 +13,7 @@ public class GetNewCharacterCards extends JPanel
 	{
 		pm = pageMngr;
 		data = pm.getGameData();
-		thisPageNumber = thisPanelNumber;
-		nextPage = "Get New Cards " + (thisPageNumber + 1);
+		nextPage = "Get New Cards " + (thisPanelNumber + 1);
 		buildLayout();
 	}
 
