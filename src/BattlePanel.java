@@ -173,7 +173,7 @@ public class BattlePanel extends JPanel implements ActionListener
 
         JLabel enemyName = new JLabel("Enemy", SwingConstants.CENTER);
         enemyName.setForeground(Color.LIGHT_GRAY);
-        enemyName.setFont(pm.normalFont);
+        enemyName.setFont(pm.titleFont);
         back.add(enemyName, BorderLayout.SOUTH);
 
         return back;
