@@ -30,6 +30,7 @@ public class BattlePanel extends JPanel implements ActionListener
     private JButton wisdomBtn;
     private boolean attributeButtonsEnabled = false;
     private Timer displayTimer;
+    private Timer delay;
     private boolean lastAnswerCorrect;
 
     public boolean startTimer;
@@ -137,6 +138,7 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
+            delay.stop();
             pm.changePanelCard("Questions");
         }
     }
@@ -402,7 +404,7 @@ public class BattlePanel extends JPanel implements ActionListener
         else
         {
             //use timer to wait 5 seconds to show user who got damaged before moving on to question
-            Timer delay = new Timer(6000, new CardDelay());
+            delay = new Timer(6000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
         }
@@ -413,6 +415,7 @@ public class BattlePanel extends JPanel implements ActionListener
         public void actionPerformed(ActionEvent e)
         {
             drawNewCards();
+            delay.stop();
             pm.changePanelCard("Questions");
         }
     }
