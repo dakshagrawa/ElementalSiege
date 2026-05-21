@@ -188,7 +188,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JButton cBtn = makeAttributeButton("Curiosity",  enemyCard.curiosity,  new Color(60, 90, 180), "");
         JButton wBtn = makeAttributeButton("Wisdom",    enemyCard.wisdom,    new Color(120, 60, 160), "");
 
-        highlightButton(sBtn, chosenAttribute.equals("problemSolving"));
+        highlightButton(sBtn, chosenAttribute.equals("problemsolving"));
         highlightButton(cBtn, chosenAttribute.equals("curiosity"));
         highlightButton(wBtn, chosenAttribute.equals("wisdom"));
 
@@ -426,7 +426,7 @@ public class BattlePanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         String cmd = e.getActionCommand();
-        if (cmd.equals("problemSolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
+        if (cmd.equals("problemsolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
         {
             doResolution(cmd);
         }
