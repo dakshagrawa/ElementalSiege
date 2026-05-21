@@ -125,7 +125,7 @@ public class BattlePanel extends JPanel implements ActionListener
         {
             if (displayTimer != null) 
                 displayTimer.stop();
-            displayTimer = new Timer(5000, new DisplayTimer());
+            displayTimer = new Timer(10000, new DisplayTimer());
             displayTimer.setRepeats(false);
             displayTimer.start();
         }   
