@@ -100,7 +100,7 @@ public class GetNewCharacterCards extends JPanel
 			}
 			catch (GameData.CharacterImage.CharacterInitializationException e)
 			{
-				System.err.println("Could not load " + characterImg.name);
+				System.err.println("The " + characterImg.name + " could not be loaded.");
 				e.printStackTrace();
 				setText(characterImg.name);
 			}
