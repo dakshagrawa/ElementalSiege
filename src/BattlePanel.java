@@ -101,7 +101,6 @@ public class BattlePanel extends JPanel implements ActionListener
     public void drawNewCards()
     {
         maxEnemyHealth = (int)(level * 1.7) + 17;
-        enemyHealth = maxEnemyHealth;
 
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
