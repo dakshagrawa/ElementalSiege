@@ -402,8 +402,7 @@ public class BattlePanel extends JPanel implements ActionListener
             Timer delay = new Timer(2000, e -> {
                 drawNewCards();
                 pm.changePanelCard("Questions");
-            });
-            // Wait for a moment before transitioning back to the next question
+            });.
             Timer delay = new Timer(2000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
