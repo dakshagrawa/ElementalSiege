@@ -79,11 +79,11 @@ public class BattlePanel extends JPanel implements ActionListener
 
 		resultLabel = new JLabel("Pick an attribute!", SwingConstants.CENTER);
 		resultLabel.setForeground(Color.WHITE);
-		resultLabel.setFont(pm.normalBoldFont);
+		resultLabel.setFont(pm.titleFont);
 
 		streakLabel = new JLabel("Streak: " + streak, SwingConstants.CENTER);
 		streakLabel.setForeground(new Color(255, 220, 50));
-		streakLabel.setFont(pm.normalBoldFont);
+		streakLabel.setFont(pm.titleFont);
 
 		centerResultPanel.add(resultLabel);
 		centerResultPanel.add(streakLabel);
