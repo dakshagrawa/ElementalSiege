@@ -32,11 +32,14 @@ public class BattlePanel extends JPanel implements ActionListener
     private Timer displayTimer;
     private boolean lastAnswerCorrect;
 
-    public BattlePanel(PageManager pageMngr)
+    private boolean startTimer;
+
+    public BattlePanel(PageManager pageMngr, boolean doTimer)
     {
         pm = pageMngr;
         data = pm.getGameData();
         level = 1;
+        startTimer = doTimer;
 
         userHealth = maxUserHealth;
         maxEnemyHealth = (int)(level * 1.7) + 17;
