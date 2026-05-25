@@ -390,6 +390,7 @@ public class GameData
 		inputCharacterInfo.nextLine(); // To ignore the instructions that are given on the top of the file
 
 		characters = new CharacterImage[12];
+		
 		userCharacters = new int[characters.length];
 		for (int i = 0; i < characters.length; i++) 
 		{

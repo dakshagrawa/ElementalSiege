@@ -43,8 +43,9 @@ public class PageManager extends JPanel
 		add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
 		BattlePanel bp = new BattlePanel(this, false);
 		add(bp,"Battle");
-		add(new QuestionPanel(this,bp),"Questions");
-		add(new HomePanel(this, bp), "homePanel");
+		add(new QuestionPanel(this, bp),"Questions");
+		add(new HomePanel(this, bp), "newLevel");
+		add(new HomePanel(this, bp), "gameEnd");
 
 		lastCardName = "Title";
 		currentCardName = "Title";

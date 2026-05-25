@@ -229,7 +229,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            Image scaled = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            Image scaled = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
         }
         else
@@ -397,9 +397,13 @@ public class BattlePanel extends JPanel implements ActionListener
 
     private void checkBattleEnd()
     {
-        if (userHealth <= 0 || enemyHealth <= 0)
+        if (userHealth <= 0)
         {
-            pm.changePanelCard("homePanel");
+            pm.changePanelCard("gameEnd");
+        }
+        else if (enemyHealth <= 0)
+        {
+            pm.changePanelCard("newLevel")
         }
         else
         {
