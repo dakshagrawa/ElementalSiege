@@ -21,6 +21,11 @@ public class GameData
 	public int[] userCharacters;
 
 	private String userAvatar;
+
+	private String username;
+	private int savedHealth;
+	private int savedLevel;
+	private String userDataFileName = "../storedData/UsersGameData.txt";
 	
 	public GameData(PageManager pageMngr)
 	{
@@ -301,8 +306,9 @@ public class GameData
 						if(Arrays.equals(currentPwd, inPwd))
 						{
 							System.out.println("\nLogin Successful! :)");
-							Arrays.fill(currentPwd, '*'); // Clean up local password
-							input.close();
+    						Arrays.fill(currentPwd, '*'); //  up password
+    						input.close();
+							loadSavedData(inName);
 							return true;
 
 						}
@@ -328,6 +334,150 @@ public class GameData
 		return false;
 	}
 
+	public void loadSavedData(String inName)
+	{
+		username = inName;
+		savedHealth = 100; //defaults if no saved data found
+		savedLevel = 1;
+		for (int i = 0; i < userCharacters.length; i++)
+			userCharacters[i] = -1;
+
+		Scanner input = null;
+		try
+		{
+			input = new Scanner(new File(userDataFileName));
+		}
+		catch (FileNotFoundException e)
+		{
+			System.err.println("No user data file found. Starting fresh.");
+			return;
+		}
+
+		boolean foundUser = false;
+		while (input.hasNextLine())
+		{
+			String line = input.nextLine().trim();
+			if (line.equals("U: " + inName))
+			{
+				foundUser = true;
+			}
+			else if (foundUser && line.startsWith("H: ")) //checks to see if this is the correct statistic to enter in that line
+			{
+				savedHealth = Integer.parseInt(line.substring(3).trim());
+			}
+			else if (foundUser && line.startsWith("L: "))
+			{
+				savedLevel = Integer.parseInt(line.substring(3).trim());
+			}
+			else if (foundUser && line.startsWith("C: "))
+			{
+				String cardsPart = line.substring(3).trim();
+				cardsPart = cardsPart.replace("[", "").replace("]", "").trim();
+				if (!cardsPart.isEmpty())
+				{
+					String[] parts = cardsPart.split(",");
+					for (int i = 0; i < parts.length && i < userCharacters.length; i++)
+					{
+						String part = parts[i].trim();
+						if (!part.isEmpty())
+							userCharacters[i] = Integer.parseInt(part);
+					}
+				}
+				break; //done with this method
+			}
+		}
+		input.close();
+
+		if (!foundUser)
+			System.out.println("No saved data found for " + inName + ". Starting fresh.");
+	}
+
+public void saveUserProgress(int currentHealth, int currentLevel)
+{
+    //Will read entire file into a string
+    StringBuilder allContent = new StringBuilder();
+    Scanner input = null;
+    try
+    {
+        input = new Scanner(new File(userDataFileName));
+    }
+    catch (FileNotFoundException e)
+    {
+        // File doesn't exist yet, will be created fresh
+    }
+
+    boolean foundUser = false;
+    boolean inUserBlock = false;
+
+    if (input != null)
+    {
+        while (input.hasNextLine())
+        {
+            String line = input.nextLine().trim();
+
+            if (line.equals("U: " + username))
+            {
+                foundUser = true;
+                inUserBlock = true;
+                // Write an updated block instead of old one
+                allContent.append(buildUserBlock(currentHealth, currentLevel));
+            }
+            else if (inUserBlock && (line.startsWith("H: ") || line.startsWith("L: ") || line.startsWith("C: ")))
+            {
+                // Skip old lines for current user — already replaced above
+            }
+            else
+            {
+                inUserBlock = false;
+                allContent.append(line).append("\n");
+            }
+        }
+        input.close();
+    }
+
+    // If user wasn't in file at all, add them
+    if (!foundUser)
+    {
+        allContent.append(buildUserBlock(currentHealth, currentLevel));
+    }
+
+    // Write everything back
+    PrintWriter output = null;
+    try
+    {
+        output = new PrintWriter(new File(userDataFileName));
+        output.print(allContent.toString());
+        output.close();
+    }
+    catch (FileNotFoundException e)
+    {
+        System.err.println("Could not save user progress: " + e);
+    }
+}
+
+private String buildUserBlock(int currentHealth, int currentLevel)
+{
+    StringBuilder block = new StringBuilder();
+    block.append("U: ").append(username).append("\n");
+    block.append("H: ").append(currentHealth).append("\n");
+    block.append("L: ").append(currentLevel).append("\n");
+
+    // Build string array to store index of cards e.g. [0, 3, 7]
+    block.append("C: [");
+    boolean first = true;
+    for (int i = 0; i < userCharacters.length; i++)
+    {
+        if (userCharacters[i] != -1)
+        {
+            if (!first) block.append(", ");
+            block.append(userCharacters[i]);
+            first = false;
+        }
+    }
+    block.append("]\n");
+    return block.toString();
+}
+
 	public boolean putAccountInFile(String inName, char[] inPwd, boolean passwordCorrectlyRepeated)
 	{
 		if(passwordCorrectlyRepeated)
@@ -351,7 +501,7 @@ public class GameData
 				pw.println("---");
 				pw.println("U: " + inName);
 				pw.println("P: " + new String(inPwd));
-				//Passwords are not encrypted in file for the sake of simplicity.
+				//Passwords aren't encrypted in the txt file
 				
 				pw.close();
 				return true;
@@ -387,10 +537,10 @@ public class GameData
 			System.err.println("Characters cannot be retrieved from file. Game will not work. :(");
 			System.exit(1);
 		}
-		inputCharacterInfo.nextLine(); // To ignore the instructions that are given on the top of the file
+		inputCharacterInfo.nextLine(); //To ignore the instructions in top of the file
 
 		characters = new CharacterImage[12];
-		
+
 		userCharacters = new int[characters.length];
 		for (int i = 0; i < characters.length; i++) 
 		{
@@ -524,4 +674,25 @@ public class GameData
 			}
 		}
 	}
+
+	public String getUsername()  //getter-and-setter methods to display this info when neeeded on screen
+	{
+		return username;
+	} 
+    public int getSavedHealth()  
+	{
+		return savedHealth;
+	}
+    public int getSavedLevel()   
+	{
+		return savedLevel;
+	}
+
+    public void resetProgress() //resets to default stats when user wants to start new game
+    {
+        savedHealth = 100;
+        savedLevel  = 1;
+        for (int i = 0; i < userCharacters.length; i++)
+            userCharacters[i] = -1;
+    }
 }
