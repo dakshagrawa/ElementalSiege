@@ -47,6 +47,9 @@ public class PageManager extends JPanel
 		add(new HomePanel(this, bp), "newLevel");
 		add(new HomePanel(this, bp), "gameEnd");
 
+		add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
+		add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
+
 		lastCardName = "Title";
 		currentCardName = "Title";
 		changePanelCard(currentCardName);

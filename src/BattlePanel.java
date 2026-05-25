@@ -403,7 +403,10 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         else if (enemyHealth <= 0)
         {
-            pm.changePanelCard("newLevel")
+            if (level >= 10)
+                pm.changePanelCard("You Win");
+            else
+                pm.changePanelCard("Level " + (level + 1));
         }
         else
         {
