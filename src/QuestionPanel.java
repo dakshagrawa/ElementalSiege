@@ -261,12 +261,10 @@ public class QuestionPanel extends JPanel
 
 			if(command.equals("PLAY AGAIN"))
 			{
-				data.saveToHighScores();
 				listOfCards.previous(primaryPanel);
 			}
 			else if(command.equals("EXIT"))
 			{
-				data.saveToHighScores();
 				System.exit(0);
 			}
 		}
