@@ -39,12 +39,22 @@ public class TutorialPanel extends JPanel implements ActionListener
         "There are 10 levels until victory and the starting health of the enemy will keep increasing in each level. If your health drops to 0 at any point in the game, you have lost and your lab has been sacrificed.",
         "You've got the knowledge. Now go defend the lab!"};
 
-    private static final String[] IMAGE_NAMES = {null, /* heading — no image null */, null /* mission — no image*/
+    private static final String[] IMAGE_NAMES = {null, /* heading — no image null */ null, /* mission — no image*/
         "tutorial_get_cards.png", /* get cards screenshot */ "tutorial_battle.png",/* battle scene screenshot */ "tutorial_reveal.png", /* card reveal screenshot */
         "tutorial_damage.png", /* damage example screenshot */ "tutorial_health.png", /* health bar/levels screenshot */ null /* final slide — no image */};
 
-    private static final Color[] ACCENT_COLORS = {new Color(100, 180, 255), new Color(120, 220, 160), new Color(255, 200, 80),
-        new Color(220, 100, 100), new Color(180, 120, 255), new Color(255, 140, 80), new Color(80, 200, 200), new Color(255, 220, 50)};
+    private Color getSlideAccent(int index)
+    {
+        if (index == 0) return new Color(100, 180, 255);
+        else if (index == 1) return new Color(120, 220, 160);
+        else if (index == 2) return new Color(255, 200, 80);
+        else if (index == 3) return new Color(220, 100, 100);
+        else if (index == 4) return new Color(180, 120, 255);
+        else if (index == 5) return new Color(255, 140, 80);
+        else if (index == 6) return new Color(80, 200, 200);
+        else if (index == 7) return new Color(255, 220, 50);
+        else return Color.WHITE;
+    }
     //there is a new accent color for each slide just so that the tutorial slides don't looking boring and wordy
 
     public TutorialPanel(PageManager pageMngr, String nextPageName)
@@ -96,7 +106,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         //Top of each slide wil always contain the title from TITLES array
         slideTitleLabel = new JLabel(TITLES[0], SwingConstants.CENTER);
         slideTitleLabel.setFont(pm.titleFont);
-        slideTitleLabel.setForeground(ACCENT_COLORS[0]);
+        slideTitleLabel.setForeground(getSlideAccent(0));
         card.add(slideTitleLabel, BorderLayout.NORTH);
 
         //Center: image + text under each other
@@ -195,7 +205,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         currentSlide = index;
 
         slideTitleLabel.setText(TITLES[index]);
-        slideTitleLabel.setForeground(ACCENT_COLORS[index]);
+        slideTitleLabel.setForeground(getSlideAccent(index));
         slideTextLabel.setText(wrapText(TEXTS[index]));
         slideCounterLabel.setText((index + 1) + " / " + TITLES.length);
 
@@ -236,7 +246,7 @@ public class TutorialPanel extends JPanel implements ActionListener
     {
         // Simulate fade by blending foreground toward background color
         Color base = new Color(30, 30, 50);
-        slideTitleLabel.setForeground(blend(ACCENT_COLORS[currentSlide], base, alpha));
+        slideTitleLabel.setForeground(blend(getSlideAccent(currentSlide), base, alpha));
         slideTextLabel.setForeground(blend(Color.WHITE, base, alpha));
         slideCounterLabel.setForeground(blend(new Color(180, 180, 180), base, alpha));
     }
@@ -298,12 +308,12 @@ public class TutorialPanel extends JPanel implements ActionListener
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            // Rounded dark card background
+            //Rounded dark background for the pop up card
             g2.setColor(new Color(22, 22, 40, 240));
             g2.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
 
-            // Subtle accent glow at top matching current slide color
-            Color accent = ACCENT_COLORS[currentSlide];
+            //There's a glow at the top of each slide that matches the accent color of the slide
+            Color accent = getSlideAccent(currentSlide);
             GradientPaint glow = new GradientPaint(
                 0, 0, new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), 60),
                 0, getHeight() / 2, new Color(0, 0, 0, 0)
@@ -354,7 +364,7 @@ public class TutorialPanel extends JPanel implements ActionListener
                 int y = (getHeight() - DOT_SIZE) / 2;
                 if (i == active)
                 {
-                    g2.setColor(ACCENT_COLORS[active]);
+                    g2.setColor(getSlideAccent(active));
                     g2.fillOval(x, y, DOT_SIZE, DOT_SIZE);
                 }
                 else
