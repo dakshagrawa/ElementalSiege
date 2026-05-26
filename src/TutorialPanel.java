@@ -228,18 +228,22 @@ public class TutorialPanel extends JPanel implements ActionListener
             {
                 Image scaled = img.getScaledInstance(580, 150, Image.SCALE_SMOOTH);
                 slideImageLabel.setIcon(new ImageIcon(scaled));
+                slideImageLabel.setText("");
+                slideImageLabel.setVisible(true);
             }
             else
             {
                 slideImageLabel.setIcon(null);
-                slideImageLabel.setText("[ screenshot ]");
+                slideImageLabel.setText("[ screenshot ]"); //in case it can't display
                 slideImageLabel.setForeground(new Color(100, 100, 120));
+                slideImageLabel.setVisible(true);
             }
         }
         else
         {
             slideImageLabel.setIcon(null);
             slideImageLabel.setText("");
+            slideImageLabel.setVisible(false); // hides imageLabel so that text is centered when the slide doesn't have an image to display
         }
 
         leftBtn.setEnabled(index > 0);
