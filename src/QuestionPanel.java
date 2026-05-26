@@ -171,7 +171,8 @@ class QuestionPanel extends JPanel
 		private GameData data;
 		private CardLayout listOfCards;
 		private QuestionPanel primaryPanel;
-		private JTextArea scoreInfo, highScoresArea;
+		private JTextArea scoreInfo;
+		private JTextArea highScoresArea;
 
 		public HighScoresPanel(GameData d, CardLayout c, QuestionPanel p)
 		{
