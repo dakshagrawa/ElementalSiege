@@ -33,12 +33,22 @@ public class EndGamePanel extends JPanel implements ActionListener
 
     private void buildUI()
     {
-        JLabel heading = new JLabel(playerWon ? "You Did It!" : "Game Over", SwingConstants.CENTER);
+        String headingText;
+        if (playerWon)
+            headingText = "You Did It!";
+        else
+            headingText = "Game Over";
+        JLabel heading = new JLabel(headingText, SwingConstants.CENTER);
         heading.setFont(pm.titleFont);
-        heading.setForeground(playerWon ? new Color(255, 220, 50) : new Color(220, 60, 60));
+
+        if (playerWon)
+            heading.setForeground(new Color(255, 220, 50));
+        else
+            heading.setForeground(new Color(220, 60, 60));
+
         add(heading, BorderLayout.NORTH);
 
-        // Panel for the win or loss message
+        //Panel for the win or loss message
         JPanel centerPanel = new JPanel(new GridLayout(3, 1, 0, 20));
         centerPanel.setOpaque(false);
 
