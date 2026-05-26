@@ -22,8 +22,7 @@ public class LevelPanel extends JPanel implements ActionListener
         "Congratulations! You've neutralized the Acid Wraith. Welcome to Level 7! A Storm Specter is generating electromagnetic pulses that are scrambling your lab's computers. Your data is at risk of being wiped forever. Channel your inner scientist and shut it down!",
         "Congratulations! You've grounded the Storm Specter. Welcome to Level 8! A Shadow Stalker has snuck into your lab under the cover of darkness and is sabotaging your supply of rare elements. Use your wits to expose it before your reserves run dry!",
         "Congratulations! You've exposed the Shadow Stalker. Welcome to Level 9! A Void Vandal is tearing holes in the fabric of your lab's reality. Entire shelves of chemicals are disappearing into nothingness. Only your strongest knowledge can seal the rift!",
-        "Congratulations! You've sealed the Void Vandal away. Welcome to Level 10! The ultimate threat has arrived — the Nuclear Overlord, the source of all the chaos. It has powered itself up using your stolen chemicals. This is your final stand. Defend your lab and save science itself!"
-    };
+        "Congratulations! You've sealed the Void Vandal away. Welcome to Level 10! The ultimate threat has arrived — the Nuclear Overlord, the source of all the chaos. It has powered itself up using your stolen chemicals. This is your final stand. Defend your lab and save science itself!"};
 
     public LevelPanel(PageManager pageMngr, int lvl)
     {
@@ -140,7 +139,7 @@ public class LevelPanel extends JPanel implements ActionListener
         if (typewriterTimer != null && typewriterTimer.isRunning())
         {
             typewriterTimer.stop();
-            storyLabel.setText(wrapText(fullStoryText));
+            storyLabel.setText(fullStoryText);
             continueBtn.setVisible(true);
         }
         else
