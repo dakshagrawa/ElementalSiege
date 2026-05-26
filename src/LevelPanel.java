@@ -57,7 +57,7 @@ public class LevelPanel extends JPanel implements ActionListener
         //all the text goes inside this area
         int archX = 310;
         int archY  = 110;
-        int archWidth  = 790;
+        int archWidth = 790;
         int archHeight = 530;
         int padding = 40;
 
