@@ -93,7 +93,7 @@ public class ExplanationPanel extends JPanel implements ActionListener
 
     public void loadExplanation(int questionNumber)
     {
-        String fileName = "storedData/Explanations.txt";
+        String fileName = "../storedData/Explanations.txt";
         Scanner input = null;
         try
         {

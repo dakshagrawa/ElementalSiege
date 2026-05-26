@@ -236,7 +236,7 @@ public class PageManager extends JLayeredPane
 		public static Image getImage(String imgName)
 		{
 			Image picture = null;
-			String pictName = "storedData/images/"+imgName;
+			String pictName = "../storedData/images/"+imgName;
 
 			try
 			{
@@ -254,7 +254,7 @@ public class PageManager extends JLayeredPane
 		public static BufferedImage getBufferedImage(String imgName)
 		{
 			BufferedImage picture = null;
-			String pictName = "storedData/images/"+imgName;
+			String pictName = "../storedData/images/"+imgName;
 
 			try
 			{
