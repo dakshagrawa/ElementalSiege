@@ -55,11 +55,19 @@ public class LevelPanel extends JPanel implements ActionListener
     {
         //The arch/center area in the background image is around x=310 to x=1100, y=100 to y=640
         //all the text goes inside this area
+<<<<<<< HEAD
         int archX = 310;
         int archY  = 110;
         int archWidth = 790;
         int archHeight = 530;
         int padding = 40;
+=======
+        int archX      = 449;
+        int archY      = 230;
+        int archWidth  = 1000-archX;
+        int archHeight = 550-archY;
+        int padding    = 40;
+>>>>>>> dd0b333 (n)
 
         //Indicates what level user is on
         JLabel levelBadge = new JLabel("— LEVEL " + level + " —", SwingConstants.CENTER);
