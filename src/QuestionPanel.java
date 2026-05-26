@@ -135,19 +135,21 @@ class QuestionPanel extends JPanel
 			}
 
 			//Short pause so user sees green/red feedback, then moves on to battle panel
-			Timer autoAdvance = new Timer(1200, new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					resetQuestion();
-					battle.resolveRound(lastAnswerCorrect);
-					pm.changePanelCard("Battle");
-					battle.startTimer = true;
-				}
-			}
+			Timer autoAdvance = new Timer(1200, new AutoAdvanceListener());
 			autoAdvance.setRepeats(false);
 			autoAdvance.start();
 		}
+
+        class AutoAdvanceListener implements ActionListener
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                resetQuestion();
+                battle.resolveRound(lastAnswerCorrect);
+                pm.changePanelCard("Battle");
+                battle.startTimer = true;
+            }
+        }
 
 		public void resetQuestion ( )
 		{
