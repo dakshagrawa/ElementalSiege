@@ -1,10 +1,18 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import javax.swing.JButton;
+
 
 public class PageManager extends JLayeredPane
 {
@@ -221,8 +229,8 @@ public class PageManager extends JLayeredPane
 		}
 	}
 
-	/* This class has different functions (tools) that helps
-		use some chunks of code that is used repeatedly. */
+	/* This class has different functions that helps
+		use some chunks of code that are used repeatedly in the game. */
 	public static class Functions
 	{
 		public static Image getImage(String imgName)
@@ -272,15 +280,15 @@ public class PageManager extends JLayeredPane
 				return (BufferedImage) imageClass.image;
 			}
 
-			// Create a buffered image with transparency
+			//Creates a buffered image with transparency
 			BufferedImage buffered = new BufferedImage(imageClass.width, imageClass.height, BufferedImage.TYPE_INT_ARGB);
 
-			// Draw the image on to the buffered image
+			// Draws the image on to the buffered image
 			Graphics2D bGr = buffered.createGraphics();
 			bGr.drawImage(imageClass.image, 0, 0, imageClass.width, imageClass.height, imageClass.x1, imageClass.y1, imageClass.x2, imageClass.y2, null);
 			bGr.dispose();
 
-			// Return the buffered image
+			//Return the buffered image
 			return buffered;
 		}
 	}
@@ -291,7 +299,7 @@ public class PageManager extends JLayeredPane
         if(icon==null) return;
         ImageIcon scaledSettingsIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
         settingsBtn = new JButton(scaledSettingsIcon);
-        settingsBtn.setBounds(frame.getWidth() - 60, 10, 50, 50); // top-left corner; adjust as needed
+        settingsBtn.setBounds(frame.getWidth() - 60, 10, 50, 50); //top-left corner
         settingsBtn.setContentAreaFilled(false);
         settingsBtn.setBorderPainted(false);
         settingsBtn.setFocusPainted(false);
@@ -311,8 +319,7 @@ public class PageManager extends JLayeredPane
             changePanelCard(e.getActionCommand());
         }
     }
-        // Replace the previous setBounds block with this one:
-        @Override
+
         public void setBounds(int x, int y, int width, int height) 
         {
             super.setBounds(x, y, width, height);
@@ -322,9 +329,9 @@ public class PageManager extends JLayeredPane
                 mainPanel.repaint();
             }
     
-            // FIX IS HERE: Keep the button pinned to the right margin dynamically
+            //Keeps the button pinned to the right margin dynamically
             if (settingsBtn != null) {
-                // (width - 70) accounts for button size (50) and a nice 20px padding from the edge
+                //(width - 70) accounts for button size (50) and adds 20px gap from the edge
                 settingsBtn.setBounds(width - 70, 10, 50, 50);
             }
         }
