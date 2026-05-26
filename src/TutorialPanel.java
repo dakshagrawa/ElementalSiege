@@ -39,16 +39,17 @@ public class TutorialPanel extends JPanel implements ActionListener
         "There are 10 levels until victory and the starting health of the enemy will keep increasing in each level. If your health drops to 0 at any point in the game, you have lost and your lab has been sacrificed.",
         "You've got the knowledge. Now go defend the lab!"};
 
-    private static final String[] IMAGE_NAMES = {
-        null, /* heading — no image null */, 
-        null, /* mission — no image*/
-        "tutorial_get_cards.png", /* get cards screenshot */ 
-        "tutorial_battle.png",/* battle scene screenshot */ 
-        "tutorial_reveal.png", /* card reveal screenshot */
-        "tutorial_damage.png", /* damage example screenshot */ 
-        "tutorial_health.png", /* health bar/levels screenshot */ 
-        null /* final slide — no image */
-    };
+    private static final String[] IMAGE_NAMES = {null, null, "tutorial_get_cards.png", "tutorial_battle.png", "tutorial_reveal.png",
+        "tutorial_damage.png", "tutorial_health.png", null};
+
+       //null opening slide -- heading: no image 
+       //null objective slide -- mission: no image
+       //"tutorial_get_cards.png" - getNewCharacterCards panel screenshot
+       //"tutorial_battle.png" -- battle scene screenshot
+       //"tutorial_reveal.png" -- card reveal screenshot
+       //"tutorial_damage.png" -- damage example screenshot
+       //"tutorial_health.png" -- health bar/levels screenshot
+       //null final slide -- no image
 
     private Color getSlideAccent(int index)
     {
