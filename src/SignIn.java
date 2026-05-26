@@ -146,6 +146,7 @@ public class SignIn extends JPanel
 				{
 					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");
+					pm.resumeOrNewGame.refresh();
 					pm.changePanelCard("Resume Or New Game");
 				}
 				else

@@ -18,7 +18,11 @@ public class PageManager extends JLayeredPane
 	public ElementalSiege frame;
 	public Sound sound;
 	public ExplanationPanel explanationPanel;
+<<<<<<< HEAD
+	public ResumeOrNewGame resumeOrNewGame;
+=======
     private JButton settingsBtn;
+>>>>>>> 4eeb5913482b189db68dc5f916c0488bf378ece3
 
     private JPanel mainPanel;
 
@@ -56,7 +60,8 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
 		mainPanel.add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
 
-		mainPanel.add(new ResumeOrNewGame(this), "Resume Or New Game"); //if user logs in
+		resumeOrNewGame = new ResumeOrNewGame(this);
+		add(resumeOrNewGame, "Resume Or New Game"); //if user logs in
 
 		mainPanel.add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); //cards for each level
 		mainPanel.add(new LevelPanel(this, 1),  "Level 1");

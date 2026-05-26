@@ -130,7 +130,7 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         String cmd = e.getActionCommand();
         if (cmd.equals("Resume Game"))
         {
-            pm.changePanelCard(""Level " + data.getSavedLevel()");
+            pm.changePanelCard("Level " + data.getSavedLevel());
         }
         else if (cmd.equals("New Game"))
         {
@@ -152,5 +152,13 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
             g2.setStroke(new BasicStroke(1.5f));
             g2.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 20, 20);
         }
+    }
+
+    public void refresh()
+    {
+        removeAll();
+        buildUI();
+        revalidate();
+        repaint();
     }
 }
