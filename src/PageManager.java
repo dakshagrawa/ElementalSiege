@@ -17,6 +17,7 @@ public class PageManager extends JPanel
 	public Font normalBoldFont;
 	public ElementalSiege frame;
 	public Sound sound;
+	public ExplanationPanel explanationPanel;
 
 	public PageManager(ElementalSiege elemntlSiege_JFrame, Sound audio)
 	{
