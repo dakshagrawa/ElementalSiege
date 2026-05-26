@@ -369,12 +369,10 @@ class HighScoresPanel extends JPanel implements ActionListener
 		
 		if(command.equals("PLAY AGAIN"))
 		{
-			data.saveToHighScores();
 			listOfCards.previous(primaryPanel);
 		}
 		else if(command.equals("EXIT"))
 		{
-			data.saveToHighScores();
 			System.exit(0);
 		}
 	}

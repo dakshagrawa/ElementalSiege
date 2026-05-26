@@ -252,4 +252,4 @@ public class GameData
 			outFile.close();
 		}
 	}
-	
+}

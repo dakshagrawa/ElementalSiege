@@ -1,6 +1,10 @@
 import java.io.File;
 import javax.sound.sampled.*; //TODO: add citation
 
+/**
+ * Handles cross-platform audio playback and volume control.
+ * Reference: Oracle Java Documentation for javax.sound.sampled.AudioSystem
+ */
 public class Sound 
 {
     private Clip clip;
@@ -12,11 +16,11 @@ public class Sound
     }
 
 	public void playNewBackground(String fileName)
-	{
+	{  
         // Stop and close existing clip to free Linux audio resources
         disposeSound();
-
-		playBackground(fileName);
+        
+	    playBackground(fileName);
 	}
 
     public void playBackground(String fileName) 
@@ -33,8 +37,19 @@ public class Sound
             }
 
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
+
+            // Ensure the audio stream actually contains data before playing
+            if (inputStream.getFrameLength() <= 0) 
+            {
+                System.err.println("Audio file is empty: " + fileName);
+                return;
+            }
+            
             clip = AudioSystem.getClip();
             clip.open(inputStream);
+
+            // Close the stream since it is now entirely cached within the Clip memory
+            inputStream.close(); 
 
             // --- CROSS-PLATFORM VOLUME CONTROL ---
             setVolume(currentVolume);
@@ -46,7 +61,7 @@ public class Sound
         } 
 		catch (Exception e) 
 		{
-            e.printStackTrace();
+            System.err.println("Error playing background sound: " + e.toString());
         }
     }
 
