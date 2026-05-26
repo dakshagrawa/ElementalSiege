@@ -1,5 +1,6 @@
 import java.io.File;
-import javax.sound.sampled.*; //TODO: add citation
+import javax.sound.sampled.AudioInputStream; //TODO: add citation
+import javax.sound.sampled.AudioSystem; 
 
 public class Sound 
 {
