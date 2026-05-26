@@ -1,5 +1,3 @@
-Format: [Name]: [Problem Solving], [Wisdom], [Curiosity], [Rarity]
-
 Mole Archemist: 4, 5, 6, C
 Pipette Droid: 6, 4, 4, C
 Sentient Bunsen Golem: 8, 6, 9, R
