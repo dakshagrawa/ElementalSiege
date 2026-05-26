@@ -28,7 +28,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-class QuestionPanel extends JPanel
+public class QuestionPanel extends JPanel
 {
 	private CardLayout listOfCards;
 	private PageManager pm;
@@ -145,21 +145,20 @@ class QuestionPanel extends JPanel
 
         class AutoAdvanceListener implements ActionListener
         {
-                public void actionPerformed(ActionEvent e)
-				{
-					resetQuestion();
-					battle.resolveRound(lastAnswerCorrect);
-					if (!lastAnswerCorrect)
-					{
-						pm.explanationPanel.loadExplanation(data.getQuestionCount());
-						pm.changePanelCard("Explanation");
-					}
-					else
-					{
-						pm.changePanelCard("Battle");
-						battle.startTimer = true;
-					}
-				}
+            public void actionPerformed(ActionEvent e)
+            {
+                resetQuestion();
+                battle.resolveRound(lastAnswerCorrect);
+                if (!lastAnswerCorrect)
+                {
+                    pm.explanationPanel.loadExplanation(data.getQuestionCount());
+                    pm.changePanelCard("Explanation");
+                }
+                else
+                {
+                    pm.changePanelCard("Battle");
+                    battle.startTimer = true;
+                }
             }
 		}
 		public void resetQuestion ( )
