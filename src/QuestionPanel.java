@@ -41,6 +41,7 @@ class QuestionPanel extends JPanel
 		data = pm.getGameData();
 		data.grabQuestionFromFile();
 		battle = bp;
+        battle.getQuestionPanel(this);
 
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -55,7 +56,7 @@ class QuestionPanel extends JPanel
 		add(third, "3");
 	}
 
-	class QuestionsPanel extends JPanel implements ActionListener
+	public class QuestionsPanel extends JPanel implements ActionListener
 	{
 		private GameData data;
 		private CardLayout listOfCards;
@@ -65,6 +66,7 @@ class QuestionPanel extends JPanel
 		private JRadioButton [] answer;
 		public PageManager pm;
 		private boolean lastAnswerCorrect;
+        private Timer autoAdvance;
 
 		public QuestionsPanel(PageManager pageMngr, CardLayout c, QuestionPanel p)
 		{
@@ -136,7 +138,7 @@ class QuestionPanel extends JPanel
 			}
 
 			//Short pause so user sees green/red feedback, then moves on to battle panel
-			Timer autoAdvance = new Timer(1200, new AutoAdvanceListener());
+			autoAdvance = new Timer(1200, new AutoAdvanceListener());
 			autoAdvance.setRepeats(false);
 			autoAdvance.start();
 		}
@@ -153,6 +155,7 @@ class QuestionPanel extends JPanel
 		}
 		public void resetQuestion ( )
 		{
+            autoAdvance.stop();
 			group.clearSelection();
 			data.grabQuestionFromFile();
 			questionArea.setText(data.getQuestion());

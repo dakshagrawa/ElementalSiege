@@ -33,7 +33,10 @@ public class BattlePanel extends JPanel implements ActionListener
     private Timer delay;
     private boolean lastAnswerCorrect;
 
+    private QuestionPanel questionPanel;
+
     public boolean startTimer;
+    public boolean isNextLevel;
 
     public BattlePanel(PageManager pageMngr, boolean doTimer)
     {
@@ -51,6 +54,11 @@ public class BattlePanel extends JPanel implements ActionListener
 
         buildUI();
         drawNewCards();
+    }
+
+    public void getQuestionPanel(QuestionPanel qPanel)
+    {
+        questionPanel = qPanel;
     }
 
     private void buildUI()
@@ -400,13 +408,25 @@ public class BattlePanel extends JPanel implements ActionListener
         if (userHealth <= 0)
         {
             pm.changePanelCard("gameEnd");
+            displayTimer.stop();
+            delay.stop();
         }
         else if (enemyHealth <= 0)
         {
             if (level >= 10)
+            {
                 pm.changePanelCard("You Win");
+
+                displayTimer.stop();
+                delay.stop();
+            }
             else
+            {
+                displayTimer.stop();
+                delay.stop();
+                data.resetAll();
                 pm.changePanelCard("Level " + (level + 1));
+            }
         }
         else
         {
