@@ -177,7 +177,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         fadingOut = true;
         animAlpha = 1.0f;
 
-        slideTimer = new Timer(16, new ActionListener()
+        slideTimer = new Timer(16, new ActionListener())
         {
             public void actionPerformed(ActionEvent e)
             {
