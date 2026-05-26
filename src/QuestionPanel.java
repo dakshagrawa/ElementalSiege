@@ -145,12 +145,21 @@ class QuestionPanel extends JPanel
 
         class AutoAdvanceListener implements ActionListener
         {
-            public void actionPerformed(ActionEvent e)
-            {
-                resetQuestion();
-                battle.resolveRound(lastAnswerCorrect);
-                pm.changePanelCard("Battle");
-                battle.startTimer = true;
+                public void actionPerformed(ActionEvent e)
+				{
+					resetQuestion();
+					battle.resolveRound(lastAnswerCorrect);
+					if (!lastAnswerCorrect)
+					{
+						pm.explanationPanel.loadExplanation(data.getQuestionCount());
+						pm.changePanelCard("Explanation");
+					}
+					else
+					{
+						pm.changePanelCard("Battle");
+						battle.startTimer = true;
+					}
+				}
             }
 		}
 		public void resetQuestion ( )
