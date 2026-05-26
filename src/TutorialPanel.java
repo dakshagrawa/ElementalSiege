@@ -43,8 +43,8 @@ public class TutorialPanel extends JPanel implements ActionListener
         "tutorial_get_cards.png", /* get cards screenshot */ "tutorial_battle.png",/* battle scene screenshot */ "tutorial_reveal.png", /* card reveal screenshot */
         "tutorial_damage.png", /* damage example screenshot */ "tutorial_health.png", /* health bar/levels screenshot */ null /* final slide — no image */};
 
-    private static final Color[] ACCENT_COLORS = { new Color(100, 180, 255), new Color(120, 220, 160), new Color(255, 200, 80),
-        new Color(220, 100, 100), new Color(180, 120, 255), new Color(255, 140, 80), new Color(80, 200, 200), new Color(255, 220, 50)};\
+    private static final Color[] ACCENT_COLORS = {new Color(100, 180, 255), new Color(120, 220, 160), new Color(255, 200, 80),
+        new Color(220, 100, 100), new Color(180, 120, 255), new Color(255, 140, 80), new Color(80, 200, 200), new Color(255, 220, 50)};
     //there is a new accent color for each slide just so that the tutorial slides don't looking boring and wordy
 
     public TutorialPanel(PageManager pageMngr, String nextPageName)
