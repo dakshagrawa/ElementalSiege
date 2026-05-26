@@ -135,7 +135,7 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         else if (cmd.equals("New Game"))
         {
             data.resetProgress();
-            pm.changePanelCard("Level 1");
+            pm.changePanelCard("Tutorial");
         }
     }
 
