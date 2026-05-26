@@ -53,8 +53,8 @@ public class PageManager extends JPanel
 
 		add(new ResumeOrNewGame(this), "Resume Or New Game"); //if user logs in
 
-		add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); //cards for each level
-		add(new LevelPanel(this, 1),  "Level 1");
+		add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); 
+		add(new LevelPanel(this, 1),  "Level 1"); //cards for each level
 		add(new LevelPanel(this, 2),  "Level 2");
 		add(new LevelPanel(this, 3),  "Level 3");
 		add(new LevelPanel(this, 4),  "Level 4");
