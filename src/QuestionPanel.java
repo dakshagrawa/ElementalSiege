@@ -149,7 +149,7 @@ class QuestionPanel extends JPanel
                 pm.changePanelCard("Battle");
                 battle.startTimer = true;
             }
-
+		}
 		public void resetQuestion ( )
 		{
 			group.clearSelection();
