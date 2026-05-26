@@ -18,11 +18,8 @@ public class PageManager extends JLayeredPane
 	public ElementalSiege frame;
 	public Sound sound;
 	public ExplanationPanel explanationPanel;
-<<<<<<< HEAD
 	public ResumeOrNewGame resumeOrNewGame;
-=======
     private JButton settingsBtn;
->>>>>>> 4eeb5913482b189db68dc5f916c0488bf378ece3
 
     private JPanel mainPanel;
 
