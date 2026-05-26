@@ -37,7 +37,10 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         JPanel topPanel = new JPanel(new GridLayout(2, 1, 0, 6));
         topPanel.setOpaque(false);
 
-        JLabel heading = new JLabel("Welcome Back, " + data.getUsername() + "!", SwingConstants.CENTER);
+        String username = data.getUsername();
+        if (username == null) 
+            username = "Player";
+        JLabel heading = new JLabel("Welcome Back, " + username + "!", SwingConstants.CENTER);
         heading.setFont(pm.titleFont);
         heading.setForeground(new Color(100, 180, 255));
         topPanel.add(heading);
@@ -160,5 +163,7 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         buildUI();
         revalidate();
         repaint();
+
+
     }
 }
