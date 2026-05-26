@@ -177,35 +177,37 @@ public class TutorialPanel extends JPanel implements ActionListener
         fadingOut = true;
         animAlpha = 1.0f;
 
-        slideTimer = new Timer(16, new ActionListener())
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                if (fadingOut)
-                {
-                    animAlpha -= 0.08f;
-                    if (animAlpha <= 0f)
-                    {
-                        animAlpha = 0f;
-                        fadingOut = false;
-                        applySlide(pendingSlide);
-                    }
-                }
-                else
-                {
-                    animAlpha += 0.08f;
-                    if (animAlpha >= 1f)
-                    {
-                        animAlpha = 1f;
-                        slideTimer.stop();
-                    }
-                }
-                //Apply alpha to labels
-                applyAlpha(animAlpha);
-                repaint();
-            }
-        }
+        slideTimer = new Timer(16, new SlideTimerListener());
         slideTimer.start();
+    }
+
+    class SlideTimerListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            if (fadingOut)
+            {
+                animAlpha -= 0.08f;
+                if (animAlpha <= 0f)
+                {
+                    animAlpha = 0f;
+                    fadingOut = false;
+                    applySlide(pendingSlide);
+                }
+            }
+            else
+            {
+                animAlpha += 0.08f;
+                if (animAlpha >= 1f)
+                {
+                    animAlpha = 1f;
+                    slideTimer.stop();
+                }
+            }
+            //Apply alpha to labels
+            applyAlpha(animAlpha);
+            repaint();
+        }
     }
 
     private void applySlide(int index)
