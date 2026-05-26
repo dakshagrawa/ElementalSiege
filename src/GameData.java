@@ -537,7 +537,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 			System.err.println("Characters cannot be retrieved from file. Game will not work. :(");
 			System.exit(1);
 		}
-		inputCharacterInfo.nextLine(); //To ignore the instructions in top of the file
+
 
 		characters = new CharacterImage[12];
 
@@ -571,73 +571,30 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 		public String rarity;
 		public boolean hasError;
 
-		public CharacterImage(Image img, int xVal, int yVal, int widthVal, int heightVal, Scanner inputCharInfo) 
 		{
-			fullImage = img;
-			x1 = xVal;
-			y1 = yVal;
-			width = widthVal;
-			height = heightVal;
-			x2 = x1+width;
-			y2 = y1+height;
-
-			hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
-			getCroppedImage();
-
-			if(rarityChar=='C')
-				rarity="Common";
-			else if(rarityChar=='L')
-				rarity="Legendary";
-			else if(rarityChar=='R')
-				rarity="Rare";
-			else
-				hasError=true;
-				
-
-			if(hasError)
-				System.out.println("Error with "+name);
-				//throw new CharacterInitializationException();
+		    fullImage = img;
+		    x1 = xVal;
+		    y1 = yVal;
+		    width = widthVal;
+		    height = heightVal;
+		    x2 = x1 + width;
+		    y2 = y1 + height;
+		
+		    hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
+		    getCroppedImage();
+		
+		    if(rarityChar == 'C') {
+		        rarity = "Common";
+		    } else if(rarityChar == 'L') {
+		        rarity = "Legendary";
+		    } else if(rarityChar == 'R') {
+		        rarity = "Rare";
+		    } else if(rarityChar == 'E') {
+		        rarity = "Epic";
+		    } else {
+		        hasError = true;
+		    }
 		}
-
-		public CharacterImage(Image img, int xMin, int yMin, int xMax, int yMax, Scanner inputCharInfo, boolean justXandY) 
-		{
-			this(img, xMin, yMin, xMax - xMin, yMax - yMin, inputCharInfo);
-		}
-
-		public boolean parsedCharacterInfo(Scanner input)
-		{
-			if(input.hasNextLine() && input!=null)
-			{
-				try
-				{
-					String line = input.nextLine().trim();
-					if(line.contains(":"))
-					{
-						name = line.substring(0,line.indexOf(':')).trim();
-						line = line.substring(line.indexOf(':')+1).trim();
-
-						problemSolving = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
-						line = line.substring(line.indexOf(',')+1).trim();
-
-						wisdom = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
-						line = line.substring(line.indexOf(',')+1).trim();
-
-						curiosity = Integer.parseInt(line.substring(0,line.indexOf(",")).trim());
-						line = line.substring(line.indexOf(',')+1).trim();
-
-						rarityChar = line.toUpperCase().charAt(0);
-
-						return true;
-					}
-				}
-				catch(NumberFormatException | IndexOutOfBoundsException e) //TODO: citation for NumberFormatException
-				{
-					System.err.println("Error parsing Character info: " + e);
-				}
-			}
-			return false;
-		}
-
 		public void getCroppedImage()
 		{
 			try
@@ -661,7 +618,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 				super(name + " information has error.");
 			}
 		}
-	}
+}
 
 	public void setUserCharacters(int characterIdx)
 	{
