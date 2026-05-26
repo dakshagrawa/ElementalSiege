@@ -94,7 +94,10 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
                 foundAny = true;
             }
         }
-        return foundAny ? sb.toString() : "None";
+        if (foundAny)
+            return sb.toString();
+        else
+            return "None";
     }
 
     public void actionPerformed(ActionEvent e)
