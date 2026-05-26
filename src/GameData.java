@@ -703,4 +703,3 @@ private String buildUserBlock(int currentHealth, int currentLevel)
             userCharacters[i] = -1;
     }
 }
->>>>>>> parent of 2a5ab39 (Remove saveToHighScores method, add centralized game state management, fix file paths to use relative storedData/ paths)
