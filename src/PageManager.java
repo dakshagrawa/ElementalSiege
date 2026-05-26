@@ -31,26 +31,29 @@ public class PageManager extends JPanel
 		card = new CardLayout();
 		setLayout(card);
 
-		add(new CloseWindow(this),"Close");
-		add(new TitlePage(this), "Title");
-		add(new SignIn(this),"Continue");
-		add(new SignUp(this),"New Game");
-		add(new Settings(this),"Settings");
-		add(new PickAvatar(this), "Pick Avatar");
-		add(new GetNewCharacterCards(this, 1),"Get New Cards 1");
+		add(new CloseWindow(this),"Close"); //opens when user tries to close game
+		add(new TitlePage(this), "Title"); //home screen/title page
+		add(new SignIn(this),"Continue"); //opens when user clicks continue button a.k.a log in button
+		add(new SignUp(this),"New Game"); //opens when user clicks new game button a.k.a sign up button
+		add(new Settings(this),"Settings"); //opens the settings screen
+		add(new PickAvatar(this), "Pick Avatar"); //panel that allows user to pick their avatar
+		add(new GetNewCharacterCards(this, 1),"Get New Cards 1"); //panels that allow user to choose their 4 cards
 		add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
 		add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
 		add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
 		BattlePanel bp = new BattlePanel(this, false);
-		add(bp,"Battle");
-		add(new QuestionPanel(this, bp),"Questions");
-		add(new HomePanel(this, bp), "newLevel");
-		add(new HomePanel(this, bp), "gameEnd");
+		add(bp,"Battle"); //"battle" scene after each question
+		add(new QuestionPanel(this, bp),"Questions"); //question panel
+		add(new HomePanel(this, bp), "newLevel"); //panel between each round -- open when user defeats enemy
+		//add(new HomePanel(this, bp), "gameEnd"); //end of Game -- opens either when user beats level 10 or loses the game
 
 		add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
 		add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
 
 		add(new ResumeOrNewGame(this), "Resume Or New Game"); //if user logs in
+
+		ExplanationPanel explanationPanel = new ExplanationPanel(this, "Battle"); 
+		add(explanationPanel, "Explanation"); //opened when user gets a question wrong
 
 		lastCardName = "Title";
 		currentCardName = "Title";
