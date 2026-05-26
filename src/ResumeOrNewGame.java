@@ -9,59 +9,64 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
     private JButton resumeBtn;
     private JButton newGameBtn;
 
-    
-
     public ResumeOrNewGame(PageManager pageMngr)
     {
         pm = pageMngr;
         data = pm.getGameData();
 
-        setLayout(new BorderLayout(0, 30));
-        setBackground(new Color(40, 40, 60));
-        setBorder(BorderFactory.createEmptyBorder(60, 80, 60, 80));
+        setLayout(new BorderLayout(0, 20));
+        setBackground(new Color(25, 25, 45));
+        setBorder(BorderFactory.createEmptyBorder(50, 100, 50, 100));
 
         buildUI();
     }
 
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Image bg = PageManager.Functions.getImage("levelBackground.png");
+        if (bg != null)
+            g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+        else
+            setBackground(new Color(25, 25, 45));
+    }
+
     private void buildUI()
     {
-        JLabel heading = new JLabel("Welcome Back!", SwingConstants.CENTER);
+        //Top: heading
+        JPanel topPanel = new JPanel(new GridLayout(2, 1, 0, 6));
+        topPanel.setOpaque(false);
+
+        JLabel heading = new JLabel("Welcome Back, " + data.getUsername() + "!", SwingConstants.CENTER);
         heading.setFont(pm.titleFont);
-        heading.setForeground(Color.WHITE);
-        add(heading, BorderLayout.NORTH);
+        heading.setForeground(new Color(100, 180, 255));
+        topPanel.add(heading);
 
-        JPanel statsPanel = new JPanel(new GridLayout(4, 1, 0, 15));
-        statsPanel.setOpaque(false);
+        JLabel subheading = new JLabel("Here are the stats you had in your previous game when you left.", SwingConstants.CENTER);
+        subheading.setFont(pm.normalFont);
+        subheading.setForeground(new Color(180, 180, 200));
+        topPanel.add(subheading);
 
-        JLabel usernameLabel = new JLabel("Username: " + data.getUsername(), SwingConstants.CENTER);
-        usernameLabel.setFont(pm.normalBoldFont);
-        usernameLabel.setForeground(Color.WHITE);
+        add(topPanel, BorderLayout.NORTH);
 
-        JLabel levelLabel = new JLabel("Level reached: " + data.getSavedLevel(), SwingConstants.CENTER);
-        levelLabel.setFont(pm.normalBoldFont);
-        levelLabel.setForeground(Color.WHITE);
+        //Center: card with previous stats
+        StatsCard statsCard = new StatsCard();
+        statsCard.setLayout(new GridLayout(3, 1, 0, 14));
+        statsCard.setBorder(BorderFactory.createEmptyBorder(24, 40, 24, 40));
 
-        JLabel healthLabel = new JLabel("Health when last saved: " + data.getSavedHealth() + "/100", SwingConstants.CENTER);
-        healthLabel.setFont(pm.normalBoldFont);
-        healthLabel.setForeground(Color.WHITE);
+        statsCard.add(makeStatRow("Level Reached", "" + data.getSavedLevel(), new Color(255, 200, 80)));
+        statsCard.add(makeStatRow("Health",        data.getSavedHealth() + " / 100", new Color(80, 200, 120)));
+        statsCard.add(makeStatRow("Cards Owned",   buildCardNamesList(), new Color(180, 120, 255)));
 
-        String cardNames = buildCardNamesList();
-        JLabel cardsLabel = new JLabel("Cards owned: " + cardNames, SwingConstants.CENTER);
-        cardsLabel.setFont(pm.normalFont);
-        cardsLabel.setForeground(Color.LIGHT_GRAY);
+        add(statsCard, BorderLayout.CENTER);
 
-        statsPanel.add(usernameLabel);
-        statsPanel.add(levelLabel);
-        statsPanel.add(healthLabel);
-        statsPanel.add(cardsLabel);
-
-        add(statsPanel, BorderLayout.CENTER);
-
+        //Bottom: buttons
         JPanel btnPanel = new JPanel(new GridLayout(1, 2, 40, 0));
         btnPanel.setOpaque(false);
+        btnPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
         resumeBtn  = pm.new Button1("Resume Game", Color.WHITE, new Color(40, 120, 40));
-        newGameBtn = pm.new Button1("New Game",    Color.WHITE, new Color(120, 40, 40));
+        newGameBtn = pm.new Button1("New Game",    Color.WHITE, new Color(140, 40, 40));
 
         resumeBtn.setFont(pm.normalBoldFont);
         newGameBtn.setFont(pm.normalBoldFont);
@@ -77,6 +82,25 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         add(btnPanel, BorderLayout.SOUTH);
     }
 
+    /** Makes a single row with a colored label on the left and value on the right. */
+    private JPanel makeStatRow(String labelText, String valueText, Color accentColor)
+    {
+        JPanel row = new JPanel(new GridLayout(1, 2, 20, 0));
+        row.setOpaque(false);
+
+        JLabel label = new JLabel(labelText, SwingConstants.RIGHT);
+        label.setFont(pm.normalBoldFont);
+        label.setForeground(accentColor);
+
+        JLabel value = new JLabel(valueText, SwingConstants.LEFT);
+        value.setFont(pm.normalFont);
+        value.setForeground(Color.WHITE);
+
+        row.add(label);
+        row.add(value);
+        return row;
+    }
+
     private String buildCardNamesList()
     {
         int[] userCards = data.userCharacters;
@@ -89,7 +113,8 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         {
             if (userCards[i] != -1)
             {
-                if (foundAny) sb.append(", ");
+                if (foundAny) 
+                    sb.append(", ");
                 sb.append(data.characters[userCards[i]].name);
                 foundAny = true;
             }
@@ -103,14 +128,29 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         String cmd = e.getActionCommand();
-        if (cmd.equals("Resume Game")) //go to the level they were on if they say resume
+        if (cmd.equals("Resume Game"))
         {
             pm.changePanelCard("Level " + data.getSavedLevel());
         }
-        else if (cmd.equals("New Game")) //start like you would for a normal person
+        else if (cmd.equals("New Game"))
         {
             data.resetProgress();
             pm.changePanelCard("Level 1");
+        }
+    }
+
+    //Rounded card panel for the stats section
+    class StatsCard extends JPanel
+    {
+        public void paintComponent(Graphics g)
+        {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setColor(new Color(35, 35, 60, 220));
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+            g2.setColor(new Color(80, 80, 130));
+            g2.setStroke(new BasicStroke(1.5f));
+            g2.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 20, 20);
         }
     }
 }
