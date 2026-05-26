@@ -200,7 +200,7 @@ public class TutorialPanel extends JPanel implements ActionListener
                         slideTimer.stop();
                     }
                 }
-                // Apply alpha to labels
+                //Apply alpha to labels
                 applyAlpha(animAlpha);
                 repaint();
             }
