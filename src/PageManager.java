@@ -65,7 +65,7 @@ public class PageManager extends JPanel
 		add(new LevelPanel(this, 9),  "Level 9");
 		add(new LevelPanel(this, 10), "Level 10");
 
-		ExplanationPanel explanationPanel = new ExplanationPanel(this, "Battle"); 
+		explanationPanel = new ExplanationPanel(this, "Battle"); 
 		add(explanationPanel, "Explanation"); //opened when user gets a question wrong
 
 		lastCardName = "Title";
