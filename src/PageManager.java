@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class PageManager extends JPanel
+public class PageManager extends JLayeredPane
 {
 	private CardLayout card;
 	private GameData data;
@@ -18,6 +18,9 @@ public class PageManager extends JPanel
 	public ElementalSiege frame;
 	public Sound sound;
 	public ExplanationPanel explanationPanel;
+    private JButton settingsBtn;
+
+    private JPanel mainPanel;
 
 	public PageManager(ElementalSiege elemntlSiege_JFrame, Sound audio)
 	{
@@ -27,46 +30,50 @@ public class PageManager extends JPanel
 		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 
+        setLayout(null);
+
 		data = new GameData(this);
-
 		card = new CardLayout();
-		setLayout(card);
-
-		add(new CloseWindow(this),"Close"); //opens when user tries to close game
-		add(new TitlePage(this), "Title"); //home screen/title page
-		add(new SignIn(this),"Continue"); //opens when user clicks continue button a.k.a log in button
-		add(new SignUp(this),"New Game"); //opens when user clicks new game button a.k.a sign up button
-		add(new Settings(this),"Settings"); //opens the settings screen
-		add(new PickAvatar(this), "Pick Avatar"); //panel that allows user to pick their avatar
-		add(new GetNewCharacterCards(this, 1),"Get New Cards 1"); //panels that allow user to choose their 4 cards
-		add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
-		add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
-		add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
+        mainPanel = new JPanel (card);
+        add(mainPanel, JLayeredPane.DEFAULT_LAYER);
+        
+		mainPanel.add(new CloseWindow(this),"Close"); //opens when user tries to close game
+		mainPanel.add(new TitlePage(this), "Title"); //home screen/title page
+		mainPanel.add(new SignIn(this),"Continue"); //opens when user clicks continue button a.k.a log in button
+		mainPanel.add(new SignUp(this),"New Game"); //opens when user clicks new game button a.k.a sign up button
+		mainPanel.add(new Settings(this),"Settings"); //opens the settings screen
+		mainPanel.add(new PickAvatar(this), "Pick Avatar"); //panel that allows user to pick their avatar
+		mainPanel.add(new GetNewCharacterCards(this, 1),"Get New Cards 1"); //panels that allow user to choose their 4 cards
+		mainPanel.add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
+		mainPanel.add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
+		mainPanel.add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
 		BattlePanel bp = new BattlePanel(this, false);
-		add(bp,"Battle"); //"battle" scene after each question
-		add(new QuestionPanel(this, bp),"Questions"); //question panel
-		add(new HomePanel(this, bp), "newLevel"); //panel between each round -- open when user defeats enemy
+		mainPanel.add(bp,"Battle"); //"battle" scene after each question
+		mainPanel.add(new QuestionPanel(this, bp),"Questions"); //question panel
+		mainPanel.add(new HomePanel(this, bp), "newLevel"); //panel between each round -- open when user defeats enemy
 		//add(new HomePanel(this, bp), "gameEnd"); //end of Game -- opens either when user beats level 10 or loses the game
 
-		add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
-		add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
+		mainPanel.add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
+		mainPanel.add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
 
-		add(new ResumeOrNewGame(this), "Resume Or New Game"); //if user logs in
+		mainPanel.add(new ResumeOrNewGame(this), "Resume Or New Game"); //if user logs in
 
-		add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); //cards for each level
-		add(new LevelPanel(this, 1),  "Level 1");
-		add(new LevelPanel(this, 2),  "Level 2");
-		add(new LevelPanel(this, 3),  "Level 3");
-		add(new LevelPanel(this, 4),  "Level 4");
-		add(new LevelPanel(this, 5),  "Level 5");
-		add(new LevelPanel(this, 6),  "Level 6");
-		add(new LevelPanel(this, 7),  "Level 7");
-		add(new LevelPanel(this, 8),  "Level 8");
-		add(new LevelPanel(this, 9),  "Level 9");
-		add(new LevelPanel(this, 10), "Level 10");
+		mainPanel.add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); //cards for each level
+		mainPanel.add(new LevelPanel(this, 1),  "Level 1");
+		mainPanel.add(new LevelPanel(this, 2),  "Level 2");
+		mainPanel.add(new LevelPanel(this, 3),  "Level 3");
+		mainPanel.add(new LevelPanel(this, 4),  "Level 4");
+		mainPanel.add(new LevelPanel(this, 5),  "Level 5");
+		mainPanel.add(new LevelPanel(this, 6),  "Level 6");
+		mainPanel.add(new LevelPanel(this, 7),  "Level 7");
+		mainPanel.add(new LevelPanel(this, 8),  "Level 8");
+		mainPanel.add(new LevelPanel(this, 9),  "Level 9");
+		mainPanel.add(new LevelPanel(this, 10), "Level 10");
 
 		explanationPanel = new ExplanationPanel(this, "Battle"); 
-		add(explanationPanel, "Explanation"); //opened when user gets a question wrong
+		mainPanel.add(explanationPanel, "Explanation"); //opened when user gets a question wrong
+
+        addSettingsButton();
 
 		lastCardName = "Title";
 		currentCardName = "Title";
@@ -77,15 +84,23 @@ public class PageManager extends JPanel
 	{
 		lastCardName = currentCardName;
 		currentCardName = cardName;
-		card.show(this,cardName);
-		revalidate(); //TODO: add citation
+		card.show(mainPanel,cardName);
+
+        if (settingsBtn != null) {
+            settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
+        }
+        
+		revalidate();
 		repaint();
 	}
 
 	public void changePanelCardNoHistory(String cardName)
 	{
 		currentCardName = cardName;
-		card.show(this,cardName);
+		card.show(mainPanel,cardName);
+        if (settingsBtn != null) {
+            settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
+        }
 		revalidate();
 		repaint();
 	}
@@ -267,4 +282,50 @@ public class PageManager extends JPanel
 			return buffered;
 		}
 	}
+
+    public void addSettingsButton()
+    {
+        Image icon = PageManager.Functions.getImage("settings.png");
+        if(icon==null) return;
+        ImageIcon scaledSettingsIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+        settingsBtn = new JButton(scaledSettingsIcon);
+        settingsBtn.setBounds(frame.getWidth() - 60, 10, 50, 50); // top-left corner; adjust as needed
+        settingsBtn.setContentAreaFilled(false);
+        settingsBtn.setBorderPainted(false);
+        settingsBtn.setFocusPainted(false);
+        settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        settingsBtn.setActionCommand("Settings");
+        settingsBtn.addActionListener(new SettingsButtonListener());
+
+        addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
+        add(settingsBtn, JLayeredPane.PALETTE_LAYER);
+    }
+
+    class SettingsButtonListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            changePanelCard(e.getActionCommand());
+        }
+    }
+        // Replace the previous setBounds block with this one:
+        @Override
+        public void setBounds(int x, int y, int width, int height) 
+        {
+            super.setBounds(x, y, width, height);
+            if (mainPanel != null) {
+                mainPanel.setBounds(0, 0, width, height);
+                mainPanel.revalidate();
+                mainPanel.repaint();
+            }
+    
+            // FIX IS HERE: Keep the button pinned to the right margin dynamically
+            if (settingsBtn != null) {
+                // (width - 70) accounts for button size (50) and a nice 20px padding from the edge
+                settingsBtn.setBounds(width - 70, 10, 50, 50);
+            }
+        }
+
+
 }

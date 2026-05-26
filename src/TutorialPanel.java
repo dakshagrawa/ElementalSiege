@@ -101,7 +101,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         JPanel topBar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 10));
         topBar.setOpaque(false);
         topBar.add(skipBtn);
-        add(topBar, BorderLayout.NORTH);
+        add(topBar, BorderLayout.SOUTH);
     }
 
     private JPanel buildPopupCard()
