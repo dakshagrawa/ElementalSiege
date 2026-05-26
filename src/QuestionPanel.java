@@ -62,7 +62,6 @@ class QuestionPanel extends JPanel
 		private ButtonGroup group;
 		private JTextArea questionArea;
 		private JRadioButton [] answer;
-		private JButton submit, nextQuestion;
 		public PageManager pm;
 		private boolean lastAnswerCorrect;
 
@@ -111,70 +110,43 @@ class QuestionPanel extends JPanel
 				answer[i].addActionListener(this);
 				answers.add(answer[i]);
 			}
-
-			JPanel buttonPanel = new JPanel();
-			buttonPanel.setBackground(Color.WHITE);
-			buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 30));
-			add(buttonPanel, BorderLayout.SOUTH);
-
-			submit = new JButton("SUBMIT");
-			submit.setFont(myFont);
-			submit.addActionListener(this);
-			submit.setEnabled(false);
-			buttonPanel.add(submit);
-
-			nextQuestion = new JButton("NEXT QUESTION");
-			nextQuestion.setFont(myFont);
-			nextQuestion.addActionListener(this);
-			nextQuestion.setOpaque(false);
-			nextQuestion.setEnabled(false);
-			buttonPanel.add(nextQuestion);
 		}
 
-		public void actionPerformed(ActionEvent evt)
+		public void actionPerformed(ActionEvent evt) //check if answer choice is correct -- called when a radio button is clicked
 		{
-			String command = evt.getActionCommand();
+			lastAnswerCorrect = false;
+			answer[data.getCorrectAnswer()].setBackground(Color.GREEN);
 
-			if(group.getSelection() != null)
+			for (int i = 0; i < answer.length; i++)
 			{
-				submit.setEnabled(true);
-			}
-
-			if(command.equals("SUBMIT"))
-			{
-				lastAnswerCorrect = false;
-				answer[data.getCorrectAnswer()].setBackground(Color.GREEN);
-				for(int i = 0; i < answer.length; i++)
+				if (answer[i].isSelected())
 				{
-					if(answer[i].isSelected())
+					if (i != data.getCorrectAnswer())
 					{
-						if(i != data.getCorrectAnswer())
-						{
-							answer[i].setBackground(Color.RED);
-						}
-						else
-						{
-							lastAnswerCorrect = true;
-							data.addOneToCorrectCount();
-						}
+						answer[i].setBackground(Color.RED);
+					}
+					else
+					{
+						lastAnswerCorrect = true;
+						data.addOneToCorrectCount();
 					}
 				}
-				group.clearSelection();
-				for(int i = 0; i < answer.length; i++)
-				{
-					answer[i].setEnabled(false);
-				}
-				submit.setEnabled(false);
-				nextQuestion.setEnabled(true);
+				answer[i].setEnabled(false); // locks all other answer choices immediately
 			}
-			else if(command.equals("NEXT QUESTION"))
+
+			//Short pause so user sees green/red feedback, then moves on to battle panel
+			Timer autoAdvance = new Timer(1200, new ActionListener()
 			{
-				resetQuestion();
-				nextQuestion.setEnabled(false);
-				battle.resolveRound(lastAnswerCorrect);
-				pm.changePanelCard("Battle");
-				battle.startTimer=true;
+				public void actionPerformed(ActionEvent e)
+				{
+					resetQuestion();
+					battle.resolveRound(lastAnswerCorrect);
+					pm.changePanelCard("Battle");
+					battle.startTimer = true;
+				}
 			}
+			autoAdvance.setRepeats(false);
+			autoAdvance.start();
 		}
 
 		public void resetQuestion ( )
