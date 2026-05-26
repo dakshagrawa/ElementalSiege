@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class TestParse {
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(new File("../storedData/CharacterInfo.txt"));
+        Scanner sc = new Scanner(new File("storedData/CharacterInfo.txt"));
         // skip first two lines
         if (sc.hasNextLine()) sc.nextLine();
         if (sc.hasNextLine()) sc.nextLine();
