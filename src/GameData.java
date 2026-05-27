@@ -59,7 +59,7 @@ public class GameData
 			answerSet[i] = "";
 		}
 		correctAnswer = -1;
-		chosenQuestions = new boolean[30];
+		chosenQuestions = new boolean[65];
 		questionCount = correctCount = 0;
 	}
 
@@ -78,10 +78,10 @@ public class GameData
 			System.err.println(e);
 			System.exit(1);
 		}
-		int questionNumber = (int)(Math.random() * 30);
+		int questionNumber = (int)(Math.random() * 65);
 		while(chosenQuestions[questionNumber] == true)
 		{
-			questionNumber = (int)(Math.random() * 30);
+			questionNumber = (int)(Math.random() * 65);
 		}
 		chosenQuestions[questionNumber] = true;
 		questionCount++;
@@ -574,7 +574,7 @@ public class GameData
 					artH = 233;
 				else
 					artH = 225;
-				characters[counter] = new CharacterImage(pic1,30+(224*pic1_i),25+(364*pic1_j),211,artH, inputCharacterInfo);
+				characters[counter] = new CharacterImage(pic1,30+(224*pic1_i),25+(364*pic1_j),211,354, inputCharacterInfo);
 				counter++;
 			}
 		}
