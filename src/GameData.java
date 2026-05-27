@@ -79,6 +79,12 @@ public class GameData
 			System.exit(1);
 		}
 		int questionNumber = (int)(Math.random() * 30);
+		// If all questions have been used, reset the pool to prevent infinite loop
+		if(questionCount >= 30)
+		{
+			Arrays.fill(chosenQuestions, false);
+			questionCount = 0;
+		}
 		while(chosenQuestions[questionNumber] == true)
 		{
 			questionNumber = (int)(Math.random() * 30);
@@ -104,6 +110,11 @@ public class GameData
 		inFile.close();
 
 		questionNumber = (int)(Math.random() * 30);
+		if(questionCount >= 30)
+		{
+			Arrays.fill(chosenQuestions, false);
+			questionCount = 0;
+		}
 		while(chosenQuestions[questionNumber] == true)
 		{
 			questionNumber = (int)(Math.random() * 30);

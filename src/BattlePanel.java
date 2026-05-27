@@ -91,6 +91,28 @@ public class BattlePanel extends JPanel implements ActionListener
         questionPanel = qPanel;
     }
 
+    public void resetForNewGame()
+    {
+        level = 1;
+        userHealth = 100;
+        maxEnemyHealth = (int)(level * 1.7) + 17;
+        enemyHealth = maxEnemyHealth;
+        streak = 0;
+        startTimer = false;
+        attributeButtonsEnabled = false;
+        if (displayTimer != null) { displayTimer.stop(); displayTimer = null; }
+        if (delay != null) { delay.stop(); delay = null; }
+        userHealthPanel.setHealth(userHealth);
+        enemyHealthPanel.setHealth(enemyHealth);
+        enemyHealthPanel.setMax(maxEnemyHealth);
+        resultLabel.setText("Pick an attribute!");
+        streakLabel.setText("Streak: 0");
+        userCardPanel.removeAll();
+        enemyCardPanel.removeAll();
+        revalidate();
+        repaint();
+    }
+
     private void buildUI()
     {
         JPanel topBar = new JPanel(new GridLayout(1, 2, 20, 0));
