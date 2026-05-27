@@ -156,11 +156,12 @@ public class QuestionPanel extends JPanel
         {
                 public void actionPerformed(ActionEvent e)
 				{
+					int questionNum = data.getCurrentQuestionNumber();
 					resetQuestion();
 					battle.resolveRound(lastAnswerCorrect);
 					if (!lastAnswerCorrect)
 					{
-						pm.explanationPanel.loadExplanation(data.getCurrentQuestionNumber());
+						pm.explanationPanel.loadExplanation(questionNum);
 						pm.changePanelCard("Explanation");
 					}
 					else
