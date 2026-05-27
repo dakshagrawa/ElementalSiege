@@ -1,5 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,7 +27,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		setLayout(new BorderLayout());
 
 		JPanel backBtnWrapper = new JPanel();
-		JButton backBtn = pm.new Button1("<- Back", Color.LIGHT_GRAY);
+		JButton backBtn = pm.new Button1("<- Back", Color.GRAY);
 		backBtn.setPreferredSize(new Dimension(100, 40));
 		backBtn.addActionListener(this);
 		add(backBtn, BorderLayout.NORTH);

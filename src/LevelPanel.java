@@ -1,16 +1,18 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 
 public class LevelPanel extends JPanel implements ActionListener
@@ -126,23 +128,25 @@ public class LevelPanel extends JPanel implements ActionListener
         storyLabel.setText("");
         continueBtn.setVisible(false);
 
-        typewriterTimer = new Timer(28, new ActionListener())
+        typewriterTimer = new Timer(28, new TypewriterTimer());
+        typewriterTimer.start();
+    }
+
+    class TypewriterTimer implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
         {
-            public void actionPerformed(ActionEvent e)
+            if (charIndex < fullStoryText.length())
             {
-                if (charIndex < fullStoryText.length())
-                {
-                    charIndex++;
-                    storyLabel.setText(fullStoryText.substring(0, charIndex));
-                }
-                else
-                {
-                    typewriterTimer.stop();
-                    continueBtn.setVisible(true);
-                }
+                charIndex++;
+                storyLabel.setText(fullStoryText.substring(0, charIndex));
+            }
+            else
+            {
+                typewriterTimer.stop();
+                continueBtn.setVisible(true);
             }
         }
-        typewriterTimer.start();
     }
 
     public void actionPerformed(ActionEvent e)

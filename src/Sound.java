@@ -1,6 +1,8 @@
 import java.io.File;
 import javax.sound.sampled.AudioInputStream; //TODO: add citation
-import javax.sound.sampled.AudioSystem; 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl; 
 
 /**
  * Handles cross-platform audio playback and volume control.
