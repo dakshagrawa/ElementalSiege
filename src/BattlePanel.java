@@ -287,7 +287,7 @@ public class BattlePanel extends JPanel implements ActionListener
         header.add(rarityLabel);
         card.add(header, BorderLayout.NORTH);
 
-        JLabel imgLabel;
+        JLabel imgLabel = new JLabel("", SwingConstants.CENTER);
         if (img != null)
         {
             BufferedImage buffered = (BufferedImage) img;
