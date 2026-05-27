@@ -71,7 +71,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		else if(command.equals("Save & Exit"))
 		{
 		    // Save current battle progress if in battle, otherwise save saved progress
-		    if (pm.currentCardName.equals("Battle") && pm.battlePanel != null) {
+		    if (pm.lastCardName != null && pm.lastCardName.equals("Battle") && pm.battlePanel != null) {
 		        int currentHealth = pm.battlePanel.getUserHealth();
 		        int currentLevel = pm.battlePanel.getLevel();
 		        data.saveUserProgress(currentHealth, currentLevel);
