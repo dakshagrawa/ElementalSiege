@@ -15,7 +15,7 @@ public class TutorialPanel extends JPanel implements ActionListener
     private JPanel slideArea;
     private JLabel slideImageLabel;
     private JLabel slideTitleLabel;
-    private JLabel slideTextLabel;
+    private JTextArea slideTextLabel;
     private JLabel slideCounterLabel;
     private JButton leftBtn;
     private JButton rightBtn;
@@ -125,10 +125,14 @@ public class TutorialPanel extends JPanel implements ActionListener
         slideImageLabel.setPreferredSize(new Dimension(600, 160));
         centerArea.add(slideImageLabel, BorderLayout.CENTER);
 
-        slideTextLabel = new JLabel(wrapText(TEXTS[0]), SwingConstants.CENTER);
+        slideTextLabel = new JTextArea();
         slideTextLabel.setFont(pm.normalFont);
         slideTextLabel.setForeground(Color.WHITE);
-        slideTextLabel.setVerticalAlignment(SwingConstants.TOP);
+        slideTextLabel.setOpaque(false);
+        slideTextLabel.setEditable(false);
+        slideTextLabel.setLineWrap(true);
+        slideTextLabel.setWrapStyleWord(true);
+        slideTextLabel.setFocusable(false);
         centerArea.add(slideTextLabel, BorderLayout.SOUTH);
 
         card.add(centerArea, BorderLayout.CENTER);
@@ -216,7 +220,7 @@ public class TutorialPanel extends JPanel implements ActionListener
 
         slideTitleLabel.setText(TITLES[index]);
         slideTitleLabel.setForeground(getSlideAccent(index));
-        slideTextLabel.setText(wrapText(TEXTS[index]));
+        slideTextLabel.setText(TEXTS[index]);
         slideCounterLabel.setText((index + 1) + " / " + TITLES.length);
 
         //Load image if available (looks at the images array from above)
@@ -271,27 +275,6 @@ public class TutorialPanel extends JPanel implements ActionListener
         int g = (int)(a.getGreen() * t + b.getGreen() * (1 - t));
         int bl = (int)(a.getBlue() * t + b.getBlue()  * (1 - t));
         return new Color(Math.max(0, Math.min(255, r)), Math.max(0, Math.min(255, g)), Math.max(0, Math.min(255, bl)));
-    }
-
-    //Wraps long text into multi-line using basic line breaks
-    private String wrapText(String text)
-    {
-        //Split into ~60 char chunks at word boundaries
-        StringBuilder result = new StringBuilder("<html><div style='text-align:center;width:560px'>");
-        String[] words = text.split(" ");
-        int lineLen = 0;
-        for (String word : words)
-        {
-            if (lineLen + word.length() > 60)
-            {
-                result.append("<br>");
-                lineLen = 0;
-            }
-            result.append(word).append(" ");
-            lineLen += word.length() + 1;
-        }
-        result.append("</div></html>");
-        return result.toString();
     }
 
     public void actionPerformed(ActionEvent e)
