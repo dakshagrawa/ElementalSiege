@@ -27,16 +27,12 @@ public class TitlePage extends JPanel implements ActionListener
 		Image picture = PageManager.Functions.getImage("HomeScreenBackground.png");
 		super.paintComponent(g);
 		if (picture != null) 
-		{
 			g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
-		}
 		else
-		{
 			setBackground(Color.LIGHT_GRAY);
-		}
 	}
 
-	public void StartButtons() ///Login and sign-in button on title page
+	public void StartButtons() //Login and sign-in button on title page
 	{
 		JButton signIn;
 		JButton signUp;

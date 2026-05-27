@@ -128,7 +128,7 @@ public class ExplanationPanel extends JPanel implements ActionListener
                     break;
                 }
 
-                // Start a new topic block
+                //Start a new topic block
                 currentTopic = line.substring(6).trim();
                 currentExplanation = new StringBuilder();
                 inMatchingTopic = false;

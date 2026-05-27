@@ -63,16 +63,15 @@ public class PickAvatar extends JPanel
 
 				avatarImg = PageManager.Functions.getImage(imgName);
 
-				// 1. Create your existing thick etch
+				//1. Create the thick border
 				Border etch = BorderFactory.createEtchedBorder(new Color(52, 53, 55), new Color(156, 157, 156));
 				Border thickEtch = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(52, 53, 55), 3), etch);
 
-				// 2. Create 15 pixels of internal padding
+				//2. Internal padding - 15 pixels
 				Border padding = BorderFactory.createEmptyBorder(15, 15, 15, 15);
 
-				// 3. Combine them: thickEtch is outer, padding is inner
+				//3. Combine them: thickEtch is outer, padding is inner
 				setBorder(BorderFactory.createCompoundBorder(thickEtch, padding));
-
 
 				setBackground(new Color(215, 200, 169));
 

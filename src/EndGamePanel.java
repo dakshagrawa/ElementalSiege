@@ -8,7 +8,7 @@ public class EndGamePanel extends JPanel implements ActionListener
     private GameData data;
     private boolean playerWon;
 
-    // true = beat all 10 levels, false = health hit 0
+    //true = beat all 10 levels, false = user health hit 0
     public EndGamePanel(PageManager pageMngr, boolean won)
     {
         pm = pageMngr;
@@ -84,7 +84,7 @@ public class EndGamePanel extends JPanel implements ActionListener
         centerPanel.add(msgLabel3);
         add(centerPanel, BorderLayout.CENTER);
 
-        // Buttons
+        //Buttons
         JPanel btnPanel = new JPanel(new GridLayout(1, 2, 40, 0));
         btnPanel.setOpaque(false);
 

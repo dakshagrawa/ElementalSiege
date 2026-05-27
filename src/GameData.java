@@ -269,7 +269,7 @@ public class GameData
 		}
 	}
 
-	// checks if the AccountInfo.txt file has the account in it
+	//checks if the AccountInfo.txt file has the account in it
 	public boolean isAccountInFile(String inName, char[] inPwd, boolean checkPassword)
 	{
 		Scanner input = null;
@@ -306,7 +306,7 @@ public class GameData
 						if(Arrays.equals(currentPwd, inPwd))
 						{
 							System.out.println("\nLogin Successful! :)");
-    						Arrays.fill(currentPwd, '*'); //  up password
+    						Arrays.fill(currentPwd, '*'); //up password
     						input.close();
 							loadSavedData(inName);
 							return true;
@@ -403,7 +403,7 @@ public void saveUserProgress(int currentHealth, int currentLevel)
     }
     catch (FileNotFoundException e)
     {
-        // File doesn't exist yet, will be created fresh
+        //File doesn't exist yet, will be created fresh
     }
 
     boolean foundUser = false;
@@ -419,12 +419,12 @@ public void saveUserProgress(int currentHealth, int currentLevel)
             {
                 foundUser = true;
                 inUserBlock = true;
-                // Write an updated block instead of old one
+                //Write an updated block instead of old one
                 allContent.append(buildUserBlock(currentHealth, currentLevel));
             }
             else if (inUserBlock && (line.startsWith("H: ") || line.startsWith("L: ") || line.startsWith("C: ")))
             {
-                // Skip old lines for current user — already replaced above
+                //Skip old lines for current user — already replaced above
             }
             else
             {
@@ -435,13 +435,13 @@ public void saveUserProgress(int currentHealth, int currentLevel)
         input.close();
     }
 
-    // If user wasn't in file at all, add them
+    //If user wasn't in file at all, add them
     if (!foundUser)
     {
         allContent.append(buildUserBlock(currentHealth, currentLevel));
     }
 
-    // Write everything back
+    //Write everything back
     PrintWriter output = null;
     try
     {
@@ -462,7 +462,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
     block.append("H: ").append(currentHealth).append("\n");
     block.append("L: ").append(currentLevel).append("\n");
 
-    // Build string array to store index of cards e.g. [0, 3, 7]
+    //Build a string array to store index of cards e.g. [0, 3, 7]
     block.append("C: [");
     boolean first = true;
     for (int i = 0; i < userCharacters.length; i++)
@@ -581,7 +581,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 		    x2 = x1 + width;
 		    y2 = y1 + height;
 		
-		    hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); // Basic validation + parsing
+		    hasError = (img == null || x1 < 0 || y1 < 0 || width <= 0 || height <= 0 || !parsedCharacterInfo(inputCharInfo)); //Basic parsing
 		    getCroppedImage();
 		
 		    if(rarityChar == 'C') 

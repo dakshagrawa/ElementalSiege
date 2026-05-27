@@ -134,7 +134,7 @@ public class QuestionPanel extends JPanel
 						data.addOneToCorrectCount();
 					}
 				}
-				answer[i].setEnabled(false); // locks all other answer choices immediately
+				answer[i].setEnabled(false); //locks all other answer choices immediately
 			}
 
 			//Short pause so user sees green/red feedback, then moves on to battle panel

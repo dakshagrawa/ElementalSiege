@@ -9,16 +9,16 @@ import javax.sound.sampled.AudioSystem;
 public class Sound 
 {
     private Clip clip;
-	public float currentVolume; // Value between 0.0f (silent) and 1.0f (full volume)
+	public float currentVolume; //Value between 0.0f (silent) and 1.0f (full volume)
 
     public Sound() 
 	{
-        currentVolume = 0.75f; // Default to maximum volume
+        currentVolume = 0.75f; //Default to maximum volume
     }
 
 	public void playNewBackground(String fileName)
 	{  
-        // Stop and close existing clip to free Linux audio resources
+        //Stop and close existing clip
         disposeSound();
         
 	    playBackground(fileName);
@@ -28,7 +28,7 @@ public class Sound
 	{
         try 
 		{
-            // Use File instead of ResourceLoader to read from the external directory path
+            //Use File instead of ResourceLoader to read from the external directory path
             File soundFile = new File(fileName);
             
             if (!soundFile.exists()) 
@@ -39,7 +39,7 @@ public class Sound
 
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundFile);
 
-            // Ensure the audio stream actually contains data before playing
+            //Ensure the audio stream actually contains data before playing
             if (inputStream.getFrameLength() <= 0) 
             {
                 System.err.println("Audio file is empty: " + fileName);
@@ -49,13 +49,12 @@ public class Sound
             clip = AudioSystem.getClip();
             clip.open(inputStream);
 
-            // Close the stream since it is now entirely cached within the Clip memory
+            //Close the stream since it is now entirely cached within the Clip memory
             inputStream.close(); 
 
-            // --- CROSS-PLATFORM VOLUME CONTROL ---
             setVolume(currentVolume);
 
-            // Loop continuously and begin playback
+            //Loop continuously and begin playback
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
             
@@ -66,8 +65,8 @@ public class Sound
         }
     }
 
-    /**
-     * Updates the volume dynamically while the clip is running or during initialization.
+    /*
+     * The below method updates the volume dynamically while the clip is running or during initialization.
      * @param volume a float value between 0.0f (silent) and 1.0f (maximum)
      */
     public void setVolume(float volume) 
@@ -79,7 +78,7 @@ public class Sound
             return;
         }
 
-        // Make volume values strictly between 0.0f and 1.0f to avoid mathematical exceptions
+        //Makes volume values strictly between 0.0f and 1.0f to avoid mathematical errors
         if (currentVolume < 0.0f) 
 			currentVolume = 0.0f;
         if (currentVolume > 1.0f) 
@@ -91,7 +90,7 @@ public class Sound
 			{
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
                 
-                // Prevent Log(0) mathematical failure when silent (volume is 0)
+                //Prevents log(0) failure when silent (volume is 0)
 				float dB;
 				if (currentVolume == 0.0f)
 					dB = -80.0f;
@@ -106,18 +105,18 @@ public class Sound
 			{
                 FloatControl volumeControl = (FloatControl) clip.getControl(FloatControl.Type.VOLUME);
                 
-                // Map linear scale directly within the specific mixer line's bounds
+                //Maps the linear scale directly to the specific mixer line's bounds
                 float min = volumeControl.getMinimum();
                 float max = volumeControl.getMaximum();
                 float targetVolume = min + (max - min) * currentVolume;
 
-				targetVolume = Math.max(min, Math.min(max, targetVolume)); // Clamp against hardware-specific limits
+				targetVolume = Math.max(min, Math.min(max, targetVolume));
                 volumeControl.setValue(targetVolume);
             }
         } 
 		catch (Exception e) 
 		{
-            System.err.println("Failed to adjust volume hardware lines: " + e.getMessage());
+            System.err.println("Failed to adjust volume hardware lines: " + e.getMessage()); //in case something goes wrong
         }
     }
 
@@ -130,7 +129,7 @@ public class Sound
                 clip.stop();
             }
             clip.close();
-            clip = null; // Dereference to allow garbage collection
+            clip = null; //Take out the reference again so that garbage can be collected
         }
     }
 }

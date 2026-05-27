@@ -149,7 +149,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         leftBtn = pm.new Button1("< Prev", Color.WHITE, new Color(60, 60, 90));
         leftBtn.setFont(pm.normalFont);
         leftBtn.addActionListener(this);
-        leftBtn.setEnabled(false); // disables back button on first slide
+        leftBtn.setEnabled(false); //disables back button on first slide
 
         slideCounterLabel = new JLabel("1 / " + TITLES.length, SwingConstants.CENTER);
         slideCounterLabel.setFont(pm.normalFont);
@@ -183,7 +183,7 @@ public class TutorialPanel extends JPanel implements ActionListener
 
     class SlideTimerListener implements ActionListener
     {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(ActionEvent e) //MARK
         {
             if (fadingOut)
             {
@@ -243,7 +243,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         {
             slideImageLabel.setIcon(null);
             slideImageLabel.setText("");
-            slideImageLabel.setVisible(false); // hides imageLabel so that text is centered when the slide doesn't have an image to display
+            slideImageLabel.setVisible(false); //hides imageLabel so that text is centered when the slide doesn't have an image to display
         }
 
         leftBtn.setEnabled(index > 0);
@@ -256,9 +256,9 @@ public class TutorialPanel extends JPanel implements ActionListener
         dotIndicator.repaint();
     }
 
-    private void applyAlpha(float alpha)
+    private void applyAlpha(float alpha) //MARK
     {
-        // Simulate fade by blending foreground toward background color
+        //Simulate fade by blending foreground toward background color
         Color base = new Color(30, 30, 50);
         slideTitleLabel.setForeground(blend(getSlideAccent(currentSlide), base, alpha));
         slideTextLabel.setForeground(blend(Color.WHITE, base, alpha));
@@ -270,17 +270,13 @@ public class TutorialPanel extends JPanel implements ActionListener
         int r = (int)(a.getRed()   * t + b.getRed()   * (1 - t));
         int g = (int)(a.getGreen() * t + b.getGreen() * (1 - t));
         int bl = (int)(a.getBlue() * t + b.getBlue()  * (1 - t));
-        return new Color(
-            Math.max(0, Math.min(255, r)),
-            Math.max(0, Math.min(255, g)),
-            Math.max(0, Math.min(255, bl))
-        );
+        return new Color(Math.max(0, Math.min(255, r)), Math.max(0, Math.min(255, g)), Math.max(0, Math.min(255, bl)));
     }
 
-    // Wraps long text into multi-line using basic line breaks
+    //Wraps long text into multi-line using basic line breaks
     private String wrapText(String text)
     {
-        // Split into ~60 char chunks at word boundaries
+        //Split into ~60 char chunks at word boundaries
         StringBuilder result = new StringBuilder("<html><div style='text-align:center;width:560px'>");
         String[] words = text.split(" ");
         int lineLen = 0;
@@ -335,7 +331,7 @@ public class TutorialPanel extends JPanel implements ActionListener
             g2.setPaint(glow);
             g2.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
 
-            // Border
+            //Border
             g2.setColor(new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), 100));
             g2.setStroke(new BasicStroke(1.5f));
             g2.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 24, 24);

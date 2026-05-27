@@ -57,19 +57,17 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		String command = evt.getActionCommand();
 		if(command.equals("<- Back"))
 		{
-			// Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName
-            // which might be incorrect when coming from ClosePanel
+			//Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName which might be incorrect when coming from ClosePanel
             if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
                 pm.changePanelCardNoHistory(pm.lastCardName);
             } else {
-                // Fallback to Title page if lastCardName is not valid
+                //Goes back to Title page if lastCardName is not valid
                 pm.changePanelCard("Title");
             }
 		}
 		else if(command.equals("Save & Exit"))
 		{
-			// Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName
-            // which might be incorrect when coming from ClosePanel
+			//Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName which might be incorrect when coming from ClosePanel
 			data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
 			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) 
 			{

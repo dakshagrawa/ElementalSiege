@@ -15,7 +15,7 @@ public class Game
 			{
                 shell = "cmd.exe";
                 shellFlag = "/c";
-                // Added "start" for Windows to ensure the GUI launches smoothly
+                //added "start" for Windows to ensure the GUI launches smoothly
                 command = "cls && cd src/ && javac *.java && java ElementalSiege && del *.class";
             } 
 			else 
@@ -29,14 +29,14 @@ public class Game
             pb.redirectErrorStream(true);
             Process p = pb.start();
 
-            // We keep this to print any COMPILER errors if the game fails to start
+            //We keep this to print any compiler errors if the game fails to start
             Scanner s = new Scanner(p.getInputStream()).useDelimiter("\\A");
             if (s.hasNext()) 
 			{
                 System.out.print(s.next());
             }
 
-            p.waitFor(); // This keeps the runner alive until you close your GUI
+            p.waitFor(); //this keeps the runner alive until you close your GUI
 
         } catch (Exception e) 
 		{

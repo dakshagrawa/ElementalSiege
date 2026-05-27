@@ -4,14 +4,14 @@ import java.util.Scanner;
 public class TestParse {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(new File("../storedData/CharacterInfo.txt"));
-        // skip first two lines
+        //skips first two lines
         if (sc.hasNextLine()) sc.nextLine();
         if (sc.hasNextLine()) sc.nextLine();
         int i = 0;
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             System.out.println("Line: '" + line + "'");
-            // mimic parsedCharacterInfo
+            //mimics parsedCharacterInfo
             if(line.contains(":")){
                 String name = line.substring(0,line.indexOf(':')).trim();
                 line = line.substring(line.indexOf(':')+1).trim();

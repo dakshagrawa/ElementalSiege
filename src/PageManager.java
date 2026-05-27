@@ -283,7 +283,7 @@ public class PageManager extends JLayeredPane
 			//Creates a buffered image with transparency
 			BufferedImage buffered = new BufferedImage(imageClass.width, imageClass.height, BufferedImage.TYPE_INT_ARGB);
 
-			// Draws the image on to the buffered image
+			//Draws the image on to the buffered image
 			Graphics2D bGr = buffered.createGraphics();
 			bGr.drawImage(imageClass.image, 0, 0, imageClass.width, imageClass.height, imageClass.x1, imageClass.y1, imageClass.x2, imageClass.y2, null);
 			bGr.dispose();

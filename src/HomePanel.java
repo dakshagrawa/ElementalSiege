@@ -46,9 +46,9 @@ public class HomePanel extends JPanel implements ActionListener
 		if(cmd.equals("Next Round"))
 		{
 			battle.level++;
-			battle.userHealth = 100; // Reset user health
-			// Enemy health is recalculated in drawNewCards or via a method we can add
-			// Let's add a reset method to BattlePanel or just call drawNewCards which sets enemyHealth
+			battle.userHealth = 100; //Reset user health
+			//Enemy health is recalculated in drawNewCards or via a method we can add
+			//Let's add a reset method to BattlePanel or just call drawNewCards which sets enemyHealth
 			battle.drawNewCards();
 			pm.changePanelCard("Battle");
 		}

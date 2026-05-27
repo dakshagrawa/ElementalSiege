@@ -115,7 +115,7 @@ public class LevelPanel extends JPanel implements ActionListener
         storyLabel.setText("");
         continueBtn.setVisible(false);
 
-        typewriterTimer = new Timer(28, new ActionListener()
+        typewriterTimer = new Timer(28, new ActionListener())
         {
             public void actionPerformed(ActionEvent e)
             {
@@ -130,7 +130,7 @@ public class LevelPanel extends JPanel implements ActionListener
                     continueBtn.setVisible(true);
                 }
             }
-        });
+        }
         typewriterTimer.start();
     }
 

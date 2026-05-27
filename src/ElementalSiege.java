@@ -1,5 +1,5 @@
-// Daksh Agrawal & Dhikshitha Aiely
-// Period 7
+//Daksh Agrawal & Dhikshitha Aiely
+//Period 7
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
