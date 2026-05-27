@@ -215,10 +215,18 @@ public class GameData
 			while(inFile.hasNext()) 
 			{
 				String line = inFile.nextLine();
-				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount)
-				{
-					result += first + " " + lastGameCorrectCount + "/4\n";
-					hasBeenAdded = true;
+				int slashIdx = line.indexOf("/");
+				if (slashIdx > 0) {
+					try {
+						int lineScore = Integer.parseInt("" + line.charAt(slashIdx - 1));
+						if(!hasBeenAdded && lineScore <= lastGameCorrectCount)
+						{
+							result += first + " " + lastGameCorrectCount + "/4\n";
+							hasBeenAdded = true;
+						}
+					} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+						// skip malformed line
+					}
 				}
 				result += line + "\n";
 			}
@@ -266,10 +274,18 @@ public class GameData
 			while(inFile.hasNext()) 
 			{
 				String line = inFile.nextLine();
-				if(!hasBeenAdded && Integer.parseInt("" + line.charAt(line.indexOf("/") - 1)) <= lastGameCorrectCount)
-				{
-					result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
-					hasBeenAdded = true;
+				int slashIdx = line.indexOf("/");
+				if (slashIdx > 0) {
+					try {
+						int lineScore = Integer.parseInt("" + line.charAt(slashIdx - 1));
+						if(!hasBeenAdded && lineScore <= lastGameCorrectCount)
+						{
+							result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+							hasBeenAdded = true;
+						}
+					} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+						// skip malformed line
+					}
 				}
 				result += line + "\n";
 			}
