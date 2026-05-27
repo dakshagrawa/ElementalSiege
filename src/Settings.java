@@ -35,13 +35,12 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		JPanel centerPanel = new JPanel(new GridLayout(3, 1, 10, 20));
 		centerPanel.setOpaque(false);
 
-		volumeSlider = new JSlider(0, 100, 75);
+		volumeSlider = new JSlider(0, 100, (int)(pm.sound.currentVolume*100));
 		volumeSlider.setOrientation(JSlider.HORIZONTAL);
 		volumeSlider.setMajorTickSpacing(25);
 		volumeSlider.setPaintTicks(true);
 		volumeSlider.setPaintLabels(true);
 		volumeSlider.addChangeListener(this);
-		volumeSlider.setValue((int)(pm.sound.currentVolume*100));
 		centerPanel.add(volumeSlider);
 
 		JButton exit = new JButton("Save & Exit");
