@@ -20,7 +20,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-
 public class PageManager extends JLayeredPane
 {
 	private CardLayout card;
@@ -34,9 +33,10 @@ public class PageManager extends JLayeredPane
 	public Sound sound;
 	public ExplanationPanel explanationPanel;
 	public ResumeOrNewGame resumeOrNewGame;
+    public BattlePanel battlePanel;
     private JButton settingsBtn;
 
-    private JPanel mainPanel;
+	private JPanel mainPanel;
 
 	public PageManager(ElementalSiege elemntlSiege_JFrame, Sound audio)
 	{
@@ -46,13 +46,13 @@ public class PageManager extends JLayeredPane
 		normalFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 		normalBoldFont = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
 
-        setLayout(null);
+		setLayout(null);
 
 		data = new GameData(this);
 		card = new CardLayout();
-        mainPanel = new JPanel (card);
-        add(mainPanel, JLayeredPane.DEFAULT_LAYER);
-        
+		mainPanel = new JPanel (card);
+		add(mainPanel, JLayeredPane.DEFAULT_LAYER);
+		
 		mainPanel.add(new CloseWindow(this),"Close"); //opens when user tries to close game
 		mainPanel.add(new TitlePage(this), "Title"); //home screen/title page
 		mainPanel.add(new SignIn(this),"Continue"); //opens when user clicks continue button a.k.a log in button
@@ -63,10 +63,10 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
 		mainPanel.add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
 		mainPanel.add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
-		BattlePanel bp = new BattlePanel(this, false);
-		mainPanel.add(bp,"Battle"); //"battle" scene after each question
-		mainPanel.add(new QuestionPanel(this, bp),"Questions"); //question panel
-		mainPanel.add(new HomePanel(this, bp), "newLevel"); //panel between each round -- open when user defeats enemy
+		battlePanel = new BattlePanel(this, false);
+		mainPanel.add(battlePanel,"Battle"); //"battle" scene after each question
+		mainPanel.add(new QuestionPanel(this, battlePanel),"Questions"); //question panel
+		mainPanel.add(new HomePanel(this, battlePanel), "newLevel"); //panel between each round -- open when user defeats enemy
 
 		mainPanel.add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
 		mainPanel.add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
@@ -89,7 +89,7 @@ public class PageManager extends JLayeredPane
 		explanationPanel = new ExplanationPanel(this, "Battle"); 
 		mainPanel.add(explanationPanel, "Explanation"); //opened when user gets a question wrong
 
-        addSettingsButton();
+		addSettingsButton();
 
 		lastCardName = "Title";
 		currentCardName = "Title";
@@ -102,10 +102,10 @@ public class PageManager extends JLayeredPane
 		currentCardName = cardName;
 		card.show(mainPanel,cardName);
 
-        if (settingsBtn != null) {
-            settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
-        }
-        
+		if (settingsBtn != null) {
+			settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
+		}
+
 		revalidate();
 		repaint();
 	}
@@ -114,9 +114,9 @@ public class PageManager extends JLayeredPane
 	{
 		currentCardName = cardName;
 		card.show(mainPanel,cardName);
-        if (settingsBtn != null) {
-            settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
-        }
+		if (settingsBtn != null) {
+			settingsBtn.setVisible(!cardName.equalsIgnoreCase("Settings") && !cardName.equalsIgnoreCase("Close"));
+		}
 		revalidate();
 		repaint();
 	}
@@ -151,18 +151,14 @@ public class PageManager extends JLayeredPane
 		}
 
 		public void mouseClicked(MouseEvent e) {}
-
 		public void mousePressed(MouseEvent e) {}
-
 		public void mouseReleased(MouseEvent e) {}
-
 		public void mouseEntered(MouseEvent e)
 		{
 			button.setBackground(hoverBackgroundColor);
 			button.setForeground(hoverForegroundColor);
 			button.setOpaque(true);
 		}
-
 		public void mouseExited(MouseEvent e)
 		{
 			button.setBackground(normalBackgroundColor);
@@ -236,7 +232,7 @@ public class PageManager extends JLayeredPane
 	}
 
 	/* This class has different functions that helps
-		use some chunks of code that are used repeatedly in the game. */
+	use some chunks of code that are used repeatedly in the game. */
 	public static class Functions
 	{
 		public static Image getImage(String imgName)
@@ -266,7 +262,6 @@ public class PageManager extends JLayeredPane
 			{
 				picture = ImageIO.read(new File(pictName));
 			}
-
 			catch(NullPointerException | IOException e)
 			{
 				System.out.println(e);
@@ -299,48 +294,46 @@ public class PageManager extends JLayeredPane
 		}
 	}
 
-    public void addSettingsButton()
-    {
-        Image icon = PageManager.Functions.getImage("settings.png");
-        if(icon==null) return;
-        ImageIcon scaledSettingsIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
-        settingsBtn = new JButton(scaledSettingsIcon);
-        settingsBtn.setBounds(frame.getWidth() - 60, 10, 50, 50); //top-left corner
-        settingsBtn.setContentAreaFilled(false);
-        settingsBtn.setBorderPainted(false);
-        settingsBtn.setFocusPainted(false);
-        settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	public void addSettingsButton()
+	{
+		Image icon = PageManager.Functions.getImage("settings.png");
+		if(icon==null) return;
+		ImageIcon scaledSettingsIcon = new ImageIcon(icon.getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+		settingsBtn = new JButton(scaledSettingsIcon);
+		settingsBtn.setBounds(frame.getWidth() - 60, 10, 50, 50); //top-left corner
+		settingsBtn.setContentAreaFilled(false);
+		settingsBtn.setBorderPainted(false);
+		settingsBtn.setFocusPainted(false);
+		settingsBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        settingsBtn.setActionCommand("Settings");
-        settingsBtn.addActionListener(new SettingsButtonListener());
+		settingsBtn.setActionCommand("Settings");
+		settingsBtn.addActionListener(new SettingsButtonListener());
 
-        addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
-        add(settingsBtn, JLayeredPane.PALETTE_LAYER);
-    }
+		addHoverEffect(settingsBtn, Color.LIGHT_GRAY, null);
+		add(settingsBtn, JLayeredPane.PALETTE_LAYER);
+	}
 
-    class SettingsButtonListener implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-            changePanelCard(e.getActionCommand());
-        }
-    }
+	class SettingsButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			changePanelCard(e.getActionCommand());
+		}
+	}
 
-        public void setBounds(int x, int y, int width, int height) 
-        {
-            super.setBounds(x, y, width, height);
-            if (mainPanel != null) {
-                mainPanel.setBounds(0, 0, width, height);
-                mainPanel.revalidate();
-                mainPanel.repaint();
-            }
-    
-            //Keeps the button pinned to the right margin dynamically
-            if (settingsBtn != null) {
-                //(width - 70) accounts for button size (50) and adds 20px gap from the edge
-                settingsBtn.setBounds(width - 70, 10, 50, 50);
-            }
-        }
+	public void setBounds(int x, int y, int width, int height) 
+	{
+		super.setBounds(x, y, width, height);
+		if (mainPanel != null) {
+			mainPanel.setBounds(0, 0, width, height);
+			mainPanel.revalidate();
+			mainPanel.repaint();
+		}
 
-
+		//Keeps the button pinned to the right margin dynamically
+		if (settingsBtn != null) {
+			//(width - 70) accounts for button size (50) and adds 20px gap from the edge
+			settingsBtn.setBounds(width - 70, 10, 50, 50);
+		}
+	}
 }

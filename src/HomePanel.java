@@ -56,6 +56,8 @@ public class HomePanel extends JPanel implements ActionListener
 		{
 			battle.level++;
 			battle.userHealth = 100; //Reset user health
+			// SAVE THE FRESH STATE THEY ARE ENTERING (level N, health 100)
+			pm.getGameData().saveUserProgress(100, battle.level);
 			//Enemy health is recalculated in drawNewCards or via a method we can add
 			//Let's add a reset method to BattlePanel or just call drawNewCards which sets enemyHealth
 			battle.drawNewCards();

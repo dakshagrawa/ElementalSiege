@@ -36,6 +36,17 @@ public class ElementalSiege extends JFrame implements WindowListener
 	{
 		if (!pm.currentCardName.equals("Close")) 
 		{
+			// Save mid-run progress before showing close panel
+			if (pm.currentCardName.equals("Battle")) 
+			{
+				BattlePanel battlePanel = pm.battlePanel;
+				if (battlePanel != null) 
+				{
+					int currentHealth = battlePanel.getUserHealth();
+					int currentLevel = battlePanel.getLevel();
+					pm.getGameData().saveUserProgress(currentHealth, currentLevel);
+				}
+			}
 			pm.changePanelCard("Close");
 		}
 	}

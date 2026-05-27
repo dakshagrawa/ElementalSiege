@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.BorderFactory;
@@ -22,8 +23,6 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
-
-
 public class BattlePanel extends JPanel implements ActionListener
 {
     private GameData data;
@@ -36,6 +35,15 @@ public class BattlePanel extends JPanel implements ActionListener
     private int maxUserHealth = 100;
     private int maxEnemyHealth;
     public int level;
+
+    // Getters for main frame to read state on manual exit
+    public int getUserHealth() {
+    	return userHealth;
+    }
+	
+    public int getLevel() {
+    	return level;
+    }
 	
     private HealthBarPanel userHealthPanel;
     private HealthBarPanel enemyHealthPanel;
@@ -135,7 +143,29 @@ public class BattlePanel extends JPanel implements ActionListener
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
 
-        int enemyIdx = (int)(Math.random() * data.characters.length);
+        // DETERMINE TARGET RARITY FOR ENEMY CARD (1-100 roll)
+        int roll = (int)(Math.random() * 100) + 1;
+        String targetRarity;
+        if (roll <= 40) targetRarity = "Common";
+        else if (roll <= 70) targetRarity = "Rare";
+        else if (roll <= 90) targetRarity = "Epic";
+        else targetRarity = "Legendary";
+
+        // FILTER CHARACTERS BY TARGET RARITY
+        ArrayList<Integer> eligibleIndices = new ArrayList<>();
+        for (int i = 0; i < data.characters.length; i++) {
+            if (data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
+                eligibleIndices.add(i);
+            }
+        }
+
+        // SELECT ENEMY CARD: fallback to any character if tier is empty
+        int enemyIdx;
+        if (eligibleIndices.isEmpty()) {
+            enemyIdx = (int)(Math.random() * data.characters.length);
+        } else {
+            enemyIdx = eligibleIndices.get((int)(Math.random() * eligibleIndices.size()));
+        }
         enemyCard = data.characters[enemyIdx];
 
         userCardPanel.removeAll();
@@ -197,7 +227,7 @@ public class BattlePanel extends JPanel implements ActionListener
         back.setBackground(new Color(60, 60, 80));
         back.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 
-        JLabel hidden = new JLabel("?", SwingConstants.CENTER); //for now it's question mark
+        JLabel hidden = new JLabel("?", SwingConstants.CENTER);
         hidden.setFont(pm.titleFont);
         hidden.setForeground(Color.LIGHT_GRAY);
         back.add(hidden, BorderLayout.CENTER);
@@ -242,6 +272,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JPanel card = new JPanel(new BorderLayout(0, 4));
         card.setBackground(new Color(55, 55, 70));
         card.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+        card.setPreferredSize(new Dimension(211, 400));
 
         JPanel header = new JPanel(new GridLayout(2, 1));
         header.setOpaque(false);
@@ -258,8 +289,10 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            Image scaled = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
+            int artHeight = (int)(img.getHeight(null) * 0.65);
+            Image artOnly = img.getScaledInstance(211, artHeight, Image.SCALE_SMOOTH);
+            imgLabel = new JLabel(new ImageIcon(artOnly), SwingConstants.CENTER);
+            imgLabel.setPreferredSize(new Dimension(211, artHeight));
         }
         else
         {
@@ -428,30 +461,32 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         if (userHealth <= 0)
         {
-            pm.changePanelCard("Game Over");
-            displayTimer.stop();
-            delay.stop();
+            // Reset progress on game over to prevent softlocks
+            pm.getGameData().saveUserProgress(100, 1);
+            pm.changePanelCard("gameEnd");
+            if (displayTimer != null) displayTimer.stop();
+            if (delay != null) delay.stop();
         }
         else if (enemyHealth <= 0)
         {
             if (level >= 10)
             {
+                // Reset progress on final victory to prevent softlocks
+                pm.getGameData().saveUserProgress(100, 1);
                 pm.changePanelCard("You Win");
-
-                displayTimer.stop();
-                delay.stop();
+                if (displayTimer != null) displayTimer.stop();
+                if (delay != null) delay.stop();
             }
             else
             {
-                displayTimer.stop();
-                delay.stop();
+                if (displayTimer != null) displayTimer.stop();
+                if (delay != null) delay.stop();
                 data.resetAll();
                 pm.changePanelCard("Level " + (level + 1));
             }
         }
         else
         {
-            //use timer to wait 5 seconds to show user who got damaged before moving on to question
             delay = new Timer(6000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
@@ -516,7 +551,7 @@ public class BattlePanel extends JPanel implements ActionListener
             label.setText(label.getText().split(":")[0] + ": " + current + "/" + max);
 
             if ((double) current / max < 0.25)
-                bar.setForeground(new Color(220, 60, 60)); //is tis red?
+                bar.setForeground(new Color(220, 60, 60));
             else
                 bar.setForeground(barColor);
 

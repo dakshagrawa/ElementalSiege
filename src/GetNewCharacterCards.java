@@ -52,46 +52,65 @@ public class GetNewCharacterCards extends JPanel
 	}
 
 	class CharacterCardsGrid extends JPanel
-	{
-		public CharacterCardsGrid()
-		{
-			setLayout(new GridLayout(1, 3, 20, 0));
-			setOpaque(false);
+    {
+        public CharacterCardsGrid()
+        {
+            setLayout(new GridLayout(1, 3, 20, 0));
+            setOpaque(false);
 
-			int numToPick = Math.min(3, data.characters.length);
-			int[] usedCharacterIdx = new int[numToPick];
+            // ROULETTE WHEEL CARD SELECTION LOGIC
+            // Roll 1-100 to pick target rarity
+            int roll = (int)(Math.random() * 100) + 1; // 1-100 inclusive
+            String targetRarity;
+            if (roll <= 40) targetRarity = "Common";
+            else if (roll <= 70) targetRarity = "Rare";
+            else if (roll <= 90) targetRarity = "Epic";
+            else targetRarity = "Legendary";
 
-			for (int i = 0; i < numToPick; i++)
-			{
-				int randomIdx;
-				boolean alreadyUsed;
-				do
-				{
-					randomIdx = (int)(Math.random() * data.characters.length);
-					alreadyUsed = false;
+            // Filter characters by target rarity
+            java.util.ArrayList<Integer> eligibleIndices = new java.util.ArrayList<>();
+            for (int i = 0; i < data.characters.length; i++) {
+                if (data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
+                    eligibleIndices.add(i);
+                }
+            }
 
-					for (int j = 0; j < i && !alreadyUsed; j++)
-					{
-						if (usedCharacterIdx[j] == randomIdx)
-							alreadyUsed = true;
-					}
+            // Backfill guardrail: ensure at least 3 unique cards in pool
+            java.util.HashSet<Integer> selectionPool = new java.util.HashSet<>(eligibleIndices);
+            if (selectionPool.size() < 3) {
+                // Add Common and Rare characters to guarantee minimum pool size
+                for (int i = 0; i < data.characters.length; i++) {
+                    String rarity = data.characters[i].rarity.toLowerCase();
+                    if (rarity.equals("common") || rarity.equals("rare")) {
+                        selectionPool.add(i);
+                    }
+                    if (selectionPool.size() >= 3) break; // Stop once we have 3
+                }
+            }
 
-					for (int k = 0; k < data.userCharacters.length && !alreadyUsed; k++)
-					{
-						if (data.userCharacters[k] == randomIdx)
-							alreadyUsed = true;
-					}
+            // Select 3 unique cards from the safe pool
+            java.util.ArrayList<Integer> poolList = new java.util.ArrayList<>(selectionPool);
+            java.util.HashSet<Integer> selectedIndices = new java.util.HashSet<>();
+            int[] usedCharacterIdx = new int[3];
+            
+            for (int i = 0; i < 3; i++) {
+                int randomIdx;
+                boolean validSelection;
+                do {
+                    randomIdx = poolList.get((int)(Math.random() * poolList.size()));
+                    validSelection = !selectedIndices.contains(randomIdx);
+                } while (!validSelection);
+                
+                selectedIndices.add(randomIdx);
+                usedCharacterIdx[i] = randomIdx;
+            }
 
-				} while (alreadyUsed);
-
-				usedCharacterIdx[i] = randomIdx;
-			}
-
-			add(new CharacterPanel(usedCharacterIdx[0]));
-			add(new CharacterPanel(usedCharacterIdx[1]));
-			add(new CharacterPanel(usedCharacterIdx[2]));
-		}
-	}
+            // Add the selected character panels
+            add(new CharacterPanel(usedCharacterIdx[0]));
+            add(new CharacterPanel(usedCharacterIdx[1]));
+            add(new CharacterPanel(usedCharacterIdx[2]));
+        }
+    }
 
 	public class CharacterPanel extends JButton implements ActionListener
 	{
