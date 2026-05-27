@@ -456,7 +456,9 @@ public class BattlePanel extends JPanel implements ActionListener
         enemyHealthPanel.setHealth(enemyHealth);
 
         resultLabel.setText(resultText);
-        if(streak<=3)
+        if (streak <= 0)
+            streakLabel.setText("");
+        else if (streak <= 3)
             streakLabel.setText("Streak: " + streak);
         else
             streakLabel.setText("Streak: " + streak + " 🔥!!!");
