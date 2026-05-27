@@ -26,7 +26,6 @@ public class TitlePage extends JPanel implements ActionListener
 	{
 		super.paintComponent(g);
 		Image picture = PageManager.Functions.getImage("HomeScreenBackground.png");
-		super.paintComponent(g);
 		if (picture != null) 
 			g.drawImage(picture, 0, 0, getWidth(),getHeight(),this);
 		else
