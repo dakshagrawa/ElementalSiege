@@ -109,7 +109,17 @@ public class LevelPanel extends JPanel implements ActionListener
         storyLabel.setBounds(archX + padding, archY + 114, archWidth - padding * 2, 120);
         add(storyLabel);
 
+<<<<<<< HEAD
         continueBtn = pm.new Button1("Continue  →", new Color(255, 230, 120), new Color(30, 60, 50));
+=======
+        //Continue button
+        continueBtn = new JButton("Continue →");
+        continueBtn.setBackground(new Color(30, 60, 50));
+        continueBtn.setForeground(new Color(255, 230, 120));
+        continueBtn.setOpaque(true);
+        continueBtn.setBorderPainted(false);
+        continueBtn.setFocusPainted(false);
+>>>>>>> 0bf952fddde9fc98522f43ade203ed88a924bfc0
         continueBtn.setFont(pm.normalBoldFont);
         continueBtn.addActionListener(this);
         continueBtn.setVisible(true); 
