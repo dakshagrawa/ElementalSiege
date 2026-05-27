@@ -268,7 +268,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         card.add(imgLabel, BorderLayout.CENTER);
 
-        return card; // TODO: stackOverflow citation 
+        return card;
     }
 
     private JButton makeAttributeButton(String label, int value, Color bg, String command)
@@ -428,7 +428,7 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         if (userHealth <= 0)
         {
-            pm.changePanelCard("gameEnd");
+            pm.changePanelCard("Game Over");
             displayTimer.stop();
             delay.stop();
         }

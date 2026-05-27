@@ -41,7 +41,7 @@ public class GameData
 		last = "";
 		userAvatar = "";
 		getCharactersFromFiles();
-		//getQuestions(); //TODO
+		//getQuestions();
 		correctCount = 0;
 		resetAll();
 	}
@@ -63,7 +63,7 @@ public class GameData
 	public void grabQuestionFromFile ( )
 	{
 		Scanner inFile = null;
-		String fileName = "../storedData/Questions.txt"; //TODO: Change FileName
+		String fileName = "../storedData/Questions.txt";
 		File inputFile = new File(fileName);
 		try
 		{
@@ -570,7 +570,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 		private Image fullImage;
 		public BufferedImage image;
 		public String name;
-		public int x1, y1, x2, y2, width, height;  //used: https://pixspy.com/ to get coordinates // TODO: cite this
+		public int x1, y1, x2, y2, width, height;  //used: https://pixspy.com/ to get coordinates
 		public int problemSolving, wisdom, curiosity;
 		public char rarityChar;
 		public String rarity;
@@ -658,7 +658,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 						return true;
 					}
 				}
-				catch(NumberFormatException | IndexOutOfBoundsException e) //TODO: citation for NumberFormatException
+				catch(NumberFormatException | IndexOutOfBoundsException e)
 				{
 					System.err.println("Error parsing Character info: " + e);
 				}
@@ -666,7 +666,7 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 			return false;
 		}
 
-		public class CharacterInitializationException extends RuntimeException //TODO: cite -> https://www.geeksforgeeks.org/java/user-defined-custom-exception-in-java/
+		public class CharacterInitializationException extends RuntimeException
 		{
 			public CharacterInitializationException()
 			{

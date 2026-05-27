@@ -67,7 +67,6 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(bp,"Battle"); //"battle" scene after each question
 		mainPanel.add(new QuestionPanel(this, bp),"Questions"); //question panel
 		mainPanel.add(new HomePanel(this, bp), "newLevel"); //panel between each round -- open when user defeats enemy
-		//add(new HomePanel(this, bp), "gameEnd"); //end of Game -- opens either when user beats level 10 or loses the game
 
 		mainPanel.add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
 		mainPanel.add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
@@ -280,7 +279,7 @@ public class PageManager extends JLayeredPane
 		// Source - https://stackoverflow.com/a/13605411
 		// Posted by Sri Harsha Chilakapati, modified by community. See post 'Timeline' for change history
 		// Retrieved 2026-05-10, License - CC BY-SA 3.0
-		public static BufferedImage characterToBufferedImage(GameData.CharacterImage imageClass) //TODO: cite
+		public static BufferedImage characterToBufferedImage(GameData.CharacterImage imageClass)
 		{
 			if (imageClass.image instanceof BufferedImage)
 			{
