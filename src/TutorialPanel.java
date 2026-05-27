@@ -27,10 +27,11 @@ public class TutorialPanel extends JPanel implements ActionListener
     private JButton leftBtn;
     private JButton rightBtn;
     private JButton skipBtn;
-    private DotIndicator dotIndicator;
+    private DotIndicator dotIndicator; //this is a component that uses little circles to indicate the user's progress 
+    //through multiple pages like in a slidedeck -- we use this in tutorial to show user how many more slides they have to get through
 
     private Timer slideTimer;
-    private float animAlpha = 1.0f;
+    private float animAlpha = 1.0f; //animation's time interval
     private boolean fadingOut = false;
     private int pendingSlide = 0;
 
@@ -148,7 +149,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         JPanel bottomBar = new JPanel(new BorderLayout(0, 8));
         bottomBar.setOpaque(false);
 
-        dotIndicator = new DotIndicator(TITLES.length);
+        dotIndicator = new DotIndicator(TITLES.length); //number of dots = number of slides
         JPanel dotWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         dotWrapper.setOpaque(false);
         dotWrapper.add(dotIndicator);
@@ -305,8 +306,9 @@ public class TutorialPanel extends JPanel implements ActionListener
     {
         public void paintComponent(Graphics g)
         {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            Graphics2D g2 = (Graphics2D) g; //Graphics2D has more tools than the regular Graphics class: 
+            //the drawRoundRect() and fillRoundRect(), setPaint() and GradientPaint, and setStroke() are additionalfeatures that we
+            //used in this method from Graphics2D since Graphics doesn't have these visual effects
 
             //Rounded dark background for the pop up card
             g2.setColor(new Color(22, 22, 40, 240));
@@ -314,21 +316,19 @@ public class TutorialPanel extends JPanel implements ActionListener
 
             //There's a glow at the top of each slide that matches the accent color of the slide
             Color accent = getSlideAccent(currentSlide);
-            GradientPaint glow = new GradientPaint(
-                0, 0, new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), 60),
-                0, getHeight() / 2, new Color(0, 0, 0, 0)
-            );
+            GradientPaint glow = new GradientPaint(0, 0, new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), 60),
+                0, getHeight() / 2, new Color(0, 0, 0, 0));
             g2.setPaint(glow);
             g2.fillRoundRect(0, 0, getWidth(), getHeight(), 24, 24);
 
-            //Border
+            //Border with a custom thickness
             g2.setColor(new Color(accent.getRed(), accent.getGreen(), accent.getBlue(), 100));
             g2.setStroke(new BasicStroke(1.5f));
             g2.drawRoundRect(1, 1, getWidth() - 2, getHeight() - 2, 24, 24);
         }
     }
 
-    //indicates what slide user is on
+    //dotIndicator is the component from above that indicates what slide the user is on with little highlighted dots
     class DotIndicator extends JPanel
     {
         private int total;
@@ -352,8 +352,6 @@ public class TutorialPanel extends JPanel implements ActionListener
         public void paintComponent(Graphics g)
         {
             super.paintComponent(g);
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
             int totalWidth = total * DOT_SIZE + (total - 1) * DOT_GAP;
             int startX = (getWidth() - totalWidth) / 2;
@@ -364,13 +362,13 @@ public class TutorialPanel extends JPanel implements ActionListener
                 int y = (getHeight() - DOT_SIZE) / 2;
                 if (i == active)
                 {
-                    g2.setColor(getSlideAccent(active));
-                    g2.fillOval(x, y, DOT_SIZE, DOT_SIZE);
+                    g.setColor(getSlideAccent(active));
+                    g.fillOval(x, y, DOT_SIZE, DOT_SIZE);
                 }
                 else
                 {
-                    g2.setColor(new Color(100, 100, 130));
-                    g2.fillOval(x, y, DOT_SIZE, DOT_SIZE);
+                    g.setColor(new Color(100, 100, 130));
+                    g.fillOval(x, y, DOT_SIZE, DOT_SIZE);
                 }
             }
         }
