@@ -437,7 +437,7 @@ public class BattlePanel extends JPanel implements ActionListener
         if(streak<=3)
             streakLabel.setText("Streak: " + streak);
         else
-            streakLabel.setText("Streak: " + streak + "🔥");
+            streakLabel.setText("Streak: " + streak + " 🔥!!!");
         revalidate();
         repaint();
 
@@ -481,13 +481,17 @@ public class BattlePanel extends JPanel implements ActionListener
                 // Reset progress on final victory to prevent softlocks
                 pm.getGameData().saveUserProgress(100, 1);
                 pm.changePanelCard("You Win");
-                if (displayTimer != null) displayTimer.stop();
-                if (delay != null) delay.stop();
+                if (displayTimer != null) 
+                    displayTimer.stop();
+                if (delay != null) 
+                    delay.stop();
             }
             else
             {
-                if (displayTimer != null) displayTimer.stop();
-                if (delay != null) delay.stop();
+                if (displayTimer != null) 
+                    displayTimer.stop();
+                if (delay != null) 
+                    delay.stop();
                 data.resetAll();
                 pm.changePanelCard("Level " + (level + 1));
             }
@@ -498,6 +502,8 @@ public class BattlePanel extends JPanel implements ActionListener
             delay.setRepeats(false);
             delay.start();
         }
+        revalidate();
+        repaint();
     }
 
     class CardDelay implements ActionListener

@@ -108,8 +108,14 @@ public class LevelPanel extends JPanel implements ActionListener
         // Changed height from 300 to 120 so it stops overlapping the button
         storyLabel.setBounds(archX + padding, archY + 114, archWidth - padding * 2, 120);
         add(storyLabel);
-
-        continueBtn = pm.new Button1("Continue  →", new Color(255, 230, 120), new Color(30, 60, 50));
+        
+        //Continue button
+        continueBtn = new JButton("Continue →");
+        continueBtn.setBackground(new Color(30, 60, 50));
+        continueBtn.setForeground(new Color(255, 230, 120));
+        continueBtn.setOpaque(true);
+        continueBtn.setBorderPainted(false);
+        continueBtn.setFocusPainted(false);
         continueBtn.setFont(pm.normalBoldFont);
         continueBtn.addActionListener(this);
         continueBtn.setVisible(true); 
