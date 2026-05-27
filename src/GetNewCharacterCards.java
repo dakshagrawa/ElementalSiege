@@ -70,7 +70,7 @@ public class GetNewCharacterCards extends JPanel
             // Filter characters by target rarity
             java.util.ArrayList<Integer> eligibleIndices = new java.util.ArrayList<>();
             for (int i = 0; i < data.characters.length; i++) {
-                if (data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
+                if (data.characters[i] != null && data.characters[i].rarity != null && data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
                     eligibleIndices.add(i);
                 }
             }
