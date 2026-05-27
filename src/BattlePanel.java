@@ -158,7 +158,7 @@ public class BattlePanel extends JPanel implements ActionListener
         // FILTER CHARACTERS BY TARGET RARITY
         ArrayList<Integer> eligibleIndices = new ArrayList<>();
         for (int i = 0; i < data.characters.length; i++) {
-            if (data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
+            if (data.characters[i] != null && data.characters[i].rarity != null && data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
                 eligibleIndices.add(i);
             }
         }
