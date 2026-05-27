@@ -501,13 +501,19 @@ public class BattlePanel extends JPanel implements ActionListener
             }
                 else
                 {
-                    if (displayTimer != null) 
+                    else
+                    {
                         displayTimer.stop();
-                    if (delay != null) 
                         delay.stop();
-                    data.resetAll();
-                pm.changePanelCard("Level " + (level + 1));
-            }
+                        data.resetAll();
+                        level++;
+                        enemyHealth = (int)(level * 1.7) + 17;
+                        maxEnemyHealth = enemyHealth;
+                        userHealthPanel.setHealth(userHealth);
+                        enemyHealthPanel.setHealth(enemyHealth);
+                        pm.changePanelCard("Level " + level);
+                    }
+                }
         }
         else
         {
