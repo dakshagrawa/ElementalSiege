@@ -103,7 +103,7 @@ public class GameData
 		correctAnswer = inFile.nextInt() -1;
 		inFile.close();
 
-		int questionNumber = (int)(Math.random() * 30);
+		questionNumber = (int)(Math.random() * 30);
 		while(chosenQuestions[questionNumber] == true)
 		{
 			questionNumber = (int)(Math.random() * 30);
