@@ -26,7 +26,7 @@ public class LevelPanel extends JPanel implements ActionListener
     private String fullStoryText;
     private int charIndex;
 
-    private static final String[] STORIES = {"Oh no! High levels of radiation have been recorded near your lab. It appears that a Radiation Goblin is trying to enter your lab. Keep your chemicals safe and answer questions to defend your lab!", 
+    private final String[] STORIES = {"Oh no! High levels of radiation have been recorded near your lab. It appears that a Radiation Goblin is trying to enter your lab. Keep your chemicals safe and answer questions to defend your lab!", 
         "Congratulations! You've defeated the Radiation Goblin. Welcome to Level 2! But the danger isn't over — a Toxic Troll has caught wind of your powerful chemicals. It's collecting poisonous sludge to throw at your beakers. Answer quickly and keep your lab clean!",
         "Congratulations! You've driven off the Toxic Troll. Welcome to Level 3! A Plasma Phantom has materialized inside your ventilation system. It's disrupting your experiments with bursts of wild energy. Focus your knowledge and blast it out!", 
         "Congratulations! You've dissolved the Plasma Phantom. Welcome to Level 4! A Magma Marauder is melting through your lab's outer walls. Your fireproof containment units are at risk. Answer correctly to cool it down before it reaches your core samples!",
