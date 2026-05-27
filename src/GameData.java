@@ -93,7 +93,7 @@ public class GameData
 		questionCount++;
 		int counter = 0;
 
-		while(inFile.hasNext() && counter < 6 * questionNumber)
+		while(inFile.hasNextLine() && counter < 6 * questionNumber)
 		{
 			String line = inFile.nextLine();
 			counter++;
@@ -101,7 +101,7 @@ public class GameData
 		question = inFile.nextLine();
 
 		counter = 0;
-		while(inFile.hasNext() && counter < 4)
+		while(inFile.hasNextLine() && counter < 4)
 		{
 			answerSet[counter] = inFile.nextLine();
 			counter++;
