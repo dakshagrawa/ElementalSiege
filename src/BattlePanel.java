@@ -66,7 +66,6 @@ public class BattlePanel extends JPanel implements ActionListener
     private QuestionPanel questionPanel;
 
     public boolean startTimer;
-    public boolean isNextLevel;
 
     public BattlePanel(PageManager pageMngr, boolean doTimer)
     {
