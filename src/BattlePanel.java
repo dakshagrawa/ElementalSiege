@@ -313,7 +313,7 @@ public class BattlePanel extends JPanel implements ActionListener
         btn.setFocusPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFont(pm.normalBoldFont);
-        btn.setPreferredSize(new Dimension(180, 44)); // taller buttons
+        btn.setPreferredSize(new Dimension(180, 44)); //taller buttons
         btn.setActionCommand(command);
         btn.addActionListener(this);
         return btn;
