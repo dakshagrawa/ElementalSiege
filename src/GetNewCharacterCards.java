@@ -139,10 +139,14 @@ public class GetNewCharacterCards extends JPanel
 
 			try
 			{
-				Image scaled = characterImg.image.getScaledInstance(200, 280, Image.SCALE_SMOOTH);
-				setIcon(new ImageIcon(scaled));
+				if (characterImg.image != null) {
+					Image scaled = characterImg.image.getScaledInstance(200, 280, Image.SCALE_SMOOTH);
+					setIcon(new ImageIcon(scaled));
+				} else {
+					setText(characterImg.name);
+				}
 			}
-			catch (GameData.CharacterImage.CharacterInitializationException e)
+			catch (Exception e)
 			{
 				System.err.println("The " + characterImg.name + " could not be loaded.");
 				e.printStackTrace();
