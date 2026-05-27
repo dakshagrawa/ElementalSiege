@@ -61,25 +61,32 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		if(command.equals("<- Back"))
 		{
 			//Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName which might be incorrect when coming from ClosePanel
-            if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
-                pm.changePanelCardNoHistory(pm.lastCardName);
-            } else {
-                //Goes back to Title page if lastCardName is not valid
-                pm.changePanelCard("Title");
-            }
+			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
+				pm.changePanelCardNoHistory(pm.lastCardName);
+			} else {
+				//Goes back to Title page if lastCardName is not valid
+				pm.changePanelCard("Title");
+			}
 		}
 		else if(command.equals("Save & Exit"))
 		{
-			//Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName which might be incorrect when coming from ClosePanel
-			data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
-			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) 
-			{
-				pm.changePanelCardNoHistory(pm.lastCardName);
-			} 
-			else 
-			{
-				pm.changePanelCard("Title");
-			}
+		    // Save current battle progress if in battle, otherwise save saved progress
+		    if (pm.currentCardName.equals("Battle") && pm.battlePanel != null) {
+		        int currentHealth = pm.battlePanel.getUserHealth();
+		        int currentLevel = pm.battlePanel.getLevel();
+		        data.saveUserProgress(currentHealth, currentLevel);
+		    } else {
+		        // Fallback to saving previously saved progress (current behavior)
+		        data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
+		    }
+		    if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) 
+		    {
+		        pm.changePanelCardNoHistory(pm.lastCardName);
+		    } 
+		    else 
+		    {
+		        pm.changePanelCard("Title");
+		    }
 		}
 		else
 		{
