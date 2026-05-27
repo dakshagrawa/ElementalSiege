@@ -290,21 +290,13 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel = new JLabel("", SwingConstants.CENTER);
         if (img != null)
         {
-            BufferedImage buffered = (BufferedImage) img;
-            int artHeight;
-            if (buffered.getHeight() >= 350)
-            {
-                // full card loaded — crop to art only
-                // row 1 cards: 233px, row 2 cards: 225px, use 229 as safe middle
-                artHeight = 229;
-            }
-            else
-            {
-                artHeight = buffered.getHeight();
-            }
-            artHeight = Math.min(artHeight, buffered.getHeight());
-            BufferedImage cropped = buffered.getSubimage(0, 0, buffered.getWidth(), artHeight);
-            Image scaled = cropped.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            //crop top 62% to cut off the stat bars at the bottom of the spritesheet card
+            int cropHeight = (int)(img.getHeight(null) * 0.62);
+            BufferedImage cropped = ((BufferedImage) img).getSubimage(0, 0, img.getWidth(null), cropHeight);
+            // cale to fill the card width while keeping proportions
+            int displayWidth  = 200;
+            int displayHeight = (int)(cropHeight * ((double) displayWidth / img.getWidth(null)));
+            Image scaled = img.getScaledInstance(displayWidth, displayHeight, Image.SCALE_SMOOTH);
             imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
         }
         card.add(imgLabel, BorderLayout.CENTER);
