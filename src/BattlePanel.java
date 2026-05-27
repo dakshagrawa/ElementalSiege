@@ -239,9 +239,10 @@ public class BattlePanel extends JPanel implements ActionListener
 
     private JPanel makeCardShell(String name, String rarity, Image img)
     {
-        JPanel card = new JPanel(new BorderLayout(0, 4));
+         JPanel card = new JPanel(new BorderLayout(0, 4));
         card.setBackground(new Color(55, 55, 70));
         card.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+        card.setPreferredSize(new Dimension(211, 400)); //width of border should match the width of image
 
         JPanel header = new JPanel(new GridLayout(2, 1));
         header.setOpaque(false);
@@ -258,8 +259,13 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            Image scaled = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
+            //crops to only the top 65% of the card image to hide the stat bars that are already in the image -- we'll place the buttons over them
+            //artHeight describes height of just the avatar panel in each card
+            //artOnly is a new Image that scales to just the art and crops out the stat bars
+            int artHeight = (int)(img.getHeight(null) * 0.65);
+            Image artOnly = img.getScaledInstance(211, artHeight, Image.SCALE_SMOOTH);
+            imgLabel = new JLabel(new ImageIcon(artOnly), SwingConstants.CENTER);
+            imgLabel.setPreferredSize(new Dimension(211, artHeight));
         }
         else
         {
