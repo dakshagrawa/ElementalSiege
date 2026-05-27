@@ -1,3 +1,197 @@
+Topic: Atomic Structure
+Questions: 1, 2, 4, 9
+Everything in chemistry is made of atoms, so this is where every chemist begins.
+Atoms contain 3 main subatomic particles:
+Protons → positive charge (+)
+Neutrons → no charge (0)
+Electrons → negative charge (-)
+The number of protons is extremely important because it determines what element the atom is.
+For example:
+1 proton = Hydrogen
+6 protons = Carbon
+8 protons = Oxygen
+The atomic number ALWAYS equals the number of protons and is the main identification for elements.
+The mass number tells you the total particles in the nucleus:
+	Mass number = protons + neutrons.
+How to Solve Questions
+Need atomic number? → count protons
+Need mass number? → add protons + neutrons
+Negative particle? → electron
+Determines element identity? → proton
+
+
+
+Topic: Atomic Models & Scientists
+Questions: 3
+Over centuries, various scientists have proposed multiple models of visualizing atoms.
+Here are the major atomic models:
+Dalton → atoms are solid spheres
+Thomson → “plum pudding” model
+Rutherford → discovered the nucleus
+Bohr → electrons orbit in energy levels
+Bohr’s model is often called the planetary model because, in this model, electrons move around the nucleus like planets around the sun.
+How to Solve Questions
+Match the scientist to the discovery:
+Planetary model → Bohr
+Nucleus → Rutherford
+Plum pudding → Thomson
+Early atomic theory → Dalton
+
+
+
+Topic: Periodic Table and Electron Configuration
+Questions: 5, 8
+The periodic table organizes elements by their properties and atomic numbers.
+Elements in the same group (column) behave similarly.
+Each group has its own key property. For example, Group 17 contains the halogens, which are very reactive nonmetals like chlorine.
+Electrons are arranged in energy levels, also called shells, which is arranged in increasing order from left to right on the periodic table.
+Example:
+Sodium (Na) has 11 electrons, so the arrangement is: 2 - 8 - 1
+This means:
+2 electrons in first shell
+8 in second shell
+1 in third shell
+How to Solve Questions
+Find element groups using the periodic table
+Count total electrons
+Remember the maximum that each shell can hold
+1st → 2
+2nd → 8
+3rd → 8
+4th → 32
+Fill electron shells in order:
+first shell → 2
+second shell → 8
+third shell → continue filling
+
+
+
+Topic: Chemical Bonding
+Questions: 6, 7
+Atoms bond together to become more stable.
+There are two major bond types:
+Covalent Bonds
+atoms SHARE electrons
+usually between nonmetals (right side of periodic table)
+Example:
+H₂O
+CO₂
+Ionic Bonds
+electrons are TRANSFERRED
+usually between a metal and a non-metal
+Example:
+NaCl → table salt
+In ionic bonding, one atom gives electrons while another takes them. In covalent bonds, the atoms just tag along and keep the shared electron(s) between their electron shells.
+How to Solve Questions
+Shared electrons → covalent
+Transferred electrons → ionic
+Metal + nonmetal → ionic compound
+
+
+
+Topic: Acids, Bases, & pH
+Question: 10
+The pH scale measures how acidic or basic a substance is. Free-floating H+ ions in a substance make it acidic, while OH- ions make a substance basic. pH is calculated in relation to the concentration of each of these ions in a solution.
+pH ranges from 0 to 14:
+Below 7 → acidic
+Exactly 7 → neutral
+Above 7 → basic
+Pure water has a pH of 7, making it neutral.
+How to Solve Questions
+Memorize the pH scale:
+7 = neutral
+lower than 7 = acid
+higher than 7 = base
+
+
+
+Topic: States of Matter
+Question: 11
+Matter exists in different states depending on how particles move.
+Solids
+definite shape
+definite volume
+particles are held together in a rigid shape with little room for movement
+Liquids
+no definite shape – take on the shape of container
+definite volume
+more average kinetic energy in the particles = they’re moving more with more space in between them
+Gases
+no definite shape
+no definite volume
+these particles have the highest average kinetic energy of any other state of matter
+this means there is much more space between gas particles
+How to Solve Questions
+Ask:
+Does it keep its shape? → solid
+Does it keep only volume? → liquid
+Does it spread out completely? → gas
+
+
+
+Topic: Law of Conservation of Mass
+Question: 12
+The Law of Conservation of Mass states:
+Matter cannot be created or destroyed.
+During chemical reactions, atoms only rearrange. There is NO change in mass – the atoms we started with are also the atoms we end with, but in different structures.
+Even when substances change form, the amount of matter remains constant.
+How to Solve Questions
+If the question mentions:
+matter not being created or destroyed
+→ choose Law of Conservation of Mass
+
+
+
+Topic: Molar Mass
+Question: 13
+Molar mass tells you the mass of one mole of a substance. A mole is a unit of volume and one mole of substance is measured as 6.022 x 10^23 particles. Molar mass tells you how much 6.022 x 10^23 particles of a substance weigh in grams.
+To calculate molar mass:
+Find the element’s atomic mass
+Multiply the mass by the subscript in the chemical formula, if there is one
+If it’s a compound and there are multiple elements, add up each element’s molar mass
+Example for H₂O:
+Hydrogen: H has a subscript of 2 and H has an atomic mass of 1.01 on the periodic table → molar mass = 1.01 x 2 = 2.02
+Oxygen: O doesn’t have a subscript O has an atomic mass of 16.00 on the periodic table → molar mass = 16.00 x 1 = 16.00
+Total: 2.02 + 16.00 = 18.02
+H₂O has a molar mass of 18.02 grams/mole
+How to Solve Questions
+Steps:
+Find atomic masses on the periodic table
+Multiply by subscripts
+Add totals to find the molar mass of the compound
+
+
+
+Topic: Earth’s Atmosphere
+Question: 14
+Earth’s atmosphere contains several gases, but the most abundant of it all is nitrogen.
+Here’s the approximate atmosphere composition:
+Nitrogen → 78%
+Oxygen → 21%
+Other gases → small amounts
+How to Solve Questions
+The key thing to remember about this topic is that nitrogen is the most abundant in the atmosphere
+
+
+
+Topic: Gas Laws
+Question: 15
+Gas particles move constantly and collide with the walls of their container or other particles, creating pressure. This is because gas particles have high average kinetic energy and are constantly moving at high speed, which causes frequent collisions as the particles buzz around in the limited space of their container.
+When volume decreases, gas particles have less space, so they collide more often.
+That means:
+lower volume → higher pressure
+higher volume → lower pressure
+This relationship is called Boyle’s Law.
+PV = nRT
+Pressure x Volume = moles of gas x gas constant* x temperature
+*The gas constant is a constant number that states the proportionality between the amount of a substance and its temperature. 
+How to Solve Questions
+Remember:
+Pressure and volume are inversely related
+As volume decreases, pressure increases and vice versa.
+
+
+
 Topic: Reaction Types
 Questions: 16, 26, 47, 53
 Chemical reactions describe how substances change into new substances. Different reaction types follow recognizable patterns depending on what happens to the reactants.
