@@ -649,7 +649,7 @@ public class GameData
 
         public boolean parsedCharacterInfo(Scanner input)
 		{
-			if(input.hasNextLine() && input!=null)
+			if(input != null && input.hasNextLine())
 			{
 				try
 				{
