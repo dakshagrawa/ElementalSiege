@@ -73,7 +73,7 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(new EndGamePanel(this, true),  "You Win");      // user beats all 10 levels -- they win yay!
 
 		resumeOrNewGame = new ResumeOrNewGame(this);
-		add(resumeOrNewGame, "Resume Or New Game"); //if user logs in
+		mainPanel.add(resumeOrNewGame, "Resume Or New Game"); //if user logs in
 
 		mainPanel.add(new TutorialPanel(this, "Get New Cards 1"), "Tutorial"); //cards for each level
 		mainPanel.add(new LevelPanel(this, 1),  "Level 1");
