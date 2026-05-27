@@ -1,28 +1,251 @@
-Topic: Atomic Structure
-Questions: 1, 2, 4, 9
-Everything in chemistry is made of atoms, so this is where every chemist begins.
-Atoms contain 3 main subatomic particles:
-Protons → positive charge (+)
-Neutrons → no charge (0)
-Electrons → negative charge (-)
-The number of protons is extremely important because it determines what element the atom is.
-For example:
-1 proton = Hydrogen
-6 protons = Carbon
-8 protons = Oxygen
-The atomic number ALWAYS equals the number of protons and is the main identification for elements.
-The mass number tells you the total particles in the nucleus:
-	Mass number = protons + neutrons.
+Topic: Reaction Types
+Questions: 16, 26, 47, 53
+Chemical reactions describe how substances change into new substances. Different reaction types follow recognizable patterns depending on what happens to the reactants.
+Synthesis Reaction
+Two or more substances combine to form one product.
+General pattern:
+A + B → AB
+Decomposition Reaction
+One compound breaks apart into simpler substances.
+General pattern:
+AB → A + B
+Single Replacement Reaction
+One element replaces another element in a compound.
+General pattern:
+A + BC → AC + B
+Double Replacement Reaction
+Two compounds exchange ions with each other.
+General pattern:
+AB + CD → AD + CB
+Combustion Reaction
+A substance reacts with oxygen and releases energy, usually in the form of heat and light.
 How to Solve Questions
-Need atomic number? → count protons
-Need mass number? → add protons + neutrons
-Negative particle? → electron
-Determines element identity? → proton
+AB + CD → AD + CB → double replacement
+One compound breaking apart → decomposition
+Reaction with oxygen releasing energy → combustion
+Two substances joining together → synthesis
 
 
 
-Topic: Atomic Models & Scientists
-Questions: 3
+Topic: Oxidation Numbers & Redox
+Questions: 17, 37, 61
+Oxidation numbers represent the apparent charge an atom would have if electrons were completely transferred. Chemists use oxidation numbers to track electron movement in reactions.
+Important Rules:
+Pure elements by themselves always have an oxidation number of 0.
+Example:
+O2 = 0
+Oxygen in most compounds has an oxidation number of -2.
+Group 1 metals, like sodium, usually have an oxidation number of +1.
+Example:
+NaCl
+Na = +1
+Cl = -1
+How to Solve Questions
+Oxygen in compounds → usually -2
+Pure elements alone → 0
+Group 1 metals → +1
+
+
+
+Topic: Periodic Trends
+Questions: 18, 43, 58
+Periodic trends are patterns that occur across the periodic table. These trends help predict how elements behave chemically.
+Electronegativity:
+Electronegativity measures how strongly an atom attracts electrons in a bond. Electronegativity generally increases from left to right across the periodic table because atoms have more protons pulling on electrons.
+*Fluorine has the highest electronegativity of all elements.
+Metalloids:
+Metalloids have properties between metals and nonmetals. They may conduct electricity somewhat, but not as well as metals (e.x, silicon).
+Elements in the same group often have similar chemical properties because they have the same number of valence electrons.
+How to Solve Questions
+Highest electronegativity → fluorine
+Trend increasing left to right → electronegativity
+Element with mixed metal and nonmetal properties → metalloid
+Same group → similar chemical properties
+
+
+
+Topic: Mole Concept & Avogadro’s Number
+Questions: 19, 28
+A mole is a counting unit used in chemistry. Just like a dozen means 12 objects, a mole represents a very large number of particles.
+One mole contains:
+6.022 × 10^23 particles
+This number is called Avogadro’s number.
+Chemists use moles because atoms and molecules are extremely tiny, so counting them individually would be impossible.
+The SI unit for amount of substance is the mole.
+How to Solve Questions
+Avogadro’s number → 6.022 × 10^23
+SI unit for amount of substance → mole
+
+
+
+Topic: Acids, Bases, & Neutralization
+Questions: 20, 44, 46
+Acids release H+ ions in water, while bases release OH- ions. Acids and bases react together in neutralization reactions.
+Neutralization Reaction:
+Acid + Base → Salt + Water
+Some acids are considered strong acids because they completely ionize in water.
+Examples:
+HCl → hydrochloric acid
+H2SO4 → sulfuric acid
+Hydrochloric acid is considered a strong acid.
+How to Solve Questions
+H2SO4 → sulfuric acid
+Strong acid → hydrochloric acid
+Neutralization products → salt and water
+
+
+
+Topic: Phase Changes
+Questions: 21, 41
+Phase changes occur when matter changes from one state to another because of energy changes.
+Sublimation
+A solid changes directly into a gas without becoming a liquid first.
+Condensation
+A gas changes into a liquid.
+When condensation happens, particles slow down, move closer together, and release energy.
+How to Solve Questions
+Solid directly to gas → sublimation
+Gas to liquid → condensation
+
+
+
+Topic: Ions & Charges
+Questions: 22
+Atoms can gain or lose electrons to become ions.
+If an atom loses electrons, it becomes positively charged because it now has more protons than electrons.
+If an atom gains electrons, it becomes negatively charged due to the same reasoning → the negative charge value is greater than the positive charge of the protons.
+The likely charge of an atom is the charge that an element is most likely to change into, ideally. For example, elements in group 2A have 2 valence electrons and will try to lose these 2 electrons during interactions with other particle elements. This means that the likely charge of elements in group 2 is +2.
+How to Solve Questions
+Locate where the element is on the periodic table
+Identify group number
+If it’s a metal → positive charge
+Nonmetal → negative charge
+Use the group number and positive/negative to identify likely charge
+
+
+
+Topic: Orbitals & Electron Arrangement
+Questions: 23, 54
+Electrons exist in regions around the nucleus called orbitals. Orbitals are areas where electrons are most likely to be found. Different orbitals have different shapes and can hold different numbers of electrons.
+The s orbital is spherical and can hold a maximum of 2 electrons. Other orbitals, like p, d, and f orbitals, have more complex shapes and can hold more electrons.
+Quantum numbers are used to describe properties of electrons, including:
+energy level
+orbital shape
+orbital orientation
+electron spin
+The angular momentum quantum number specifically describes the shape of an orbital.
+How to Solve Questions
+s orbital maximum electrons → 2
+Orbital shape → angular momentum/quantum number
+Remember that different orbitals have different shapes and electron capacities
+
+
+
+Topic: Empirical Formulas
+Questions: 24
+An empirical formula shows the simplest whole-number ratio of atoms in a compound.
+Example:
+C6H12O6
+All subscripts can be divided by 6:
+CH2O
+CH2O is the empirical formula because it is the simplest ratio.
+How to Solve Questions
+Divide all subscripts by the greatest common factor
+E.x C6H12O6 → divide by 6 → CH2O
+
+
+
+Topic: Noble Gases
+Questions: 25
+Noble gases are found in Group 18 of the periodic table. These elements are very unreactive because their outer electron shells are full and stable.
+Examples:
+Helium
+Neon
+Argon
+Because noble gases already have full valence shells, they usually do not bond with other elements.
+How to Solve Questions
+Just remember that Group 18 elements are noble gases.
+
+
+
+Topic: Intermolecular Forces
+Questions: 27
+Intermolecular forces (IMFs) are forces of attraction between molecules. These forces are NOT actual chemical bonds like ionic or covalent bonds. Instead, they are weaker attractions that affect how molecules behave near each other.
+Intermolecular forces help explain many physical properties of substances, including: boiling point, melting point, surface tension, etc.
+In general:
+Stronger intermolecular forces → particles stick together more strongly
+Stronger IMFs = higher boiling points, higher melting points, and slower evaporation
+Weaker intermolecular forces → particles separate more easily
+Weaker IMFs = lower boiling points, faster evaporation
+There are several major types of intermolecular forces:
+London Dispersion Forces
+These are the weakest intermolecular forces and occur in ALL molecules. They happen because electrons move around constantly, creating temporary uneven charges.
+Dipole-Dipole Forces
+These occur in polar molecules, where one side of the molecule is slightly positive and the other side is slightly negative. Opposite charges attract each other.
+Hydrogen Bonding
+This is a particularly strong type of dipole-dipole force. Hydrogen bonding occurs when hydrogen is bonded to: Fluorine, Oxygen, or Nitrogen (FON molecules)
+Hydrogen bonding has key properties of having a high boiling point, high surface tension, and an ability to dissolve many substances
+Water molecules have hydrogen bonding, which is why water molecules “stick together” so well.
+How to Solve Questions
+ First, determine whether the molecules are polar or nonpolar. Polar molecules have uneven charge distribution, while nonpolar molecules have more even charge distribution.
+Then identify the strongest intermolecular force present:
+ Nonpolar molecules → usually London dispersion forces
+ Polar molecules → usually dipole-dipole forces
+ Hydrogen bonded to nitrogen, oxygen, or fluorine → hydrogen bonding
+Topic: Endothermic & Exothermic Reactions
+Questions: 28
+Chemical reactions either absorb or release energy.
+Endothermic Reactions – Absorb energy from the surroundings to facilitate the reaction
+This usually occurs when the reactants need energy to carry out the reaction to completion and transform into products.
+Exothermic Reactions – Release energy into the surroundings
+This occurs when the rearrangement of bonds in a chemical reaction releases energy (usually in the form of heat) as a product.
+Endothermic reactions often feel cold because they take in energy, while exothermic reactions feel warmer when the reaction is complete.
+How to Solve Questions
+Absorbs energy → endothermic
+Releases energy → exothermic
+
+
+
+Topic: Valence Electrons
+Questions: 30, 44
+Electrons are arranged in energy levels, also called shells, which are arranged in increasing order from left to right on the periodic table.
+Valence electrons are the electrons in the outermost shell of an atom. These electrons are responsible for bonding and chemical reactions.
+An atom always wants to have its outermost electron shell full. Any extra electrons that hinder this goal are called valence electrons. 
+The atom either wants to give away these electrons to drop down to its next full outer shell or gain more electrons to complete its current outermost shell. 
+Example:
+Sodium (Na) has 11 electrons, so the arrangement is: 2 - 8 - 1
+This means:
+2 electrons in first shell
+8 in second shell
+1 in third shell ← the third shell can normally hold up to 18 electrons, but it only has 1 right now, so it’s an incomplete shell
+How to Solve Questions
+To find the electron configuration:
+Find the element’s group using the periodic table
+Count total electrons
+Remember the maximum that each shell can hold
+1st → 2
+2nd → 8
+3rd → 8
+4th → 32
+Fill electron shells in order:
+first shell → 2
+second shell → 8
+third shell → continue filling
+
+
+
+Topic: Molecular Geometry & Polarity
+Questions: 31, 45, 62
+Molecular geometry describes the 3D shape of molecules based on how electron pairs repel each other.
+This shape is determined by the number of lone pairs of electrons and tells you the angle that is formed between central bonds.
+Molecular shape affects the polarity of a compound. For example, water is polar because its bent shape causes uneven charge distribution.
+How to Solve Questions
+To do molecular geometry questions, a VESPR chart is needed. Match the number of lone pairs and the steric number of your element to the chart’s columns and rows to identify the shape.
+
+
+
+Topic: Discovery of Subatomic Particles
+Questions: 32, 38
 Over centuries, various scientists have proposed multiple models of visualizing atoms.
 Here are the major atomic models:
 Dalton → atoms are solid spheres
@@ -39,155 +262,104 @@ Early atomic theory → Dalton
 
 
 
-Topic: Periodic Table and Electron Configuration
-Questions: 5, 8
-The periodic table organizes elements by their properties and atomic numbers.
-Elements in the same group (column) behave similarly.
-Each group has its own key property. For example, Group 17 contains the halogens, which are very reactive nonmetals like chlorine.
-Electrons are arranged in energy levels, also called shells, which is arranged in increasing order from left to right on the periodic table.
+Topic: Radiation
+Questions: 33
+Radiation is energy emitted from unstable atoms. There are several types of radiation with different charges and properties.
+Alpha Radiation
+Positive charge
+Beta Radiation
+Negative charge
+Gamma Radiation
+No charge and no mass
+Gamma radiation is pure energy and is highly penetrating.
+How to Solve Questions
+Radiation with no charge → gamma radiation
+
+
+
+Topic: Molarity
+Questions: 34
+Molarity measures the concentration of a solution.
+Formula:
+Molarity = moles of solute ÷ liters of solution
 Example:
-Sodium (Na) has 11 electrons, so the arrangement is: 2 - 8 - 1
-This means:
-2 electrons in first shell
-8 in second shell
-1 in third shell
+2 moles dissolved in 1 liter:
+2 ÷ 1 = 2 M
+A higher molarity means the solution is more concentrated.
 How to Solve Questions
-Find element groups using the periodic table
-Count total electrons
-Remember the maximum that each shell can hold
-1st → 2
-2nd → 8
-3rd → 8
-4th → 32
-Fill electron shells in order:
-first shell → 2
-second shell → 8
-third shell → continue filling
+Divide moles by liters
+2 moles ÷ 1 liter = 2 M
 
 
 
-Topic: Chemical Bonding
-Questions: 6, 7
-Atoms bond together to become more stable.
-There are two major bond types:
-Covalent Bonds
-atoms SHARE electrons
-usually between nonmetals (right side of periodic table)
+Topic: Alkali Metals
+Questions: 35
+Alkali metals are found in Group 1 of the periodic table.
+These metals are highly reactive because they only have 1 valence electron, which is easily lost during reactions.
+Reactivity increases as you move down the group because the outer electron is farther from the nucleus and easier to remove → higher possibility of a reaction occurring.
+How to Solve Questions
+To identify the most reactive element within group 1, find the element that is lowest in the group with a higher number of electron shells.
+
+
+
+Topic: Types of Solids
+Questions: 36
+Different solids are classified based on how their particles are held together.
+Ionic solids are made of positive and negative ions held together by strong electrostatic attractions.
+NaCl is an ionic solid because sodium and chlorine form ions that attract each other.
+How to Solve Questions
+Metal + metal → Covalent – electrons are shared, meaning electrons spend time in the electron clouds of multiple atoms
+Metal + non-metal → Ionic – electrons are distributed according to likely charges
+
+
+
+Topic: Balancing Equations
+Questions: 37
+Chemical equations must follow the Law of Conservation of Mass, meaning atoms cannot be created or destroyed.
+Balanced equations have the same number of each type of atom on both sides of the equation.
 Example:
-H₂O
-CO₂
-Ionic Bonds
-electrons are TRANSFERRED
-usually between a metal and a non-metal
-Example:
-NaCl → table salt
-In ionic bonding, one atom gives electrons while another takes them. In covalent bonds, the atoms just tag along and keep the shared electron(s) between their electron shells.
+2H2 + O2 → 2H2O
+The coefficient in front of O2 is 1.
+Coefficients tell how many molecules or moles are involved in the reaction.
 How to Solve Questions
-Shared electrons → covalent
-Transferred electrons → ionic
-Metal + nonmetal → ionic compound
+Count atoms on both sides carefully
+Coefficients are numbers placed before formulas
 
 
 
-Topic: Acids, Bases, & pH
-Question: 10
-The pH scale measures how acidic or basic a substance is. Free-floating H+ ions in a substance make it acidic, while OH- ions make a substance basic. pH is calculated in relation to the concentration of each of these ions in a solution.
-pH ranges from 0 to 14:
-Below 7 → acidic
-Exactly 7 → neutral
-Above 7 → basic
-Pure water has a pH of 7, making it neutral.
+Topic: Kinetic Molecular Theory
+Questions: 38
+The Kinetic Molecular Theory explains how gas particles behave.
+Gas particles:
+move constantly
+have high kinetic energy
+are very far apart
+Because there is so much empty space between gas particles, gases are compressible.
 How to Solve Questions
-Memorize the pH scale:
-7 = neutral
-lower than 7 = acid
-higher than 7 = base
+Gases are compressible because:
+gas particles are very far apart
 
 
 
-Topic: States of Matter
-Question: 11
-Matter exists in different states depending on how particles move.
-Solids
-definite shape
-definite volume
-particles are held together in a rigid shape with little room for movement
-Liquids
-no definite shape – take on the shape of container
-definite volume
-more average kinetic energy in the particles = they’re moving more with more space in between them
-Gases
-no definite shape
-no definite volume
-these particles have the highest average kinetic energy of any other state of matter
-this means there is much more space between gas particles
+Topic: Density
+Questions: 40
+Density measures how much mass exists in a certain amount of volume.
+Formula:
+Density = mass ÷ volume
+Dense substances have a lot of mass packed into a small space.
 How to Solve Questions
-Ask:
-Does it keep its shape? → solid
-Does it keep only volume? → liquid
-Does it spread out completely? → gas
+Density = mass ÷ volume
 
 
 
-Topic: Law of Conservation of Mass
-Question: 12
-The Law of Conservation of Mass states:
-Matter cannot be created or destroyed.
-During chemical reactions, atoms only rearrange. There is NO change in mass – the atoms we started with are also the atoms we end with, but in different structures.
-Even when substances change form, the amount of matter remains constant.
+Topic: Chemical Naming
+Questions: 42, 51
+Chemists use naming rules to identify compounds.
+Examples:
+NH3 → ammonia
+CaCO3 → calcium carbonate
+Memorizing common compound names is important because many compounds are referred to by name instead of formula.
 How to Solve Questions
-If the question mentions:
-matter not being created or destroyed
-→ choose Law of Conservation of Mass
-
-
-
-Topic: Molar Mass
-Question: 13
-Molar mass tells you the mass of one mole of a substance. A mole is a unit of volume and one mole of substance is measured as 6.022 x 10^23 particles. Molar mass tells you how much 6.022 x 10^23 particles of a substance weigh in grams.
-To calculate molar mass:
-Find the element’s atomic mass
-Multiply the mass by the subscript in the chemical formula, if there is one
-If it’s a compound and there are multiple elements, add up each element’s molar mass
-Example for H₂O:
-Hydrogen: H has a subscript of 2 and H has an atomic mass of 1.01 on the periodic table → molar mass = 1.01 x 2 = 2.02
-Oxygen: O doesn’t have a subscript O has an atomic mass of 16.00 on the periodic table → molar mass = 16.00 x 1 = 16.00
-Total: 2.02 + 16.00 = 18.02
-H₂O has a molar mass of 18.02 grams/mole
-How to Solve Questions
-Steps:
-Find atomic masses on the periodic table
-Multiply by subscripts
-Add totals to find the molar mass of the compound
-
-
-
-
-Topic: Earth’s Atmosphere
-Question: 14
-Earth’s atmosphere contains several gases, but the most abundant of it all is nitrogen.
-Here’s the approximate atmosphere composition:
-Nitrogen → 78%
-Oxygen → 21%
-Other gases → small amounts
-How to Solve Questions
-The key thing to remember about this topic is that nitrogen is the most abundant in the atmosphere
-
-
-
-Topic: Gas Laws
-Question: 15
-Gas particles move constantly and collide with the walls of their container or other particles, creating pressure. This is because gas particles have high average kinetic energy and are constantly moving at high speed, which causes frequent collisions as the particles buzz around in the limited space of their container.
-When volume decreases, gas particles have less space, so they collide more often.
-That means:
-lower volume → higher pressure
-higher volume → lower pressure
-This relationship is called Boyle’s Law.
-PV = nRT
-Pressure x Volume = moles of gas x gas constant* x temperature
-*The gas constant is a constant number that states the proportionality between the amount of a substance and its temperature. 
-How to Solve Questions
-Remember:
-Pressure and volume are inversely related
-As volume decreases, pressure increases and vice versa.
+NH3 → ammonia
+CaCO3 → calcium carbonate
 
