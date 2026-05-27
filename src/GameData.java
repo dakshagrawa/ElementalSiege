@@ -31,6 +31,9 @@ public class GameData
 	private int savedHealth;
 	private int savedLevel;
 	private String userDataFileName = "../storedData/UsersGameData.txt";
+
+	private int currentQuestionNumber; //question number that's being displayed -- will later be passed into 
+	//Explanation panel methods in case user gets question wrong
 	
 	public GameData(PageManager pageMngr)
 	{
@@ -99,6 +102,13 @@ public class GameData
 		}
 		correctAnswer = inFile.nextInt() -1;
 		inFile.close();
+
+		int questionNumber = (int)(Math.random() * 30);
+		while(chosenQuestions[questionNumber] == true)
+		{
+			questionNumber = (int)(Math.random() * 30);
+		}
+		currentQuestionNumber = questionNumber + 1; // +1 because questions in file start at 1
 	}
 	
 	public void setName(String f, String l)
@@ -397,91 +407,91 @@ public class GameData
 			System.out.println("No saved data found for " + inName + ". Starting fresh.");
 	}
 
-public void saveUserProgress(int currentHealth, int currentLevel)
-{
-    //Will read entire file into a string
-    StringBuilder allContent = new StringBuilder();
-    Scanner input = null;
-    try
-    {
-        input = new Scanner(new File(userDataFileName));
-    }
-    catch (FileNotFoundException e)
-    {
-        //File doesn't exist yet, will be created fresh
-    }
+	public void saveUserProgress(int currentHealth, int currentLevel)
+	{
+		//Will read entire file into a string
+		StringBuilder allContent = new StringBuilder();
+		Scanner input = null;
+		try
+		{
+			input = new Scanner(new File(userDataFileName));
+		}
+		catch (FileNotFoundException e)
+		{
+			//File doesn't exist yet, will be created fresh
+		}
 
-    boolean foundUser = false;
-    boolean inUserBlock = false;
+		boolean foundUser = false;
+		boolean inUserBlock = false;
 
-    if (input != null)
-    {
-        while (input.hasNextLine())
-        {
-            String line = input.nextLine().trim();
+		if (input != null)
+		{
+			while (input.hasNextLine())
+			{
+				String line = input.nextLine().trim();
 
-            if (line.equals("U: " + username))
-            {
-                foundUser = true;
-                inUserBlock = true;
-                //Write an updated block instead of old one
-                allContent.append(buildUserBlock(currentHealth, currentLevel));
-            }
-            else if (inUserBlock && (line.startsWith("H: ") || line.startsWith("L: ") || line.startsWith("C: ")))
-            {
-                //Skip old lines for current user — already replaced above
-            }
-            else
-            {
-                inUserBlock = false;
-                allContent.append(line).append("\n");
-            }
-        }
-        input.close();
-    }
+				if (line.equals("U: " + username))
+				{
+					foundUser = true;
+					inUserBlock = true;
+					//Write an updated block instead of old one
+					allContent.append(buildUserBlock(currentHealth, currentLevel));
+				}
+				else if (inUserBlock && (line.startsWith("H: ") || line.startsWith("L: ") || line.startsWith("C: ")))
+				{
+					//Skip old lines for current user — already replaced above
+				}
+				else
+				{
+					inUserBlock = false;
+					allContent.append(line).append("\n");
+				}
+			}
+			input.close();
+		}
 
-    //If user wasn't in file at all, add them
-    if (!foundUser)
-    {
-        allContent.append(buildUserBlock(currentHealth, currentLevel));
-    }
+		//If user wasn't in file at all, add them
+		if (!foundUser)
+		{
+			allContent.append(buildUserBlock(currentHealth, currentLevel));
+		}
 
-    //Write everything back
-    PrintWriter output = null;
-    try
-    {
-        output = new PrintWriter(new File(userDataFileName));
-        output.print(allContent.toString());
-        output.close();
-    }
-    catch (FileNotFoundException e)
-    {
-        System.err.println("Could not save user progress: " + e);
-    }
-}
+		//Write everything back
+		PrintWriter output = null;
+		try
+		{
+			output = new PrintWriter(new File(userDataFileName));
+			output.print(allContent.toString());
+			output.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			System.err.println("Could not save user progress: " + e);
+		}
+	}
 
-private String buildUserBlock(int currentHealth, int currentLevel)
-{
-    StringBuilder block = new StringBuilder();
-    block.append("U: ").append(username).append("\n");
-    block.append("H: ").append(currentHealth).append("\n");
-    block.append("L: ").append(currentLevel).append("\n");
+	private String buildUserBlock(int currentHealth, int currentLevel)
+	{
+		StringBuilder block = new StringBuilder();
+		block.append("U: ").append(username).append("\n");
+		block.append("H: ").append(currentHealth).append("\n");
+		block.append("L: ").append(currentLevel).append("\n");
 
-    //Build a string array to store index of cards e.g. [0, 3, 7]
-    block.append("C: [");
-    boolean first = true;
-    for (int i = 0; i < userCharacters.length; i++)
-    {
-        if (userCharacters[i] != -1)
-        {
-            if (!first) block.append(", ");
-            block.append(userCharacters[i]);
-            first = false;
-        }
-    }
-    block.append("]\n");
-    return block.toString();
-}
+		//Build a string array to store index of cards e.g. [0, 3, 7]
+		block.append("C: [");
+		boolean first = true;
+		for (int i = 0; i < userCharacters.length; i++)
+		{
+			if (userCharacters[i] != -1)
+			{
+				if (!first) block.append(", ");
+				block.append(userCharacters[i]);
+				first = false;
+			}
+		}
+		block.append("]\n");
+		return block.toString();
+	}
 
 	public boolean putAccountInFile(String inName, char[] inPwd, boolean passwordCorrectlyRepeated)
 	{
@@ -563,6 +573,11 @@ private String buildUserBlock(int currentHealth, int currentLevel)
 				counter++;
 			}
 		}
+	}
+
+	public int getCurrentQuestionNumber()
+	{
+		return currentQuestionNumber;
 	}
 
 	public static class CharacterImage 

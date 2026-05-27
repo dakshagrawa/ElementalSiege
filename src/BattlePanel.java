@@ -289,10 +289,14 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel;
         if (img != null)
         {
-            int artHeight = (int)(img.getHeight(null) * 0.65);
-            Image artOnly = img.getScaledInstance(211, artHeight, Image.SCALE_SMOOTH);
-            imgLabel = new JLabel(new ImageIcon(artOnly), SwingConstants.CENTER);
-            imgLabel.setPreferredSize(new Dimension(211, artHeight));
+            //crop top 62% to cut off the stat bars at the bottom of the spritesheet card
+            int cropHeight = (int)(img.getHeight(null) * 0.62);
+            BufferedImage cropped = ((BufferedImage) img).getSubimage(0, 0, img.getWidth(null), cropHeight);
+            // cale to fill the card width while keeping proportions
+            int displayWidth  = 200;
+            int displayHeight = (int)(cropHeight * ((double) displayWidth / img.getWidth(null)));
+            Image scaled = cropped.getScaledInstance(displayWidth, displayHeight, Image.SCALE_SMOOTH);
+            imgLabel = new JLabel(new ImageIcon(scaled), SwingConstants.CENTER);
         }
         else
         {
@@ -313,13 +317,15 @@ public class BattlePanel extends JPanel implements ActionListener
         btn.setBorderPainted(false);
         btn.setFocusPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn.setFont(pm.normalFont);
+        btn.setFont(pm.normalBoldFont);
+        btn.setPreferredSize(new Dimension(180, 44)); // taller buttons
         btn.setActionCommand(command);
         btn.addActionListener(this);
         return btn;
     }
 
-    private void highlightButton(JButton btn, boolean highlight)
+    private void highlightButton(JButton btn, boolean highlight) //when user clicks on an attribute, that attribute is given an
+    //extra yellow border to higlight it
     {
         if (highlight)
         {

@@ -151,7 +151,7 @@ public class QuestionPanel extends JPanel
 					battle.resolveRound(lastAnswerCorrect);
 					if (!lastAnswerCorrect)
 					{
-						pm.explanationPanel.loadExplanation(data.getQuestionCount());
+						pm.explanationPanel.loadExplanation(data.getCurrentQuestionNumber());
 						pm.changePanelCard("Explanation");
 					}
 					else
