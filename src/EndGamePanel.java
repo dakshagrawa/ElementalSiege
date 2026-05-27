@@ -130,6 +130,11 @@ public class EndGamePanel extends JPanel implements ActionListener
             data.resetProgress();
             pm.battlePanel.level = 1;
             pm.battlePanel.userHealth = 100;
+            pm.battlePanel.enemyHealth = (int)(1 * 1.7) + 17;
+            pm.battlePanel.maxEnemyHealth = pm.battlePanel.enemyHealth;
+            pm.battlePanel.streak = 0;
+            if (pm.battlePanel.displayTimer != null) pm.battlePanel.displayTimer.stop();
+            if (pm.battlePanel.delay != null) pm.battlePanel.delay.stop();
             pm.changePanelCard("Level 1");
         }
         else if (cmd.equals("Quit"))
