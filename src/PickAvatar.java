@@ -91,9 +91,10 @@ public class PickAvatar extends JPanel
 			public void paintComponent(Graphics g)
 			{
 				super.paintComponent(g);
+				if (avatarImg == null) return;
 				double scale = (double) getWidth() / avatarImg.getWidth(null);
-                int finalHeight = (int) (avatarImg.getHeight(null) * scale);
-                g.drawImage(avatarImg, 15, 15+((getHeight()/2)-(finalHeight/2)), getWidth()-30, finalHeight-30, this);
+				int finalHeight = (int) (avatarImg.getHeight(null) * scale);
+				g.drawImage(avatarImg, 15, 15+((getHeight()/2)-(finalHeight/2)), getWidth()-30, finalHeight-30, this);
 			}
 
 			public void mouseClicked(MouseEvent e) 
