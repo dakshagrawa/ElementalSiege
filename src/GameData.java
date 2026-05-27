@@ -569,7 +569,12 @@ public class GameData
 		{
 			for (int pic1_j = 0; pic1_j < 2; pic1_j++) 
 			{
-				characters[counter] = new CharacterImage(pic1,30+(224*pic1_i),25+(364*pic1_j),211,354, inputCharacterInfo);
+				int artH;
+				if (pic1_j == 0)
+					artH = 233;
+				else
+					artH = 225;
+				characters[counter] = new CharacterImage(pic1,30+(224*pic1_i),25+(364*pic1_j),211,artH, inputCharacterInfo);
 				counter++;
 			}
 		}
