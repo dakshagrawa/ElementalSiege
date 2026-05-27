@@ -32,14 +32,12 @@ public class GetNewCharacterCards extends JPanel
 	private void buildLayout()
 	{
 		setLayout(new BorderLayout(0, 30));
-		setBackground(new Color(169, 169, 169));
+		setBackground(new Color(30, 30, 50));
 		setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
 
-		JLabel heading = new JLabel("Pick 1 Card:"
-		
-		
-		, SwingConstants.CENTER);
+		JLabel heading = new JLabel("Pick 1 Card:", SwingConstants.CENTER);
 		heading.setFont(pm.titleFont);
+		heading.setForeground(Color.WHITE);
 		add(heading, BorderLayout.NORTH);
 
 		add(new CharacterCardsGrid(), BorderLayout.CENTER);
@@ -97,13 +95,16 @@ public class GetNewCharacterCards extends JPanel
 			character = characterIdx;
 			characterImg = data.characters[character];
 
-			setBackground(new Color(215, 200, 169));
+			setOpaque(false);
+			setContentAreaFilled(false);
+			setBorderPainted(false);
 			setFocusPainted(false);
 			setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 			try
 			{
-				setIcon(new ImageIcon(characterImg.image));
+				Image scaled = characterImg.image.getScaledInstance(200, 280, Image.SCALE_SMOOTH);
+				setIcon(new ImageIcon(scaled));
 			}
 			catch (GameData.CharacterImage.CharacterInitializationException e)
 			{
@@ -112,7 +113,7 @@ public class GetNewCharacterCards extends JPanel
 				setText(characterImg.name);
 			}
 
-			setPreferredSize(new Dimension(characterImg.width, characterImg.height));
+			setPreferredSize(new Dimension(200, 280));
 			addActionListener(this);
 		}
 
