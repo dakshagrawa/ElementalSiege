@@ -62,7 +62,7 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(new GetNewCharacterCards(this, 1),"Get New Cards 1"); //panels that allow user to choose their 4 cards
 		mainPanel.add(new GetNewCharacterCards(this, 2),"Get New Cards 2");
 		mainPanel.add(new GetNewCharacterCards(this, 3),"Get New Cards 3");
-		mainPanel.add(new GetNewCharacterCards(this, "Questions"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
+		mainPanel.add(new GetNewCharacterCards(this, "Level 1"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
 		battlePanel = new BattlePanel(this, false);
 		mainPanel.add(battlePanel,"Battle"); //"battle" scene after each question
 		mainPanel.add(new QuestionPanel(this, battlePanel),"Questions"); //question panel

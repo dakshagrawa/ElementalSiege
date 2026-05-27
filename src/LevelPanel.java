@@ -159,7 +159,7 @@ public class LevelPanel extends JPanel implements ActionListener
         }
         else
         {
-            pm.changePanelCard("Battle");
+            pm.changePanelCard("Questions");
         }
     }
 }
