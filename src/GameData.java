@@ -59,7 +59,7 @@ public class GameData
 			answerSet[i] = "";
 		}
 		correctAnswer = -1;
-		chosenQuestions = new boolean[65];
+		chosenQuestions = new boolean[30];
 		questionCount = correctCount = 0;
 	}
 
@@ -78,10 +78,10 @@ public class GameData
 			System.err.println(e);
 			System.exit(1);
 		}
-		int questionNumber = (int)(Math.random() * 65);
+		int questionNumber = (int)(Math.random() * 30);
 		while(chosenQuestions[questionNumber] == true)
 		{
-			questionNumber = (int)(Math.random() * 65);
+			questionNumber = (int)(Math.random() * 30);
 		}
 		chosenQuestions[questionNumber] = true;
 		questionCount++;

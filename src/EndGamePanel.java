@@ -68,15 +68,18 @@ public class EndGamePanel extends JPanel implements ActionListener
 
         String line1, line2, line3;
 
+        String username = data.getUsername();
+        if (username == null || username.isEmpty()) username = "Defender";
+
         if (playerWon)
         {
-            line1 = "Congratulations, " + data.getUsername() + "!";
+            line1 = "Congratulations, " + username + "!";
             line2 = "You defeated all 10 enemies and saved your lab from destruction.";
             line3 = "Science is safe — for now. Well done, defender!";
         }
         else
         {
-            line1 = "Your lab has been overtaken, " + data.getUsername() + ".";
+            line1 = "Your lab has been overtaken, " + username + ".";
             line2 = "Your health dropped to zero and the enemy broke through.";
             line3 = "Better luck next time — the lab needs you!";
         }
@@ -125,6 +128,8 @@ public class EndGamePanel extends JPanel implements ActionListener
         if (cmd.equals("Play Again"))
         {
             data.resetProgress();
+            pm.battlePanel.level = 1;
+            pm.battlePanel.userHealth = 100;
             pm.changePanelCard("Level 1");
         }
         else if (cmd.equals("Quit"))

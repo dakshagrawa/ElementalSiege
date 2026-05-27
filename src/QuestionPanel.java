@@ -56,9 +56,16 @@ public class QuestionPanel extends JPanel
 		add(third, "3");
 	}
 
+	public void reloadQuestion()
+	{
+		data.grabQuestionFromFile();
+		QuestionsPanel qp = new QuestionsPanel(pm, listOfCards, this);
+		add(qp, "2");
+		listOfCards.show(this, "2");
+	}
+
 	public class QuestionsPanel extends JPanel implements ActionListener
 	{
-		private GameData data;
 		private CardLayout listOfCards;
 		private QuestionPanel primaryPanel;
 		private ButtonGroup group;
@@ -118,13 +125,15 @@ public class QuestionPanel extends JPanel
 		public void actionPerformed(ActionEvent evt) //check if answer choice is correct -- called when a radio button is clicked
 		{
 			lastAnswerCorrect = false;
-			answer[data.getCorrectAnswer()].setBackground(Color.GREEN);
+			int correctIdx = data.getCorrectAnswer();
+			if (correctIdx >= 0 && correctIdx < answer.length)
+				answer[correctIdx].setBackground(Color.GREEN);
 
 			for (int i = 0; i < answer.length; i++)
 			{
 				if (answer[i].isSelected())
 				{
-					if (i != data.getCorrectAnswer())
+					if (i != correctIdx)
 					{
 						answer[i].setBackground(Color.RED);
 					}
@@ -251,8 +260,6 @@ public class QuestionPanel extends JPanel
 		{
 			super.paintComponent(g);
 			scoreInfo.setText("" + data.toString());
-			highScoresArea.setText("" + data.getHighScores());
-			highScoresArea.setCaretPosition(0);
 		}
 
 		public void actionPerformed(ActionEvent evt)

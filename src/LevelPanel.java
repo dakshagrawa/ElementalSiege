@@ -26,7 +26,7 @@ public class LevelPanel extends JPanel implements ActionListener
     private String fullStoryText;
     private int charIndex;
 
-    private static final String[] STORIES = {"Oh no! High levels of radiation have been recorded near your lab. It appears that a Radiation Goblin is trying to enter your lab. Keep your chemicals safe and answer questions to defend your lab!", 
+    private String[] STORIES = {"Oh no! High levels of radiation have been recorded near your lab. It appears that a Radiation Goblin is trying to enter your lab. Keep your chemicals safe and answer questions to defend your lab!", 
         "Congratulations! You've defeated the Radiation Goblin. Welcome to Level 2! But the danger isn't over — a Toxic Troll has caught wind of your powerful chemicals. It's collecting poisonous sludge to throw at your beakers. Answer quickly and keep your lab clean!",
         "Congratulations! You've driven off the Toxic Troll. Welcome to Level 3! A Plasma Phantom has materialized inside your ventilation system. It's disrupting your experiments with bursts of wild energy. Focus your knowledge and blast it out!", 
         "Congratulations! You've dissolved the Plasma Phantom. Welcome to Level 4! A Magma Marauder is melting through your lab's outer walls. Your fireproof containment units are at risk. Answer correctly to cool it down before it reaches your core samples!",
@@ -118,7 +118,7 @@ public class LevelPanel extends JPanel implements ActionListener
         continueBtn.setFocusPainted(false);
         continueBtn.setFont(pm.normalBoldFont);
         continueBtn.addActionListener(this);
-        continueBtn.setVisible(true); 
+        continueBtn.setVisible(false);
         continueBtn.setBounds(archX + (archWidth / 2) - 110, archY + archHeight - 70, 220, 44);
         add(continueBtn);
     }
@@ -127,7 +127,7 @@ public class LevelPanel extends JPanel implements ActionListener
     {
         charIndex = 0;
         storyLabel.setText("");
-        continueBtn.setVisible(true); 
+        continueBtn.setVisible(false);
 
         typewriterTimer = new Timer(28, new TypewriterTimer());
         typewriterTimer.start();
@@ -145,6 +145,7 @@ public class LevelPanel extends JPanel implements ActionListener
             else
             {
                 typewriterTimer.stop();
+                continueBtn.setVisible(true);
             }
         }
     }
@@ -155,7 +156,8 @@ public class LevelPanel extends JPanel implements ActionListener
         {
             typewriterTimer.stop();
         }
-        
+
+        pm.reloadQuestions();
         pm.changePanelCard("Questions");
     }
 }

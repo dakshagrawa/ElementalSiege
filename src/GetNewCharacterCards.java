@@ -99,6 +99,15 @@ public class GetNewCharacterCards extends JPanel
                 do {
                     randomIdx = poolList.get((int)(Math.random() * poolList.size()));
                     validSelection = !selectedIndices.contains(randomIdx);
+                    // also check not already owned
+                    if (validSelection) {
+                        for (int k = 0; k < data.userCharacters.length; k++) {
+                            if (data.userCharacters[k] == randomIdx) {
+                                validSelection = false;
+                                break;
+                            }
+                        }
+                    }
                 } while (!validSelection);
                 
                 selectedIndices.add(randomIdx);

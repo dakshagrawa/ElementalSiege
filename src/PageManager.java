@@ -34,6 +34,7 @@ public class PageManager extends JLayeredPane
 	public ExplanationPanel explanationPanel;
 	public ResumeOrNewGame resumeOrNewGame;
     public BattlePanel battlePanel;
+    public QuestionPanel questionPanel;
     private JButton settingsBtn;
 
 	private JPanel mainPanel;
@@ -65,7 +66,8 @@ public class PageManager extends JLayeredPane
 		mainPanel.add(new GetNewCharacterCards(this, "Level 1"),"Get New Cards 4"); //no page number entered, bcs it is the last one, nextPanelName entered
 		battlePanel = new BattlePanel(this, false);
 		mainPanel.add(battlePanel,"Battle"); //"battle" scene after each question
-		mainPanel.add(new QuestionPanel(this, battlePanel),"Questions"); //question panel
+		questionPanel = new QuestionPanel(this, battlePanel);
+		mainPanel.add(questionPanel,"Questions"); //question panel
 		mainPanel.add(new HomePanel(this, battlePanel), "newLevel"); //panel between each round -- open when user defeats enemy
 
 		mainPanel.add(new EndGamePanel(this, false), "Game Over");    // user health hit 0 -- they lost
@@ -94,6 +96,13 @@ public class PageManager extends JLayeredPane
 		lastCardName = "Title";
 		currentCardName = "Title";
 		changePanelCard(currentCardName);
+	}
+
+	public void reloadQuestions()
+	{
+		if (questionPanel != null) {
+			questionPanel.reloadQuestion();
+		}
 	}
 
 	public void changePanelCard(String cardName)

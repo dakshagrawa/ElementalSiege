@@ -140,6 +140,9 @@ public class BattlePanel extends JPanel implements ActionListener
     public void drawNewCards()
     {
         maxEnemyHealth = (int)(level * 1.7) + 17;
+        enemyHealthPanel.setMax(maxEnemyHealth);
+        if (enemyHealth > maxEnemyHealth)
+            enemyHealth = maxEnemyHealth;
 
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
@@ -198,7 +201,8 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            delay.stop();
+            if (delay != null)
+                delay.stop();
             pm.changePanelCard("Questions");
         }
     }
@@ -466,7 +470,7 @@ public class BattlePanel extends JPanel implements ActionListener
         {
             // Reset progress on game over to prevent softlocks
             pm.getGameData().saveUserProgress(100, 1);
-            pm.changePanelCard("gameEnd");
+            pm.changePanelCard("Game Over");
             if (displayTimer != null) displayTimer.stop();
             if (delay != null) delay.stop();
         }
@@ -477,19 +481,19 @@ public class BattlePanel extends JPanel implements ActionListener
                 // Reset progress on final victory to prevent softlocks
                 pm.getGameData().saveUserProgress(100, 1);
                 pm.changePanelCard("You Win");
-                if (displayTimer != null) 
+                if (displayTimer != null)
                     displayTimer.stop();
-                if (delay != null) 
+                if (delay != null)
                     delay.stop();
             }
             else
             {
-                displayTimer.stop();
-                delay.stop();
-                data.resetAll();
+                if (displayTimer != null) displayTimer.stop();
+                if (delay != null) delay.stop();
                 level++;
                 enemyHealth = (int)(level * 1.7) + 17;
                 maxEnemyHealth = enemyHealth;
+                enemyHealthPanel.setMax(maxEnemyHealth);
                 userHealthPanel.setHealth(userHealth);
                 enemyHealthPanel.setHealth(enemyHealth);
                 pm.changePanelCard("Level " + level);
@@ -497,6 +501,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         else
         {
+            if (delay != null) delay.stop();
             delay = new Timer(6000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
@@ -568,6 +573,13 @@ public class BattlePanel extends JPanel implements ActionListener
                 bar.setForeground(barColor);
 
             repaint();
+        }
+
+        public void setMax(int newMax)
+        {
+            max = newMax;
+            bar.setMaximum(max);
+            label.setText(label.getText().split(":")[0] + ": " + current + "/" + max);
         }
     }
 
