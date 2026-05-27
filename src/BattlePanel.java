@@ -547,6 +547,7 @@ public class BattlePanel extends JPanel implements ActionListener
         String cmd = e.getActionCommand();
         if (cmd.equals("problemsolving") || cmd.equals("curiosity") || cmd.equals("wisdom"))
         {
+            if (!attributeButtonsEnabled) return;
             doResolution(cmd);
         }
     }
