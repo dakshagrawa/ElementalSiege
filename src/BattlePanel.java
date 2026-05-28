@@ -178,7 +178,7 @@ public class BattlePanel extends JPanel implements ActionListener
 
         int[] temp = new int[4];
         int j = 0;
-        for(int i = 0; i < data.userCharacters.length)
+        for(int i = 0; i < data.userCharacters.length; i++)
         {
             if(data.userCharacters[i]>=0)
             {
