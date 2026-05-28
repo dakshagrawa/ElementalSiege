@@ -51,18 +51,18 @@ public class TutorialPanel extends JPanel implements ActionListener
 
     private static final String[] TEXTS = {"Here's a quick tutorial to get you ready for battle.",
         "You are a chemistry researcher. Your goal is to defend your laboratory against invading monsters. Battles take place by comparing cards.",
-        "In the next screen, choose four cards. Pick cards with the highest numbers next to Problem Solving, Wisdom, and Curiosity.",
+        "In the next screen, you'll get to choose four cards. Pick cards with the highest numbers next to Problem Solving, Wisdom, and Curiosity.",
         "After answering a question, a card is randomly chosen from your collection. Pick an attribute from your card to compete with.",
         "The enemy's card flips over. The game compares the number value of the attribute you picked on both cards. Higher value = you deal damage. Lower value = you take damage.",
         "Damage is based on the difference between the two values. Example: if enemy Curiosity is 2 higher than yours, you lose 2 health.",
         "There are 10 levels until victory and the starting health of the enemy will keep increasing in each level. If your health drops to 0 at any point in the game, you have lost and your lab has been sacrificed.",
         "You've got the knowledge. Now go defend the lab!"};
 
-    private static final String[] IMAGE_NAMES = {null, null, "tutorial_get_cards.png", "tutorial_battle.png", "tutorial_reveal.png",
+    private static final String[] IMAGE_NAMES = {"tutorial_opening.png", "tutorial_objective.png", "tutorial_get_cards.png", "tutorial_battle.png", "tutorial_reveal.png",
         "tutorial_damage.png", "tutorial_health.png", null};
 
-       //null opening slide -- heading: no image 
-       //null objective slide -- mission: no image
+       //null opening slide -- heading: opening screen of game, title page
+       //null objective slide -- mission: chemist stock photo
        //"tutorial_get_cards.png" - getNewCharacterCards panel screenshot
        //"tutorial_battle.png" -- battle scene screenshot
        //"tutorial_reveal.png" -- card reveal screenshot
