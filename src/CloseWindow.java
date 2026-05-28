@@ -12,7 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class CloseWindow extends JPanel
+public class CloseWindow extends JPanel //when user tries to close the window, this panel will pop up to ask the user if they're sure
+//about the closign the game -- if they say no, it will let them get back to whatever panel they're on and if they say yes, game will close
 {
 	private PageManager pm;
 	private GameData data;
@@ -27,10 +28,8 @@ public class CloseWindow extends JPanel
 
 		JPanel card = new JPanel(new BorderLayout(0, 20));
 		card.setBackground(new Color(22, 22, 40, 240));
-		card.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1),
-			BorderFactory.createEmptyBorder(30, 40, 30, 40)
-		));
+		card.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1), BorderFactory.createEmptyBorder(30, 40, 30, 40)));
+		//border outline the pop up in black to make it clear to user
 		card.setPreferredSize(new Dimension(520, 200));
 
 		card.add(closeLabel(), BorderLayout.NORTH);
@@ -43,7 +42,7 @@ public class CloseWindow extends JPanel
 	{
 		JLabel label = new JLabel("Exit without saving?", SwingConstants.CENTER);
 		label.setFont(pm.titleFont);
-		label.setForeground(new Color(255, 200, 100));
+		label.setForeground(new Color(255, 200, 100)); //pale yellow for background of pop up
 		return label;
 	}
 
@@ -56,7 +55,7 @@ public class CloseWindow extends JPanel
 
 			JButton no = pm.new Button1("Cancel", Color.WHITE, new Color(80, 80, 100));
 			no.setPreferredSize(new Dimension(200, 44));
-			pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getBackground());
+			pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getBackground()); //hoverEffect method from pageManager highlights buttton when user hovers
 			no.addActionListener(this);
 
 			JButton yes = pm.new Button1("Exit", Color.WHITE, new Color(160, 60, 60));

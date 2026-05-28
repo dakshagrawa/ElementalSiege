@@ -135,12 +135,14 @@ public class PageManager extends JLayeredPane
 		return data;
 	}
 
-	public void addHoverEffect(JButton btn, Color onHoverFgColor, Color onHoverBgColor)
+	public void addHoverEffect(JButton btn, Color onHoverFgColor, Color onHoverBgColor) //this method is called
+	//multiple times throughout the game to give various buttons a hover effect
 	{
 		FormatButtonOnHover listener = new FormatButtonOnHover(btn, onHoverBgColor, onHoverFgColor);
 		btn.addMouseListener(listener);
 	}
-	static class FormatButtonOnHover implements MouseListener
+	static class FormatButtonOnHover implements MouseListener //uses mouseListener to detect when user is hovering over the button
+	//and changes the formatting of the button when it is hovered over
 	{
 		private Color hoverBackgroundColor;
 		private Color normalBackgroundColor;

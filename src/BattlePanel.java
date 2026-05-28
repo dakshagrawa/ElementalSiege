@@ -28,8 +28,11 @@ public class BattlePanel extends JPanel implements ActionListener
     private GameData data;
     private PageManager pm;
 
+    //cards drawn each round for user and enemy
     private GameData.CharacterImage userCard;
     private GameData.CharacterImage enemyCard;
+
+    //health values are public so Settings can read them when user exits and saves
     public int userHealth;
     private int enemyHealth;
     private int maxUserHealth = 100;
@@ -54,11 +57,15 @@ public class BattlePanel extends JPanel implements ActionListener
     private JLabel streakLabel;
     private int streak = 0;
 
+    //the three attribute buttons on the user's card
     private JButton problemSolvingBtn;
     private JButton curiosityBtn;
     private JButton wisdomBtn;
     private boolean attributeButtonsEnabled = false;
+
+    //displayTimer gives user some time to study their card before each round starts
     private Timer displayTimer;
+    //delay gives user time to see the result of that round's "battle" before moving on to question
     private Timer delay;
     private boolean lastAnswerCorrect;
 
@@ -89,6 +96,8 @@ public class BattlePanel extends JPanel implements ActionListener
         questionPanel = qPanel;
     }
 
+    //this method is called when user clicks the play again button from the end game panel
+    //everything is reset back to level 1
     public void resetForNewGame()
     {
         level = 1;
@@ -111,6 +120,7 @@ public class BattlePanel extends JPanel implements ActionListener
         repaint();
     }
 
+    //health bar is at the top -- user's bar is green and enemy's is red
     private void buildUI()
     {
         JPanel topBar = new JPanel(new GridLayout(1, 2, 20, 0));
@@ -123,6 +133,7 @@ public class BattlePanel extends JPanel implements ActionListener
         topBar.add(enemyHealthPanel);
         add(topBar, BorderLayout.NORTH);
 
+        //the center of battle panel has 3 columns: user card, result of who won, and enemy card
         JPanel centerArea = new JPanel(new GridLayout(1, 3, 20, 0));
         centerArea.setOpaque(false);
         centerArea.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -159,6 +170,7 @@ public class BattlePanel extends JPanel implements ActionListener
 
     public void drawNewCards()
     {
+        //enemy's starting health increases with each level to make it harder to defeat the level
         maxEnemyHealth = (int)(level * 1.7) + 17;
         enemyHealthPanel.setMax(maxEnemyHealth);
         if (enemyHealth > maxEnemyHealth)
@@ -218,11 +230,13 @@ public class BattlePanel extends JPanel implements ActionListener
         enemyCardPanel.add(buildEnemyCardDisplay(), BorderLayout.CENTER);
 
         resultLabel.setText("Study your card... (5s)");
+        //disables the attrubute buttons when user is studying their card
         attributeButtonsEnabled = false;
         problemSolvingBtn.setEnabled(false);
         curiosityBtn.setEnabled(false);
         wisdomBtn.setEnabled(false);
 
+        //starts the timer that moves user to questions screen after they've had time to look at their card
         if(startTimer)
         {
             if (displayTimer != null) 
@@ -236,6 +250,7 @@ public class BattlePanel extends JPanel implements ActionListener
         repaint();
     }
 
+    //after user has had 10 seconds to look at the round's results, it moves on to next question
     class DisplayTimer implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -250,6 +265,7 @@ public class BattlePanel extends JPanel implements ActionListener
     {
         JPanel card = makeCardShell(userCard.name, userCard.rarity, userCard.image);
 
+        //user clciks these buttons to decide what they battle with
         problemSolvingBtn = makeAttributeButton("Problem Solving", userCard.problemSolving, new Color(180, 60, 60), "problemsolving");
         curiosityBtn = makeAttributeButton("Curiosity", userCard.curiosity, new Color(60, 90, 180), "curiosity");
         wisdomBtn   = makeAttributeButton("Wisdom",   userCard.wisdom,   new Color(120, 60, 160), "wisdom");
@@ -265,6 +281,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
+    //enemy card starts hidden so that user can't see before picking the attribute
     private JPanel buildEnemyCardDisplay()
     {
         JPanel back = new JPanel(new BorderLayout());
@@ -284,6 +301,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return back;
     }
 
+    //the enemy's card is revealed after user picks an attribute and the chosen attribute is highlighted
     private JPanel buildRevealedEnemyCard(String chosenAttribute)
     {
         JPanel card = makeCardShell(enemyCard.name, enemyCard.rarity, enemyCard.image);
@@ -311,6 +329,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return card;
     }
 
+    //this will build the "shell" where the user's card, name of card, and rarity and the image are placed
     private JPanel makeCardShell(String name, String rarity, Image img)
     {
         JPanel card = new JPanel(new BorderLayout(0, 4));
@@ -362,8 +381,9 @@ public class BattlePanel extends JPanel implements ActionListener
         return btn;
     }
 
-    private void highlightButton(JButton btn, boolean highlight) //when user clicks on an attribute, that attribute is given an
-    //extra yellow border to higlight it
+    //when user picks an attribute, we add a yellow border to that button so it's clear which one was chosen
+    //we also do this on the enemy's revealed card so user can see both values being compared side by side
+    private void highlightButton(JButton btn, boolean highlight)
     {
         if (highlight)
         {
@@ -371,7 +391,7 @@ public class BattlePanel extends JPanel implements ActionListener
             btn.setBorderPainted(true);
         }
     }
-
+    //each rarity gets its own color so user can tell at a glance how strong their card is
     private Color rarityColor(String rarity)
     {
     	if (rarity == null)
@@ -387,7 +407,8 @@ public class BattlePanel extends JPanel implements ActionListener
 		else
 			return Color.LIGHT_GRAY;
     }
-
+    //this is called from QuestionPanel after user answers -- correct answer lets user pick their attribute,
+    //wrong answer auto-picks the weakest attribute on their card (increases chance of user losing that round)
     public void resolveRound(boolean correct)
     {
         lastAnswerCorrect = correct;
@@ -409,7 +430,7 @@ public class BattlePanel extends JPanel implements ActionListener
         revalidate();
         repaint();
     }
-
+    //finds which of the 3 attributes has the lowest value on the card -- used when user gets a question wrong
     private String getLowestAttribute(GameData.CharacterImage card)
     {
         int ps = card.problemSolving;
@@ -423,6 +444,7 @@ public class BattlePanel extends JPanel implements ActionListener
         return "wisdom";
     }
 
+    //compares user and enemy attribute values, calculates damage, updates health bars
     private void doResolution(String attribute)
     {
         problemSolvingBtn.setEnabled(false);
@@ -434,6 +456,7 @@ public class BattlePanel extends JPanel implements ActionListener
         int diff = Math.abs(userValue - enemyValue);
         int damage = diff;
 
+        //flips the enemy card now that the attribute has been chosen
         enemyCardPanel.removeAll();
         enemyCardPanel.add(buildRevealedEnemyCard(attribute), BorderLayout.CENTER);
 
@@ -506,7 +529,7 @@ public class BattlePanel extends JPanel implements ActionListener
                 if (delay != null)
                     delay.stop();
             }
-            else
+            else //if user didn't die or win, move on to the next level
             {
                 if (displayTimer != null) displayTimer.stop();
                 if (delay != null) delay.stop();
@@ -519,7 +542,7 @@ public class BattlePanel extends JPanel implements ActionListener
                 pm.changePanelCard("Level " + level);
             }
         }
-        else
+        else //battle isn't over yet -- wait 6 seconds so user can see the result then draw new cards
         {
             if (delay != null) delay.stop();
             delay = new Timer(6000, new CardDelay());
@@ -529,7 +552,7 @@ public class BattlePanel extends JPanel implements ActionListener
         revalidate();
         repaint();
     }
-
+    //moves on after 6 second delay -- draws new cards and moves to questions for next round
     class CardDelay implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -558,7 +581,8 @@ public class BattlePanel extends JPanel implements ActionListener
         private JLabel label;
         private JProgressBar bar;
 
-        public HealthBarPanel(String ownerName, int current, int max, Color barColor)
+        public HealthBarPanel(String ownerName, int current, int max, Color barColor) //a health bar is displayed
+        //separately for user and enemy and it shows up only during the "battle"
         {
             this.current = current;
             this.max = max;
@@ -587,7 +611,8 @@ public class BattlePanel extends JPanel implements ActionListener
             current = newHealth;
             bar.setValue(current);
             label.setText(label.getText().split(":")[0] + ": " + current + "/" + max);
-
+            
+            //user's health bar turns red when health drops below 25% to warn user
             if ((double) current / max < 0.25)
                 bar.setForeground(new Color(220, 60, 60));
             else
