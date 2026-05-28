@@ -134,7 +134,7 @@ public class QuestionPanel extends JPanel
 			}
 
 			//Short pause so user sees green/red feedback, then moves on to battle panel
-			autoAdvance = new Timer(1200, new AutoAdvanceListener());
+			autoAdvance = new Timer(1500, new AutoAdvanceListener());
 			autoAdvance.setRepeats(false);
 			autoAdvance.start();
 		}

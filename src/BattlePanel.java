@@ -545,7 +545,7 @@ public class BattlePanel extends JPanel implements ActionListener
         else //battle isn't over yet -- wait 6 seconds so user can see the result then draw new cards
         {
             if (delay != null) delay.stop();
-            delay = new Timer(6000, new CardDelay());
+            delay = new Timer(10000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
         }
