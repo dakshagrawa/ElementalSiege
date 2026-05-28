@@ -121,13 +121,7 @@ public class GameData
 		}
 		currentQuestionNumber = questionNumber + 1; // +1 because questions in file start at 1
 	}
-	
-	public void setName(String f, String l)
-	{
-		first = f;
-		last = l;
-	}
-	
+
 	public String getQuestion ( )
 	{
 		return "" + questionCount + ". " + question;
@@ -142,12 +136,7 @@ public class GameData
 	{
 		return correctAnswer;
 	}
-	
-	public int getQuestionCount ( )
-	{
-		return questionCount;
-	}
-	
+
 	public int getCorrectCount ( )
 	{
 		return lastGameCorrectCount;
