@@ -99,7 +99,6 @@ public class PickAvatar extends JPanel
 
 			public void mouseClicked(MouseEvent e) 
 			{
-				data.setAvatar(avatar);
 				pm.changePanelCard("Get New Cards 1");
 			}
 

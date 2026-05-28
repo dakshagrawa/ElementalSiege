@@ -24,8 +24,6 @@ public class GameData
 	public CharacterImage[] characters;
 	public int[] userCharacters;
 
-	private String userAvatar;
-
 	private String username;
 	private int savedHealth;
 	private int savedLevel;
@@ -39,7 +37,6 @@ public class GameData
 		pm = pageMngr;
 		fileName = "../storedData/AccountInfo.txt";
 		accountInfoFile = new File(fileName);
-		userAvatar = "";
 		getCharactersFromFiles();
 		//getQuestions();
 		correctCount = 0;
@@ -479,16 +476,6 @@ public class GameData
 			pw.close();
 		}
 		return false;
-	}
-
-	public void setAvatar(int avatar)
-	{
-		if (avatar==1)
-			userAvatar = "FEMALE";
-		else if(avatar==2)
-			userAvatar = "MALE";
-		else
-			userAvatar = "NO AVATAR";
 	}
 
 	public void getCharactersFromFiles()
