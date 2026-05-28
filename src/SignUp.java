@@ -2,19 +2,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
+import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.JPasswordField; //text field where text is automatically starred out (used for password)
+import javax.swing.JLabel;
 
 public class SignUp extends JPanel
 {
@@ -33,80 +31,75 @@ public class SignUp extends JPanel
 		pm = pageMngr;
 		sp = new SouthPanel();
 
-		setLayout(new GridBagLayout());
-		setBackground(new Color(30, 30, 50));
+		setLayout(new FlowLayout(FlowLayout.CENTER));
+		JPanel positioner = new JPanel(new BorderLayout(50,50));
+		
+		positioner.add(new signInLabel(),BorderLayout.NORTH);
+		positioner.add(new CenterPanel(),BorderLayout.CENTER);
+		positioner.add(sp,BorderLayout.SOUTH);
+		positioner.setOpaque(false);
+		add(positioner); 
 
-		JPanel card = new JPanel(new BorderLayout(0, 16));
-		card.setBackground(new Color(22, 22, 40, 220));
-		card.setBorder(BorderFactory.createCompoundBorder(
-			BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1),
-			BorderFactory.createEmptyBorder(36, 44, 36, 44)
-		));
-		card.setPreferredSize(new Dimension(500, 360));
-
-		card.add(new SignUpLabel(), BorderLayout.NORTH);
-		card.add(new CenterPanel(), BorderLayout.CENTER);
-		card.add(sp, BorderLayout.SOUTH);
-
-		add(card);
+		setBackground(new Color(211, 211, 211, 220));
 	}
 
-	class SignUpLabel extends JPanel
+	class signInLabel extends JPanel
 	{
-		public SignUpLabel()
+		public signInLabel()
 		{
-			setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+			setLayout(new FlowLayout(FlowLayout.CENTER,100,100));
+			setPreferredSize(new Dimension(800,200));
+			add(signUp());
 			setOpaque(false);
-			setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
-
+		}
+		
+		public JLabel signUp()
+		{
 			JLabel title = new JLabel("Sign Up");
 			title.setFont(pm.titleFont);
-			title.setForeground(Color.WHITE);
-			add(title);
+			return title;
 		}
 	}
-
+	
 	class CenterPanel extends JPanel
 	{
 		public CenterPanel()
 		{
-			setLayout(new GridLayout(3, 1, 0, 12));
+			setLayout(new GridLayout(3,1,0,10));
+			setPreferredSize(new Dimension(200,120));
 			setOpaque(false);
 
 			username = new JTextField();
 			password = new JPasswordField();
 			passwordCheck = new JPasswordField();
+			
+			username.setEditable(true);
+			password.setEditable(true);
+			passwordCheck.setEditable(true);
 
-			username.setFont(pm.normalFont);
-			password.setFont(pm.normalFont);
-			passwordCheck.setFont(pm.normalFont);
+			username.addActionListener(new nameListener());
+			password.addActionListener(new pwdListener());
+			passwordCheck.addActionListener(new pwdCheckListener());
 
-			username.addActionListener(new NameListener());
-			password.addActionListener(new PwdListener());
-			passwordCheck.addActionListener(new PwdCheckListener());
-
-			JPanel usernamePanel = new JPanel(new GridLayout(1, 2, 10, 0));
-			JLabel usernameLabel = new JLabel("Username:", SwingConstants.RIGHT);
-			usernameLabel.setFont(pm.normalBoldFont);
-			usernameLabel.setForeground(new Color(180, 200, 255));
+			JPanel usernamePanel = new JPanel(new GridLayout(1,2));
+			JLabel usernameLabel = new JLabel("Username:");
+			usernameLabel.setFont(pm.normalFont);
 			usernamePanel.add(usernameLabel);
 			usernamePanel.add(username);
 			usernamePanel.setOpaque(false);
 			add(usernamePanel);
 
-			JPanel passwordPanel = new JPanel(new GridLayout(1, 2, 10, 0));
-			JLabel passwordLabel = new JLabel("Password:", SwingConstants.RIGHT);
-			passwordLabel.setFont(pm.normalBoldFont);
-			passwordLabel.setForeground(new Color(180, 200, 255));
+			JPanel passwordPanel = new JPanel(new GridLayout(1,2));
+			JLabel passwordLabel = new JLabel("Password:");
+			passwordLabel.setFont(pm.normalFont);
 			passwordPanel.add(passwordLabel);
 			passwordPanel.add(password);
 			passwordPanel.setOpaque(false);
 			add(passwordPanel);
 
-			JPanel passwordCheckPanel = new JPanel(new GridLayout(1, 2, 10, 0));
-			JLabel passwordCheckLabel = new JLabel("Confirm:", SwingConstants.RIGHT);
-			passwordCheckLabel.setFont(pm.normalBoldFont);
-			passwordCheckLabel.setForeground(new Color(180, 200, 255));
+			JPanel passwordCheckPanel = new JPanel(new GridLayout(1,2));
+			JLabel passwordCheckLabel = new JLabel("Confirm Password: ");
+			passwordCheckLabel.setFont(pm.normalFont);
 			passwordCheckPanel.add(passwordCheckLabel);
 			passwordCheckPanel.add(passwordCheck);
 			passwordCheckPanel.setOpaque(false);
@@ -115,7 +108,7 @@ public class SignUp extends JPanel
 			username.requestFocusInWindow();
 		}
 
-		class NameListener implements ActionListener
+		class nameListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -123,7 +116,7 @@ public class SignUp extends JPanel
 			}
 		}
 
-		class PwdListener implements ActionListener
+		class pwdListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -131,7 +124,7 @@ public class SignUp extends JPanel
 			}
 		}
 
-		class PwdCheckListener implements ActionListener
+		class pwdCheckListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -146,33 +139,29 @@ public class SignUp extends JPanel
 
 		public SouthPanel()
 		{
-			setLayout(new GridLayout(2, 1, 0, 8));
-			setOpaque(false);
-			setBorder(BorderFactory.createEmptyBorder(8, 0, 0, 0));
+			setLayout(new GridLayout(2,2,100,100));
 
-			JPanel btnRow = new JPanel(new GridLayout(1, 2, 20, 0));
-			btnRow.setOpaque(false);
-
-			signUp = pm.new Button1("Sign Up", Color.WHITE, new Color(60, 120, 60));
-			cancel = pm.new Button1("Cancel", Color.WHITE, new Color(120, 60, 60));
+			signUp = pm.new Button1("Sign Up", getBackground(),new Color(70, 130, 180));
+			cancel = pm.new Button1("Cancel", getBackground(),new Color(70, 130, 180));
 
 			signUp.setFont(pm.normalBoldFont);
 			cancel.setFont(pm.normalBoldFont);
 
-			pm.addHoverEffect(signUp, Color.LIGHT_GRAY, signUp.getBackground());
-			pm.addHoverEffect(cancel, Color.LIGHT_GRAY, cancel.getBackground());
-
+			pm.addHoverEffect(signUp, new Color(20, 35, 20), getBackground());
+			pm.addHoverEffect(cancel, new Color(20, 35, 20), getBackground());
+			
 			signUp.addActionListener(this);
 			cancel.addActionListener(this);
 
-			btnRow.add(cancel);
-			btnRow.add(signUp);
-			add(btnRow);
-
-			warningLabel = new JLabel("", SwingConstants.CENTER);
-			warningLabel.setFont(pm.normalBoldFont);
-			warningLabel.setForeground(new Color(255, 100, 100));
+			add(cancel);
+			add(signUp);
+			JPanel placeholder = new JPanel();
+			placeholder.setOpaque(false);
+			add(placeholder);
+			warningLabel = new JLabel("");
+			warningLabel.setForeground(Color.RED);
 			add(warningLabel);
+			setOpaque(false);
 		}
 
 		public void actionPerformed(ActionEvent e)
@@ -183,32 +172,30 @@ public class SignUp extends JPanel
 			{
 				char[] pwd = password.getPassword();
 				char[] pwdCheck = passwordCheck.getPassword();
-				boolean pwdCorrect = false;
-				if(Arrays.equals(pwdCheck, pwd))
-					pwdCorrect = true;
+				boolean pwdCorrect=false;
+				if(Arrays.equals(pwdCheck,pwd))
+					pwdCorrect=true;
 				boolean isBlank = true;
 				if(pwd.length > 0)
 					isBlank = false;
-				boolean signUpSuccessful = data.putAccountInFile(username.getText(), pwd, pwdCorrect);
+				boolean signUpSuccessful = data.putAccountInFile(username.getText(),pwd, pwdCorrect);
 				Arrays.fill(pwd, '*');
 				Arrays.fill(pwdCheck, '*');
 				if(signUpSuccessful && !isBlank)
 				{
-					warningLabel.setForeground(new Color(100, 220, 100));
+					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");
 					pm.changePanelCard("Pick Avatar");
 					pm.repaint();
 				}
 				else if(!pwdCorrect)
 				{
-					warningLabel.setForeground(new Color(255, 100, 100));
-					warningLabel.setText("Passwords do not match.");
+					warningLabel.setText("Password does not match. Please try again.");
 					pm.repaint();
 				}
 				else
 				{
-					warningLabel.setForeground(new Color(255, 100, 100));
-					warningLabel.setText("Username already exists.");
+					warningLabel.setText("Username already exists. Please try again.");
 					pm.repaint();
 				}
 			}
