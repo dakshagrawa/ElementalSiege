@@ -621,15 +621,7 @@ public class GameData
 			}
 			return false;
 		}
-
-		public class CharacterInitializationException extends RuntimeException
-		{
-			public CharacterInitializationException()
-			{
-				super(name + " information has error.");
-			}
-		}
-}
+	}
 
 	public void setUserCharacters(int characterIdx)
 	{
