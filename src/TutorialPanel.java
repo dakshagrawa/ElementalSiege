@@ -59,7 +59,7 @@ public class TutorialPanel extends JPanel implements ActionListener
         "You've got the knowledge. Now go defend the lab!"};
 
     private static final String[] IMAGE_NAMES = {"tutorial_opening.png", "tutorial_objective.png", "tutorial_get_cards.png", "tutorial_battle.png", "tutorial_reveal.png",
-        "tutorial_damage.png", "tutorial_health.png", null};
+        "tutorial_damage.png", "tutorial_health.png", "tutorial_final.png"};
 
        //null opening slide -- heading: opening screen of game, title page
        //null objective slide -- mission: chemist stock photo
@@ -68,7 +68,7 @@ public class TutorialPanel extends JPanel implements ActionListener
        //"tutorial_reveal.png" -- card reveal screenshot
        //"tutorial_damage.png" -- damage example screenshot
        //"tutorial_health.png" -- health bar/levels screenshot
-       //null final slide -- no image
+       //null final slide -- lab stock photo
 
     private Color getSlideAccent(int index)
     {
