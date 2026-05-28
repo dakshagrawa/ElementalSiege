@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -315,10 +314,8 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel = new JLabel("", SwingConstants.CENTER);
         if (img != null)
         {
-            //crop top 62% to cut off the stat bars at the bottom of the spritesheet card
+            // Scale to fill the card width while keeping proportions
             int cropHeight = (int)(img.getHeight(null) * 0.62);
-            BufferedImage cropped = ((BufferedImage) img).getSubimage(0, 0, img.getWidth(null), cropHeight);
-            // cale to fill the card width while keeping proportions
             int displayWidth  = 200;
             int displayHeight = (int)(cropHeight * ((double) displayWidth / img.getWidth(null)));
             Image scaled = img.getScaledInstance(displayWidth, displayHeight, Image.SCALE_SMOOTH);
