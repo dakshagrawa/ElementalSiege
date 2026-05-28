@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class GameData
 {
-	private String first, last;
 	private String question;
 	private String [] answerSet;
 	private int correctAnswer;
@@ -40,8 +39,6 @@ public class GameData
 		pm = pageMngr;
 		fileName = "../storedData/AccountInfo.txt";
 		accountInfoFile = new File(fileName);
-		first = "";
-		last = "";
 		userAvatar = "";
 		getCharactersFromFiles();
 		//getQuestions();
@@ -151,10 +148,10 @@ public class GameData
 	{
 		if(lastGameCorrectCount > 2)
 		{
-			return "Congratulations, " + first + ", you answered " + lastGameCorrectCount +
+			return "Congratulations, you answered " + lastGameCorrectCount +
 				" out of 4 of the questions correctly.  Your name will be added to the list of high scores, shown to the right.  Good work!";
 		}
-		return "Good try " + first + ", you answered " + lastGameCorrectCount +
+		return "Good try, you answered " + lastGameCorrectCount +
 			" out of 4 of the questions correctly.  Keep working at it, and maybe next time your name will be added to the list of high scores!";
 	}
 	
@@ -180,65 +177,6 @@ public class GameData
 			result += line + "\n";
 		}
 		return result;
-	}
-	
-	public void saveData ( )
-	{
-		if(lastGameCorrectCount >= 3)
-		{
-			String result = "";
-			boolean hasBeenAdded = false;
-			String fileName = "highScores.txt";
-			Scanner inFile = null;
-			File inputFile = new File(fileName);
-			try 
-			{
-				inFile = new Scanner(inputFile);
-			} 
-			catch(FileNotFoundException e) 
-			{
-				System.err.printf("ERROR: Cannot open %s\n", fileName);
-				System.err.println(e);
-				System.exit(1);
-			}
-			while(inFile.hasNext()) 
-			{
-				String line = inFile.nextLine();
-				int slashIdx = line.indexOf("/");
-				if (slashIdx > 0) {
-					try {
-						int lineScore = Integer.parseInt("" + line.charAt(slashIdx - 1));
-						if(!hasBeenAdded && lineScore <= lastGameCorrectCount)
-						{
-							result += first + " " + lastGameCorrectCount + "/4\n";
-							hasBeenAdded = true;
-						}
-					} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-						// skip malformed line
-					}
-				}
-				result += line + "\n";
-			}
-			if(!hasBeenAdded)
-			{
-				result += first + " " + lastGameCorrectCount + "/4\n";
-			}
-			inFile.close();
-
-			File ioFile = new File("highScores.txt");
-			PrintWriter outFile = null;
-			try
-			{
-				outFile = new PrintWriter(ioFile);
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-				System.exit(1);
-			}
-			outFile.print(result);
-			outFile.close();
-		}
 	}
 	
 	public void saveToHighScores ( )
@@ -269,7 +207,7 @@ public class GameData
 						int lineScore = Integer.parseInt("" + line.charAt(slashIdx - 1));
 						if(!hasBeenAdded && lineScore <= lastGameCorrectCount)
 						{
-							result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+							result += username + " " + lastGameCorrectCount + "/4\n";
 							hasBeenAdded = true;
 						}
 					} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
@@ -280,7 +218,7 @@ public class GameData
 			}
 			if(!hasBeenAdded)
 			{
-				result += first + " " + last + " " + lastGameCorrectCount + "/4\n";
+				result += username + " " + lastGameCorrectCount + "/4\n";
 			}
 			inFile.close();
 
