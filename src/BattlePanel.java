@@ -81,7 +81,7 @@ public class BattlePanel extends JPanel implements ActionListener
         startTimer = doTimer;
 
         userHealth = maxUserHealth;
-        maxEnemyHealth = (int)(level * 1.7) + 17;
+        maxEnemyHealth = (int)(level * 1.7)+17;
         enemyHealth = maxEnemyHealth;
 
         setLayout(new BorderLayout());
@@ -171,25 +171,40 @@ public class BattlePanel extends JPanel implements ActionListener
     public void drawNewCards()
     {
         //enemy's starting health increases with each level to make it harder to defeat the level
-        maxEnemyHealth = (int)(level * 1.7) + 17;
+        maxEnemyHealth = (int)(level * 1.7) + 5;
         enemyHealthPanel.setMax(maxEnemyHealth);
         if (enemyHealth > maxEnemyHealth)
             enemyHealth = maxEnemyHealth;
 
-        int userIdx = (int)(Math.random() * data.userCharacters.length);
-        userCard = data.characters[userIdx];
+        int[] temp = new int[4];
+        int j = 0;
+        for(int i = 0; i < data.userCharacters.length)
+        {
+            if(data.userCharacters[i]>=0)
+            {
+                temp[j] = data.userCharacters[i];
+                j++;
+            }
+        }
+        int userIdx=0;
+        while(userIdx>=0)
+        {
+            userIdx = (int)(Math.random() * temp.length);
+        }
+        
+        userCard = data.characters[temp[userIdx]];
 
         //when we let the program choose the enemy's cards randomly, the enemy card was often of a higher status than the user's
         //which is a problem in lower levels that are meant to be easy so we're using this chunk of code to limit
         //how often the enemy gets legendary cards -- the lower level cards have a higher chance of occurring which helps player
         int roll = (int)(Math.random() * 100) + 1;
         String targetRarity;
-        if 
-            (roll <= 40) targetRarity = "Common";
-        else if 
-            (roll <= 70) targetRarity = "Rare";
-        else if 
-            (roll <= 90) targetRarity = "Epic";
+        if (roll <= 40) 
+            targetRarity = "Common";
+        else if (roll <= 70) 
+            targetRarity = "Rare";
+        else if (roll <= 85) 
+            targetRarity = "Epic";
         else 
             targetRarity = "Legendary";
 
@@ -519,7 +534,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         else if (enemyHealth <= 0)
         {
-            if (level >= 10)
+            if (level >= 2)
             {
                 //Resets progress on final victory to also prevent user from getting stuck when they log in again
                 pm.getGameData().saveUserProgress(100, 1);
