@@ -236,12 +236,12 @@ public class TutorialPanel extends JPanel implements ActionListener
     private void applySlide(int index)
     {
         currentSlide = index;
-
+    
         slideTitleLabel.setText(TITLES[index]);
         slideTitleLabel.setForeground(getSlideAccent(index));
         slideTextLabel.setText(TEXTS[index]);
         slideCounterLabel.setText((index + 1) + " / " + TITLES.length);
-
+    
         //Load image if available (looks at the images array from above)
         String imgName = IMAGE_NAMES[index];
         if (imgName != null)
@@ -249,7 +249,21 @@ public class TutorialPanel extends JPanel implements ActionListener
             Image img = PageManager.Functions.getImage(imgName);
             if (img != null)
             {
-                Image scaled = img.getScaledInstance(580, 150, Image.SCALE_SMOOTH);
+                // 1. Get original image sizes
+                int origWidth = img.getWidth(null);
+                int origHeight = img.getHeight(null);
+                
+                // 2. Set max limits based on your UI space
+                int maxWidth = 580;
+                int maxHeight = 150;
+                
+                // 3. Calculate scaling factor to protect proportions
+                double scale = Math.min((double) maxWidth / origWidth, (double) maxHeight / origHeight);
+                int targetWidth = (int) (origWidth * scale);
+                int targetHeight = (int) (origHeight * scale);
+                
+                // 4. Scale with the safe dimensions
+                Image scaled = img.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
                 slideImageLabel.setIcon(new ImageIcon(scaled));
                 slideImageLabel.setText("");
                 slideImageLabel.setVisible(true);
@@ -268,16 +282,17 @@ public class TutorialPanel extends JPanel implements ActionListener
             slideImageLabel.setText("");
             slideImageLabel.setVisible(false); //hides imageLabel so that text is centered when the slide doesn't have an image to display
         }
-
+    
         leftBtn.setEnabled(index > 0);
         if (index == TITLES.length - 1)
             rightBtn.setText("Let's Go!");
         else
             rightBtn.setText("Next >");
-
+    
         dotIndicator.setActive(index);
         dotIndicator.repaint();
     }
+
 
     private void applyAlpha(float alpha) //MARK
     {
