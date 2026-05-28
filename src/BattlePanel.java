@@ -186,11 +186,8 @@ public class BattlePanel extends JPanel implements ActionListener
                 j++;
             }
         }
-        int userIdx=0;
-        while(userIdx>=0)
-        {
-            userIdx = (int)(Math.random() * temp.length);
-        }
+        
+        int userIdx = (int)(Math.random() * temp.length);
         
         userCard = data.characters[temp[userIdx]];
 
