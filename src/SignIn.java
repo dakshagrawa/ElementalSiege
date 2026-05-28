@@ -96,19 +96,19 @@ public class SignIn extends JPanel
 			username.requestFocusInWindow();
 		}
 
-		class nameListener implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				password.requestFocusInWindow();
-			}
-		}
-
 		class pwdListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				login.doClick();
+			}
+		}
+
+		class nameListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				password.requestFocusInWindow();
 			}
 		}
 	}

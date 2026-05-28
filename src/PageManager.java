@@ -193,9 +193,9 @@ public class PageManager extends JLayeredPane
 			isOpaque = isBgOpaque;
 			bgColor = Color.WHITE;
 			if(!isBgOpaque)
-				isBorderPainted=false;
+				isBorderPainted = false;
 			else
-				isBorderPainted=true;
+				isBorderPainted = true;
 			makeButton();
 		}
 
@@ -205,7 +205,7 @@ public class PageManager extends JLayeredPane
 			fgColor = foregroundColor;
 			bgColor = backgroundColor;
 			isOpaque = true;
-			isBorderPainted=true;
+			isBorderPainted = true;
 			makeButton();
 		}
 
