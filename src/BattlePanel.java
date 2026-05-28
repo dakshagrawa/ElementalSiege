@@ -554,10 +554,10 @@ public class BattlePanel extends JPanel implements ActionListener
                 pm.changePanelCard("Level " + level);
             }
         }
-        else //battle isn't over yet -- wait 6 seconds so user can see the result then draw new cards
+        else //battle isn't over yet -- wait 8 seconds so user can see the result then draw new cards
         {
             if (delay != null) delay.stop();
-            delay = new Timer(10000, new CardDelay());
+            delay = new Timer(8000, new CardDelay());
             delay.setRepeats(false);
             delay.start();
         }

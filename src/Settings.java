@@ -83,7 +83,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		JPanel buttonsPanel = new JPanel(new GridLayout(2, 1, 0, 14));
 		buttonsPanel.setOpaque(false);
 
-		JButton saveBtn = pm.new Button1("Save & Exit", Color.WHITE, new Color(60, 140, 80));
+		JButton saveBtn = pm.new Button1("Save", Color.WHITE, new Color(60, 140, 80));
 		saveBtn.setFont(pm.normalBoldFont);
 		saveBtn.setPreferredSize(new Dimension(200, 44));
 		saveBtn.addActionListener(this);

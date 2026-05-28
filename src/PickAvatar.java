@@ -97,7 +97,7 @@ public class PickAvatar extends JPanel
 
 			public void mouseClicked(MouseEvent e)
 			{
-				pm.changePanelCard("Get New Cards 1");
+				pm.changePanelCard("Tutorial");
 			}
 
 			public void mousePressed(MouseEvent e) {}
