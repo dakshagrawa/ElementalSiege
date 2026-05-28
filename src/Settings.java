@@ -1,16 +1,23 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -24,33 +31,81 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 	{
 		pm = pageMngr;
 		data = pm.getGameData();
+
 		setLayout(new BorderLayout());
+		setBackground(new Color(30, 30, 50));
 
-		JButton backBtn = pm.new Button1("<- Back", Color.GRAY);
-		backBtn.setPreferredSize(new Dimension(100, 40));
+		// ── Title bar ──
+		JPanel titleBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 12));
+		titleBar.setOpaque(false);
+
+		JButton backBtn = pm.new Button1("<- Back", new Color(200, 200, 200), new Color(60, 60, 80));
+		backBtn.setPreferredSize(new Dimension(110, 40));
 		backBtn.addActionListener(this);
-		add(backBtn, BorderLayout.NORTH);
+		titleBar.add(backBtn);
 
-		JPanel centerPanel = new JPanel(new GridLayout(3, 1, 10, 20));
-		centerPanel.setOpaque(false);
+		JLabel titleLabel = new JLabel("Settings", SwingConstants.LEFT);
+		titleLabel.setFont(pm.titleFont);
+		titleLabel.setForeground(Color.WHITE);
+		titleBar.add(titleLabel);
 
-		volumeSlider = new JSlider(0, 100, (int)(pm.sound.currentVolume*100));
+		add(titleBar, BorderLayout.NORTH);
+
+		// ── Center card ──
+		JPanel outerWrapper = new JPanel(new GridBagLayout());
+		outerWrapper.setOpaque(false);
+
+		JPanel card = new JPanel(new BorderLayout(0, 20));
+		card.setBackground(new Color(22, 22, 40, 220));
+		card.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1),
+			BorderFactory.createEmptyBorder(30, 40, 30, 40)
+		));
+		card.setPreferredSize(new Dimension(420, 320));
+
+		// Volume section
+		JPanel volumePanel = new JPanel(new BorderLayout(0, 8));
+		volumePanel.setOpaque(false);
+
+		JLabel volumeLabel = new JLabel("Volume", SwingConstants.CENTER);
+		volumeLabel.setFont(pm.normalBoldFont);
+		volumeLabel.setForeground(new Color(180, 200, 255));
+		volumePanel.add(volumeLabel, BorderLayout.NORTH);
+
+		volumeSlider = new JSlider(0, 100, (int)(pm.sound.currentVolume * 100));
 		volumeSlider.setOrientation(JSlider.HORIZONTAL);
 		volumeSlider.setMajorTickSpacing(25);
 		volumeSlider.setPaintTicks(true);
 		volumeSlider.setPaintLabels(true);
+		volumeSlider.setOpaque(false);
+		volumeSlider.setForeground(Color.WHITE);
 		volumeSlider.addChangeListener(this);
-		centerPanel.add(volumeSlider);
+		volumePanel.add(volumeSlider, BorderLayout.CENTER);
 
-		JButton exit = new JButton("Save & Exit");
-		exit.addActionListener(this);
-		centerPanel.add(exit);
+		card.add(volumePanel, BorderLayout.NORTH);
 
-		JButton quit = new JButton("Quit");
-		quit.addActionListener(this);
-		centerPanel.add(quit);
+		// Buttons section
+		JPanel buttonsPanel = new JPanel(new GridLayout(2, 1, 0, 14));
+		buttonsPanel.setOpaque(false);
 
-		add(centerPanel, BorderLayout.CENTER);
+		JButton saveBtn = pm.new Button1("Save & Exit", Color.WHITE, new Color(60, 140, 80));
+		saveBtn.setFont(pm.normalBoldFont);
+		saveBtn.setPreferredSize(new Dimension(200, 44));
+		saveBtn.addActionListener(this);
+		pm.addHoverEffect(saveBtn, Color.LIGHT_GRAY, new Color(60, 140, 80));
+		buttonsPanel.add(saveBtn);
+
+		JButton quitBtn = pm.new Button1("Quit", Color.WHITE, new Color(160, 60, 60));
+		quitBtn.setFont(pm.normalBoldFont);
+		quitBtn.setPreferredSize(new Dimension(200, 44));
+		quitBtn.addActionListener(this);
+		pm.addHoverEffect(quitBtn, Color.LIGHT_GRAY, new Color(160, 60, 60));
+		buttonsPanel.add(quitBtn);
+
+		card.add(buttonsPanel, BorderLayout.CENTER);
+
+		outerWrapper.add(card);
+		add(outerWrapper, BorderLayout.CENTER);
 	}
 
 	public void actionPerformed(ActionEvent evt)
@@ -58,33 +113,27 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		String command = evt.getActionCommand();
 		if(command.equals("<- Back"))
 		{
-			//Use the same logic as ClosePanel - go to the previous panel without relying on lastCardName which might be incorrect when coming from ClosePanel
 			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
 				pm.changePanelCardNoHistory(pm.lastCardName);
 			} else {
-				//Goes back to Title page if lastCardName is not valid
 				pm.changePanelCard("Title");
 			}
 		}
 		else if(command.equals("Save & Exit"))
 		{
-		    // Save current battle progress if in battle, otherwise save saved progress
-		    if (pm.lastCardName != null && pm.lastCardName.equals("Battle") && pm.battlePanel != null) {
-		        int currentHealth = pm.battlePanel.getUserHealth();
-		        int currentLevel = pm.battlePanel.getLevel();
-		        data.saveUserProgress(currentHealth, currentLevel);
-		    } else {
-		        // Fallback to saving previously saved progress (current behavior)
-		        data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
-		    }
-		    if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) 
-		    {
-		        pm.changePanelCardNoHistory(pm.lastCardName);
-		    } 
-		    else 
-		    {
-		        pm.changePanelCard("Title");
-		    }
+			// Save current battle progress if in battle, otherwise save saved progress
+			if (pm.lastCardName != null && pm.lastCardName.equals("Battle") && pm.battlePanel != null) {
+				int currentHealth = pm.battlePanel.getUserHealth();
+				int currentLevel = pm.battlePanel.getLevel();
+				data.saveUserProgress(currentHealth, currentLevel);
+			} else {
+				data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
+			}
+			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
+				pm.changePanelCardNoHistory(pm.lastCardName);
+			} else {
+				pm.changePanelCard("Title");
+			}
 		}
 		else
 		{
