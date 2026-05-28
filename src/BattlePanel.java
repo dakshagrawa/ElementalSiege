@@ -36,7 +36,7 @@ public class BattlePanel extends JPanel implements ActionListener
     private int maxEnemyHealth;
     public int level;
 
-    // Getters for main frame to read state on manual exit
+    //Getters for the main frame to read user's current stats when they manually exit and choose to save stats
     public int getUserHealth() {
     	return userHealth;
     }
@@ -167,29 +167,48 @@ public class BattlePanel extends JPanel implements ActionListener
         int userIdx = (int)(Math.random() * data.userCharacters.length);
         userCard = data.characters[userIdx];
 
-        // DETERMINE TARGET RARITY FOR ENEMY CARD (1-100 roll)
+        //when we let the program choose the enemy's cards randomly, the enemy card was often of a higher status than the user's
+        //which is a problem in lower levels that are meant to be easy so we're using this chunk of code to limit
+        //how often the enemy gets legendary cards -- the lower level cards have a higher chance of occurring which helps player
         int roll = (int)(Math.random() * 100) + 1;
         String targetRarity;
-        if (roll <= 40) targetRarity = "Common";
-        else if (roll <= 70) targetRarity = "Rare";
-        else if (roll <= 90) targetRarity = "Epic";
-        else targetRarity = "Legendary";
+        if 
+            (roll <= 40) targetRarity = "Common";
+        else if 
+            (roll <= 70) targetRarity = "Rare";
+        else if 
+            (roll <= 90) targetRarity = "Epic";
+        else 
+            targetRarity = "Legendary";
 
-        // FILTER CHARACTERS BY TARGET RARITY
-        ArrayList<Integer> eligibleIndices = new ArrayList<>();
-        for (int i = 0; i < data.characters.length; i++) {
-            if (data.characters[i] != null && data.characters[i].rarity != null && data.characters[i].rarity.equalsIgnoreCase(targetRarity)) {
-                eligibleIndices.add(i);
+        //goes through the available cards and filters through them to pick out the ones that have the chosen rarity
+        int count = 0;
+        for (int i = 0; i < data.characters.length; i++)
+        {
+            if (data.characters[i] != null && data.characters[i].rarity != null && data.characters[i].rarity.equalsIgnoreCase(targetRarity))
+                count++;
+        }
+
+        //goes through the available cards and filters through them to pick out the ones that have the chosen rarity
+        int[] eligibleIndices = new int[count];
+        int pos = 0;
+        for (int i = 0; i < data.characters.length; i++)
+        {
+            if (data.characters[i] != null && data.characters[i].rarity != null && data.characters[i].rarity.equalsIgnoreCase(targetRarity))
+            {
+                eligibleIndices[pos] = i;
+                pos++;
             }
         }
 
-        // SELECT ENEMY CARD: fallback to any character if tier is empty
+        //selects one card out of the elegiible cards
+        //if for some reason there is an error and it can't find any cards that are of the chosen rarity, it'll pick a random card
         int enemyIdx;
-        if (eligibleIndices.isEmpty()) {
+        if (count == 0)
             enemyIdx = (int)(Math.random() * data.characters.length);
-        } else {
-            enemyIdx = eligibleIndices.get((int)(Math.random() * eligibleIndices.size()));
-        }
+        else
+            enemyIdx = eligibleIndices[(int)(Math.random() * count)];
+
         enemyCard = data.characters[enemyIdx];
 
         userCardPanel.removeAll();
@@ -303,10 +322,10 @@ public class BattlePanel extends JPanel implements ActionListener
         header.setOpaque(false);
         JLabel nameLabel = new JLabel(name, SwingConstants.CENTER);
         nameLabel.setForeground(Color.WHITE);
-        nameLabel.setFont(pm.normalBoldFont);
+        nameLabel.setFont(pm.titleFont);
         JLabel rarityLabel = new JLabel(rarity, SwingConstants.CENTER);
         rarityLabel.setForeground(rarityColor(rarity));
-        rarityLabel.setFont(pm.normalFont);
+        rarityLabel.setFont(pm.normalBoldFont);
         header.add(nameLabel);
         header.add(rarityLabel);
         card.add(header, BorderLayout.NORTH);
@@ -314,7 +333,7 @@ public class BattlePanel extends JPanel implements ActionListener
         JLabel imgLabel = new JLabel("", SwingConstants.CENTER);
         if (img != null)
         {
-            // Scale to fill the card width while keeping proportions
+            //Scale to fill image to the card width while keeping proportions
             int cropHeight = (int)(img.getHeight(null) * 0.62);
             int displayWidth  = 200;
             int displayHeight = (int)(cropHeight * ((double) displayWidth / img.getWidth(null)));
@@ -356,29 +375,17 @@ public class BattlePanel extends JPanel implements ActionListener
     private Color rarityColor(String rarity)
     {
     	if (rarity == null)
-		{
 			return Color.LIGHT_GRAY;
-		}
 		else if (rarity.toLowerCase().equals("legendary"))
-		{
 			return new Color(255, 180, 0);
-		}
 		else if (rarity.toLowerCase().equals("epic"))
-		{
 			return new Color(160, 80, 220);
-		}
         else if (rarity.toLowerCase().equals("rare"))
-        {
             return new Color(60, 130, 220);
-        }
 		else if (rarity.toLowerCase().equals("uncommon"))
-		{
 			return new Color(80, 190, 80);
-		}
 		else
-		{
 			return Color.LIGHT_GRAY;
-		}
     }
 
     public void resolveRound(boolean correct)
@@ -467,28 +474,21 @@ public class BattlePanel extends JPanel implements ActionListener
     private int getAttributeValue(GameData.CharacterImage card, String attribute)
     {
         if (attribute.equals("problemsolving"))
-    	{
         	return card.problemSolving;
-    	}
     	else if (attribute.equals("curiosity"))
-    	{
         	return card.curiosity;
-    	}
     	else if (attribute.equals("wisdom"))
-    	{
         	return card.wisdom;
-    	}
     	else
-    	{
         	return 0;
-    	}
     }
 
     private void checkBattleEnd()
     {
         if (userHealth <= 0)
         {
-            // Reset progress on game over to prevent softlocks
+            //In case user loses before saving game, this will prevent them from getting stuck the next time they log in
+            //by resetting health to 100 and level to 1
             pm.getGameData().saveUserProgress(100, 1);
             pm.changePanelCard("Game Over");
             if (displayTimer != null) displayTimer.stop();
@@ -498,7 +498,7 @@ public class BattlePanel extends JPanel implements ActionListener
         {
             if (level >= 10)
             {
-                // Reset progress on final victory to prevent softlocks
+                //Resets progress on final victory to also prevent user from getting stuck when they log in again
                 pm.getGameData().saveUserProgress(100, 1);
                 pm.changePanelCard("You Win");
                 if (displayTimer != null)
