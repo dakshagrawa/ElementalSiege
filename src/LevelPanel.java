@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -110,15 +111,12 @@ public class LevelPanel extends JPanel implements ActionListener
         add(storyLabel);
         
         //Continue button
-        continueBtn = new JButton("Continue →");
-        continueBtn.setBackground(new Color(30, 60, 50));
-        continueBtn.setForeground(new Color(255, 230, 120));
-        continueBtn.setOpaque(true);
-        continueBtn.setBorderPainted(false);
-        continueBtn.setFocusPainted(false);
+        continueBtn = pm.new Button1("Continue \u2192", Color.WHITE, new Color(60, 120, 60));
         continueBtn.setFont(pm.normalBoldFont);
+        continueBtn.setPreferredSize(new Dimension(220, 44));
         continueBtn.addActionListener(this);
         continueBtn.setVisible(false);
+        pm.addHoverEffect(continueBtn, Color.LIGHT_GRAY, continueBtn.getBackground());
         continueBtn.setBounds(archX + (archWidth / 2) - 110, archY + archHeight - 70, 220, 44);
         add(continueBtn);
     }

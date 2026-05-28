@@ -1,15 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class HomePanel extends JPanel implements ActionListener
 {
@@ -22,31 +24,39 @@ public class HomePanel extends JPanel implements ActionListener
 		battle = bp;
 
 		setLayout(new BorderLayout());
-		setBackground(new Color(40, 40, 50));
+		setBackground(new Color(30, 30, 50));
 
-		JPanel centerPanel = new JPanel();
+		JPanel centerPanel = new JPanel(new GridBagLayout());
 		centerPanel.setOpaque(false);
-		centerPanel.setLayout(new GridBagLayout());
+
+		JPanel card = new JPanel(new GridLayout(2, 1, 0, 16));
+		card.setOpaque(false);
+		card.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
 
 		JLabel statusLabel = new JLabel("Battle Ended!", SwingConstants.CENTER);
 		statusLabel.setForeground(Color.WHITE);
 		statusLabel.setFont(pm.titleFont);
-		centerPanel.add(statusLabel);
-		add(centerPanel, BorderLayout.CENTER);
+		card.add(statusLabel);
 
-		JPanel buttonPanel = new JPanel();
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
 		buttonPanel.setOpaque(false);
-		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-		JButton nextRoundBtn = pm.new Button1("Next Round", Color.GREEN);
+		JButton nextRoundBtn = pm.new Button1("Next Round", Color.WHITE, new Color(60, 120, 60));
+		nextRoundBtn.setPreferredSize(new Dimension(180, 44));
+		pm.addHoverEffect(nextRoundBtn, Color.LIGHT_GRAY, nextRoundBtn.getBackground());
 		nextRoundBtn.addActionListener(this);
 
-		JButton settingsBtn = pm.new Button1("Settings", Color.LIGHT_GRAY);
+		JButton settingsBtn = pm.new Button1("Settings", new Color(200, 200, 200), new Color(80, 80, 100));
+		settingsBtn.setPreferredSize(new Dimension(140, 44));
+		pm.addHoverEffect(settingsBtn, Color.LIGHT_GRAY, settingsBtn.getBackground());
 		settingsBtn.addActionListener(this);
 
 		buttonPanel.add(nextRoundBtn);
 		buttonPanel.add(settingsBtn);
-		add(buttonPanel, BorderLayout.SOUTH);
+		card.add(buttonPanel);
+
+		centerPanel.add(card);
+		add(centerPanel, BorderLayout.CENTER);
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -55,11 +65,8 @@ public class HomePanel extends JPanel implements ActionListener
 		if(cmd.equals("Next Round"))
 		{
 			battle.level++;
-			battle.userHealth = 100; //Reset user health
-			// SAVE THE FRESH STATE THEY ARE ENTERING (level N, health 100)
+			battle.userHealth = 100;
 			pm.getGameData().saveUserProgress(100, battle.level);
-			//Enemy health is recalculated in drawNewCards or via a method we can add
-			//Let's add a reset method to BattlePanel or just call drawNewCards which sets enemyHealth
 			battle.drawNewCards();
 			pm.changePanelCard("Battle");
 		}

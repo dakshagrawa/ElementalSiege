@@ -2,15 +2,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
+import javax.swing.SwingConstants;
 
 public class CloseWindow extends JPanel
 {
@@ -22,81 +22,64 @@ public class CloseWindow extends JPanel
 		pm = pageMngr;
 		data = pm.getGameData();
 
-		setLayout(new FlowLayout(FlowLayout.CENTER));
+		setLayout(new GridBagLayout());
+		setBackground(new Color(0, 0, 0, 160));
 
-		setBackground(new Color(211, 211, 211, 100));
-		add(new WindowOnClosing());
+		JPanel card = new JPanel(new BorderLayout(0, 20));
+		card.setBackground(new Color(22, 22, 40, 240));
+		card.setBorder(BorderFactory.createCompoundBorder(
+			BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1),
+			BorderFactory.createEmptyBorder(30, 40, 30, 40)
+		));
+		card.setPreferredSize(new Dimension(520, 200));
+
+		card.add(closeLabel(), BorderLayout.NORTH);
+		card.add(new ButtonGrid(), BorderLayout.CENTER);
+
+		add(card);
 	}
 
-	class WindowOnClosing extends JPanel
+	public JLabel closeLabel()
 	{
-		public WindowOnClosing()
+		JLabel label = new JLabel("Exit without saving?", SwingConstants.CENTER);
+		label.setFont(pm.titleFont);
+		label.setForeground(new Color(255, 200, 100));
+		return label;
+	}
+
+	class ButtonGrid extends JPanel implements ActionListener
+	{
+		public ButtonGrid()
 		{
-			setBackground(new Color(215, 200, 169));
+			setLayout(new GridLayout(1, 2, 20, 0));
+			setOpaque(false);
 
-			Border etch = BorderFactory.createEtchedBorder(new Color(52, 53, 55), new Color(156, 157, 156));
-			Border thickEtch = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(52, 53, 55), 3), etch);
-			setBorder(thickEtch);
+			JButton no = pm.new Button1("Cancel", Color.WHITE, new Color(80, 80, 100));
+			no.setPreferredSize(new Dimension(200, 44));
+			pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getBackground());
+			no.addActionListener(this);
 
-			setLayout(new BorderLayout());
+			JButton yes = pm.new Button1("Exit", Color.WHITE, new Color(160, 60, 60));
+			yes.setPreferredSize(new Dimension(200, 44));
+			pm.addHoverEffect(yes, Color.LIGHT_GRAY, yes.getBackground());
+			yes.addActionListener(this);
 
-			add(closeLabel(),BorderLayout.NORTH);
-			add(new ButtonGrid(),BorderLayout.SOUTH);
+			add(no);
+			add(yes);
 		}
 
-		public JLabel closeLabel()
+		public void actionPerformed(ActionEvent e)
 		{
-			JLabel label = new JLabel("Are you sure you want to leave without saving your game data?");
-			label.setFont(pm.titleFont);
-			//label.setForeground(Color.RED);
-			return label;
-		}
+			String command = e.getActionCommand();
 
-		class ButtonGrid extends JPanel implements ActionListener
-		{
-			public ButtonGrid()
+			if(command.equals("Exit"))
 			{
-				setLayout(new GridLayout(1,2));
-
-				setOpaque(false);
-
-				add(noButton());
-				add(yesButton());
+				pm.frame.dispose();
+				System.exit(0);
 			}
-
-			public JButton noButton()
+			else if(command.equals("Cancel"))
 			{
-				JButton no = pm.new Button1("No", Color.RED);
-				no.setPreferredSize(new Dimension(200,50));
-				pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getForeground());
-				no.addActionListener(this);
-				return no;
-			}
-
-			public JButton yesButton()
-			{
-				JButton yes = pm.new Button1("Yes", Color.GREEN);
-				yes.setPreferredSize(new Dimension(200,50));
-				pm.addHoverEffect(yes, Color.LIGHT_GRAY, yes.getForeground());
-				yes.addActionListener(this);
-				return yes;
-			}
-
-			
-			public void actionPerformed(ActionEvent e)
-			{
-				String command = e.getActionCommand();
-
-				if(command.equals("Yes"))
-				{
-					pm.frame.dispose();
-					System.exit(0);
-				}
-				else if(command.equals("No"))
-				{
-					pm.changePanelCardNoHistory(pm.lastCardName);
-				}
-				
+				pm.changePanelCardNoHistory(pm.lastCardName);
 			}
 		}
 	}
