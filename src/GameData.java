@@ -53,7 +53,7 @@ public class GameData
 			answerSet[i] = "";
 		}
 		correctAnswer = -1;
-		chosenQuestions = new boolean[30];
+		chosenQuestions = new boolean[65];
 		questionCount = correctCount = 0;
 	}
 
