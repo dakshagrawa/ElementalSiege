@@ -2,14 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -36,18 +30,19 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		setBackground(new Color(30, 30, 50));
 
 		// ── Title bar ──
-		JPanel titleBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 12));
+		JPanel titleBar = new JPanel(new BorderLayout(0, 0));
 		titleBar.setOpaque(false);
+		titleBar.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 0));
 
-		JButton backBtn = pm.new Button1("<- Back", new Color(200, 200, 200), new Color(60, 60, 80));
-		backBtn.setPreferredSize(new Dimension(110, 40));
+		JButton backBtn = pm.new Button1("◀", new Color(200, 200, 200), new Color(60, 60, 80));
+		backBtn.setPreferredSize(new Dimension(44, 40));
 		backBtn.addActionListener(this);
-		titleBar.add(backBtn);
+		titleBar.add(backBtn, BorderLayout.WEST);
 
-		JLabel titleLabel = new JLabel("Settings", SwingConstants.LEFT);
+		JLabel titleLabel = new JLabel("Settings", SwingConstants.CENTER);
 		titleLabel.setFont(pm.titleFont);
 		titleLabel.setForeground(Color.WHITE);
-		titleBar.add(titleLabel);
+		titleBar.add(titleLabel, BorderLayout.CENTER);
 
 		add(titleBar, BorderLayout.NORTH);
 
@@ -111,7 +106,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 	public void actionPerformed(ActionEvent evt)
 	{
 		String command = evt.getActionCommand();
-		if(command.equals("<- Back"))
+		if(command.equals("◀"))
 		{
 			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
 				pm.changePanelCardNoHistory(pm.lastCardName);
