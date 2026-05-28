@@ -31,7 +31,6 @@ public class TutorialPanel extends JPanel implements ActionListener
     private String nextPage;
 
     private int currentSlide = 0;
-    private JPanel slideArea;
     private JLabel slideImageLabel;
     private JLabel slideTitleLabel;
     private JTextArea slideTextLabel;
