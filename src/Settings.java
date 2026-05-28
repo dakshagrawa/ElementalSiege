@@ -29,7 +29,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		setLayout(new BorderLayout());
 		setBackground(new Color(30, 30, 50));
 
-		// ── Title bar ──
+		//Title bar
 		JPanel titleBar = new JPanel(new BorderLayout(0, 0));
 		titleBar.setOpaque(false);
 		titleBar.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 0));
@@ -46,7 +46,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 		add(titleBar, BorderLayout.NORTH);
 
-		// ── Center card ──
+		//Center
 		JPanel outerWrapper = new JPanel(new GridBagLayout());
 		outerWrapper.setOpaque(false);
 
@@ -58,7 +58,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		));
 		card.setPreferredSize(new Dimension(420, 320));
 
-		// Volume section
+		//Volume section
 		JPanel volumePanel = new JPanel(new BorderLayout(0, 8));
 		volumePanel.setOpaque(false);
 
@@ -79,7 +79,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 
 		card.add(volumePanel, BorderLayout.NORTH);
 
-		// Buttons section
+		//Buttons section
 		JPanel buttonsPanel = new JPanel(new GridLayout(2, 1, 0, 14));
 		buttonsPanel.setOpaque(false);
 
@@ -116,17 +116,21 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		}
 		else if(command.equals("Save & Exit"))
 		{
-			// Save current battle progress if in battle, otherwise save saved progress
-			if (pm.lastCardName != null && pm.lastCardName.equals("Battle") && pm.battlePanel != null) {
-				int currentHealth = pm.battlePanel.getUserHealth();
-				int currentLevel = pm.battlePanel.getLevel();
-				data.saveUserProgress(currentHealth, currentLevel);
-			} else {
+			//save from battlePanel directly since it has the live health and level
+			if (pm.battlePanel != null)
+			{
+				data.saveUserProgress(pm.battlePanel.getUserHealth(), pm.battlePanel.getLevel());
+			}
+			else
+			{
 				data.saveUserProgress(data.getSavedHealth(), data.getSavedLevel());
 			}
-			if(pm.lastCardName != null && !pm.lastCardName.equals("Close")) {
+			if(pm.lastCardName != null && !pm.lastCardName.equals("Close"))
+			{
 				pm.changePanelCardNoHistory(pm.lastCardName);
-			} else {
+			}
+			else
+			{
 				pm.changePanelCard("Title");
 			}
 		}
