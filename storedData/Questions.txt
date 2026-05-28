@@ -208,8 +208,7 @@ Molecular solid
 Ionic solid
 Covalent network solid
 3
-What is the balanced coefficient of O2 in the equation:
-2H2 + O2 → 2H2O
+What is the balanced coefficient of O2 in the equation: 2H2 + O2 → 2H2O
 1
 2
 3
