@@ -72,16 +72,16 @@ public class GameData
 			System.err.println(e);
 			System.exit(1);
 		}
-		int questionNumber = (int)(Math.random() * 30);
-		// If all questions have been used, reset the pool to prevent infinite loop
-		if(questionCount >= 30)
+		int questionNumber = (int)(Math.random() * 65);
+		// if all questions have been used, reset the pool so game doesn't get stuck
+		if(questionCount >= 65)
 		{
 			Arrays.fill(chosenQuestions, false);
 			questionCount = 0;
 		}
 		while(chosenQuestions[questionNumber] == true)
 		{
-			questionNumber = (int)(Math.random() * 30);
+			questionNumber = (int)(Math.random() * 65);
 		}
 		chosenQuestions[questionNumber] = true;
 		questionCount++;
@@ -103,16 +103,6 @@ public class GameData
 		correctAnswer = inFile.nextInt() -1;
 		inFile.close();
 
-		questionNumber = (int)(Math.random() * 30);
-		if(questionCount >= 30)
-		{
-			Arrays.fill(chosenQuestions, false);
-			questionCount = 0;
-		}
-		while(chosenQuestions[questionNumber] == true)
-		{
-			questionNumber = (int)(Math.random() * 30);
-		}
 		currentQuestionNumber = questionNumber + 1; // +1 because questions in file start at 1
 	}
 
@@ -360,6 +350,12 @@ public class GameData
 
 	public void saveUserProgress(int currentHealth, int currentLevel)
 	{
+		// don't save if username is null -- this can happen if game tries to save before user has logged in
+		if (username == null || username.equals("null"))
+		{
+			System.err.println("saveUserProgress skipped: username is null");
+			return;
+		}
 		//Will read entire file into a string
 		StringBuilder allContent = new StringBuilder();
 		Scanner input = null;
