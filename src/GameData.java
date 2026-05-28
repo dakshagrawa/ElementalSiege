@@ -635,6 +635,11 @@ public class GameData
 	{
 		return username;
 	} 
+
+	public void setUsername(String name)
+	{
+		username = name;
+	}
     public int getSavedHealth()  
 	{
 		return savedHealth;

@@ -185,6 +185,7 @@ public class SignUp extends JPanel
 				{
 					warningLabel.setForeground(Color.GREEN);
 					warningLabel.setText("Success!");
+					data.setUsername(username.getText());
 					pm.changePanelCard("Pick Avatar");
 					pm.repaint();
 				}
