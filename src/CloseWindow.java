@@ -2,18 +2,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
-public class CloseWindow extends JPanel //when user tries to close the window, this panel will pop up to ask the user if they're sure
-//about the closign the game -- if they say no, it will let them get back to whatever panel they're on and if they say yes, game will close
+public class CloseWindow extends JPanel
 {
 	private PageManager pm;
 	private GameData data;
@@ -23,62 +22,81 @@ public class CloseWindow extends JPanel //when user tries to close the window, t
 		pm = pageMngr;
 		data = pm.getGameData();
 
-		setLayout(new GridBagLayout());
-		setBackground(new Color(0, 0, 0, 160));
+		setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		JPanel card = new JPanel(new BorderLayout(0, 20));
-		card.setBackground(new Color(22, 22, 40, 240));
-		card.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1), BorderFactory.createEmptyBorder(30, 40, 30, 40)));
-		//border outline the pop up in black to make it clear to user
-		card.setPreferredSize(new Dimension(520, 200));
-
-		card.add(closeLabel(), BorderLayout.NORTH);
-		card.add(new ButtonGrid(), BorderLayout.CENTER);
-
-		add(card);
+		setBackground(new Color(211, 211, 211, 100));
+		add(new WindowOnClosing());
 	}
 
-	public JLabel closeLabel()
+	class WindowOnClosing extends JPanel
 	{
-		JLabel label = new JLabel("Exit without saving?", SwingConstants.CENTER);
-		label.setFont(pm.titleFont);
-		label.setForeground(new Color(255, 200, 100)); //pale yellow for background of pop up
-		return label;
-	}
-
-	class ButtonGrid extends JPanel implements ActionListener
-	{
-		public ButtonGrid()
+		public WindowOnClosing()
 		{
-			setLayout(new GridLayout(1, 2, 20, 0));
-			setOpaque(false);
+			setBackground(new Color(215, 200, 169));
 
-			JButton no = pm.new Button1("Cancel", Color.WHITE, new Color(80, 80, 100));
-			no.setPreferredSize(new Dimension(200, 44));
-			pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getBackground()); //hoverEffect method from pageManager highlights buttton when user hovers
-			no.addActionListener(this);
+			Border etch = BorderFactory.createEtchedBorder(new Color(52, 53, 55), new Color(156, 157, 156));
+			Border thickEtch = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(52, 53, 55), 3), etch);
+			setBorder(thickEtch);
 
-			JButton yes = pm.new Button1("Exit", Color.WHITE, new Color(160, 60, 60));
-			yes.setPreferredSize(new Dimension(200, 44));
-			pm.addHoverEffect(yes, Color.LIGHT_GRAY, yes.getBackground());
-			yes.addActionListener(this);
+			setLayout(new BorderLayout());
 
-			add(no);
-			add(yes);
+			add(closeLabel(),BorderLayout.NORTH);
+			add(new ButtonGrid(),BorderLayout.SOUTH);
 		}
 
-		public void actionPerformed(ActionEvent e)
+		public JLabel closeLabel()
 		{
-			String command = e.getActionCommand();
+			JLabel label = new JLabel("Are you sure you want to leave without saving your game data?");
+			label.setFont(pm.titleFont);
+			//label.setForeground(Color.RED);
+			return label;
+		}
 
-			if(command.equals("Exit"))
+		class ButtonGrid extends JPanel implements ActionListener
+		{
+			public ButtonGrid()
 			{
-				pm.frame.dispose();
-				System.exit(0);
+				setLayout(new GridLayout(1,2));
+
+				setOpaque(false);
+
+				add(noButton());
+				add(yesButton());
 			}
-			else if(command.equals("Cancel"))
+
+			public JButton noButton()
 			{
-				pm.changePanelCardNoHistory(pm.lastCardName);
+				JButton no = pm.new Button1("No", Color.RED);
+				no.setPreferredSize(new Dimension(200,50));
+				pm.addHoverEffect(no, Color.LIGHT_GRAY, no.getForeground());
+				no.addActionListener(this);
+				return no;
+			}
+
+			public JButton yesButton()
+			{
+				JButton yes = pm.new Button1("Yes", Color.GREEN);
+				yes.setPreferredSize(new Dimension(200,50));
+				pm.addHoverEffect(yes, Color.LIGHT_GRAY, yes.getForeground());
+				yes.addActionListener(this);
+				return yes;
+			}
+
+			
+			public void actionPerformed(ActionEvent e)
+			{
+				String command = e.getActionCommand();
+
+				if(command.equals("Yes"))
+				{
+					pm.frame.dispose();
+					System.exit(0);
+				}
+				else if(command.equals("No"))
+				{
+					pm.changePanelCardNoHistory(pm.lastCardName);
+				}
+				
 			}
 		}
 	}
