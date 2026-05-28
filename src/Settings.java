@@ -26,7 +26,6 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 		data = pm.getGameData();
 		setLayout(new BorderLayout());
 
-		JPanel backBtnWrapper = new JPanel();
 		JButton backBtn = pm.new Button1("<- Back", Color.GRAY);
 		backBtn.setPreferredSize(new Dimension(100, 40));
 		backBtn.addActionListener(this);
