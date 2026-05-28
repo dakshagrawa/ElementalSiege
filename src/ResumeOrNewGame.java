@@ -51,6 +51,8 @@ public class ResumeOrNewGame extends JPanel implements ActionListener
         topPanel.setOpaque(false);
 
         JLabel heading = new JLabel("Welcome Back, " + data.getUsername() + "!", SwingConstants.CENTER);
+        heading.setFont(pm.titleFont);
+        heading.setForeground(new Color(100, 180, 255));
 
         JLabel subheading = new JLabel("Here are the stats you had in your previous game when you left.", SwingConstants.CENTER);
         subheading.setFont(pm.normalFont);
