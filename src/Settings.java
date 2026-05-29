@@ -114,7 +114,7 @@ public class Settings extends JPanel implements ActionListener, ChangeListener
 				pm.changePanelCard("Title");
 			}
 		}
-		else if(command.equals("Save & Exit"))
+		else if(command.equals("Save"))
 		{
 			//save from battlePanel directly since it has the live health and level
 			if (pm.battlePanel != null)
