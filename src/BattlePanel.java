@@ -171,7 +171,7 @@ public class BattlePanel extends JPanel implements ActionListener
     public void drawNewCards()
     {
         //enemy's starting health increases with each level to make it harder to defeat the level
-        maxEnemyHealth = (int)(level * 1.7) + 5;
+        maxEnemyHealth = (int)(level * 1.7) + 17;
         enemyHealthPanel.setMax(maxEnemyHealth);
         if (enemyHealth > maxEnemyHealth)
             enemyHealth = maxEnemyHealth;
