@@ -37,8 +37,8 @@ public class TitlePage extends JPanel implements ActionListener
 		signIn = pm.new Button1("Continue", new Color(21,49,94));
 		signUp = pm.new Button1("New Game", new Color(23,55,23));
 
-		signIn.setBounds(525, 682, 200, 50);
-		signUp.setBounds(770, 682, 200, 50);
+		signIn.setBounds(525, 675, 200, 50);
+		signUp.setBounds(770, 675, 200, 50);
 
 		add(signUp);
 		add(signIn);
