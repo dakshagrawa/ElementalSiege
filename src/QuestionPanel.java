@@ -5,14 +5,11 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
@@ -141,28 +138,22 @@ public class QuestionPanel extends JPanel
 
         class AutoAdvanceListener implements ActionListener
         {
-                public void actionPerformed(ActionEvent e)
-				{
-					int questionNum = data.getCurrentQuestionNumber();
-					resetQuestion();
-					battle.resolveRound(lastAnswerCorrect);
-					if (!lastAnswerCorrect)
-					{
-						// Stop battle timers before showing explanation to prevent unwanted panel changes
-						if (battle.getDisplayTimer() != null) battle.getDisplayTimer().stop();
-						if (battle.getDelay() != null) battle.getDelay().stop();
-						pm.explanationPanel.loadExplanation(questionNum);
-						pm.changePanelCard("Explanation");
-					}
-					else
-					{
-						// Reset battle timers for next round
-						if (battle.getDisplayTimer() != null) battle.getDisplayTimer().stop();
-						if (battle.getDelay() != null) battle.getDelay().stop();
-						pm.changePanelCard("Battle");
-						battle.startTimer = true;
-					}
-				}
+            public void actionPerformed(ActionEvent e)
+            {
+                int questionNum = data.getCurrentQuestionNumber();
+                resetQuestion();
+                battle.resolveRound(lastAnswerCorrect);
+                if (!lastAnswerCorrect)
+                {
+                    pm.explanationPanel.loadExplanation(questionNum);
+                    pm.changePanelCard("Explanation");
+                }
+                else
+                {
+                    pm.changePanelCard("Battle");
+                    battle.startTimer = true;
+                }
+            }
         }
 		public void resetQuestion ( )
 		{

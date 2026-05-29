@@ -2,12 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -96,19 +94,19 @@ public class SignIn extends JPanel
 			username.requestFocusInWindow();
 		}
 
-		class pwdListener implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				login.doClick();
-			}
-		}
-
 		class nameListener implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
 				password.requestFocusInWindow();
+			}
+		}
+
+		class pwdListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				login.doClick();
 			}
 		}
 	}

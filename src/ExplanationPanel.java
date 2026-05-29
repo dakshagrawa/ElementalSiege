@@ -9,13 +9,9 @@ import java.awt.GridBagLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -200,6 +196,7 @@ public class ExplanationPanel extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         pm.changePanelCard(nextPage);
+        pm.battlePanel.startTimer = true;
     }
 
     //dark background for the pop-up and rounds the corners of pop-up

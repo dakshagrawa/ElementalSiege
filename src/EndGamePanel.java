@@ -1,20 +1,16 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.Timer;
 
 public class EndGamePanel extends JPanel implements ActionListener
 {
@@ -60,11 +56,15 @@ public class EndGamePanel extends JPanel implements ActionListener
         else
             heading.setForeground(new Color(220, 60, 60));
 
-        add(heading, BorderLayout.NORTH);
+        JPanel wrapper = new JPanel(new BorderLayout());
+        wrapper.setPreferredSize(new Dimension(500,200));
+        wrapper.setOpaque(false);
+        add(wrapper, BorderLayout.NORTH);
 
         //Panel for the win or loss message
-        JPanel centerPanel = new JPanel(new GridLayout(3, 1, 0, 20));
+        JPanel centerPanel = new JPanel(new GridLayout(4, 1, 0, 0));
         centerPanel.setOpaque(false);
+        centerPanel.add(heading, BorderLayout.NORTH);
 
         String line1, line2, line3;
 
