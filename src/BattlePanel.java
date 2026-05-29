@@ -45,7 +45,11 @@ public class BattlePanel extends JPanel implements ActionListener
     }
 	
     public int getLevel() {
-    	return level;
+        return level;
+    }
+
+    public void setEnemyHealth(int health) {
+        this.enemyHealth = health;
     }
 	
     private HealthBarPanel userHealthPanel;

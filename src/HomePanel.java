@@ -66,6 +66,7 @@ public class HomePanel extends JPanel implements ActionListener
 		{
 			battle.level++;
 			battle.userHealth = 100;
+			battle.setEnemyHealth((int)(battle.level * 1.7) + 17); // Full heal enemy for new level
 			pm.getGameData().saveUserProgress(100, battle.level);
 			battle.drawNewCards();
 			pm.changePanelCard("Battle");
