@@ -14,7 +14,7 @@
 
 ```shell
 # From the project directory:
-cd src && javac *.java && java ElementalSiege.java && rm *.class # and there you go...
+cd src && javac *.java && java ElementalSiege && rm *.class && cd .. # and there you go...
 ```
 
 <details>
@@ -39,7 +39,7 @@ cd src && javac *.java && java ElementalSiege.java && rm *.class # and there you
 - Strategic card selection affects damage output
 - Visual feedback shows attack effectiveness
 
-### 📚 Educational Integration
+### 📖 Educational Integration
 - Chemistry-focused questions from curated databases
 - Immediate feedback with explanations for incorrect answers
 - Progressive difficulty as you advance through levels
@@ -81,7 +81,13 @@ storedData/
 
 **Elemental Siege proves that when you gamify education, players don't just learn—they want to keep playing.**
 
+
+## 📚 References
+
+All sources utilized in this project are documented in the [WORKS_CITED.md](./WORKS_CITED.md) file.
+
 ---
+
 *Created by Daksh Agrawal & Dhikshitha Aiely*
 
 <small>*Under the guidance of Mr. Yu - MVHS Java Programming (Period 7)*</small>
