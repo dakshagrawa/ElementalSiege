@@ -598,7 +598,8 @@ public class BattlePanel extends JPanel implements ActionListener
         {
             drawNewCards();
             delay.stop();
-            pm.changePanelCard("Questions");
+            // Don't go to Questions immediately - let displayTimer handle the transition after study time
+            // pm.changePanelCard("Questions");
         }
     }
     
