@@ -125,7 +125,7 @@ public class BattlePanel extends JPanel implements ActionListener
         enemyHealthPanel.setHealth(enemyHealth);
         enemyHealthPanel.setMax(maxEnemyHealth);
         resultLabel.setText("Pick an attribute!");
-        streakLabel.setText("Streak: 0");
+        streakLabel.setText("");
         userCardPanel.removeAll();
         enemyCardPanel.removeAll();
         revalidate();
