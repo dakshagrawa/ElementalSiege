@@ -40,7 +40,7 @@ Early atomic theory → Dalton
 
 
 Topic: Periodic Table and Electron Configuration
-Questions: 5, 8
+Questions: 5, 8, 48, 52
 The periodic table organizes elements by their properties and atomic numbers.
 Elements in the same group (column) behave similarly.
 Each group has its own key property. For example, Group 17 contains the halogens, which are very reactive nonmetals like chlorine.
@@ -67,7 +67,7 @@ third shell → continue filling
 
 
 Topic: Chemical Bonding
-Questions: 6, 7
+Questions: 6, 7, 60
 Atoms bond together to become more stable.
 There are two major bond types:
 Covalent Bonds
@@ -130,7 +130,7 @@ Does it spread out completely? → gas
 
 
 Topic: Law of Conservation of Mass
-Question: 12
+Questions: 12, 63
 The Law of Conservation of Mass states:
 Matter cannot be created or destroyed.
 During chemical reactions, atoms only rearrange. There is NO change in mass – the atoms we started with are also the atoms we end with, but in different structures.
@@ -143,7 +143,7 @@ matter not being created or destroyed
 
 
 Topic: Molar Mass
-Question: 13
+Questions: 13, 56
 Molar mass tells you the mass of one mole of a substance. A mole is a unit of volume and one mole of substance is measured as 6.022 x 10^23 particles. Molar mass tells you how much 6.022 x 10^23 particles of a substance weigh in grams.
 To calculate molar mass:
 Find the element’s atomic mass
@@ -163,7 +163,7 @@ Add totals to find the molar mass of the compound
 
 
 Topic: Earth’s Atmosphere
-Question: 14
+Questions: 14
 Earth’s atmosphere contains several gases, but the most abundant of it all is nitrogen.
 Here’s the approximate atmosphere composition:
 Nitrogen → 78%
@@ -175,7 +175,7 @@ The key thing to remember about this topic is that nitrogen is the most abundant
 
 
 Topic: Gas Laws
-Question: 15
+Questions: 15, 64
 Gas particles move constantly and collide with the walls of their container or other particles, creating pressure. This is because gas particles have high average kinetic energy and are constantly moving at high speed, which causes frequent collisions as the particles buzz around in the limited space of their container.
 When volume decreases, gas particles have less space, so they collide more often.
 That means:
@@ -193,7 +193,7 @@ As volume decreases, pressure increases and vice versa.
 
 
 Topic: Reaction Types
-Questions: 16, 26, 47, 53
+Questions: 16, 26, 47, 50, 53, 55
 Chemical reactions describe how substances change into new substances. Different reaction types follow recognizable patterns depending on what happens to the reactants.
 Synthesis Reaction
 Two or more substances combine to form one product.
@@ -242,7 +242,7 @@ Group 1 metals → +1
 
 
 Topic: Periodic Trends
-Questions: 18, 43, 58
+Questions: 18, 39, 43, 58, 59
 Periodic trends are patterns that occur across the periodic table. These trends help predict how elements behave chemically.
 Electronegativity:
 Electronegativity measures how strongly an atom attracts electrons in a bond. Electronegativity generally increases from left to right across the periodic table because atoms have more protons pulling on electrons.
@@ -273,7 +273,7 @@ SI unit for amount of substance → mole
 
 
 Topic: Acids, Bases, & Neutralization
-Questions: 20, 44, 46
+Questions: 10, 20, 44, 46
 Acids release H+ ions in water, while bases release OH- ions. Acids and bases react together in neutralization reactions.
 Neutralization Reaction:
 Acid + Base → Salt + Water
@@ -290,7 +290,7 @@ Neutralization products → salt and water
 
 
 Topic: Phase Changes
-Questions: 21, 41
+Questions: 11, 21, 41
 Phase changes occur when matter changes from one state to another because of energy changes.
 Sublimation
 A solid changes directly into a gas without becoming a liquid first.
@@ -319,7 +319,7 @@ Use the group number and positive/negative to identify likely charge
 
 
 Topic: Orbitals & Electron Arrangement
-Questions: 23, 54
+Questions: 23, 54, 57
 Electrons exist in regions around the nucleus called orbitals. Orbitals are areas where electrons are most likely to be found. Different orbitals have different shapes and can hold different numbers of electrons.
 The s orbital is spherical and can hold a maximum of 2 electrons. Other orbitals, like p, d, and f orbitals, have more complex shapes and can hold more electrons.
 Quantum numbers are used to describe properties of electrons, including:
@@ -386,6 +386,9 @@ Then identify the strongest intermolecular force present:
  Nonpolar molecules → usually London dispersion forces
  Polar molecules → usually dipole-dipole forces
  Hydrogen bonded to nitrogen, oxygen, or fluorine → hydrogen bonding
+
+
+ 
 Topic: Endothermic & Exothermic Reactions
 Questions: 28
 Chemical reactions either absorb or release energy.
@@ -401,7 +404,7 @@ Releases energy → exothermic
 
 
 Topic: Valence Electrons
-Questions: 30, 44
+Questions: 29, 30, 44
 Electrons are arranged in energy levels, also called shells, which are arranged in increasing order from left to right on the periodic table.
 Valence electrons are the electrons in the outermost shell of an atom. These electrons are responsible for bonding and chemical reactions.
 An atom always wants to have its outermost electron shell full. Any extra electrons that hinder this goal are called valence electrons. 
@@ -429,7 +432,7 @@ third shell → continue filling
 
 
 Topic: Molecular Geometry & Polarity
-Questions: 31, 45, 62
+Questions: 31, 45, 49, 62, 65
 Molecular geometry describes the 3D shape of molecules based on how electron pairs repel each other.
 This shape is determined by the number of lone pairs of electrons and tells you the angle that is formed between central bonds.
 Molecular shape affects the polarity of a compound. For example, water is polar because its bent shape causes uneven charge distribution.
@@ -556,4 +559,3 @@ Memorizing common compound names is important because many compounds are referre
 How to Solve Questions
 NH3 → ammonia
 CaCO3 → calcium carbonate
-
