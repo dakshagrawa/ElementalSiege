@@ -196,14 +196,29 @@ public class BattlePanel extends JPanel implements ActionListener
         //how often the enemy gets legendary cards -- the lower level cards have a higher chance of occurring which helps player
         int roll = (int)(Math.random() * 100) + 1;
         String targetRarity;
-        if (roll <= 40) 
-            targetRarity = "Common";
-        else if (roll <= 70) 
-            targetRarity = "Rare";
-        else if (roll <= 85) 
-            targetRarity = "Epic";
-        else 
-            targetRarity = "Legendary";
+        if (level == 1)
+        {
+            //level 1 -- enemy should almost always be Common or Rare
+            if (roll <= 70) 
+                targetRarity = "Common";
+            else if (roll <= 95) 
+                targetRarity = "Rare";
+            else 
+                targetRarity = "Epic";
+            //no Legendary on level 1
+        }
+        else
+        {
+            //level 2 -- slightly harder but still weighted toward weaker cards
+            if (roll <= 40) 
+                targetRarity = "Common";
+            else if (roll <= 75) 
+                targetRarity = "Rare";
+            else if (roll <= 95) 
+                targetRarity = "Epic";
+            else 
+                targetRarity = "Legendary";
+        }
 
         //goes through the available cards and filters through them to pick out the ones that have the chosen rarity
         int count = 0;
