@@ -546,7 +546,7 @@ public class BattlePanel extends JPanel implements ActionListener
         }
         else if (enemyHealth <= 0)
         {
-            if (level >= 2)
+            if (level >= 10)
             {
                 //Resets progress on final victory to also prevent user from getting stuck when they log in again
                 pm.getGameData().saveUserProgress(100, 1);
