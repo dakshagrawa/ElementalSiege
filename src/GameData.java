@@ -108,7 +108,7 @@ public class GameData
 
 	public String getQuestion ( )
 	{
-		return "" + questionCount + ". " + question;
+		return "" + (questionCount-1) + ". " + question;
 	}
 	
 	public String getAnswer(int index)
