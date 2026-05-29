@@ -12,7 +12,7 @@
 
 ## 🚀 How to Play
 
-```bash
+```shell
 # From the project directory:
 cd src && javac *.java && java ElementalSiege.java && rm *.class # and there you go...
 ```
