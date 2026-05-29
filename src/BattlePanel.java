@@ -48,6 +48,14 @@ public class BattlePanel extends JPanel implements ActionListener
         return level;
     }
 
+    public Timer getDisplayTimer() {
+        return displayTimer;
+    }
+
+    public Timer getDelay() {
+        return delay;
+    }
+
     public void setEnemyHealth(int health) {
         this.enemyHealth = health;
     }

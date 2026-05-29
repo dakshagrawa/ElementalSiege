@@ -148,11 +148,17 @@ public class QuestionPanel extends JPanel
 					battle.resolveRound(lastAnswerCorrect);
 					if (!lastAnswerCorrect)
 					{
+						// Stop battle timers before showing explanation to prevent unwanted panel changes
+						if (battle.getDisplayTimer() != null) battle.getDisplayTimer().stop();
+						if (battle.getDelay() != null) battle.getDelay().stop();
 						pm.explanationPanel.loadExplanation(questionNum);
 						pm.changePanelCard("Explanation");
 					}
 					else
 					{
+						// Reset battle timers for next round
+						if (battle.getDisplayTimer() != null) battle.getDisplayTimer().stop();
+						if (battle.getDelay() != null) battle.getDelay().stop();
 						pm.changePanelCard("Battle");
 						battle.startTimer = true;
 					}
