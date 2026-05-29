@@ -84,4 +84,4 @@ storedData/
 ---
 *Created by Daksh Agrawal & Dhikshitha Aiely*
 
-<small>Under the guidance of Mr. Yu - MVHS Java Programming (Period 7)</small>
+<small>*Under the guidance of Mr. Yu - MVHS Java Programming (Period 7)*</small>
