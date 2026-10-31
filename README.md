@@ -67,7 +67,7 @@ src/
 storedData/
 ├── Questions.txt            # Educational content database
 ├── CharacterImages/         # Visual assets for character cards
-├── images/ 				 # Visual assets for graphical enhancement
+├── images/                  # Visual assets for graphical enhancement
 └── Audio/                   # Game sounds and music
 
 ```
